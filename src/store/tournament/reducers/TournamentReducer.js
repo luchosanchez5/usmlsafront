@@ -8,6 +8,7 @@ const initialState = {
   DivisionDetailsBySearch:{},
   DivisionDetails:{},
   AllDivisionsData:[],
+  DefaultTournamentData:[],
     // VenuData: false
     isLoading: false,
 };
@@ -63,6 +64,12 @@ const TournamentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 DivisionDetails: action.payload || {}
+            };
+        
+        case actionTypes.DEFAULT_TOURNAMENTS:
+            return {
+                ...state,
+                DefaultTournamentData: action.payload || []
             };
         
         default:

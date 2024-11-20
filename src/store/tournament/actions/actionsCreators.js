@@ -88,6 +88,33 @@ export const GetTournamentsBySearch = (token, page) => (dispatch) => {
       // Toast.error(error.response.data.message);
     });
 };
+export const GetDefaultTournamentsBySearch = (token, page) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/tournaments/search?page=0&size=10`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.DEFAULT_TOURNAMENTS,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      //   navigate("/dashboard");
+      // Toast.success(response.data.status);
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: true,
+      });
+      // Toast.error(error.response.data.message);
+    });
+};
+
 export const GetDivisionsBySearch = (token, page, tournmentname) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,

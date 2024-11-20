@@ -1,4 +1,4 @@
-export const ADD_PERSONS = 'ADD_PERSONS'
+export const ADD_PERSONS='ADD_PERSONS'
 export const GET_PERSONS = 'GET_PERSONS';
 export const Delete_PERSONS = 'Delete_VENUE';
 export const SET_LOADING = 'SET_LOADING';

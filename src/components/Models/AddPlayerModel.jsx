@@ -8,8 +8,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddCoManagerToTeam, GetCoManager, AddPlayerToTeam } from '../../store/team/actions/actionsCreators';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import Toast from '../../shared/Toast';
-const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id,setState }) => {
-    const { CoManagerData, isLoading } = useSelector((state) => state.team)
+const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
+    const { CoManagerData, TeamMembers, isLoading } = useSelector((state) => state.team)
+    if (TeamMembers && CoManagerData) {
+        const teamMemberEmails = TeamMembers.members.map((item) => item.email);
+        console.log("🚀 : ~ file: AddPlayerModel.jsx:15 ~ AddPlayerModel ~ teamMemberEmails", teamMemberEmails);
+        const coManagerEmails = CoManagerData.data.map((item) => item.email);
+
+        const matchedEmails = teamMemberEmails.filter((email) =>
+          
+            coManagerEmails.includes(email)
+        );
+       
+
+        // If you need full objects of matched members:
+        const matchedMembers = TeamMembers.members.filter((member) =>
+          
+            coManagerEmails.includes(member.email)
+        );
+        
+    }
     const { token } = useSelector((state) => state.user)
     const [selectedCard, setSelectedCard] = useState(null);
     const [page, setPage] = useState(0);
@@ -24,7 +42,7 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id,setState }) => {
     };
     const handleSubmit = () => {
         Dispatch(AddPlayerToTeam(id, selectedCard, token))
-        setState((prev)=>!prev)
+        setState((prev) => !prev)
         SetPlayerBoxModel(false)
     }
 
@@ -93,7 +111,7 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id,setState }) => {
                         </button>
                     </div>
                 )}
-              
+
 
             </Modal.Body>
         </Modal>

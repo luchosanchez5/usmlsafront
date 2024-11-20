@@ -311,7 +311,7 @@ const AddPersonFields = ({ setState }) => {
                         />
                     </div>
 
-                    {roleValue === 'PLAYER' && (
+                    {values?.role === 'PLAYER' && (
                         <>
                             <div className="d-flex flex-column flex-grow-1">
                                 <InputField

@@ -15,7 +15,7 @@ const AllPersonDetails = () => {
  
   return (
     <>
-    <h1 className="font-bold my-3">All Tournament Details</h1>
+    <h1 className="font-bold my-3">Person Details</h1>
            
     <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
 

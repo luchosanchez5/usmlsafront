@@ -53,7 +53,7 @@ const AllTournamentTable = () => {
     }
     return (
         <>
-            <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl'>
+            <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
                 <Row className='mb-3'>
                     <Col>
                         <Form.Control type="email" placeholder="Search" className='w-50' />
