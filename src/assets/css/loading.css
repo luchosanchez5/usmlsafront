@@ -1,0 +1,63 @@
+.loading-bg {
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: #fff;
+  position: fixed;
+  z-index: 9999;
+  opacity: 1;
+  display: block;
+}
+
+.loading {
+  left: 50%;
+  top: 50%;
+  font-size: 40px;
+  font-family: "Fieldwork-Regular";
+  font-weight: bold;
+  letter-spacing: 4.4px;
+  text-transform: capitalize;
+  position: absolute;
+  overflow: hidden;
+  transform: translate(-50%, -60%);
+  z-index: 999;
+}
+
+.loading:before {
+  color: #000;
+  content: attr(data-loading-text);
+  font-size: 50px;
+}
+
+.loading:after {
+  top: 0;
+  left: 0;
+  width: 0;
+  opacity: 1;
+  color: #e30613;
+  overflow: hidden;
+  position: absolute;
+  content: attr(data-loading-text);
+  -webkit-animation: loading 5s infinite;
+  animation: loading 5s infinite;
+  font-size: 50px;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes loading {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}

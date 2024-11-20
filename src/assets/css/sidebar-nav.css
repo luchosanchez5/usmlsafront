@@ -1,0 +1,34 @@
+.main-navigation {
+  border-right: 1px solid #cacaca !important;
+}
+
+.menu-icon {
+  font-size: 22px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+}
+
+.menu-item-link {
+  font-weight: bold;
+  color: #000;
+}
+.css-dip3t8 {
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden !;
+  color: black;
+  background-color: rgb(249, 249, 249, 0.7) !important;
+}
+
+.css-16jesut >.ps-menu-button:hover {
+  background-color: var(--mirth-color);
+  color: rgb(182, 200, 217);
+}
+
+
+/* .menu-item-link .menu-item .menu-anchor:hover  {
+  border-radius: 0;
+  background-color:#e30613 !important;
+  color: white;
+} */

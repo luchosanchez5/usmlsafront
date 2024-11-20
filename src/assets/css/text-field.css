@@ -1,0 +1,38 @@
+.field-container {
+  border: 1px solid #e7e6e9;
+  /* border-radius: 8px; */
+  background-color: #fff !important;
+  margin-bottom: 16px !important;
+  padding: 5px;
+}
+.field-container-1{
+  border: 1px solid #e7e6e9;
+  /* border-radius: 8px; */
+  background-color: #fff !important;
+  margin-bottom: 16px !important;
+  padding: 5px;
+  div{
+    height: 40px;
+  }
+}
+
+.field-container > div {
+  height: 40px;
+}
+
+.custom-field {
+  border: none !important;
+  background-color: #fff !important;
+  
+}
+
+.mobile {
+  border: none !important;
+  width: 100% !important;
+}
+
+.dotted {
+  border: 1.5px dashed #000;
+  background-color: #f1f6f7 !important;
+  cursor: pointer;
+}

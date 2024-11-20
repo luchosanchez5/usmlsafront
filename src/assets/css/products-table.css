@@ -1,0 +1,29 @@
+.pdf-icon,
+.print-icon {
+  color: #e74032;
+  font-size: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.print-icon {
+  color: #317dee;
+}
+
+.action-icon {
+  font-size: 18px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.eye-icon:hover {
+  color: #317dee;
+}
+
+.edit-icon:hover {
+  color: rgb(235, 172, 113);
+}
+
+.delete-icon:hover {
+  color: red;
+}

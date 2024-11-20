@@ -1,0 +1,11 @@
+.recent-products-table,
+.recent-products-table tr,
+.recent-products-table td,
+.recent-products-table th {
+  border: none !important;
+}
+
+.recent-products-table {
+  font-size: 14px;
+  font-weight: 400;
+}

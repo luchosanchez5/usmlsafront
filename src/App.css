@@ -1,0 +1,379 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+:root {
+  --primary: #ff9f43;
+  --Misk-Color: #e30613;
+  --font: "Montserrat", sans-serif;
+}
+
+body {
+  font-family: Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+}
+
+.page-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  border: 10px;
+  /* overflow-y: scroll; */
+}
+
+.main-container {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.section-main {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.page-main-table .main-row {
+  border-bottom: 1px solid #d9d9d9 !important;
+}
+
+.form-space {
+  a {
+    text-decoration: none;
+  }
+}
+
+/*  */
+
+.Logout-btn {
+  background-color: #e30613;
+  color: #d9d9d9;
+  border: 1px solid #e30613;
+}
+
+.gradient-btn-orange {
+  border: 1px solid #e30613;
+  background-color: #e30613;
+  border-radius: 0;
+  font-weight: 700;
+  color: #fff !important;
+  font-style: italic;
+  padding: 13px 10px 12px;
+  font-size: 16px;
+  letter-spacing: 0;
+}
+.Team-register-btn {
+  border: 1px solid black;
+  background-color: black;
+  border-radius: 0;
+  font-weight: 700;
+  color: #fff !important;
+  font-style: italic;
+  padding: 13px 10px 12px;
+  font-size: 16px;
+  letter-spacing: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #333;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -moz-text-fill-color: #333 !important;
+}
+
+input:-ms-input-placeholder {
+  color: #333 !important;
+  background-color: white !important;
+}
+
+.bOQEtf {
+  padding: 0 !important;
+  border-right: none !important;
+}
+
+.divider {
+  display: grid;
+  background-color: white;
+}
+
+.divider::before {
+  content: "";
+  height: 1px;
+}
+
+.dropdown-item:active {
+  background-color: none !important;
+}
+
+.dropdown-item:hover {
+  background-color: none !important;
+}
+
+li {
+  list-style-type: none;
+}
+
+.Login-btn {
+  background-color: var(--Misk-Color);
+  border: 1px solid var(--Misk-Color);
+}
+
+.Signup-btn {
+  background-color: silver;
+  border: 1px solid silver;
+}
+
+.main-container {
+  width: 100%;
+  /* padding: 40px 28px; */
+  background-color: white;
+  transition: 0.4s padding linear;
+}
+
+.event-data-container {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .event-data-container {
+    text-align: center;
+    /* Center text on smaller screens */
+  }
+}
+
+.google-login {
+  max-width: 320px;
+  /* Adjust width as needed */
+  width: 100%;
+  /* Full width */
+}
+
+.google-login-button {
+  text-align: center;
+  /* Center text */
+  color: black;
+  a:hover {
+    color: black !important;
+  }
+  /* Text color */
+  /* Full width */
+  height: 56px;
+  /* Set height */
+  /* Rounded corners */
+  border: 1px solid #c6c6c6;
+  /* Border color */
+  font-size: 16px;
+  /* Font size */
+  font-weight: 600;
+  /* Font weight */
+  display: flex;
+  /* Flexbox layout */
+  gap: 10px;
+  /* Space between icon and text */
+  align-items: center;
+  /* Center items vertically */
+  justify-content: center;
+  /* Center items horizontally */
+  background-color: white;
+  /* Button background color */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  transition: background-color 0.3s;
+  /* Smooth background color transition */
+}
+
+.google-login-button:hover {
+  background-color: #f0f0f0;
+  /* Light gray background on hover */
+}
+
+/* a{
+  text-decoration: none !important;
+  color: white !important;
+} */
+.btn-close {
+  filter: brightness(0) invert(1);
+}
+
+/*  */
+.order-summary-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.order-item {
+  margin-top: 16px;
+}
+
+.product-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.item-details h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.price {
+  margin-top: 4px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 8px;
+}
+
+.discounted-price {
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.coupon-section {
+  margin-top: 16px;
+}
+
+.summary {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #333;
+}
+
+.subtotal,
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.total {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.Signup-form {
+  select {
+    border: none !important;
+  }
+
+  select:focus {
+    border: none !important;
+    outline: none !important;
+  }
+}
+
+.active > .page-link,
+.page-link.active {
+  background-color: #e30613 !important;
+  border: 1px solid #e30613 !important;
+  color: white !important;
+}
+
+.page-link {
+  color: black !important;
+}
+
+#user-dropdown {
+  background-color: #e30613 !important;
+  border: 1px solid #e30613;
+}
+
+.main-navigation {
+  .submenu-item {
+    color: white !important;
+
+    a {
+      color: white !important;
+    }
+  }
+
+  .lkTtqM {
+    display: flex !important;
+    &:hover {
+      background-color: #e30613 !important;
+
+      a {
+        color: white !important;
+      }
+    }
+  }
+
+  .menu-anchor {
+    a {
+      color: white !important;
+    }
+  }
+
+  .sc-eDvSVe {
+    a {
+      color: white !important;
+    }
+  }
+
+  .sc-eDvSVe {
+    .sub-menu-content {
+      background-color: black;
+      color: black !important;
+    }
+  }
+}
+.StripeElement {
+	background-color: #f8f8f8;
+	padding: 10px;
+	max-width: 100%;
+  width: calc(100% - 1%) !important;
+	border: 1px solid #e0dddd;
+border-radius: 3px;
+}
+
+.StripeElement--empty {
+    border-bottom-color: #b22222;
+}
+
+.StripeElement--focus {
+    border-bottom-color: #008000;
+}
+
+/* Set styling when form field data is invalid */
+.StripeElement--invalid {
+    border-color: #b22222;
+}
+
+.StripeElement--complete {
+  border: 1px solid green;
+}
+
+form.pmpro_form #pmpro_payment_information_fields div#AccountNumber {
+	max-width: 270px;
+}
+
+/* Set expiry date input field width */
+form.pmpro_form #pmpro_payment_information_fields div#Expiry {
+	max-width: 110px;
+}
+
+/* Set CVC/CVV input field width */
+form.pmpro_form #pmpro_payment_information_fields div#CVV {
+	max-width: 110px;
+}

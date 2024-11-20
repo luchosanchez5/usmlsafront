@@ -1,0 +1,8 @@
+export const ADD_PERSONS = 'ADD_PERSONS'
+export const GET_PERSONS = 'GET_PERSONS';
+export const Delete_PERSONS = 'Delete_VENUE';
+export const SET_LOADING = 'SET_LOADING';
+export const GET_PERSON = 'GET_PERSON';
+export const FORGET_PASSWORD = 'FORGET_PASSWORD';
+export const UPDATE_PERSON = 'FORGET_PASSWORD';
+export const GET_PERSONS_BY_ID = 'GET_PERSONS_BY_ID'; 
