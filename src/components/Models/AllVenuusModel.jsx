@@ -66,7 +66,7 @@ const AllVenuusModel = ({ show, onClose, SetTeamBoxModel,setState }) => {
                         <InputField
                             type="text"
                             name="address1"
-                            label="Adress 1"
+                            label="Address 1"
                             onChange={handleChange}
                             value={values.address1}
                             className="form-control"

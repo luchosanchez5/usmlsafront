@@ -73,13 +73,10 @@ const AllTournamentTable = () => {
                             <tr>
                                 <th>Tournament Name</th>
                                 <th>Venue Name</th>
-                                <th> startDate </th>
+                                <th> Start Date </th>
                                 <th> End Date</th>
                                 <th>Tournament Status</th>
                                 <th>Action</th>
-
-
-
                             </tr>
                         </thead>
                         <tbody>
