@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CardForm from "../../components/CardModel/CardForm";
-import InputField from "../../components/product/InputField";
 import { Row, Col } from "react-bootstrap";
-import SelectTag from "../../components/product/SelectTag";
 import OrderSummeryCard from "./OrderSummeryCard";
 import DashboardLayout from "../../layout/DashboardLayout";
 import ContactInformation from "./ContactInformation";

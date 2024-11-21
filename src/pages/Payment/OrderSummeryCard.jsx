@@ -1,8 +1,4 @@
 import React, { useState } from 'react'
-import InputField from '../../components/product/InputField';
-import { Row, Col } from 'react-bootstrap';
-import SelectTag from '../../components/product/SelectTag';
-import { useSelector } from 'react-redux';
 const OrderSummeryCard = ({ selectedPayment, DivisionDetailsBySearch, totalAmount }) => {
 console.log("🚀 : ~ file: OrderSummeryCard.jsx:7 ~ OrderSummeryCard ~ totalAmount", totalAmount);
 

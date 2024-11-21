@@ -2,7 +2,7 @@ import React from 'react'
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
 import { FaUsers, FaLocationDot } from "react-icons/fa6";
-import { MdTour, MdOutlinePayment } from "react-icons/md";
+import { MdTour } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
 import { IoTrophy } from "react-icons/io5";
 

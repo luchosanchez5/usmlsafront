@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 import { GrNotification } from 'react-icons/gr';
-import { CgProfile } from 'react-icons/cg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import '../assets/css/topbar.css';
 import { IoIosLogOut } from "react-icons/io";
@@ -14,10 +13,8 @@ const TopBar = () => {
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
     const userName = user?.name?.trim() !== '' ? user?.name : 'No User Name';
-
-    const getitem= localStorage.removeItem('grow-share');
     const handleLogout = () => {
-       const getitem= localStorage.removeItem('persist:grow-share');
+        localStorage.removeItem('persist:grow-share');
         navigate('/auth/login');
     }
 

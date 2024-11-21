@@ -1,20 +1,18 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row, Table, Form } from 'react-bootstrap';
-import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../assets/css/products-table.css';
-import { GET_PERSONS } from '../../store/person/actions/actionTypes';
-import { DelPersons, GetPersons } from '../../store/person/actions/actionsCreators';
 import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { DeleteDivision, GetAllDivisions } from '../../store/tournament/actions/actionsCreators';
 const AllDivisionTable = () => {
-    const { AllDivisionsData, isLoading } = useSelector((state) => state.tournament);
+    const { AllDivisionsData } = useSelector((state) => state.tournament);
     const { SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo)
     const { token } = useSelector((state) => state.user);
     const [page, setPage] = useState(0);
@@ -28,7 +26,7 @@ const AllDivisionTable = () => {
 
     useEffect(() => {
         Dispatch(GetAllDivisions(page, token))
-    }, [Dispatch, state, token])
+    }, [Dispatch, state, token, page])
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };
@@ -46,11 +44,11 @@ const AllDivisionTable = () => {
         Navigate('/dashboard/addivision')
     }
     const handleDeletePerson = () => {
-        Dispatch(DeleteDivision(divisionId, token,() => {
+        Dispatch(DeleteDivision(divisionId, token, () => {
             Dispatch(GetAllDivisions(page, token))
-        setDeleteModel(false)
+            setDeleteModel(false)
         }))
-       
+
     }
     const handleCloseModel = () => {
         setDeleteModel(false);

@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Col, Row, Table, Form } from 'react-bootstrap';
-import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
-import { BsEye } from 'react-icons/bs';
-import { CiEdit } from 'react-icons/ci';
-import { IoAddCircle } from "react-icons/io5";
+import React, { useState } from 'react';
+import { Table } from 'react-bootstrap';
+import { AiOutlineDelete } from 'react-icons/ai';
 import '../../assets/css/products-table.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { DelVenue } from '../../store/Venue/actions/actionCreators';
 import DeleteModel from '../Models/DeleteModel';
-import { GetVenue } from '../../store/Venue/actions/actionCreators';
 import { useNavigate } from 'react-router-dom';
-import { PaginationControl } from 'react-bootstrap-pagination-control';
 const MembersTable = ({ state, setState }) => {
     const { TeamMembers, isLoading } = useSelector((state) => state.team);
     const { token } = useSelector((state) => state.user)

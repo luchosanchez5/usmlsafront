@@ -1,8 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { MdOutlineAdd } from 'react-icons/md';
-
-import CustomButton from './CustomButton';
 import '../assets/css/page-header.css';
 
 const PageHeader = ({ title, subtitle, btnText, onClick, TeamBoxModel }) => {

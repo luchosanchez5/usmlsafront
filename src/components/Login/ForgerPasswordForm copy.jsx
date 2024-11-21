@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import TextField from "../../shared/TextField";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ForgetPasswordSchema } from "../../Schemas/Schemas";
 import { Formik, Form } from "formik";
 import { FaEnvelope } from "react-icons/fa";
@@ -16,7 +16,6 @@ const ForgerPasswordForm = () => {
   const handlesubmit = (values, action) => {
     action.resetForm();
     // Add the logic to handle the password reset here.
-
     localStorage.setItem(
       "forget-password-email",
       JSON.stringify(values?.email)

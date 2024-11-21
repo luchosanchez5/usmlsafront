@@ -1,6 +1,5 @@
 import React from "react";
 import {Image } from "react-bootstrap";
-import Junction from "../assets/images/auth-section2-image.svg";
 import img from '../assets/images/soccer-cup-golden-winners-cup-middle-stadium-celebrating-victory-with-audience_1014870-61060.avif'
 import "../assets/css/auth-slider.css";
 

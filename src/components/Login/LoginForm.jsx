@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Image, Col, Row } from "react-bootstrap";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import PaymentModel from "../CardModel/PaymentModel";
 import { useNavigate, Link } from "react-router-dom";
 import TextField from "../../shared/TextField";
-import GoogleLogin from "./GoogleLogin";
-import SelectField from "../../shared/SelectField";
 import RateIcon from "../../assets/images/icons/@.png";
 import { FaLock } from "react-icons/fa";
-import PassIcon from "../../assets/images/icons/lock.png";
-import EyeIcon from "../../assets/images/icons/eye.svg";
-import CloseEye from "../../assets/images/icons/eyeclose.svg";
 import { BiLogoGoogle } from "react-icons/bi";
 import "../../assets/css/login-form.css";
-import Toast from "../../shared/Toast";
-import axios from "axios";
-import { useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/user/actions/actionCreators";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 const LoginForm = () => {
@@ -34,10 +26,6 @@ const LoginForm = () => {
         password: 'Farooq@123'
     }
 
-    const validValues = {
-        Email: "",
-        Password: "",
-    };
 
     const errorSchema = Yup.object().shape({
         email: Yup.string().email().required("Email is required"),

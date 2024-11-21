@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Form from '../Form.js';
 import YourTeamDetails from '../pages/Dashboard/YourTeamDetails.js';
 const Login = lazy(() => import('../pages/Login/Login.js'));
