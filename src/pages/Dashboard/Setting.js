@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Image } from "react-bootstrap";
 import { GetPerson } from "../../store/person/actions/actionsCreators";
 import { Col, Row } from "react-bootstrap";
-import { MdOutlineEmail } from "react-icons/md";
+
 import profilePic from "../../assets/images/images (1).jpeg";
 import PageHeader from "../../shared/PageHeader";
-import UserInfoEditModel from "../../components/Models/UserInfoEditModel";
+import ManagerInfoEditModel from "../../components/Models/ManagerInfoEditModel";
 import AdminInfoEditModel from "../../components/Models/AdminInfoEditModel";
+import PlayerInfoEditModel from "../../components/Models/PlayerInfoEditModel";
+import CoManagerInfoEditModel from "../../components/Models/CoManagerInfoEditModel";
 const Setting = () => {
     const { Persondata } = useSelector((state) => state.person);
     const { user, token } = useSelector((state) => state.user);
@@ -64,12 +66,29 @@ const Setting = () => {
                         setState={setState}
 
                     />
-                ) : (
-                    <UserInfoEditModel
+                ) : Persondata?.data?.role === 'MANAGER' ? (
+                    <ManagerInfoEditModel
                         show={editModel}
+                        setEditModel={setEditModel}
                         onClose={() => setEditModel(false)}
                         onClick={handleConfrim}
                     />
+                ) : Persondata?.data?.role === 'PLAYER' ? (
+                    <PlayerInfoEditModel
+                        show={editModel}
+                        setEditModel={setEditModel}
+                        onClose={() => setEditModel(false)}
+                        onClick={handleConfrim}
+                    />
+                ) : Persondata?.data?.role === 'CO_MANAGER' ? (
+                    <CoManagerInfoEditModel
+                        show={editModel}
+                        setEditModel={setEditModel}
+                        onClose={() => setEditModel(false)}
+                        onClick={handleConfrim}
+                    />
+                ) : (
+                    ''
                 )
             )}
         </>
