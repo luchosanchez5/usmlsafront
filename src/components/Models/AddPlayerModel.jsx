@@ -21,6 +21,7 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
         );
        
 
+<<<<<<< Updated upstream
         // If you need full objects of matched members:
         const matchedMembers = TeamMembers.members.filter((member) =>
           
@@ -31,6 +32,11 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
     const { token } = useSelector((state) => state.user)
     const [selectedCard, setSelectedCard] = useState(null);
     const [page, setPage] = useState(0);
+=======
+  useEffect(() => {
+    Dispatch(GetCoManager("PLAYER", token, page));
+  }, [Dispatch,page,token]);
+>>>>>>> Stashed changes
 
     const Dispatch = useDispatch();
     const handleCardSelect = (id) => {

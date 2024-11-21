@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row, Table, Form } from 'react-bootstrap';
-import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
 import '../../assets/css/products-table.css';
@@ -10,7 +10,6 @@ import { PaginationControl } from 'react-bootstrap-pagination-control';
 import DeleteModel from '../Models/DeleteModel';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
-import SkeletonTable from '../SkeletonTable/SkeletonTable';
 const AllTeamTable = () => {
     const { TeamData, isLoading } = useSelector((state) => state.team);
     console.log(isLoading)
@@ -18,7 +17,6 @@ const AllTeamTable = () => {
     const { user, token } = useSelector((state) => state.user);
     const { SetTeamEdit, SetTeamId } = useContext(GlobalInfo)
     const [teamId, setTeamId] = useState(null);
-    const [state, setState] = useState(false)
     const role = user
     const userId = user?.userId
     const Dispatch = useDispatch()
@@ -28,17 +26,25 @@ const AllTeamTable = () => {
     const Navigate = useNavigate()
     useEffect(() => {
         Dispatch(GetTeams(page, token, role, userId))
-    }, [Dispatch, state, page])
+    }, [Dispatch, page])
     const handleDeleteBtn = (id) => {
         setTeamId(id)
         SetDelTeamModel(true)
 
     }
     const handleDeleteTeam = () => {
+<<<<<<< Updated upstream
         Dispatch(DeleteTeams(teamId, token))
         SetDelTeamModel(false)
         setState(prev => !prev)
 
+=======
+        Dispatch(DeleteTeams(teamId, token, () => {
+            Dispatch(GetTeams(page, token, role, userId))
+            SetDelTeamModel(false)
+        }
+        ))
+>>>>>>> Stashed changes
     }
     const handlePageChange = (newPage) => {
         setPage(newPage);
@@ -66,11 +72,11 @@ const AllTeamTable = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Ranking</th>
-                            <th>GamesWin</th>
-                            <th>GamesLost</th>
+                            <th>Games Win</th>
+                            <th>Games Lost</th>
                             <th>State</th>
-                            <th>RunScored</th>
-                            <th>RunAllowed</th>
+                            <th>Run Scored</th>
+                            <th>Run Allowed</th>
                             <th>Team Status</th>
                             <th>Actions</th>
 
