@@ -34,7 +34,7 @@ function AddDivisionFields() {
 
         }))
         : [];
-   
+
     const initialValues = {
         divisionName: "",
         entryFee: null,
@@ -46,7 +46,7 @@ function AddDivisionFields() {
         prize2: null,
         prize3: null,
         prize4: null,
-        // tournamentId: null
+        tournamentId: null
     }
 
     const convertToISOString = (selectedTime) => {
@@ -65,7 +65,6 @@ function AddDivisionFields() {
         initialValues: initialValues,
         validationSchema: AllDivisionSchemas,
         onSubmit: (values, action) => {
-
             const data = {
                 divisionName: values.divisionName,
                 entryFee: values.entryFee,
@@ -84,8 +83,6 @@ function AddDivisionFields() {
 
             } else {
                 Dispatch(AddDivisions(data, Token, Navigate))
-
-
             }
             action.resetForm();
 
@@ -139,7 +136,7 @@ function AddDivisionFields() {
         <>
 
             <div className='mt-3'>
-                <h4 className='mb-3 fw-bold'>{DivisionEdit ? 'Update Division' :'Add Division'}</h4>
+                <h4 className='mb-3 fw-bold'>{DivisionEdit ? 'Update Division' : 'Add Division'}</h4>
                 <form onSubmit={handleSubmit}>
 
                     <Row className='row gy-3 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2'>
@@ -281,6 +278,8 @@ function AddDivisionFields() {
                                 onChange={handleChange}
                                 value={values.tournamentId}
                                 className='form-control'
+                                touched={touched.tournamentId}
+                                error={errors.tournamentId}
 
                             />
 

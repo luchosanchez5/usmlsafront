@@ -46,9 +46,11 @@ const AllDivisionTable = () => {
         Navigate('/dashboard/addivision')
     }
     const handleDeletePerson = () => {
-        Dispatch(DeleteDivision(divisionId, token))
-        setState(prev => !prev)
+        Dispatch(DeleteDivision(divisionId, token,() => {
+            Dispatch(GetAllDivisions(page, token))
         setDeleteModel(false)
+        }))
+       
     }
     const handleCloseModel = () => {
         setDeleteModel(false);

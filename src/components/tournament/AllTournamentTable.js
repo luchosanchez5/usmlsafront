@@ -39,9 +39,11 @@ const AllTournamentTable = () => {
         SetDelTournamentModel(false);
     };
     const handleDeleteTournament = () => {
-        Dispatch(DelTournaments(tournamentId, token))
-        setState(prev => !prev)
-        SetDelTournamentModel(false)
+        Dispatch(DelTournaments(tournamentId, token, () => {
+            Dispatch(GetTournaments(page))
+            SetDelTournamentModel(false)
+        }))
+
     };
     const handleEditbtn = (id) => {
         SetTournamentId(id)

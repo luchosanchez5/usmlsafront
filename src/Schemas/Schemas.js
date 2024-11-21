@@ -38,6 +38,13 @@ export const AllVenueSchemas = Yup.object({
 
 });
 
+export const AdminValuesSchemas = Yup.object({
+    email: Yup.string().email().required("Email is Required"),
+    firstName: Yup.string().required("first Name is Required"),
+    lastName: Yup.string().required("last Name is Required"),
+});
+
+
 export const AllDivisionSchemas = Yup.object({
     divisionName: Yup.string().required("Division Name is Required"),
 

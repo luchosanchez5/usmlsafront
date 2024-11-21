@@ -47,13 +47,17 @@ export const GetTournaments = (page) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TOURNAMENT,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
       // Toast.error(error.response.data.message);
     });
@@ -81,6 +85,12 @@ export const GetTournamentsBySearch = (token, page) => (dispatch) => {
       // Toast.success(response.data.status);
     })
     .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TOURNAMENTS_BY_SEARCH,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: true,
@@ -164,18 +174,21 @@ export const GetAllDivisions = (page, token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
+      if (error.response.status === 400) {
+        dispatch({
+          type: actionTypes.GET_ALL_DIVISIONS,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
-      // Toast.error(error.response.data.message);
     });
 };
-export const DeleteDivision = (id, token) => (dispatch) => {
+export const DeleteDivision = (id, token, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -194,6 +207,8 @@ export const DeleteDivision = (id, token) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
+      if (callback) callback();
+
     })
     .catch((error) => {
       dispatch({
@@ -286,7 +301,7 @@ export const GetTournamentsDetailsByTournamentId = (id, token) => (dispatch) => 
       });
     });
 };
-export const DelTournaments = (tournamentId, token) => (dispatch) => {
+export const DelTournaments = (tournamentId, token, callback) => (dispatch) => {
   axios.delete(`${Url}api/tournaments/${tournamentId}`, {
     headers: { Authorization: `Bearer ${token}` }
   })
@@ -295,6 +310,7 @@ export const DelTournaments = (tournamentId, token) => (dispatch) => {
         type: actionTypes.DELETE_TOURNAMENT,
       });
       Toast.success(response.data.message);
+      if (callback) callback();
     })
     .catch((error) => {
       Toast.error(error.response.data.message);

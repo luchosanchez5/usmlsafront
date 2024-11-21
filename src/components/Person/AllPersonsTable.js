@@ -27,7 +27,7 @@ const AllPersonsTable = () => {
 
     useEffect(() => {
         Dispatch(GetPersons(page, token))
-    }, [Dispatch, state, token])
+    }, [Dispatch, token])
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };
@@ -45,9 +45,10 @@ const AllPersonsTable = () => {
         Navigate('/dashboard/addperson')
     }
     const handleDeletePerson = () => {
-        Dispatch(DelPersons(personId, token))
-        setState(prev => !prev)
-        setDeleteModel(false)
+        Dispatch(DelPersons(personId, token, () => {
+            Dispatch(GetPersons(page, token))
+            setDeleteModel(false)
+        }))
     }
     const handleCloseModel = () => {
         setDeleteModel(false);

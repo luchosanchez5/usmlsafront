@@ -90,15 +90,17 @@ export const GetPersons = (page, token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
-      console.log("🚀 : ~ file: actionsCreators.js:54 ~ GetPersons ~ error", error);
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_PERSONS,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -133,7 +135,7 @@ export const GetPersonsById = (id, Token) => (dispatch) => {
       });
     });
 };
-export const DelPersons = (Personid, token) => (dispatch) => {
+export const DelPersons = (Personid, token, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -152,6 +154,8 @@ export const DelPersons = (Personid, token) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
+      if (callback) callback();
+
     })
     .catch((error) => {
       dispatch({
@@ -182,14 +186,13 @@ export const GetPerson = (id = '10', Token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.message);
+
     })
     .catch((error) => {
-      Toast.success(error.data.message);
+      Toast.success(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
