@@ -9,31 +9,25 @@ import DeleteModel from './DeleteModel';
 import { Row, Col } from 'react-bootstrap';
 import SelectTag from '../product/SelectTag';
 import { Update_Persons } from '../../store/person/actions/actionsCreators';
-const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
+const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
     const Dispatch = useDispatch()
     const { Persondata } = useSelector((state) => state.person)
     const { user } = useSelector((state) => state.user)
     const userId = user.userId
-    const [roleValue, SetRoleValue] = useState("");
     const Token = user?.access_token
     const initialValues = {
         email: Persondata.data.email,
         name: Persondata?.data.name || '',
-        role: Persondata?.data.role || '',
         firstName: Persondata?.data.firstName || '',
         lastName: Persondata?.data.lastName || '',
         address1: Persondata?.data.address1 || '',
         address2: Persondata?.data.address2 || '',
-        points: Persondata?.data.points || null,
-        ranking: Persondata?.data.ranking || null,
-        division: Persondata.data.division || "",
-        city: Persondata.data.city || "",
-        state: Persondata.data.state || "",
-        zipCode: Persondata.data.zipCode || "",
-        mobilePhone: Persondata.data.mobilePhone || "",
-        playerStatus:'',
-        tournamentsPlayed: Persondata.data.tournamentsPlayed || null,
-        gamesPlayed: Persondata.data.gamesPlayed || null,
+        ranking: Persondata?.data?.ranking || null,
+        city: Persondata?.data?.city || "",
+        state: Persondata?.data?.state || "",
+        mobilePhone:Persondata?.data?.mobilePhone || "",
+        zipCode: Persondata?.data?.zipCode || "",
+        country:Persondata?.data?.country || "",
     }
     const { values, handleChange, errors, handleSubmit, touched, resetForm } = useFormik({
         initialValues: initialValues,
@@ -43,45 +37,33 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
 
             const data = {
                 name: values.name,
-                email:Persondata.data.email,
-                Password: values.password,
-                role: roleValue,
+                email: Persondata.data.email,
+                Password: null,
+                role: 'CO_MANAGER',
                 firstName: values.firstName,
                 lastName: values.lastName,
                 address1: values.address1,
                 address2: values.address2,
-                points: values.points,
+                points: null,
                 ranking: values.ranking,
-                division: values.division,
+                division: null,
                 city: values.city,
                 state: values.state,
                 zipCode: values.zipCode,
                 mobilePhone: values.mobilePhone,
-                // playerStatus:values.playerStatus ,
-                tournamentsPlayed: values.tournamentsPlayed,
-                gamesPlayed: values.gamesPlayed,
-               
-                personAPlayer: roleValue === 'PLAYER' ? true : false
+                playerStatus: 'ACTIVE',
+                tournamentsPlayed: null,
+                gamesPlayed: null,
+                personAPlayer: false,
+                country:values.country
             }
             Dispatch(Update_Persons(data, userId, Token))
-
+            setEditModel(false)
             setState(prev => !prev)
-            SetTeamBoxModel(false)
+          
         }
     });
-    const playerStatusOptions = [
-        { value: "ACTIVE", label: "ACTIVE" },
-        { value: "INACTIVE", label: "INACTIVE" },
-        { value: "SUSPENDED", label: "SUSPENDED" }
-    ]
-    const handleRole = (e) => {
-        SetRoleValue(e.target.value);
-    }
-    const roleOptions = [
-        { value: 'CO_MANAGER', label: ' CO MANAGER' },
-        { value: 'MANAGER', label: ' MANAGER' },
-        { value: 'PLAYER', label: 'PLAYER' },
-    ]
+    
     return (
         <Modal show={show} onHide={onClose} size='xl' centered className='py-4 ' >
             <Modal.Header closeButton>
@@ -106,18 +88,6 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                         </div>
 
 
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="password"
-                                name="password"
-                                label="Password"
-                                onChange={handleChange}
-                                value={values.password}
-                                className="form-control"
-                                touched={touched.password}
-                                error={errors.password}
-                            />
-                        </div>
 
                         {/* Name Field */}
                         <div className="d-flex flex-column flex-grow-1">
@@ -134,32 +104,7 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                         </div>
 
 
-                        <div className="d-flex flex-column  flex-grow-1">
-                            <SelectTag
-                                label="Role"
-                                deFaultValue='Select Your Role'
-                                name="role"
-                                options={roleOptions}
-                                value={values.roleOptions}
-                                onChange={handleRole}
-                                touched={touched.roleOptions}
-                                error={errors.roleOptions}
-                                className="form-control"
-                            />
-
-                        </div>
-                        <div className="d-flex flex-column flex-grow-1">
-                        <SelectTag
-                            options={playerStatusOptions}
-                            onChange={handleChange}
-                            name='playerStatus'
-                            label='Player Status'
-                            touched={touched.playerStatus}
-                            error={errors.playerStatus}
-                            value={values.playerStatus}
-                            className="form-control"
-                        />
-                    </div>
+                       
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
                                 type="text"
@@ -212,7 +157,7 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                             />
                         </div>
 
-                        {/* <div className="d-flex flex-column flex-grow-1">
+                        <div className="d-flex flex-column flex-grow-1">
                             <InputField
                                 type="text"
                                 name="city"
@@ -223,7 +168,7 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                                 touched={touched.city}
                                 error={errors.city}
                             />
-                        </div> */}
+                        </div>
 
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
@@ -251,56 +196,7 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                             />
                         </div>
 
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="text"
-                                name="mobilePhone"
-                                label="Mobile Phone"
-                                onChange={handleChange}
-                                value={values.mobilePhone}
-                                className="form-control"
-                                touched={touched.mobilePhone}
-                                error={errors.mobilePhone}
-                            />
-                        </div>
-
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="number"
-                                name="numberOfFields"
-                                label="Number of Fields"
-                                onChange={handleChange}
-                                value={values.numberOfFields}
-                                className="form-control"
-                                touched={touched.numberOfFields}
-                                error={errors.numberOfFields}
-                            />
-                        </div>
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="number"
-                                name="tournamentsPlayed"
-                                label="Tournaments Played"
-                                onChange={handleChange}
-                                value={values.tournamentsPlayed}
-                                className="form-control"
-                                touched={touched.tournamentsPlayed}
-                                error={errors.tournamentsPlayed}
-                            />
-                        </div>
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="number"
-                                name="points"
-                                label="Points"
-                                onChange={handleChange}
-                                value={values.points}
-                                className="form-control"
-                                touched={touched.points}
-                                error={errors.points}
-                            />
-                        </div>
-
+                      
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
                                 type="number"
@@ -313,19 +209,40 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
                                 error={errors.ranking}
                             />
                         </div>
-                        {/* Games Played Field */}
+
+                      
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
-                                type="number"
-                                name="gamesPlayed"
-                                label="Games Played"
+                                type="text"
+                                name="mobilePhone"
+                                label="mobilePhone"
                                 onChange={handleChange}
-                                value={values.gamesPlayed}
+                                value={values.mobilePhone}
                                 className="form-control"
-                                touched={touched.gamesPlayed}
-                                error={errors.gamesPlayed}
+                                touched={touched.mobilePhone}
+                                error={errors.mobilePhone}
                             />
                         </div>
+
+                        <div className="d-flex flex-column flex-grow-1">
+                            <InputField
+                                type="text"
+                                name="country"
+                                label="Country"
+                                onChange={handleChange}
+                                value={values.country}
+                                className="form-control"
+                                touched={touched.country}
+                                error={errors.country}
+                            />
+                        </div>
+
+
+                     
+                        
+                    
+
+                     
                     </Row>
                     <div className="d-flex ">
                         <button type="submit" className="mt-3 gradient-btn-orange">
@@ -339,4 +256,4 @@ const UserInfoEditModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
     )
 }
 
-export default UserInfoEditModel;
+export default CoManagerInfoEditModel;
