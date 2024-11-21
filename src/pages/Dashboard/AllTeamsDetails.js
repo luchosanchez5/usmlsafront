@@ -27,16 +27,16 @@ const AllTeamsDetails = () => {
 
 
     }, [id, Dispatch, state, token])
-
-
+    const { user } = useSelector((state) => state.user);
+    const role = user?.roles[0]
     return (
         <>
             <h1 className="font-bold my-3 ps-4">Team Details</h1>
             <div className="text-start  pe-4  ">
                 <PageHeader btnText="Add Co Manager" onClick={() => SetCoManagerBoxModel(true)} />
                 <PageHeader btnText="Add Player" onClick={() => SetPlayerBoxModel(true)} />
-
-                <PageHeader btnText="Team Register" onClick={() => Navigate(`/dashboard/registerteam/${id}`)} />
+                {role === 'ADMIN' ? '' : <PageHeader btnText="Team Register" onClick={() => Navigate(`/dashboard/registerteam/${id}`)} />
+                }
             </div>
             <div className="text-start  ps-4  ">
                 <button className='Team-register-btn'

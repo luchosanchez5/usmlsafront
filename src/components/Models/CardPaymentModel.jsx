@@ -17,10 +17,7 @@ const CardPaymentModel = ({ show, onClose, SetTeamBoxModel, DivisionDetailsBySea
                 <Elements stripe={stripePromise}>
                     <CardPaymentForm DivisionDetailsBySearch={DivisionDetailsBySearch} totalAmount={totalAmount} tournamentId={tournamentId} SetTeamBoxModel={SetTeamBoxModel} />
                 </Elements>
-
             </Modal.Body>
-
-
         </Modal>
     )
 }

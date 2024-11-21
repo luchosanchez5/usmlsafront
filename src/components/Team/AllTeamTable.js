@@ -35,11 +35,11 @@ const AllTeamTable = () => {
 
     }
     const handleDeleteTeam = () => {
-        Dispatch(DeleteTeams(teamId, token,() => {
+        Dispatch(DeleteTeams(teamId, token, () => {
             Dispatch(GetTeams(page, token, role, userId))
             SetDelTeamModel(false)
         }
-    ))
+        ))
     }
     const handlePageChange = (newPage) => {
         setPage(newPage);
@@ -66,9 +66,6 @@ const AllTeamTable = () => {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Ranking</th>
-                            <th>GamesWin</th>
-                            <th>GamesLost</th>
                             <th>State</th>
                             <th>RunScored</th>
                             <th>RunAllowed</th>
@@ -83,9 +80,6 @@ const AllTeamTable = () => {
                                 <tr key={index} className='main-row'>
                                     <td>{item?.name}</td>
                                     <td>{item?.email}</td>
-                                    <td>{item?.ranking}</td>
-                                    <td>{item?.gamesWin}</td>
-                                    <td>{item?.gamesLost}</td>
                                     <td>{item?.state}</td>
                                     <td>{item?.avgRunsDiff}</td>
                                     <td>{item?.runAllowed}</td>

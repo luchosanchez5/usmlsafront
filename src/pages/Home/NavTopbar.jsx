@@ -9,6 +9,7 @@ function NavTopbar() {
   const handleClose = () => setShowCanvas(false);
   const handleShow = () => setShowCanvas(true);
   const { user } = useSelector((state) => state.user);
+  console.log(user.roles[0]);
   const Token = user?.access_token;
   const [LoggedIn, SetLoggedIn] = useState(false);
   const Navigate = useNavigate();
@@ -32,7 +33,15 @@ function NavTopbar() {
             <>
               <button
                 className="text-white py-2 px-3 Login-btn"
-                onClick={() => Navigate("/myaccount")}
+                onClick={() => {
+                  if (user.roles[0] === "ADMIN") {
+                    Navigate("/dashboard");
+                  } else if (user.roles[0] === "MANAGER") {
+                    Navigate("/dashboard/allteams");
+                  } else {
+                    Navigate("/dashboard/yourteam");
+                  }
+                }}
               >
                 Dashboard
               </button>
@@ -58,61 +67,6 @@ function NavTopbar() {
           <HiBars3 onClick={handleShow} fontSize={30} />
         </div>
       </Navbar>
-
-      <Offcanvas show={showCanvas} onHide={handleClose} placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <ul className="list-unstyled">
-            <li className="py-2" onClick={() => Navigate("/")}>
-              Home
-            </li>
-            <li className="py-2" onClick={() => Navigate("/about")}>
-              About
-            </li>
-            <li className="py-2" onClick={() => Navigate("/contact")}>
-              Contact
-            </li>
-            <li className="py-2" onClick={() => Navigate("/newspaper")}>
-              News Paper
-            </li>
-            <hr />
-            {LoggedIn ? (
-              <>
-                <button
-                  className="w-100 mb-3 text-white py-2 Login-btn"
-                  onClick={() => Navigate("/myaccount")}
-                >
-                  My Account
-                </button>{" "}
-                {/* <button className="w-100 mb-3 text-white py-2 Login-btn" onClick={() => Navigate('/myaccount')}>My Account</button> */}
-                <button
-                  className="w-100 mb-3 text-white py-2 Login-btn"
-                  onClick={() => Navigate("/myaccount")}
-                >
-                  Sign Out
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  className="w-100 mb-3 text-white py-2 Login-btn"
-                  onClick={() => Navigate("/auth/login")}
-                >
-                  Login
-                </button>
-                <button
-                  className="w-100 text-white py-2 Signup-btn"
-                  onClick={() => Navigate("/auth/register")}
-                >
-                  Sign Up
-                </button>
-              </>
-            )}
-          </ul>
-        </Offcanvas.Body>
-      </Offcanvas>
     </>
   );
 }

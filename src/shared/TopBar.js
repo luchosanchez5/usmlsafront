@@ -26,17 +26,13 @@ const TopBar = () => {
         <Row className='bg-black'>
             <Col className='px-0'>
                 <div className='d-flex justify-content-end py-4 align-items-center'>
-                    <BsSearch className='bar-icon' color='white' />
-                    <GrNotification className='bar-icon' color='white' />
-                    
-                
                     {userName && (
-                        <div className="text-white me-3">{userName}</div>
+                        <div className="text-white me-3">Hello {userName}</div>
                     )}
 
                     <div className="custom-select-wrapper">
                         <Dropdown className={`user-dropdown`} show={showOptions} onToggle={toggleDropdown}>
-                            <Dropdown.Toggle  className='bar-icon' cursor='pointer' id="user-dropdown" />
+                            <Dropdown.Toggle className='bar-icon' cursor='pointer' id="user-dropdown" />
                             <Dropdown.Menu className='p-2'>
                                 <Dropdown.Item className="py-0" onClick={handleLogout}>
                                     <div className="text-decoration-none text-dark d-flex align-items-center gap-2">
