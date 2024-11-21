@@ -1,28 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { Row, Col, Form } from 'react-bootstrap';
+import { useContext, useEffect } from 'react';
+import { Row } from 'react-bootstrap';
 import InputField from '../product/InputField';
-import { Formik, useFormik } from 'formik';
-import * as Yup from "yup";
-import { AllDivisionSchemas, AllTeamSchemas } from '../../Schemas/Schemas';
+import { useFormik } from 'formik';
+import { AllDivisionSchemas } from '../../Schemas/Schemas';
 import { useDispatch } from 'react-redux';
-import { AddTeams, GetTeamsbyTeamId, UpdateTeams } from '../../store/team/actions/actionsCreators';
 import { useSelector } from 'react-redux';
 import { GlobalInfo } from '../../App';
 import SelectTag from '../product/SelectTag';
 import { useNavigate } from 'react-router-dom';
 import { AddDivisions, GetDivisionsDetailsByDivisionId, GetTournamentsBySearch, UpdateDivisions } from '../../store/tournament/actions/actionsCreators';
-import AllDivisionDetails from '../../pages/Dashboard/AllDivisionDetails';
 
 function AddDivisionFields() {
-    const TitleTournamentList = 'All Tournament lists'
     const { user, token } = useSelector((state) => state.user)
-    const { TeamDetailsData } = useSelector((state) => state.team)
-    const { TournamentBySearch, AllDivisionsData, DivisionDetails, TournamentData } = useSelector((state) => state.tournament)
-
-
-
+    const { TournamentBySearch, AllDivisionsData, DivisionDetails } = useSelector((state) => state.tournament)
     const { DivisionEdit, DivisionId } = useContext(GlobalInfo)
     const Token = user?.access_token
     const Dispatch = useDispatch()
@@ -61,7 +51,7 @@ function AddDivisionFields() {
         // Return ISO string
         return currentDate.toISOString();
     }
-    const { values, handleChange, errors, handleSubmit, setValues, touched, resetForm } = useFormik({
+    const { values, handleChange, errors, handleSubmit, setValues, touched } = useFormik({
         initialValues: initialValues,
         validationSchema: AllDivisionSchemas,
         onSubmit: (values, action) => {

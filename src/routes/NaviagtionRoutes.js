@@ -8,7 +8,6 @@ const Home = lazy(() => import('../pages/Home/Home'));
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
 const AllPersonDetails = lazy(() => import('../pages/Dashboard/AllPersonDetails.js'));
 const PaymentHistory = lazy(() => import('../pages/Dashboard/Payment.js'));
-const FindEvents = lazy(() => import('../components/product/FindEvents'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
 const RegisterTeam = lazy(() => import('../pages/Payment/RegisterTeam.jsx'));
 const ForgetPassword = lazy(() => import('../pages/Login/ForgetPassword.js'));

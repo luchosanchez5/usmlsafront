@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Image } from "react-bootstrap";
 import { GetPerson } from "../../store/person/actions/actionsCreators";
 import { Col, Row } from "react-bootstrap";
-import { MdOutlineEmail } from "react-icons/md";
 import profilePic from "../../assets/images/images (1).jpeg";
 import PageHeader from "../../shared/PageHeader";
 import UserInfoEditModel from "../../components/Models/UserInfoEditModel";
 import AdminInfoEditModel from "../../components/Models/AdminInfoEditModel";
 const Setting = () => {
     const { Persondata } = useSelector((state) => state.person);
-    const { user, token } = useSelector((state) => state.user);
+    const { user } = useSelector((state) => state.user);
     const [editModel, setEditModel] = useState(false);
     const [state, setState] = useState(true);
     const Dispatch = useDispatch();

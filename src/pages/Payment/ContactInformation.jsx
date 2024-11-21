@@ -1,44 +1,48 @@
-import React, { useEffect, useState } from 'react';
-import InputField from '../../components/product/InputField';
-import SelectTag from '../../components/product/SelectTag';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { GetDivisionsBySearch, GetDivisionsDetailsBySearch, GetTournamentsBySearch } from '../../store/tournament/actions/actionsCreators';
-import PaymentModel from '../../components/CardModel/PaymentModel'
-import CardPaymentModel from '../../components/Models/CardPaymentModel';
-import SelectField from '../../components/product/SelectField';
-import Toast from '../../shared/Toast';
-const ContactInformation = ({ selectedPayment, setSelectedPayment, DivisionValue, setDivisionValue, DivisionDetailsBySearch,totalAmount }) => {
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GetDivisionsBySearch,
+  GetTournamentsBySearch,
+} from "../../store/tournament/actions/actionsCreators";
+import CardPaymentModel from "../../components/Models/CardPaymentModel";
+import SelectField from "../../components/product/SelectField";
+import Toast from "../../shared/Toast";
+const ContactInformation = ({
+  selectedPayment,
+  setSelectedPayment,
+  DivisionValue,
+  setDivisionValue,
+  DivisionDetailsBySearch,
+  totalAmount,
+}) => {
   const { token } = useSelector((state) => state.user);
-  const { TournamentBySearch, DivisionBySearch } = useSelector((state) => state.tournament);
-const[tournamentId,setTournamentId]=useState(null)
+  const { TournamentBySearch, DivisionBySearch } = useSelector(
+    (state) => state.tournament
+  );
+  const [tournamentId, setTournamentId] = useState(null);
 
-
-  const [CardModel, SetCardModel] = useState(false)
+  const [CardModel, SetCardModel] = useState(false);
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
   };
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const TournmentOptions = TournamentBySearch?.data?.length > 0
-    ? TournamentBySearch.data.map(item => ({
-      value: item?.name,
-      label: item?.name
-    }))
-    : [];
+  const TournmentOptions =
+    TournamentBySearch?.data?.length > 0
+      ? TournamentBySearch.data.map((item) => ({
+          value: item?.name,
+          label: item?.name,
+        }))
+      : [];
 
-  const DivisionOptions = DivisionBySearch?.data?.length > 0
-    ? DivisionBySearch.data.map(item => ({
-      value: item?.divisionName,
-      label: item?.divisionName
-    }))
-    : [];
-
-  const StateOptions = [
-    { value: 'Gujrat', label: 'Gujrat' }
-  ];
+  const DivisionOptions =
+    DivisionBySearch?.data?.length > 0
+      ? DivisionBySearch.data.map((item) => ({
+          value: item?.divisionName,
+          label: item?.divisionName,
+        }))
+      : [];
 
   useEffect(() => {
     dispatch(GetTournamentsBySearch(token));
@@ -46,31 +50,32 @@ const[tournamentId,setTournamentId]=useState(null)
 
   const handleChange = (e) => {
     const value = decodeURIComponent(e.target.value);
-    const FindTournamentId=TournamentBySearch.data.find((item)=>item.name===value)
-    setTournamentId(FindTournamentId.tournamentId)
+    const FindTournamentId = TournamentBySearch.data.find(
+      (item) => item.name === value
+    );
+    setTournamentId(FindTournamentId.tournamentId);
     dispatch(GetDivisionsBySearch(token, 0, value));
   };
 
   const handleDivisionChange = (e) => {
     const value = decodeURIComponent(e.target.value);
-    setDivisionValue(value)
+    setDivisionValue(value);
   };
-  const handlePlaceOrderBtn=()=>{
-    if(!selectedPayment){
-      return Toast.error('Select Your Payment Option')
-    }else{
-SetCardModel(true)
+  const handlePlaceOrderBtn = () => {
+    if (!selectedPayment) {
+      return Toast.error("Select Your Payment Option");
+    } else {
+      SetCardModel(true);
     }
-  }
+  };
 
   return (
     <>
-<h2>Register Your Team</h2>
+      <h2>Register Your Team</h2>
       <div className="mt-5 d-flex flex-column gap-2">
         <div className="d-flex  me-1">
-
           <SelectField
-            deFaultValue='Select Your Tournament'
+            deFaultValue="Select Your Tournament"
             options={TournmentOptions}
             className="d-flex flex-grow-1 py-2 me-1 form-control"
             onChange={handleChange}
@@ -78,7 +83,7 @@ SetCardModel(true)
 
           {DivisionBySearch && DivisionBySearch?.data?.length > 0 && (
             <SelectField
-              deFaultValue='Select Your Division'
+              deFaultValue="Select Your Division"
               options={DivisionOptions}
               onClick={handleDivisionChange}
               className="py-2 d-flex flex-grow-1 form-control"
@@ -97,12 +102,13 @@ SetCardModel(true)
                   name="EntryFee"
                   value="EntryFee"
                   id="EntryFee"
-                  checked={selectedPayment === 'EntryFee'}
+                  checked={selectedPayment === "EntryFee"}
                   onChange={handlePaymentChange}
                 />
                 <label className="form-check-label" htmlFor="EntryFee">
-                  Entry Fee <span className="fw-bolder">
-                    ${DivisionDetailsBySearch?.[0]?.entryFee || 'N/A'}
+                  Entry Fee{" "}
+                  <span className="fw-bolder">
+                    ${DivisionDetailsBySearch?.[0]?.entryFee || "N/A"}
                   </span>
                 </label>
               </div>
@@ -116,27 +122,37 @@ SetCardModel(true)
                   name="IntialDeposit"
                   value="IntialDeposit"
                   id="IntialDeposit"
-                  checked={selectedPayment === 'IntialDeposit'}
+                  checked={selectedPayment === "IntialDeposit"}
                   onChange={handlePaymentChange}
                 />
                 <label className="form-check-label" htmlFor="IntialDeposit">
-                  Initial Deposit Fee <span className="fw-bolder">
-                    ${DivisionDetailsBySearch?.[0]?.initialDepositFee || 'N/A'}
+                  Initial Deposit Fee{" "}
+                  <span className="fw-bolder">
+                    ${DivisionDetailsBySearch?.[0]?.initialDepositFee || "N/A"}
                   </span>
                 </label>
               </div>
             </div>
 
-         
-            <button className="gradient-btn-orange" onClick={handlePlaceOrderBtn}>Place Your Order</button>
-            {CardModel && <CardPaymentModel show={CardModel} DivisionDetailsBySearch={DivisionDetailsBySearch} totalAmount={totalAmount} tournamentId={tournamentId} onClose={() => SetCardModel(false)} />}
+            <button
+              className="gradient-btn-orange"
+              onClick={handlePlaceOrderBtn}
+            >
+              Place Your Order
+            </button>
+            {CardModel && (
+              <CardPaymentModel
+                show={CardModel}
+                DivisionDetailsBySearch={DivisionDetailsBySearch}
+                totalAmount={totalAmount}
+                tournamentId={tournamentId}
+                onClose={() => SetCardModel(false)}
+              />
+            )}
           </>
-
         )}
       </div>
-
     </>
-
   );
 };
 

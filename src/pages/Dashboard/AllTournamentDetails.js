@@ -11,20 +11,20 @@ const AllTournamentDetails = () => {
     const [state, setState] = useState(false)
     const [assignVenueBoxModel, SetVenueModel] = useState(false)
     const { token } = useSelector((state) => state.user)
-    const Navigate=useNavigate()
+    const Navigate = useNavigate()
     const { id } = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(GetTournamentsDetailsByTournamentId(id, token))
-    }, [id, dispatch, state])
+    }, [id, dispatch, state, token])
     return (
         <>
-           
+
 
 
             <h1 className="font-bold my-3"> Tournament Details</h1>
-           
-          
+
+
             <div className="text-end  pe-4  ">
                 <button className='Team-register-btn'
                     onClick={() => Navigate(-1)}>Go Back</button>
@@ -42,7 +42,7 @@ const AllTournamentDetails = () => {
                     </Col>
                     <Col >
                         <h5 className=" text-nowrap fw-bold ">Venue Name:</h5>
-                        <h6 className=" text-nowrap ">{TournamentDetails?.venueName ? TournamentDetails?.venueName :'No Venue Selected Yet'}</h6>
+                        <h6 className=" text-nowrap ">{TournamentDetails?.venueName ? TournamentDetails?.venueName : 'No Venue Selected Yet'}</h6>
 
                     </Col>
                     <Col>

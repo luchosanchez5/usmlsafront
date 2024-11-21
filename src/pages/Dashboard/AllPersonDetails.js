@@ -7,11 +7,11 @@ import DashboardLayout from '../../layout/DashboardLayout'
 const AllPersonDetails = () => {
     const { id } = useParams()
     const { token } = useSelector((state) => state.user)
-    const { PersonDetails, isLoading } = useSelector((state) => state.person)
+    const { PersonDetails } = useSelector((state) => state.person)
     const Dispatch = useDispatch()
     useEffect(() => {
         Dispatch(GetPersonsById(id, token))
-    }, [Dispatch, id])
+    }, [Dispatch, id, token])
 
     const Navigate = useNavigate()
 

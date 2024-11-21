@@ -1,23 +1,21 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row, Table, Form } from 'react-bootstrap';
-import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../assets/css/products-table.css';
-import { GET_PERSONS } from '../../store/person/actions/actionTypes';
 import { DelPersons, GetPersons } from '../../store/person/actions/actionsCreators';
 import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
 const AllPersonsTable = () => {
-    const { PersonData, isLoading } = useSelector((state) => state.person);
+    const { PersonData } = useSelector((state) => state.person);
     const { SetUserEdit, SetUserId } = useContext(GlobalInfo)
     const { token } = useSelector((state) => state.user);
     const [page, setPage] = useState(0);
-    const [state, setState] = useState(0);
     const [deleteModel, setDeleteModel] = useState(false)
     const [personId, setPersonid] = useState(null);
     const Dispatch = useDispatch()
@@ -27,7 +25,7 @@ const AllPersonsTable = () => {
 
     useEffect(() => {
         Dispatch(GetPersons(page, token))
-    }, [Dispatch, token])
+    }, [Dispatch, token,page])
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };

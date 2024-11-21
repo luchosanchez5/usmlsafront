@@ -1,20 +1,18 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Row,Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import { GetTeamsbyTeamId } from '../../store/team/actions/actionsCreators'
 import DashboardLayout from '../../layout/DashboardLayout'
 const YourTeamDetails = () => {
-    const{id}=useParams()
+    const { id } = useParams()
     const { TeamDetailsData } = useSelector((state) => state.team)
-    const{token}=useSelector((state)=>state.user)
-    const Dispatch=useDispatch()
-    const Navigate=useNavigate()
+    const { token } = useSelector((state) => state.user)
+    const Dispatch = useDispatch()
+    const Navigate = useNavigate()
     useEffect(() => {
         Dispatch(GetTeamsbyTeamId(id, token))
-
-
-    }, [id, Dispatch])
+    }, [id, Dispatch, token])
     return (
         <>
             <h1 className="font-bold my-3"> Team Details </h1>
@@ -26,7 +24,7 @@ const YourTeamDetails = () => {
             <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
 
                 <Row className="row row-cols-3 align-items-center  gy-3">
-                <Col >
+                    <Col >
                         <h5 className=" text-nowrap fw-bold">Team Name:</h5>
                         <h6 className=" text-nowrap ">{TeamDetailsData?.name}</h6>
                     </Col>
@@ -38,7 +36,7 @@ const YourTeamDetails = () => {
                         <h5 className=" text-nowrap fw-bold">Team Address:</h5>
                         <h6 className=" text-nowrap ">{TeamDetailsData?.address}</h6>
                     </Col>
-                  
+
                     <Col >
                         <h5 className=" text-nowrap fw-bold"> Team City :</h5>
                         <h6 className=" text-nowrap ">{TeamDetailsData?.city}</h6>

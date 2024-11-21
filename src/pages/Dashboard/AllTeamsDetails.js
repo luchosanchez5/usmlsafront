@@ -4,8 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { GetMemberByTeamId, GetTeamsbyTeamId, GetCoManager } from '../../store/team/actions/actionsCreators'
-
+import { GetMemberByTeamId, GetTeamsbyTeamId } from '../../store/team/actions/actionsCreators'
 import PageHeader from '../../shared/PageHeader'
 import MembersTable from '../../components/Member/MembersTable'
 import AddCoManagerModel from '../../components/Models/AddCoManagerModel'
@@ -16,7 +15,7 @@ const AllTeamsDetails = () => {
     const { id } = useParams()
     const { TeamDetailsData } = useSelector((state) => state.team)
     const { token } = useSelector((state) => state.user)
-    const [state,setState]=useState(false)
+    const [state, setState] = useState(false)
     const [CoManagerBoxModel, SetCoManagerBoxModel] = useState(false)
     const [PlayerBoxModel, SetPlayerBoxModel] = useState(false)
     const [PaymentBoxModel, SetPaymentModel] = useState(false)
@@ -27,7 +26,7 @@ const AllTeamsDetails = () => {
         Dispatch(GetMemberByTeamId(id, token))
 
 
-    }, [id, Dispatch,state])
+    }, [id, Dispatch, state, token])
 
 
     return (
@@ -61,7 +60,7 @@ const AllTeamsDetails = () => {
                         <h5 className=" text-nowrap fw-bold">Team Address:</h5>
                         <h6 className=" text-nowrap ">{TeamDetailsData?.address}</h6>
                     </Col>
-                  
+
                     <Col >
                         <h5 className=" text-nowrap fw-bold"> Team City :</h5>
                         <h6 className=" text-nowrap ">{TeamDetailsData?.city}</h6>
@@ -132,7 +131,7 @@ const AllTeamsDetails = () => {
             }
             <MembersTable />
             <h2 className='ps-4 text-danger'>Payment Records:</h2>
-            <PaymentHistoryTable/>
+            <PaymentHistoryTable />
 
 
         </>

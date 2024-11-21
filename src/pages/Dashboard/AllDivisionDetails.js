@@ -2,18 +2,17 @@ import React, { useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { GetPersonsById } from '../../store/person/actions/actionsCreators'
 import DashboardLayout from '../../layout/DashboardLayout'
 import { GetDivisionsDetailsByDivisionId } from '../../store/tournament/actions/actionsCreators'
 const AllDivisionDetails = () => {
     const { id } = useParams()
     const { token } = useSelector((state) => state.user)
-    const { DivisionDetails, isLoading } = useSelector((state) => state.tournament)
+    const { DivisionDetails } = useSelector((state) => state.tournament)
     const Navigate = useNavigate()
     const Dispatch = useDispatch()
     useEffect(() => {
         Dispatch(GetDivisionsDetailsByDivisionId(id, token))
-    }, [Dispatch, id])
+    }, [Dispatch, id, token])
 
     return (
         <>

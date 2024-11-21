@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DashboardLayout from '../../layout/DashboardLayout'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetVenueByVenueId } from '../../store/Venue/actions/actionCreators'
 import { Row, Col } from 'react-bootstrap'
-import PageHeader from '../../shared/PageHeader'
 const AllVenusDetails = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
