@@ -7,26 +7,25 @@ const TextField = ({ righticon, icon, margin, ...props }) => {
 
     return (
         <React.Fragment>
-                <div className={`mb-2 field-container ${margin}`} >
-                    <div className="d-flex align-items-center">
-                        {icon}
-                        <input
-                            className={`form-control custom-field shadow-none ${
-                                meta.touched && meta.error ? "is-invalid" : ""
+            <div className={`mb-2 field-container ${margin}`} >
+                <div className="d-flex align-items-center">
+                    {icon}
+                    <input
+                        className={`form-control custom-field shadow-none ${meta.touched && meta.error ? "is-invalid" : ""
                             }`}
-                            {...field}
-                            {...props}
-                            autoComplete="off"
-                            style={{ flexGrow: 1 }}
-                        />
-                        {righticon}
-                    </div>
+                        {...field}
+                        {...props}
+                        autoComplete="off"
+                        style={{ flexGrow: 1 }}
+                    />
+                    {righticon}
                 </div>
-                <ErrorMessage
-                    component="small"
-                    name={field.name}
-                    className="text-danger fw-bold"
-                />
+            </div>
+            <ErrorMessage
+                component="small"
+                name={field.name}
+                className="text-danger fw-bold"
+            />
         </React.Fragment>
     );
 }

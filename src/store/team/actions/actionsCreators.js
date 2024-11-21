@@ -55,6 +55,12 @@ export const GetTeams = (page, Token, role, userId) => (dispatch) => {
       // Toast.success(response.data.status);
     })
     .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TEAMS,
+          payload: []
+        });
+      }
       // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
@@ -62,7 +68,7 @@ export const GetTeams = (page, Token, role, userId) => (dispatch) => {
       });
     });
 };
-export const DeleteTeams = (teamId, Token) => (dispatch) => {
+export const DeleteTeams = (teamId, Token, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -82,6 +88,7 @@ export const DeleteTeams = (teamId, Token) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
+      if (callback) callback();
     })
     .catch((error) => {
       Toast.error(error.response.data.message);

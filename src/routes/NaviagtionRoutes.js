@@ -6,12 +6,13 @@ const Login = lazy(() => import('../pages/Login/Login.js'));
 const YourTeams = lazy(() => import('../pages/Dashboard/YourTeams.js'));
 const Home = lazy(() => import('../pages/Home/Home'));
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
-const AllPersonDetails = lazy(()=>import('../pages/Dashboard/AllPersonDetails.js')); 
-const PaymentHistory = lazy(()=>import('../pages/Dashboard/Payment.js')); 
+const AllPersonDetails = lazy(() => import('../pages/Dashboard/AllPersonDetails.js'));
+const PaymentHistory = lazy(() => import('../pages/Dashboard/Payment.js'));
 const FindEvents = lazy(() => import('../components/product/FindEvents'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
 const RegisterTeam = lazy(() => import('../pages/Payment/RegisterTeam.jsx'));
 const ForgetPassword = lazy(() => import('../pages/Login/ForgetPassword.js'));
+const SelectRole = lazy(() => import('../pages/Login/SelectRole.js'));
 const ResetPassword = lazy(() => import('../pages/Login/ResetPassword.js'));
 const AllTeamsDetails = lazy(() => import('../pages/Dashboard/AllTeamsDetails.js'));
 const AddTeams = lazy(() => import('../pages/Dashboard/AddTeams.js'));
@@ -40,6 +41,7 @@ const NavigationRoutes = () => {
             <Route exact path='/dashboard' element={<Dashboard />}></Route>
             <Route exact path='/' element={<Home />}></Route>
             <Route exact path='/auth/register' element={<ProviderRegister />}></Route>
+            <Route exact path='/auth/selectrole' element={<SelectRole />}></Route>
             <Route exact path='/dashboard/allteams' element={<AllTeam />}></Route>
             <Route exact path='/dashboard/allteams/:id' element={<AllTeamsDetails />}></Route>
             <Route exact path='/dashboard/yourteam' element={<YourTeams />}></Route>

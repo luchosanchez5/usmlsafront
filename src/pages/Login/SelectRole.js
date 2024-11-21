@@ -1,10 +1,10 @@
 import React from 'react'
 import ForgerPasswordForm from '../../components/Login/SelectRoleForm'
 import AuthLayout from '../../layout/AuthLayout'
-const ForgetPassword = () => {
+const SelectRole = () => {
   return (
     <ForgerPasswordForm />
   )
 }
 
-export default AuthLayout(ForgetPassword)
+export default AuthLayout(SelectRole)

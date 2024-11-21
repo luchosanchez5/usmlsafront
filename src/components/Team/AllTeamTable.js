@@ -35,10 +35,11 @@ const AllTeamTable = () => {
 
     }
     const handleDeleteTeam = () => {
-        Dispatch(DeleteTeams(teamId, token))
-        SetDelTeamModel(false)
-        setState(prev => !prev)
-
+        Dispatch(DeleteTeams(teamId, token,() => {
+            Dispatch(GetTeams(page, token, role, userId))
+            SetDelTeamModel(false)
+        }
+    ))
     }
     const handlePageChange = (newPage) => {
         setPage(newPage);
@@ -77,8 +78,7 @@ const AllTeamTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {isLoading ?
-                            <SkeletonTable rows={5} columns={9} /> :
+                        {
                             TeamData?.data?.length > 0 ? TeamData?.data?.map((item, index) => (
                                 <tr key={index} className='main-row'>
                                     <td>{item?.name}</td>
@@ -104,7 +104,7 @@ const AllTeamTable = () => {
 
                                 </tr>
                             )) : <tr>
-                                <td colSpan="8" className='text-center'>No Teams Available</td>
+                                <td colSpan="10" className='text-center'>No Teams Available</td>
                             </tr>}
                     </tbody>
                 </Table>
