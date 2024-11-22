@@ -10,6 +10,7 @@ import { PaginationControl } from 'react-bootstrap-pagination-control';
 import DeleteModel from '../Models/DeleteModel';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
+import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllTeamTable = () => {
 
     const { TeamData, isLoading } = useSelector((state) => state.team);
@@ -57,45 +58,57 @@ const AllTeamTable = () => {
                         <Form.Control type="email" placeholder="Search" className='w-50' />
                     </Col>
                 </Row>
-                <Table responsive hover className=' mt-2'>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>State</th>
-                            <th>Run Scored</th>
-                            <th>Run Allowed</th>
-                            <th>Team Status</th>
-                            <th>Actions</th>
+                {
+                    isLoading ? (
+                        <Table>
+                            <TableSkeleton
+                                rows={10}
+                                columns={7}
+                                baseColor="#afafaf"
+                                highlightColor="#afafaf"
+                            />
+                        </Table>) :
+                        <Table responsive hover className=' mt-2'>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>State</th>
+                                    <th>Run Scored</th>
+                                    <th>Run Allowed</th>
+                                    <th>Team Status</th>
+                                    <th>Actions</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            TeamData?.data?.length > 0 ? TeamData?.data?.map((item, index) => (
-                                <tr key={index} className='main-row'>
-                                    <td>{item?.name}</td>
-                                    <td>{item?.email}</td>
-                                    <td>{item?.state}</td>
-                                    <td>{item?.avgRunsDiff}</td>
-                                    <td>{item?.runAllowed}</td>
-                                    <td style={{
-                                        color: item?.teamStatus === 'ACTIVE' ? 'green' : 'red',
-                                    }}>{item?.teamStatus}</td>
-
-                                    <td>
-                                        <div>
-                                            <BsEye className='action-icon eye-icon' onClick={() => handleEyeBtn(item?.teamId)} />
-                                            <CiEdit className='action-icon edit-icon' onClick={() => handleEditBtn(item?.teamId)} />
-                                            <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeleteBtn(item?.teamId)} />
-                                        </div>
-                                    </td>
                                 </tr>
-                            )) : <tr>
-                                <td colSpan="10" className='text-center'>No Teams Available</td>
-                            </tr>}
-                    </tbody>
-                </Table>
+                            </thead>
+                            <tbody>
+                                {
+                                    TeamData?.data?.length > 0 ? TeamData?.data?.map((item, index) => (
+                                        <tr key={index} className='main-row'>
+                                            <td>{item?.name}</td>
+                                            <td>{item?.email}</td>
+                                            <td>{item?.state}</td>
+                                            <td>{item?.avgRunsDiff}</td>
+                                            <td>{item?.runAllowed}</td>
+                                            <td style={{
+                                                color: item?.teamStatus === 'ACTIVE' ? 'green' : 'red',
+                                            }}>{item?.teamStatus}</td>
+
+                                            <td>
+                                                <div>
+                                                    <BsEye className='action-icon eye-icon' onClick={() => handleEyeBtn(item?.teamId)} />
+                                                    <CiEdit className='action-icon edit-icon' onClick={() => handleEditBtn(item?.teamId)} />
+                                                    <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeleteBtn(item?.teamId)} />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )) : <tr>
+                                        <td colSpan="10" className='text-center'>No Teams Available</td>
+                                    </tr>}
+                            </tbody>
+                        </Table>
+                }
+
             </div>
             {DelTeamModel && <DeleteModel show={DelTeamModel} onClose={() => SetDelTeamModel(false)} OnDelete={handleDeleteTeam} title='Team' />}
             {TeamData?.data?.length > 10 && <PaginationControl

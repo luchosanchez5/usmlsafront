@@ -44,6 +44,12 @@ export const AdminValuesSchemas = Yup.object({
     lastName: Yup.string().required("last Name is Required"),
 });
 
+export const ManagerUpdateValuesSchemas = Yup.object({
+    email: Yup.string().email().required("Email is Required"),
+    firstName: Yup.string().required("first Name is Required"),
+    lastName: Yup.string().required("last Name is Required"),
+});
+
 
 export const AllDivisionSchemas = Yup.object({
     divisionName: Yup.string().required("Division Name is Required"),
@@ -57,7 +63,7 @@ export const AllDivisionSchemas = Yup.object({
     prize2: Yup.number().required('Prize2  is Required'),
     prize3: Yup.number().required('Prize3 is Required'),
     prize4: Yup.number().required('Prize4  is Required'),
-    tournamentId: Yup.number().required('Tournament Id  is Required'),
+    tournamentId: Yup.number().required('Tournament is Required'),
 
 });
 
@@ -92,9 +98,55 @@ export const ProviderRegisterSchemas = Yup.object({
     city: Yup.string().required("city is Required"),
     state: Yup.string().required("state is Required"),
     zipCode: Yup.string().required("zipCode is Required"),
-    mobilePhone: Yup.string().required("mobilePhone is Required"),
-    password: Yup.string().required("Password is Required")
+    mobilePhone: Yup.string()
+        .required("mobilePhone is Required")
+        .matches(
+            /^[+]?[0-9\s-]+$/,
+            "Invalid mobile phone format. Only numbers, spaces, '+' or '-' are allowed."
+        ),
+    password: Yup.string().required("Password is Required"),
+    role: Yup.string().required("Role is required"),
+
 });
 export const ForgetPasswordSchema = Yup.object({
     email: Yup.string().email().required("Email is Required"),
 })
+
+
+
+export const AddPersonSchema = Yup.object({
+    email: Yup.string().email('Invalid email address').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+    name: Yup.string().required('Name is required'),
+    role: Yup.string().required('Role is required'),
+    firstName: Yup.string().required('First Name is required'),
+    lastName: Yup.string().required('Last Name is required'),
+    address1: Yup.string().required('Address 1 is required'),
+    address2: Yup.string().required('Address 2 is required'),
+    city: Yup.string().required('City is required'),
+    state: Yup.string().required('State is required'),
+    zipCode: Yup.string().required('Zip Code is required'),
+    mobilePhone: Yup.string().required('Mobile Phone is required'),
+    playerStatus: Yup.string().required('Player Status is required'),
+    tournamentsPlayed: Yup.number().when('role', {
+        is: 'PLAYER',
+        then: Yup.number().required('Tournaments Played is required'),
+        otherwise: Yup.number().nullable(),
+    }),
+    points: Yup.number().when('role', {
+        is: 'PLAYER',
+        then: Yup.number().required('Points are required'),
+        otherwise: Yup.number().nullable(),
+    }),
+    ranking: Yup.number().when('role', {
+        is: 'PLAYER',
+        then: Yup.number().required('Ranking is required'),
+        otherwise: Yup.number().nullable(),
+    }),
+    gamesPlayed: Yup.number().when('role', {
+        is: 'PLAYER',
+        then: Yup.number().required('Games Played is required'),
+        otherwise: Yup.number().nullable(),
+    }),
+
+});

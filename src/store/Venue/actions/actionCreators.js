@@ -4,6 +4,10 @@ import Toast from "../../../shared/Toast";
 import axios from "axios";
 const Url = process.env.REACT_APP_MAIN_URL;
 export const AddVenue = (data, Token, Navigate) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
   axios.post(`${Url}api/venues`, data, {
     headers: {
       Authorization: `Bearer ${Token}`,
@@ -17,14 +21,21 @@ export const AddVenue = (data, Token, Navigate) => (dispatch) => {
       });
       Navigate('/dashboard/allvenue')
       Toast.success(response.data.message);
-
-
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
     })
     .catch((error) => {
       Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
     });
 };
 export const GetVenue = (page) => (dispatch) => {
+  console.log('alsdnlajsd')
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,

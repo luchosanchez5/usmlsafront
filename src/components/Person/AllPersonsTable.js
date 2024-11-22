@@ -11,11 +11,13 @@ import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllPersonsTable = () => {
-    const { PersonData } = useSelector((state) => state.person);
+    const { PersonData, isLoading } = useSelector((state) => state.person);
     const { SetUserEdit, SetUserId } = useContext(GlobalInfo)
     const { token } = useSelector((state) => state.user);
     const [page, setPage] = useState(0);
+    console.log(page)
     const [deleteModel, setDeleteModel] = useState(false)
     const [personId, setPersonid] = useState(null);
     const Dispatch = useDispatch()
@@ -25,10 +27,13 @@ const AllPersonsTable = () => {
 
     useEffect(() => {
         Dispatch(GetPersons(page, token))
-    }, [Dispatch, token,page])
+    }, [Dispatch, token, page])
+
+
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };
+
     const handleDeletePersonbtn = (id) => {
         setDeleteModel(true)
         setPersonid(id)
@@ -65,50 +70,61 @@ const AllPersonsTable = () => {
                 </Col> */}
             </Row>
             <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                <Table responsive hover size="sm" className=' mt-2'>
-                    <thead>
+                {
+                    isLoading ? (
+                        <Table>
+                            <TableSkeleton
+                                rows={10}
+                                columns={7}
+                                baseColor="#afafaf"
+                                highlightColor="#afafaf"
+                            />
+                        </Table>) :
+                        <Table responsive hover size="sm" className=' mt-2'>
+                            <thead>
 
-                        <tr>
+                                <tr>
 
-                            <th>Name</th>
-                            <th>email</th>
-                            <th>ranking</th>
-                            <th>Person A Player</th>
-                            <th>Role</th>
-
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* {isLoading && <div>Loading...</div>} */}
-                        {PersonData?.data?.length > 0 ? PersonData?.data?.map((item, index) => (
-                            <tr key={index} className='main-row'>
-                                <td>{item.name || 'N/A'}</td>
-                                <td>{item.email}</td>
-                                <td>{item.ranking}</td>
-                                <td>{item.role}</td>
+                                    <th>Name</th>
+                                    <th>email</th>
+                                    <th>ranking</th>
+                                    <th>Person A Player</th>
+                                    <th>Role</th>
 
 
-                                <td>
-                                    <div>
-                                        <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.id)} />
-                                        <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.id)} />
-                                        <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeletePersonbtn(item?.id)} />
-                                    </div>
-                                </td>
 
-                            </tr>
-                        )) : <tr>
-                            <td colSpan="5" className='text-center'>No Persons Available</td>
-                        </tr>}
-                    </tbody>
-                </Table>
-                {PersonData?.data?.length > 10 && <PaginationControl
-                    page={page}
-                    between={3}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* {isLoading && <div>Loading...</div>} */}
+                                {PersonData?.data?.length > 0 ? PersonData?.data?.map((item, index) => (
+                                    <tr key={index} className='main-row'>
+                                        <td>{item.name || 'N/A'}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.ranking}</td>
+                                        <td>{item.role}</td>
+
+
+                                        <td>
+                                            <div>
+                                                <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.id)} />
+                                                {/* <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.id)} /> */}
+                                                <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeletePersonbtn(item?.id)} />
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                )) : <tr>
+                                    <td colSpan="5" className='text-center'>No Persons Available</td>
+                                </tr>}
+                            </tbody>
+                        </Table>
+                }
+                {PersonData?.totalRecords > 10 && <PaginationControl
+                    page={page + 1}
+                    between={1}
                     limit={10}
-                    total={PersonData?.data?.totalRecords}
+                    total={PersonData?.totalRecords}
                     changePage={(page) => handlePageChange(page)}
                     ellipsis={1}
                 />}

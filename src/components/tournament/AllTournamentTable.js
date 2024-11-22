@@ -11,12 +11,12 @@ import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
+import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllTournamentTable = () => {
-    const { TournamentData } = useSelector((state) => state.tournament)
+    const { TournamentData, isLoading } = useSelector((state) => state.tournament)
     const { token } = useSelector((state) => state.user)
     const Dispatch = useDispatch()
     const Navigate = useNavigate()
-    const [state, setState] = useState(false)
     const [page, setPage] = useState(0);
     const [tournamentId, setTournamentId] = useState(null)
     const { SetTournamentEdit, SetTournamentId } = useContext(GlobalInfo)
@@ -29,7 +29,7 @@ const AllTournamentTable = () => {
     };
     useEffect(() => {
         Dispatch(GetTournaments(page))
-    }, [Dispatch, state, page])
+    }, [Dispatch, page])
 
     const handleDelTournamentbtn = (id) => {
         setTournamentId(id);
@@ -68,47 +68,59 @@ const AllTournamentTable = () => {
                     </Col> */}
                 </Row>
                 <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                    <Table responsive hover className='page-main-table mt-2'>
-                        <thead>
-                            <tr>
-                                <th>Tournament Name</th>
-                                <th>Venue Name</th>
-                                <th> Start Date </th>
-                                <th> End Date</th>
-                                <th>Tournament Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {TournamentData?.data?.length > 0 ? TournamentData?.data?.map((item, index) => (
-                                <tr key={index} className='main-row'>
-                                    <td>{item?.name}</td>
-                                    <td>{item?.venueName ? item?.venueName : 'No Venue Selected Yet'}</td>
-                                    <td>{item?.startDate}</td>
-                                    <td>{item?.endDate}</td>
-                                    <td
-                                        style={{
-                                            color: item?.status === 'ACTIVE' ? 'green' : 'red',
-                                        }}>
-                                        {item?.tournamentStatus || item?.status}
-                                    </td>
+                    {
+                        isLoading ? (
+                            <Table>
+                                <TableSkeleton
+                                    rows={10}
+                                    columns={7}
+                                    baseColor="#afafaf"
+                                    highlightColor="#afafaf"
+                                />
+                            </Table>) :
+                            <Table responsive hover className='page-main-table mt-2'>
+                                <thead>
+                                    <tr>
+                                        <th>Tournament Name</th>
+                                        <th>Venue Name</th>
+                                        <th> Start Date </th>
+                                        <th> End Date</th>
+                                        <th>Tournament Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {TournamentData?.data?.length > 0 ? TournamentData?.data?.map((item, index) => (
+                                        <tr key={index} className='main-row'>
+                                            <td>{item?.name}</td>
+                                            <td>{item?.venueName ? item?.venueName : 'No Venue Selected Yet'}</td>
+                                            <td>{item?.startDate}</td>
+                                            <td>{item?.endDate}</td>
+                                            <td
+                                                style={{
+                                                    color: item?.status === 'ACTIVE' ? 'green' : 'red',
+                                                }}>
+                                                {item?.tournamentStatus || item?.status}
+                                            </td>
 
-                                    <td>
-                                        <div>
-                                            <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.tournamentId)} />
-                                            <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.tournamentId)} />
-                                            <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDelTournamentbtn(item?.tournamentId)} />
-                                        </div>
-                                    </td>
+                                            <td>
+                                                <div>
+                                                    <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.tournamentId)} />
+                                                    <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.tournamentId)} />
+                                                    <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDelTournamentbtn(item?.tournamentId)} />
+                                                </div>
+                                            </td>
 
 
-                                </tr>
-                            )) : <tr>
-                                <td colSpan="7" className='text-center'>No Tournament Available</td>
-                            </tr>}
-                        </tbody>
+                                        </tr>
+                                    )) : <tr>
+                                        <td colSpan="7" className='text-center'>No Tournament Available</td>
+                                    </tr>}
+                                </tbody>
 
-                    </Table>
+                            </Table>
+                    }
+
                     {TournamentData?.totalRecords > 10 && <PaginationControl
                         page={page}
                         between={3}

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Image, Col, Row } from "react-bootstrap";
-import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "../../store/user/actions/actionCreators";
 import TextField from "../../shared/TextField";
 import SelectTag from "../product/SelectTag";
@@ -12,7 +11,9 @@ import { MdGames } from "react-icons/md";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import "../../assets/css/login-form.css";
 import { ProviderRegisterSchemas } from "../../Schemas/Schemas";
+import SpinNer from "../LoadingSpinner/SpinNer";
 const ProviderRegisterForm = () => {
+  const { isLoading } = useSelector((state) => state.user);
   const [roleValue, SetRoleValue] = useState("");
   const [eye, setEye] = useState(false);
   const navigate = useNavigate();
@@ -20,8 +21,6 @@ const ProviderRegisterForm = () => {
 
   const roleOptions = [
     { value: 'MANAGER', label: 'MANAGER' },
-    // { value: 'CO_MANAGER', label: ' CO MANAGER' },
-    // { value: 'ADMIN', label: ' ADMIN' },
     { value: 'PLAYER', label: 'PLAYER' },
   ]
 
@@ -41,10 +40,11 @@ const ProviderRegisterForm = () => {
     email: "",
     password: "",
     tournamentsPlayed: null,
-    gamesPlayed: null
+    gamesPlayed: null,
+    role: "",
   };
 
- 
+
   const RegisterHandler = (values, action) => {
 
     const data = {
@@ -65,22 +65,17 @@ const ProviderRegisterForm = () => {
       mobilePhone: values.mobilePhone,
       tournamentsPlayed: values.tournamentsPlayed,
       gamesPlayed: values.gamesPlayed,
-      playerStatus:'ACTIVE',
+      playerStatus: 'ACTIVE',
       personAPlayer: roleValue === 'PLAYER' ? true : false,
-      country:'Pakistan',
+      country: 'Pakistan',
 
     };
     dispatch(userRegister(data, navigate));
     action.resetForm();
   };
-// const PlayerStatusOptions=()=>{
-//   value:"",label:"",
-//   value:"",label:"",
-//   value:"",label:"",
-// }
-  const handleRole = (e) => {
-    SetRoleValue(e.target.value);
-  };
+  // const handleRole = (e) => {
+  //   SetRoleValue(e.target.value);
+  // };
 
   return (
     <div className="form-space px-lg-5 mx-xl-5 d-flex flex-column mt-5 pt-5 align-content-center justify-content-center " >
@@ -99,9 +94,9 @@ const ProviderRegisterForm = () => {
         validationSchema={ProviderRegisterSchemas}
         onSubmit={RegisterHandler}
       >
-        {(formik) => (
-          <Form >
-            <Row className=" Signup-form row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 gy-3">
+        {({ values, handleChange, handleBlur, errors, touched }) => (
+          <Form>
+            <Row className="Signup-form row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 gy-3">
               <Col>
                 <TextField
                   icon={<FaUser />}
@@ -126,12 +121,6 @@ const ProviderRegisterForm = () => {
                   type="text"
                 />
               </Col>
-              {/* <Col>
-               <SelectTag
-                options={PlayerStatusOptions}
-                
-               />
-              </Col> */}
               <Col>
                 <TextField
                   icon={<FaAddressBook />}
@@ -150,17 +139,23 @@ const ProviderRegisterForm = () => {
               </Col>
               <Col className="">
                 <SelectTag
-                deFaultValue='Select Your Role'
+                  deFaultValue="Select Your Role"
                   icon={<FaUserTie className="me-2" size={20} />}
                   options={roleOptions}
-                  className="d-flex flex-grow-1 bg-white   "
+                  className="d-flex flex-grow-1 bg-white"
                   name="role"
-                  onChange={handleRole}
+                  value={values.role}
+                  onChange={(e) => {
+                    handleChange(e);
+                    SetRoleValue(e.target.value);
+                  }}
+                  onBlur={handleBlur}
+                  error={errors.role}
+                  touched={touched.role}
                 />
               </Col>
-              {roleValue === 'PLAYER' &&
+              {values.role === 'PLAYER' && (
                 <>
-
                   <Col>
                     <TextField
                       icon={<FaMedal />}
@@ -202,8 +197,7 @@ const ProviderRegisterForm = () => {
                     />
                   </Col>
                 </>
-
-              }
+              )}
               <Col>
                 <TextField
                   icon={<FaCity />}
@@ -263,7 +257,7 @@ const ProviderRegisterForm = () => {
             <Row className="my-3">
               <Col xs="12 d-flex flex-grow-1 justify-content-center">
                 <button type="submit" className="h-56px gradient-btn-orange">
-                  Submit
+                  {isLoading ? <SpinNer /> : "Submit"}
                 </button>
               </Col>
             </Row>
@@ -276,6 +270,7 @@ const ProviderRegisterForm = () => {
           </Form>
         )}
       </Formik>
+
     </div>
   );
 };

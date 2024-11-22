@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     VenueData: [],
-    VenuDetails:[],
+    VenuDetails: [],
     // VenuData: false
     isLoading: false,
 };
@@ -34,7 +34,7 @@ const VenueReducer = (state = initialState, action) => {
         case actionTypes.GET_VENUE_BY_ID:
             return {
                 ...state,
-                VenuDetails:action.payload || [],
+                VenuDetails: action.payload || [],
                 // VenuDataUpdate: !state.VenuDataUpdate
             }
         default:

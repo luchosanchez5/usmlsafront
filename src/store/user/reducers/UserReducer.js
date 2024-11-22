@@ -5,12 +5,18 @@ const initialState = {
     token: '',
     user: {},
     cards: [],
-    managers: {}
+    managers: {},
+    isLoading: false,
 };
 
 const UserReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case actionTypes.SET_LOADING:
+            return {
+                ...state,
+                isLoading: action.payload
+            };
         case actionTypes.USER_LOGIN:
             return {
                 ...state,
@@ -25,26 +31,6 @@ const UserReducer = (state = initialState, action) => {
                 token: action.payload.access_token,
                 user: action.payload
             };
-        // case actionTypes.UPDATE_ACCOUNT:
-        //     return {
-        //         ...state,
-        //         user: action.payload
-        //     };
-        // case actionTypes.UPDATE_PASSWORD:
-        //     return {
-        //         ...state,
-        //         token: action.payload
-        //     };
-        // case actionTypes.USER_CARDS:
-        //     return {
-        //         ...state,
-        //         cards: action.payload
-        //     };
-        // case actionTypes.USER_MANAGERS:
-        //     return {
-        //         ...state,
-        //         managers: action.payload
-        //     };
         // case actionTypes.USER_LOGOUT:
         //     return {
         //         isLogin: false,

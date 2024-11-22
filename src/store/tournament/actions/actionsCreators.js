@@ -268,7 +268,7 @@ export const GetDivisionsDetailsByDivisionId = (id, token) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -335,6 +335,10 @@ export const UpdateTournaments = (TournamentId, data, Token, Navigate) => (dispa
     });
 };
 export const AddDivisions = (data, token, Navigate) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
   axios.post(`${Url}api/divisions`, data, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -345,11 +349,19 @@ export const AddDivisions = (data, token, Navigate) => (dispatch) => {
         type: actionTypes.ADD_DIVISION,
 
       });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
       Navigate("/dashboard/alldivisions");
       Toast.success(response.data.message);
     })
     .catch((error) => {
       Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
     });
 };
 export const UpdateDivisions = (DivisionId, data, token, Navigate) => (dispatch) => {

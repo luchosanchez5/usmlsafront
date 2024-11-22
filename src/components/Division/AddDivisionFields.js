@@ -9,10 +9,11 @@ import { GlobalInfo } from '../../App';
 import SelectTag from '../product/SelectTag';
 import { useNavigate } from 'react-router-dom';
 import { AddDivisions, GetDivisionsDetailsByDivisionId, GetTournamentsBySearch, UpdateDivisions } from '../../store/tournament/actions/actionsCreators';
+import SpinNer from '../LoadingSpinner/SpinNer';
 
 function AddDivisionFields() {
     const { user, token } = useSelector((state) => state.user)
-    const { TournamentBySearch, AllDivisionsData, DivisionDetails } = useSelector((state) => state.tournament)
+    const { TournamentBySearch, AllDivisionsData, DivisionDetails, isLoading } = useSelector((state) => state.tournament)
     const { DivisionEdit, DivisionId } = useContext(GlobalInfo)
     const Token = user?.access_token
     const Dispatch = useDispatch()
@@ -76,7 +77,7 @@ function AddDivisionFields() {
             }
             action.resetForm();
 
-            
+
         }
     });
 
@@ -272,7 +273,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex justify-content-center flex-grow-1 ">
                             <button type="submit" className="mt-3 gradient-btn-orange">
-                                Submit
+                                {isLoading ? <SpinNer /> : "Add Division"}
                             </button>
                         </div>
 

@@ -146,14 +146,11 @@ export const GetTeamsbyTeamId = (Id, Token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
-      // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -176,14 +173,11 @@ export const GetMemberByTeamId = (Id, Token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
-      // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -237,14 +231,11 @@ export const GetCoManager = (role, token, page) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.message);
     })
     .catch((error) => {
-      // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };

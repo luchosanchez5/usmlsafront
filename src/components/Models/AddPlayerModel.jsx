@@ -8,29 +8,12 @@ import {
 } from "../../store/team/actions/actionsCreators";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
+import PlayerCardSkeleton from "../SkeletonTable/PlayerCardSkeleton";
 const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
-    const { CoManagerData, TeamMembers, isLoading } = useSelector((state) => state.team)
-    if (TeamMembers && CoManagerData) {
-        const teamMemberEmails = TeamMembers.members.map((item) => item.email);
-        console.log("🚀 : ~ file: AddPlayerModel.jsx:15 ~ AddPlayerModel ~ teamMemberEmails", teamMemberEmails);
-        const coManagerEmails = CoManagerData.data.map((item) => item.email);
-
-        const matchedEmails = teamMemberEmails.filter((email) =>
-          
-            coManagerEmails.includes(email)
-        );
-       
-
-        // If you need full objects of matched members:
-        const matchedMembers = TeamMembers.members.filter((member) =>
-          
-            coManagerEmails.includes(member.email)
-        );
-        
-    }
-    const { token } = useSelector((state) => state.user)
-    const [selectedCard, setSelectedCard] = useState(null);
-    const [page, setPage] = useState(0);
+  const { CoManagerData, isLoading } = useSelector((state) => state.team);
+  const { token } = useSelector((state) => state.user);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [page, setPage] = useState(0);
 
   const Dispatch = useDispatch();
   const handleCardSelect = (id) => {
@@ -47,17 +30,19 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
 
   useEffect(() => {
     Dispatch(GetCoManager("PLAYER", token, page));
-  }, []);
+  }, [Dispatch, token, page]);
 
   return (
-    <Modal show={show} onHide={onClose} size="xl" centered className="py-4">
+    <Modal show={show} onHide={onClose} size="lg" centered className="py-4">
       <Modal.Header closeButton>
         <Modal.Title>Select Player </Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="row justify-content-center ">
         <Row className="d-flex flex-column align-items-center">
-          {CoManagerData?.data?.length > 0 ? (
+          {isLoading ? (
+            <PlayerCardSkeleton />
+          ) : CoManagerData?.data?.length > 0 ? (
             CoManagerData?.data?.map((card, index) => (
               <Col key={card.id} md={12} className="my-2 ">
                 <Card

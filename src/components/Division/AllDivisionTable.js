@@ -11,8 +11,9 @@ import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { DeleteDivision, GetAllDivisions } from '../../store/tournament/actions/actionsCreators';
+import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllDivisionTable = () => {
-    const { AllDivisionsData } = useSelector((state) => state.tournament);
+    const { AllDivisionsData, isLoading } = useSelector((state) => state.tournament);
     const { SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo)
     const { token } = useSelector((state) => state.user);
     const [page, setPage] = useState(0);
@@ -66,48 +67,58 @@ const AllDivisionTable = () => {
                 </Col> */}
             </Row>
             <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
-                <Table responsive hover size="sm" className=' mt-2'>
-                    <thead>
+                {isLoading ? (
+                    <Table>
+                        <TableSkeleton
+                            rows={10}
+                            columns={7}
+                            baseColor="#afafaf"
+                            highlightColor="#afafaf"
+                        />
+                    </Table>) :
+                    <Table responsive hover size="sm" className=' mt-2'>
+                        <thead>
 
-                        <tr>
+                            <tr>
 
-                            <th>Division Name</th>
-                            <th>Tournament Name</th>
-                            <th>Entry Fee</th>
-                            <th>Initial Deposte Fee</th>
-                            <th>Max Teams</th>
-                            <th>Actions</th>
-
-
-
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* {isLoading && <div>Loading...</div>} */}
-                        {AllDivisionsData?.data?.length > 0 ? AllDivisionsData?.data?.map((item, index) => (
-                            <tr key={index} className='main-row'>
-                                <td>{item?.divisionName || 'N/A'}</td>
-                                <td>{item?.tournamentName || 'N/A'}</td>
-                                <td>{item?.entryFee || 'N/A'}</td>
-                                <td>{item?.initialDepositFee || 'N/A'}</td>
-                                <td>{item?.maxTeams || 'N/A'}</td>
+                                <th>Division Name</th>
+                                <th>Tournament Name</th>
+                                <th>Entry Fee</th>
+                                <th>Initial Deposte Fee</th>
+                                <th>Max Teams</th>
+                                <th>Actions</th>
 
 
-                                <td>
-                                    <div>
-                                        <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.divisionId)} />
-                                        <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.divisionId)} />
-                                        <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeletePersonbtn(item?.divisionId)} />
-                                    </div>
-                                </td>
+
 
                             </tr>
-                        )) : <tr>
-                            <td colSpan="6" className='text-center'>No Divisions Available</td>
-                        </tr>}
-                    </tbody>
-                </Table>
+                        </thead>
+                        <tbody>
+                            {/* {isLoading && <div>Loading...</div>} */}
+                            {AllDivisionsData?.data?.length > 0 ? AllDivisionsData?.data?.map((item, index) => (
+                                <tr key={index} className='main-row'>
+                                    <td>{item?.divisionName || 'N/A'}</td>
+                                    <td>{item?.tournamentName || 'N/A'}</td>
+                                    <td>{item?.entryFee || 'N/A'}</td>
+                                    <td>{item?.initialDepositFee || 'N/A'}</td>
+                                    <td>{item?.maxTeams || 'N/A'}</td>
+
+
+                                    <td>
+                                        <div>
+                                            <BsEye className='action-icon eye-icon' onClick={() => handleEyebtn(item?.divisionId)} />
+                                            <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.divisionId)} />
+                                            <AiOutlineDelete className='action-icon delete-icon' onClick={() => handleDeletePersonbtn(item?.divisionId)} />
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            )) : <tr>
+                                <td colSpan="6" className='text-center'>No Divisions Available</td>
+                            </tr>}
+                        </tbody>
+                    </Table>}
+
                 {AllDivisionsData?.data?.length > 10 && <PaginationControl
                     page={page}
                     between={3}

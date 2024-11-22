@@ -4,11 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetVenueByVenueId } from '../../store/Venue/actions/actionCreators'
 import { Row, Col } from 'react-bootstrap'
+import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
 const AllVenusDetails = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const Navigate = useNavigate()
-    const { VenuDetails } = useSelector((state) => state.venue)
+    const { VenuDetails, isLoading } = useSelector((state) => state.venue)
     useEffect(() => {
         dispatch(GetVenueByVenueId(id))
     }, [id, dispatch])
@@ -20,9 +21,7 @@ const AllVenusDetails = () => {
                 <button className='Team-register-btn'
                     onClick={() => Navigate(-1)}>Go Back</button>
             </div>
-
-
-            <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
+            {isLoading ? <DetailSkeleton /> : <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
 
                 <Row className="row row-cols-3 align-items-center  gy-3">
                     <Col >
@@ -56,16 +55,8 @@ const AllVenusDetails = () => {
                             color: VenuDetails?.statusVenue === 'OPEN' ? 'green' : 'red',
                         }} >{VenuDetails?.statusVenue}</h6>
                     </Col>
-
-
-
-
-
-
-
                 </Row>
-            </div>
-
+            </div>}
         </>
 
     )

@@ -1,32 +1,26 @@
-import React from 'react';
-import { Table } from 'react-bootstrap';
-import Skeleton from 'react-loading-skeleton';
+import React from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-function SkeletonTable({ rows = 5, columns = 6 }) {
+const TableSkeleton = ({ rows = 5, columns = 5, baseColor = "#afafaf", highlightColor = "#afafaf" }) => {
     return (
-        <Table responsive hover className='mt-2'>
-            <thead>
-                <tr>
-                    {[...Array(columns)].map((_, colIndex) => (
-                        <th key={colIndex}>
-                            <Skeleton width={100} />
-                        </th>
+        <tbody>
+            {Array.from({ length: rows }).map((_, rowIndex) => (
+                <tr key={rowIndex}>
+                    {Array.from({ length: columns }).map((_, colIndex) => (
+                        <td key={colIndex}>
+                            <Skeleton
+                                height={20}
+                                width="100%"
+                                baseColor={baseColor}
+                                highlightColor={highlightColor}
+                            />
+                        </td>
                     ))}
                 </tr>
-            </thead>
-            <tbody>
-                {[...Array(rows)].map((_, rowIndex) => (
-                    <tr key={rowIndex}>
-                        {[...Array(columns)].map((_, colIndex) => (
-                            <td key={colIndex}>
-                                <Skeleton width="100%" />
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </Table>
+            ))}
+        </tbody>
     );
-}
+};
 
-export default SkeletonTable;
+export default TableSkeleton;

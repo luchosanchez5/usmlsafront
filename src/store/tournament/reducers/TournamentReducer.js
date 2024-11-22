@@ -3,12 +3,12 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     TournamentData: [],
     TournamentDetails: [],
-  TournamentBySearch:[],
-  DivisionBySearch:[],
-  DivisionDetailsBySearch:{},
-  DivisionDetails:{},
-  AllDivisionsData:[],
-  DefaultTournamentData:[],
+    TournamentBySearch: [],
+    DivisionBySearch: [],
+    DivisionDetailsBySearch: {},
+    DivisionDetails: {},
+    AllDivisionsData: [],
+    DefaultTournamentData: [],
     // VenuData: false
     isLoading: false,
 };
@@ -24,7 +24,7 @@ const TournamentReducer = (state = initialState, action) => {
         case actionTypes.ADD_TOURNAMENT:
             return {
                 ...state,
-               
+
             };
 
         case actionTypes.GET_TOURNAMENT:
@@ -32,7 +32,7 @@ const TournamentReducer = (state = initialState, action) => {
                 ...state,
                 TournamentData: action.payload || []
             };
-        
+
         case actionTypes.GET_TOURNAMENT_BY_ID:
             return {
                 ...state,
@@ -48,7 +48,7 @@ const TournamentReducer = (state = initialState, action) => {
                 ...state,
                 DivisionBySearch: action.payload || []
             };
-        
+
         case actionTypes.GET_DIVISION__Details_BY_SEARCH:
             return {
                 ...state,
@@ -59,23 +59,23 @@ const TournamentReducer = (state = initialState, action) => {
                 ...state,
                 AllDivisionsData: action.payload || []
             };
-        
+
         case actionTypes.GET_DIVISION__DETAILS_BY_DIVISION_ID:
             return {
                 ...state,
                 DivisionDetails: action.payload || {}
             };
-        
+
         case actionTypes.DEFAULT_TOURNAMENTS:
             return {
                 ...state,
                 DefaultTournamentData: action.payload || []
             };
-        
+
         default:
             return state;
-    
-   
+
+
 
     }
 }

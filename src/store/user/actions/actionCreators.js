@@ -4,12 +4,19 @@ import Toast from "../../../shared/Toast";
 import axios from "axios";
 const Url = process.env.REACT_APP_MAIN_URL;
 export const userLogin = (data, navigate) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
   axios.post(`${Url}api/v1/auth/authenticate`, data)
     .then((response) => {
-      console.log("🚀 : ~ file: actionCreators.js:9 ~ .then ~ response", response.data.data);
       dispatch({
         type: actionTypes.USER_LOGIN,
         payload: response?.data?.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
       });
       if (response?.data?.data?.roles.includes('ADMIN') || response?.data?.data?.roles.includes('ADMIN')) {
         navigate("/dashboard");
@@ -20,9 +27,6 @@ export const userLogin = (data, navigate) => (dispatch) => {
       else {
         navigate("/dashboard/yourteam");
       }
-
-
-      //  Toast.success(response?.data?.data?.message);
       const roles = response.data.data.roles;
       if (roles && roles.length > 0) {
         roles.forEach((role) => {
@@ -34,21 +38,37 @@ export const userLogin = (data, navigate) => (dispatch) => {
     })
     .catch((error) => {
       Toast.error(error.response.data.message);
-      console.error("Login error:", error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
 
     });
 };
 export const userRegister = (data, navigation) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
   axios.post(`${Url}api/v1/auth/register`, data)
     .then((response) => {
       dispatch({
         type: actionTypes.USER_REGISTER,
         payload: response.data.data,
       });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
       navigation("/auth/login");
       Toast.success(response?.data?.message);
+
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
     });
 };

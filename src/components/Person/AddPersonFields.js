@@ -1,15 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
-import Modal from 'react-bootstrap/Modal';
 import InputField from '../product/InputField';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddVenue, GetVenue } from '../../store/Venue/actions/actionCreators';
-import DeleteModel from '../Models/DeleteModel';
 import { Row } from 'react-bootstrap';
 import SelectTag from '../product/SelectTag';
 import { Add_Persons, GetPersonsById, Update_Persons } from '../../store/person/actions/actionsCreators';
 import { useFormik } from 'formik';
 import SpinNer from '../LoadingSpinner/SpinNer';
-import { AllUsersSchema } from '../../Schemas/Schemas';
+import { AddPersonSchema } from '../../Schemas/Schemas';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
 const AddPersonFields = ({ setState }) => {
@@ -45,7 +42,7 @@ const AddPersonFields = ({ setState }) => {
 
     const { values, handleChange, errors, handleSubmit, touched, setValues, resetForm } = useFormik({
         initialValues: initialValues,
-        // validationSchema:AllUsersSchema,
+        validationSchema: AddPersonSchema,
         onSubmit: (values, action) => {
             const data = {
                 email: values.email,
@@ -69,9 +66,9 @@ const AddPersonFields = ({ setState }) => {
                 personAPlayer: values?.role === 'PLAYER' ? true : false
             }
             if (UserEdit) {
-                Dispatch(Update_Persons(data, UserId, Token, Navigate,role))
+                Dispatch(Update_Persons(data, UserId, Token, Navigate, role))
             } else {
-                Dispatch(Add_Persons(data, Token, Navigate,role))
+                Dispatch(Add_Persons(data, Token, Navigate, role))
 
             }
             action.resetForm();
@@ -87,7 +84,6 @@ const AddPersonFields = ({ setState }) => {
         roleOptions = [
             { value: 'CO_MANAGER', label: ' CO MANAGER' },
             { value: 'MANAGER', label: 'MANAGER' },
-            { value: 'ADMIN', label: ' ADMIN' },
             { value: 'PLAYER', label: 'PLAYER' },
         ]
     } else {
@@ -105,6 +101,18 @@ const AddPersonFields = ({ setState }) => {
             Dispatch(GetPersonsById(UserId, Token))
         }
     }, [UserEdit, Dispatch])
+    useEffect(() => {
+        if (values.role !== 'PLAYER') {
+            setValues({
+                ...values,
+                tournamentsPlayed: null,
+                points: null,
+                ranking: null,
+                gamesPlayed: null,
+            });
+        }
+    }, [values.role, setValues]);
+
     const PersonStatusOptions = [
         { value: "ACTIVE", label: "ACTIVE" },
         { value: "INACTIVE", label: "INACTIVE" },
@@ -135,7 +143,7 @@ const AddPersonFields = ({ setState }) => {
     }, [PersonDetails, UserEdit, setValues]);
     return (
         <div className='mt-3'>
-            <h2 className='mb-3 fw-bold'>{UserEdit ? 'Update User' :'Add User'}</h2>
+            <h2 className='mb-3 fw-bold'>{UserEdit ? 'Update User' : 'Add User'}</h2>
             <form onSubmit={handleSubmit}>
                 <Row className='row gy-3 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2'>
                     <div className="d-flex flex-column flex-grow-1">
@@ -152,20 +160,20 @@ const AddPersonFields = ({ setState }) => {
                     </div>
 
                     {/* Password Field */}
-               
-                        <div className="d-flex flex-column flex-grow-1">
-                            <InputField
-                                type="password"
-                                name="password"
-                                label="Password"
-                                onChange={handleChange}
-                                value={values.password}
-                                className="form-control"
-                                touched={touched.password}
-                                error={errors.password}
-                            />
-                        </div>
-                 
+
+                    <div className="d-flex flex-column flex-grow-1">
+                        <InputField
+                            type="password"
+                            name="password"
+                            label="Password"
+                            onChange={handleChange}
+                            value={values.password}
+                            className="form-control"
+                            touched={touched.password}
+                            error={errors.password}
+                        />
+                    </div>
+
                     {/* Name Field */}
                     <div className="d-flex flex-column flex-grow-1">
                         <InputField
@@ -189,6 +197,8 @@ const AddPersonFields = ({ setState }) => {
                             value={values.role}
                             deFaultValue="Select Role"
                             onChange={handleChange}
+                            touched={touched.role}
+                            error={errors.role}
                         />
                     </div>
 
@@ -296,7 +306,7 @@ const AddPersonFields = ({ setState }) => {
                         />
                     </div>
 
-                  
+
                     <div className="d-flex flex-column flex-grow-1">
                         <SelectTag
                             options={PersonStatusOptions}
@@ -371,7 +381,7 @@ const AddPersonFields = ({ setState }) => {
                 </Row>
                 <div className="d-flex justify-content-center ">
                     <button type="submit" className="mt-3 gradient-btn-orange" >
-                        {'Submit'}
+                        {isLoading ? <SpinNer /> : "Submit"}
                     </button>
                 </div>
 
