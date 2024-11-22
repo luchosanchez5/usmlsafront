@@ -1,20 +1,16 @@
 import Navbar from "react-bootstrap/Navbar";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Image, Offcanvas } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { HiBars3 } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 function NavTopbar() {
   const [showCanvas, setShowCanvas] = useState(false);
-  const handleClose = () => setShowCanvas(false);
+  console.log(showCanvas);
   const handleShow = () => setShowCanvas(true);
   const { user } = useSelector((state) => state.user);
-  console.log(user.roles[0]);
   const Token = user?.access_token;
-  const [LoggedIn, SetLoggedIn] = useState(false);
   const Navigate = useNavigate();
-
-  // Effect to check if the user is logged in based on localStorage
   useEffect(() => {
     localStorage.removeItem("persist:grow-share");
   }, []);
