@@ -25,11 +25,7 @@ const AllDivisionTable = () => {
 
     useEffect(() => {
         Dispatch(GetAllDivisions(page, token))
-<<<<<<< Updated upstream
-    }, [Dispatch, state, token, page])
-=======
     }, [Dispatch, token, page])
->>>>>>> Stashed changes
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };

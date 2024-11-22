@@ -11,6 +11,7 @@ import DeleteModel from '../Models/DeleteModel';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
 const AllTeamTable = () => {
+
     const { TeamData, isLoading } = useSelector((state) => state.team);
     const [DelTeamModel, SetDelTeamModel] = useState(false)
     const { user, token } = useSelector((state) => state.user);
@@ -29,14 +30,13 @@ const AllTeamTable = () => {
         SetDelTeamModel(true)
 
     }
-    const handleDeleteTeam = () => 
+    const handleDeleteTeam = () =>
         Dispatch(DeleteTeams(teamId, token, () => {
             Dispatch(GetTeams(page, token, role, userId))
             SetDelTeamModel(false)
         }
         ))
 
-    }
     const handlePageChange = (newPage) => {
         setPage(newPage);
     };
@@ -109,6 +109,15 @@ const AllTeamTable = () => {
 
         </>
     )
+
+
+}
+
+
+
+
+
+
 
 
 export default AllTeamTable;
