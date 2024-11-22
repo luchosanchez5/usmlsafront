@@ -9,10 +9,28 @@ import {
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
-  const { CoManagerData } = useSelector((state) => state.team);
-  const { token } = useSelector((state) => state.user);
-  const [selectedCard, setSelectedCard] = useState(null);
-  const [page, setPage] = useState(0);
+    const { CoManagerData, TeamMembers, isLoading } = useSelector((state) => state.team)
+    if (TeamMembers && CoManagerData) {
+        const teamMemberEmails = TeamMembers.members.map((item) => item.email);
+        console.log("🚀 : ~ file: AddPlayerModel.jsx:15 ~ AddPlayerModel ~ teamMemberEmails", teamMemberEmails);
+        const coManagerEmails = CoManagerData.data.map((item) => item.email);
+
+        const matchedEmails = teamMemberEmails.filter((email) =>
+          
+            coManagerEmails.includes(email)
+        );
+       
+
+        // If you need full objects of matched members:
+        const matchedMembers = TeamMembers.members.filter((member) =>
+          
+            coManagerEmails.includes(member.email)
+        );
+        
+    }
+    const { token } = useSelector((state) => state.user)
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [page, setPage] = useState(0);
 
   const Dispatch = useDispatch();
   const handleCardSelect = (id) => {

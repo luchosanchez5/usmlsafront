@@ -5,32 +5,28 @@ import '../../assets/css/products-table.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { DelVenue } from '../../store/Venue/actions/actionCreators';
 import DeleteModel from '../Models/DeleteModel';
+<<<<<<< Updated upstream
 import { useNavigate } from 'react-router-dom';
 const MembersTable = ({ state, setState }) => {
+=======
+const MembersTable = ({  setState }) => {
+>>>>>>> Stashed changes
     const { TeamMembers, isLoading } = useSelector((state) => state.team);
-    const { token } = useSelector((state) => state.user)
     const [DelVenueModel, SetDelVenueModel] = useState(false);
     const [VenueId, Setvenueid] = useState(null);
     const Dispatch = useDispatch();
-    const Navigate = useNavigate()
     const handleDeletebtn = (id) => {
         Setvenueid(id);
         SetDelVenueModel(true);
     };
 
-    // useEffect(() => {
-
-    //     Dispatch(GetVenue());
-
-    // }, [Dispatch, state]);
+    
 
     const handleCloseModel = () => {
         SetDelVenueModel(false);
     };
-    const handleEyebtn = (id) => {
-        // Navigate(`/dashboard/allvenue/${id}`)
-
-    }
+   
+  
 
     const handleDeleteVenue = () => {
         Dispatch(DelVenue(VenueId));

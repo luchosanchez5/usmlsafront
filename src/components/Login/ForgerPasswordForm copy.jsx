@@ -2,9 +2,14 @@ import React from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import TextField from "../../shared/TextField";
 import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { ForgetPasswordSchema } from "../../Schemas/Schemas";
 import { Formik, Form } from "formik";
+<<<<<<< Updated upstream:src/components/Login/ForgerPasswordForm.jsx
 import { FaEnvelope } from "react-icons/fa";
+=======
+import {  FaUserTie } from "react-icons/fa";
+>>>>>>> Stashed changes:src/components/Login/SelectRoleForm.jsx
 import { useDispatch } from "react-redux";
 import { ForgetPassword } from "../../store/person/actions/actionsCreators";
 const ForgerPasswordForm = () => {

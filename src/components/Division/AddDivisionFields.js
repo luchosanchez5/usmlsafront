@@ -76,13 +76,7 @@ function AddDivisionFields() {
             }
             action.resetForm();
 
-            // if (TeamEdit) {
-            //     Dispatch(UpdateTeams(TeamId, data, Token, Navigate))
-
-            // } else {
-            //     Dispatch(AddTeams(data, Token, Navigate))
-
-            // }
+            
         }
     });
 

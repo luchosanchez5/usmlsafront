@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React  from 'react'
 import { useFormik } from 'formik';
 import Modal from 'react-bootstrap/Modal';
 import InputField from '../product/InputField';
-import { AllVenueSchemas } from '../../Schemas/Schemas';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddVenue, GetVenue } from '../../store/Venue/actions/actionCreators';
-import DeleteModel from './DeleteModel';
-import { Row, Col } from 'react-bootstrap';
-import SelectTag from '../product/SelectTag';
+import { Row  } from 'react-bootstrap';
 import { Update_Persons } from '../../store/person/actions/actionsCreators';
 const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
     const Dispatch = useDispatch()
@@ -29,11 +25,9 @@ const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
         zipCode: Persondata?.data?.zipCode || "",
         country:Persondata?.data?.country || "",
     }
-    const { values, handleChange, errors, handleSubmit, touched, resetForm } = useFormik({
+    const { values, handleChange, errors, handleSubmit, touched  } = useFormik({
         initialValues: initialValues,
-        // validationSchema: AllVenueSchemas,
         onSubmit: (values, action) => {
-            action.resetForm();
 
             const data = {
                 name: values.name,
@@ -58,6 +52,7 @@ const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
                 country:values.country
             }
             Dispatch(Update_Persons(data, userId, Token))
+            action.resetForm();
             setEditModel(false)
             setState(prev => !prev)
           

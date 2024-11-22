@@ -16,7 +16,6 @@ const AllDivisionTable = () => {
     const { SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo)
     const { token } = useSelector((state) => state.user);
     const [page, setPage] = useState(0);
-    const [state, setState] = useState(false);
     const [deleteModel, setDeleteModel] = useState(false)
     const [divisionId, setDivisionid] = useState(null);
     const Dispatch = useDispatch()
@@ -26,7 +25,11 @@ const AllDivisionTable = () => {
 
     useEffect(() => {
         Dispatch(GetAllDivisions(page, token))
+<<<<<<< Updated upstream
     }, [Dispatch, state, token, page])
+=======
+    }, [Dispatch, token, page])
+>>>>>>> Stashed changes
     const handlePageChange = (newPage) => {
         setPage(newPage - 1);
     };

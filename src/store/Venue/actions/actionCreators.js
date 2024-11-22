@@ -11,7 +11,6 @@ export const AddVenue = (data, Token, Navigate) => (dispatch) => {
     }
   })
     .then((response) => {
-      console.log("🚀 : ~ file: actionCreators.js:14 ~ .then ~ response", response);
       dispatch({
         type: actionTypes.Add_VENUE,
         // payload: response.data,
