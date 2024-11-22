@@ -3,13 +3,14 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Image } from 'react-bootstrap';
 import '../assets/css/sidebar-nav.css';
 import AdminMenu from '../components/Menu/AdminMenu';
 import ManagerMenu from '../components/Menu/ManagerMenu';
 import PlayerMenu from '../components/Menu/PlayerMenu';
 import CoManager from '../components/Menu/CoManager';
+import { getToken } from '../store/user/actions/actionCreators';
 
 const SidebarNav = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -30,6 +31,13 @@ const SidebarNav = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getToken());
+        // const timer = setTimeout(() => {
+        // }, 5000);
+        // return () => clearTimeout(timer);
+    }, [dispatch]);
 
     return (
         <Sidebar collapsed={isCollapsed} collapsedWidth='70px' backgroundColor="#151515" className='main-navigation'>
@@ -56,7 +64,7 @@ const SidebarNav = () => {
                     <NavLink to="/dashboard/user/setting" className='menu-item-link text-white'>
                         <MenuItem  >{!isCollapsed && 'Profile'}</MenuItem>
                     </NavLink>
-                   
+
                 </SubMenu>
             </Menu>
         </Sidebar>

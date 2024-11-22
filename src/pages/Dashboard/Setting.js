@@ -10,11 +10,13 @@ import ManagerInfoEditModel from "../../components/Models/ManagerInfoEditModel";
 import AdminInfoEditModel from "../../components/Models/AdminInfoEditModel";
 import PlayerInfoEditModel from "../../components/Models/PlayerInfoEditModel";
 import CoManagerInfoEditModel from "../../components/Models/CoManagerInfoEditModel";
+import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 const Setting = () => {
-    const { Persondata } = useSelector((state) => state.person);
+    const { Persondata, isLoading } = useSelector((state) => state.person);
     const { user } = useSelector((state) => state.user);
     const [editModel, setEditModel] = useState(false);
     const [state, setState] = useState(true);
+    console.log(state)
     const Dispatch = useDispatch();
     useEffect(() => {
         Dispatch(GetPerson(user.userId));
@@ -28,33 +30,34 @@ const Setting = () => {
                 btnText="Edit User"
                 onClick={() => setEditModel(true)}
             />
-            <div className="section-main m-3 px-3 py-5 bg-white  shadow-lg">
-                <Image
-                    src={profilePic}
-                    width={100}
-                    height={100}
-                    style={{ borderRadius: "50px" }}
-                />
-                <Row className="my-3">
-                    <Col>
-                        <h5 className="fw-bold"> Email : </h5>
-                        <h6>{Persondata?.data?.email}</h6>
-                    </Col>
+            {isLoading ? <DetailSkeleton /> :
+                <div className="section-main m-3 px-3 py-5 bg-white  shadow-lg">
+                    <Image
+                        src={profilePic}
+                        width={100}
+                        height={100}
+                        style={{ borderRadius: "50px" }}
+                    />
+                    <Row className="my-3">
+                        <Col>
+                            <h5 className="fw-bold"> Email : </h5>
+                            <h6>{Persondata?.data?.email}</h6>
+                        </Col>
 
-                    <Col>
-                        <h5 className="fw-bold"> Role : </h5>
-                        <h6>{Persondata?.data?.role}</h6>
-                    </Col>
-                    <Col>
-                        <h5 className="fw-bold">First Name : </h5>
-                        <h6>{Persondata?.data?.firstName}</h6>
-                    </Col>
-                    <Col>
-                        <h5 className="fw-bold">Last Name : </h5>
-                        <h6> {Persondata?.data?.lastName}</h6>
-                    </Col>
-                </Row>
-            </div>
+                        <Col>
+                            <h5 className="fw-bold"> Role : </h5>
+                            <h6>{Persondata?.data?.role}</h6>
+                        </Col>
+                        <Col>
+                            <h5 className="fw-bold">First Name : </h5>
+                            <h6>{Persondata?.data?.firstName}</h6>
+                        </Col>
+                        <Col>
+                            <h5 className="fw-bold">Last Name : </h5>
+                            <h6> {Persondata?.data?.lastName}</h6>
+                        </Col>
+                    </Row>
+                </div>}
             {editModel && (
                 Persondata?.data?.role === 'ADMIN' ? (
                     <AdminInfoEditModel
@@ -71,6 +74,7 @@ const Setting = () => {
                         setEditModel={setEditModel}
                         onClose={() => setEditModel(false)}
                         onClick={handleConfrim}
+                        setState={setState}
                     />
                 ) : Persondata?.data?.role === 'PLAYER' ? (
                     <PlayerInfoEditModel

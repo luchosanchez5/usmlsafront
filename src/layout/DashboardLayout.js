@@ -1,17 +1,15 @@
 
 import React, { useContext, useEffect } from 'react'
-import FindEvents from '../components/product/FindEvents'
-import NavTopbar from '../pages/Home/NavTopbar'
 import SidebarNav from '../shared/SidebarNav'
-import { Container, Row } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import TopBar from '../shared/TopBar'
 import { useLocation } from 'react-router-dom'
-import PageHeader from '../shared/PageHeader'
 import { GlobalInfo } from '../App'
+
 const DashboardLayout = (WrapComponent) => {
+
     return function Globally(props) {
-        const { SetVenueEdit, SetVenueId, SetTournamentEdit, SetTournamentId,SetTeamEdit,SetTeamId,SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo)
-        
+        const { SetVenueEdit, SetVenueId, SetTournamentEdit, SetTournamentId, SetTeamEdit, SetTeamId, SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo)
         const location = useLocation()
         const IsPathlistAllVenue = location.pathname === '/dashboard/addvenue'
         const IsPathAddTournaments = location.pathname === '/dashboard/addtournaments'
@@ -38,7 +36,7 @@ const DashboardLayout = (WrapComponent) => {
         useEffect(() => {
             if (!IsPathAddDivision) {
                 SetDivisionEdit(false)
-                 SetDivisionId(null)
+                SetDivisionId(null)
             }
         }, [IsPathAddDivision, SetDivisionEdit])
         return (

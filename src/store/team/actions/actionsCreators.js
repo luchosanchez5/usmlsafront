@@ -357,3 +357,32 @@ export const GetPaymentRecords = (teamId, page, Token, isUser = false) => (dispa
       });
     });
 };
+
+export const getPendingPaymentRecords = (teamId, page, Token) => (dispatch) => {
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/teams/tournament-registrations?teamId=${teamId}&page=${page}&size=10`, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_PENDING_PAYMENT_RECORDS,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: true,
+      });
+    });
+};

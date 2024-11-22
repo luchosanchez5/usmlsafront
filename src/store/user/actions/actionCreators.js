@@ -45,6 +45,32 @@ export const userLogin = (data, navigate) => (dispatch) => {
 
     });
 };
+
+export const getToken = () => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`http://localhost:8082/api/v1/auth/token-for-google-user`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.USER_LOGIN,
+        payload: response?.data?.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+
+    });
+};
 export const userRegister = (data, navigation) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,

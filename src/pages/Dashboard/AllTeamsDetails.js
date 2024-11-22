@@ -12,9 +12,11 @@ import AddPlayerModel from '../../components/Models/AddPlayerModel'
 import PaymentModel from '../../components/CardModel/PaymentModel'
 import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
+import PendingHistoryTable from '../../components/Paymenthistory/PendingHistoryTable'
 const AllTeamsDetails = () => {
     const { id } = useParams()
     const { TeamDetailsData, isLoading } = useSelector((state) => state.team)
+    const { PaymentRecords } = useSelector((state) => state.team);
     const { token } = useSelector((state) => state.user)
     const [state, setState] = useState(false)
     const [CoManagerBoxModel, SetCoManagerBoxModel] = useState(false)
@@ -38,7 +40,8 @@ const AllTeamsDetails = () => {
                     onClick={() => SetCoManagerBoxModel(true)} >Add Co Manager</button>
                 <button className='Team-register-btn mx-2'
                     onClick={() => SetPlayerBoxModel(true)} >Add Player</button>
-                {role === 'ADMIN' ? '' :
+                {role === 'ADMIN' || PaymentRecords?._embedded?.paymentRecordResponseList?.length >
+                    0 ? '' :
                     <button className='Team-register-btn mx-2 '
                         onClick={() => Navigate(`/dashboard/registerteam/${id}`)} >Team Register</button>
                 }
@@ -135,6 +138,8 @@ const AllTeamsDetails = () => {
             <MembersTable />
             <h2 className='ps-4 text-danger'>Payment Records:</h2>
             <PaymentHistoryTable />
+            <h2 className='ps-4 text-danger'>Tournament Registration:</h2>
+            <PendingHistoryTable />
 
 
         </>

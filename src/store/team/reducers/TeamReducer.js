@@ -2,12 +2,13 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     TeamData: [],
-    TeamDetailsData:[],
-    TeamMembers:{},
-    CoManagerData:[],
-    PaymentRecords:[],
+    TeamDetailsData: [],
+    TeamMembers: {},
+    CoManagerData: [],
+    PaymentRecords: [],
+    PendingPaymentRecords: [],
     // VenuData: false
-    YourTeamData:[],
+    YourTeamData: [],
     isLoading: false,
 };
 
@@ -22,7 +23,7 @@ const TeamReducer = (state = initialState, action) => {
         case actionTypes.ADD_TEAMS:
             return {
                 ...state,
-               
+
             };
 
         case actionTypes.GET_TEAMS:
@@ -30,39 +31,44 @@ const TeamReducer = (state = initialState, action) => {
                 ...state,
                 TeamData: action.payload || [],
             };
-            case actionTypes.GET_TEAM_BY_ID:
-                return{
-                    ...state,
-                    TeamDetailsData:action.payload || []
-                }
-            case actionTypes.GET_CO_MANAGERS:
-                return{
-                    ...state,
-                    CoManagerData:action.payload || []
-                }
-            case actionTypes.GET_MEMBER_BY_TEAMID:
-                return{
-                    ...state,
-                    TeamMembers:action.payload || {}
-                }
-            case actionTypes.GET_YOUR_TEAM:
-                return{
-                    ...state,
-                    YourTeamData:action.payload || []
-                }
-        
-            case actionTypes.GET_PAYMENT_RECORDS:
-                return{
-                    ...state,
-                    PaymentRecords:action.payload || []
-                }
-        
-          
-        
+        case actionTypes.GET_TEAM_BY_ID:
+            return {
+                ...state,
+                TeamDetailsData: action.payload || []
+            }
+        case actionTypes.GET_CO_MANAGERS:
+            return {
+                ...state,
+                CoManagerData: action.payload || []
+            }
+        case actionTypes.GET_MEMBER_BY_TEAMID:
+            return {
+                ...state,
+                TeamMembers: action.payload || {}
+            }
+        case actionTypes.GET_YOUR_TEAM:
+            return {
+                ...state,
+                YourTeamData: action.payload || []
+            }
+
+        case actionTypes.GET_PAYMENT_RECORDS:
+            return {
+                ...state,
+                PaymentRecords: action.payload || []
+            }
+        case actionTypes.GET_PENDING_PAYMENT_RECORDS:
+            return {
+                ...state,
+                PendingPaymentRecords: action.payload || []
+            }
+
+
+
         default:
             return state;
-    
-   
+
+
 
     }
 }

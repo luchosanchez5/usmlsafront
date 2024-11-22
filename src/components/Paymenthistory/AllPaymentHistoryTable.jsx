@@ -77,7 +77,6 @@ const AllPaymentHistoryTable = () => {
           <thead>
             <tr>
               <th>Team Name</th>
-              <th>Payment Purpose</th>
               <th>Pending Amount</th>
               <th>Paid Amount</th>
               <th>Total Amount</th>
@@ -88,12 +87,12 @@ const AllPaymentHistoryTable = () => {
             </tr>
           </thead>
           <tbody>
-            {PaymentRecords?._embedded.paymentRecordResponseList?.length > 0 ? (
-              PaymentRecords?._embedded.paymentRecordResponseList?.map(
+            {PaymentRecords?._embedded?.paymentRecordResponseList?.length >
+            0 ? (
+              PaymentRecords?._embedded?.paymentRecordResponseList?.map(
                 (item, index) => (
                   <tr key={index} className="main-row">
                     <td>{item?.teamName}</td>
-                    <td>{item?.paymentPurpose}</td>
                     <td>{item?.pendingAmount}</td>
                     <td>{item?.paidAmount}</td>
                     <td>{item?.totalAmount}</td>

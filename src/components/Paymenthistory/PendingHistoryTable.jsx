@@ -3,19 +3,21 @@ import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
+import { getPendingPaymentRecords } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
-const PaymentHistoryTable = ({ state, setState }) => {
-  const { PaymentRecords, isLoading } = useSelector((state) => state.team);
+const PendingHistoryTable = ({ state, setState }) => {
+  const { PendingPaymentRecords, isLoading } = useSelector(
+    (state) => state.team
+  );
 
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
   const Dispatch = useDispatch();
 
   useEffect(() => {
-    Dispatch(GetPaymentRecords(id, 0, token));
+    Dispatch(getPendingPaymentRecords(id, 0, token));
   }, [Dispatch, state, id, token]);
-
+  console.log(PendingPaymentRecords, "lasbdhkhaksdhkasd");
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>
@@ -33,11 +35,11 @@ const PaymentHistoryTable = ({ state, setState }) => {
             <thead>
               <tr>
                 <th>Team Name</th>
-                <th>Payment Purpose</th>
-                <th>Pending Amount</th>
+                <th>Tournament Name</th>
+                <th>Division Name</th>
+                <th>Registration Date</th>
                 <th>Paid Amount</th>
-                <th>Total Amount</th>
-                <th>Payment Status</th>
+                <th>Registration Status</th>
               </tr>
             </thead>
             <tbody>
@@ -46,33 +48,30 @@ const PaymentHistoryTable = ({ state, setState }) => {
                   <h4>Loading...</h4>
                 </div>
               )}
-              {PaymentRecords?._embedded?.paymentRecordResponseList?.length >
-              0 ? (
-                PaymentRecords?._embedded?.paymentRecordResponseList?.map(
-                  (item, index) => (
-                    <tr key={index} className="main-row">
-                      <td>{item?.teamName}</td>
-                      <td>{item?.paymentPurpose}</td>
-                      <td>{item?.pendingAmount}</td>
-                      <td>{item?.paidAmount}</td>
-                      <td>{item?.totalAmount}</td>
-                      <td
-                        style={{
-                          color:
-                            item?.paymentStatus === "succeeded"
-                              ? "green"
-                              : "red",
-                        }}
-                      >
-                        {item.paymentStatus}
-                      </td>
-                    </tr>
-                  )
-                )
+              {PendingPaymentRecords?.data?.length > 0 ? (
+                PendingPaymentRecords?.data?.map((item, index) => (
+                  <tr key={index} className="main-row">
+                    <td>{item?.teamName}</td>
+                    <td>{item?.tournamentName}</td>
+                    <td>{item?.divisionName}</td>
+                    <td>{item?.registrationDate}</td>
+                    <td>{item?.depositFeeAmount}</td>
+                    <td
+                      style={{
+                        color:
+                          item?.registrationStatus === "PARTIAL_REGISTRATION"
+                            ? "red"
+                            : "green",
+                      }}
+                    >
+                      {item?.registrationStatus}
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td colSpan="6" className="text-center">
-                    No Payment Record Available
+                    No Record Available
                   </td>
                 </tr>
               )}
@@ -84,4 +83,4 @@ const PaymentHistoryTable = ({ state, setState }) => {
   );
 };
 
-export default PaymentHistoryTable;
+export default PendingHistoryTable;
