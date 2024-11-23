@@ -4,6 +4,7 @@ import Form from '../Form.js';
 import YourTeamDetails from '../pages/Dashboard/YourTeamDetails.js';
 const Login = lazy(() => import('../pages/Login/Login.js'));
 const YourTeams = lazy(() => import('../pages/Dashboard/YourTeams.js'));
+const GoogleSucceed = lazy(() => import('../pages/Login/GoogleResponse.js'));
 const Home = lazy(() => import('../pages/Home/Home'));
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
 const AllPersonDetails = lazy(() => import('../pages/Dashboard/AllPersonDetails.js'));
@@ -39,8 +40,9 @@ const NavigationRoutes = () => {
         <Routes>
             <Route exact path='/dashboard' element={<Dashboard />}></Route>
             <Route exact path='/' element={<Home />}></Route>
+            <Route exact path='/auth/google-succeed' element={<GoogleSucceed />}></Route>
             <Route exact path='/auth/register' element={<ProviderRegister />}></Route>
-            <Route exact path='/auth/selectrole' element={<SelectRole />}></Route>
+            <Route exact path='/auth/select-role' element={<SelectRole />}></Route>
             <Route exact path='/dashboard/allteams' element={<AllTeam />}></Route>
             <Route exact path='/dashboard/allteams/:id' element={<AllTeamsDetails />}></Route>
             <Route exact path='/dashboard/yourteam' element={<YourTeams />}></Route>
@@ -52,7 +54,6 @@ const NavigationRoutes = () => {
             <Route exact path='/dashboard/addvenue' element={<AddVenues />}></Route>
             <Route exact path='/dashboard/allvenue' element={<AllVenues />}></Route>
             <Route exact path='/dashboard/allvenue/:id' element={<AllVenusDetails />}></Route>
-
             <Route exact path='/dashboard/allpersons' element={<AllPerson />}></Route>
             <Route exact path='/dashboard/allpersons/:id' element={<AllPersonDetails />}></Route>
             <Route exact path='/dashboard/addperson' element={<AddPerson />}></Route>

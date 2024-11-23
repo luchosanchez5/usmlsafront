@@ -31,13 +31,6 @@ const SidebarNav = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getToken());
-        // const timer = setTimeout(() => {
-        // }, 5000);
-        // return () => clearTimeout(timer);
-    }, [dispatch]);
 
     return (
         <Sidebar collapsed={isCollapsed} collapsedWidth='70px' backgroundColor="#151515" className='main-navigation'>

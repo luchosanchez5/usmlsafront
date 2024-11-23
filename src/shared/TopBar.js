@@ -6,16 +6,18 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import '../assets/css/topbar.css';
 import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOut } from '../store/user/actions/actionCreators';
 
 const TopBar = () => {
     const [showOptions, setShowOptions] = useState(false);
     const navigate = useNavigate();
-    const { user } = useSelector((state) => state.user);
+    const { user, token } = useSelector((state) => state.user);
     const userName = user?.name?.trim() !== '' ? user?.name : 'No User Name';
+    const dispatch = useDispatch();
     const handleLogout = () => {
         localStorage.removeItem('persist:grow-share');
-        navigate('/auth/login');
+        dispatch(logOut(token, navigate));
     }
 
     const toggleDropdown = () => {

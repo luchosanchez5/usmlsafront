@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 import Toast from "../../../shared/Toast";
 
 import axios from "axios";
+import { FaLess } from "react-icons/fa6";
 const Url = process.env.REACT_APP_MAIN_URL;
 export const userLogin = (data, navigate) => (dispatch) => {
   dispatch({
@@ -46,13 +47,18 @@ export const userLogin = (data, navigate) => (dispatch) => {
     });
 };
 
-export const getToken = () => (dispatch) => {
+export const getToken = (token, navigate) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(`http://localhost:8082/api/v1/auth/token-for-google-user`)
+  axios.get(`http://localhost:8082/api/v1/auth/token-for-google-user`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
     .then((response) => {
+
       dispatch({
         type: actionTypes.USER_LOGIN,
         payload: response?.data?.data,
@@ -61,6 +67,8 @@ export const getToken = () => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
+      Toast.success(response.data.message);
+      navigate('/dashboard/yourteam')
     })
     .catch((error) => {
       Toast.error(error.response.data.message);
@@ -89,6 +97,68 @@ export const userRegister = (data, navigation) => (dispatch) => {
       navigation("/auth/login");
       Toast.success(response?.data?.message);
 
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+
+
+export const changeRole = (role, token, navigate) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.put(`${Url}api/persons/change-google-user-role?newRole=${role}`, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+
+      dispatch({
+        type: actionTypes.USER_LOGIN,
+        payload: response?.data?.data,
+      });
+      Toast.success(response.data.message);
+      navigate('/dashboard/yourteam')
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+
+export const logOut = (token, navigate) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.post(`${Url}api/v1/auth/logout`, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      Toast.success(response.data.message);
+      navigate('/auth/login');
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
