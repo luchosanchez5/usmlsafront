@@ -5,7 +5,6 @@ import { AllTournamentSchemas } from "../../Schemas/Schemas";
 import { useDispatch } from "react-redux";
 import {
   Add_Tournaments,
-  GetTournaments,
   GetTournamentsDetailsByTournamentId,
   UpdateTournaments,
 } from "../../store/tournament/actions/actionsCreators";
@@ -14,7 +13,6 @@ import SelectTag from "../product/SelectTag";
 import { Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { GlobalInfo } from "../../App";
-import { GetTeamsbyTeamId } from "../../store/team/actions/actionsCreators";
 import SpinNer from "../LoadingSpinner/SpinNer";
 const AddTournamentFields = () => {
   const Dispatch = useDispatch();
@@ -51,7 +49,7 @@ const AddTournamentFields = () => {
     handleSubmit,
     setValues,
     touched,
-    resetForm,
+   
   } = useFormik({
     initialValues: initialValues,
     validationSchema: AllTournamentSchemas,
@@ -90,7 +88,7 @@ const AddTournamentFields = () => {
     if (TournamentEdit && TournamentDetails) {
       Dispatch(GetTournamentsDetailsByTournamentId(TournamentId, Token));
     }
-  }, [TournamentEdit, Dispatch]);
+  }, [TournamentEdit, Dispatch, Token, TournamentId]);
   useEffect(() => {
     if (TournamentEdit && TournamentDetails) {
       setValues({
