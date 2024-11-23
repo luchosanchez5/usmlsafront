@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import InputField from "../product/InputField";
-import Modal from "react-bootstrap/Modal";
 import { AllTournamentSchemas } from "../../Schemas/Schemas";
 import { useDispatch } from "react-redux";
 import {

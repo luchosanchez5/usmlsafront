@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import InputField from "../product/InputField"; // Assuming you have a reusable InputField component
 import Modal from "react-bootstrap/Modal";
 import { Card, Row, Col, Form } from "react-bootstrap";
-import { AllPlayersSchemas } from "../../Schemas/Schemas"; // Assuming validation schema is correct
 import { useDispatch, useSelector } from "react-redux";
 import {
-  AddCoManagerToTeam,
   AddVenue,
-  GetCoManager,
 } from "../../store/team/actions/actionsCreators";
 import { PaginationControl } from "react-bootstrap-pagination-control";
-import { toast } from "react-toast-notification";
 import Toast from "../../shared/Toast";
 import { useParams } from "react-router-dom";
 import { GetVenue } from "../../store/Venue/actions/actionCreators";
