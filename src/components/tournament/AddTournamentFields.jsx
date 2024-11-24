@@ -91,7 +91,7 @@ const AddTournamentFields = () => {
     if (TournamentEdit && TournamentDetails) {
       Dispatch(GetTournamentsDetailsByTournamentId(TournamentId, Token));
     }
-  }, [TournamentEdit, Dispatch]);
+  }, [TournamentEdit, Dispatch, Token, TournamentId,]);
   useEffect(() => {
     if (TournamentEdit && TournamentDetails) {
       setValues({

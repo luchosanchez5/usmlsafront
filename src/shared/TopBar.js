@@ -13,7 +13,6 @@ const TopBar = () => {
     const [showOptions, setShowOptions] = useState(false);
     const navigate = useNavigate();
     const { user, token } = useSelector((state) => state.user);
-    const userName = user?.name?.trim() !== '' ? user?.name : 'No User Name';
     const dispatch = useDispatch();
     const handleLogout = () => {
         localStorage.removeItem('persist:grow-share');
@@ -28,9 +27,9 @@ const TopBar = () => {
         <Row className='bg-black'>
             <Col className='px-0'>
                 <div className='d-flex justify-content-end py-4 align-items-center'>
-                    {userName && (
-                        <div className="text-white me-3">Hello {userName}</div>
-                    )}
+
+                    <div className="text-white me-3">{user?.email}</div>
+
 
                     <div className="custom-select-wrapper">
                         <Dropdown className={`user-dropdown`} show={showOptions} onToggle={toggleDropdown}>
