@@ -2,7 +2,11 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Form from '../Form.js';
 import YourTeamDetails from '../pages/Dashboard/YourTeamDetails.js';
-const Login = lazy(() => import('../pages/Login/Login.js'));
+import AdminRoutes from './AdminRoutes.js';
+import GlobalRoutes from './GlobalRoutes.js';
+import ManagerRoutes from './ManagerRoutes.js';
+import PlayerRoutes from './PlayerRoutes.js';
+import Co_ManagerRoutes from './Co_ManagerRoutes.js';
 const YourTeams = lazy(() => import('../pages/Dashboard/YourTeams.js'));
 const GoogleSucceed = lazy(() => import('../pages/Login/GoogleResponse.js'));
 const Home = lazy(() => import('../pages/Home/Home'));
@@ -38,7 +42,12 @@ const NavigationRoutes = () => {
 
     return (
         <Routes>
-            <Route exact path='/dashboard' element={<Dashboard />}></Route>
+            {AdminRoutes}
+            {GlobalRoutes}
+            {ManagerRoutes}
+            {PlayerRoutes}
+            {Co_ManagerRoutes}
+            {/* <Route exact path='/dashboard' element={<Dashboard />}></Route>
             <Route exact path='/' element={<Home />}></Route>
             <Route exact path='/auth/google-succeed' element={<GoogleSucceed />}></Route>
             <Route exact path='/auth/register' element={<ProviderRegister />}></Route>
@@ -61,17 +70,12 @@ const NavigationRoutes = () => {
             <Route exact path='/dashboard/addivision' element={<AddDivision />}></Route>
             <Route exact path='/dashboard/alldivisions' element={<AllDivision />}></Route>
             <Route exact path='/dashboard/alldivisions/:id' element={<AllDivisionDetails />}></Route>
-            <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
+            <Route exact path='/dashboard/user/setting' element={<Setting />}></Route> */}
 
             <Route exact path='/dashboard/categories' element={<Category />}></Route>
             <Route exact path='/dashboard/sales' element={<Sales />}></Route>
-            <Route exact path='/dashboard/expenses' element={<Expense />}></Route>
-            <Route exact path='/dashboard/quotations' element={<Quotation />}></Route>
-            <Route exact path='/auth/login' element={<Login />}></Route>
-            <Route exact path='/auth/forget-password' element={<ForgetPassword />}></Route>
-            <Route exact path='/auth/reset-password' element={<ResetPassword />}></Route>
             <Route exact path='/Form' element={<Form />}></Route>
-            <Route exact path='/dashboard/registerteam/:id' element={<RegisterTeam />}></Route>
+            {/* <Route exact path='/dashboard/registerteam/:id' element={<RegisterTeam />}></Route> */}
 
             {/* <Route
                 path="*"

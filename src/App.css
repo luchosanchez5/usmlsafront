@@ -339,25 +339,25 @@ li {
   }
 }
 .StripeElement {
-	background-color: #f8f8f8;
-	padding: 10px;
-	max-width: 100%;
+  background-color: #f8f8f8;
+  padding: 10px;
+  max-width: 100%;
   width: calc(100% - 1%) !important;
-	border: 1px solid #e0dddd;
-border-radius: 3px;
+  border: 1px solid #e0dddd;
+  border-radius: 3px;
 }
 
 .StripeElement--empty {
-    border-bottom-color: #b22222;
+  border-bottom-color: #b22222;
 }
 
 .StripeElement--focus {
-    border-bottom-color: #008000;
+  border-bottom-color: #008000;
 }
 
 /* Set styling when form field data is invalid */
 .StripeElement--invalid {
-    border-color: #b22222;
+  border-color: #b22222;
 }
 
 .StripeElement--complete {
@@ -365,15 +365,39 @@ border-radius: 3px;
 }
 
 form.pmpro_form #pmpro_payment_information_fields div#AccountNumber {
-	max-width: 270px;
+  max-width: 270px;
 }
 
 /* Set expiry date input field width */
 form.pmpro_form #pmpro_payment_information_fields div#Expiry {
-	max-width: 110px;
+  max-width: 110px;
 }
 
 /* Set CVC/CVV input field width */
 form.pmpro_form #pmpro_payment_information_fields div#CVV {
-	max-width: 110px;
+  max-width: 110px;
 }
+.Upload-picture {
+  border: 1px dashed #ccc;
+  border-radius: 60%;
+  width: 122px;
+  height: 122px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  text-align: center;
+  transition: all 0.3s ease;
+  &:hover{
+  border-color: #e30613;
+
+  }
+  img {
+    border-radius: 60%;
+    width: 122px;
+    height: 122px;
+  }
+  span {
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+}
+
