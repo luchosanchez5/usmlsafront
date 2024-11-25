@@ -75,9 +75,7 @@ const AddPersonFields = ({ setState }) => {
 
         }
     });
-    const handleRole = (e) => {
-        SetRoleValue(e.target.value);
-    }
+   
     let roleOptions
 
     if (role === "ADMIN") {
