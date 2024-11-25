@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
 const PaymentHistory = lazy(() => import('../pages/Dashboard/Payment.js'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
-const SelectRole = lazy(() => import('../pages/Login/SelectRole.js'));
 const AllTeamsDetails = lazy(() => import('../pages/Dashboard/AllTeamsDetails.js'));
 const AddTeams = lazy(() => import('../pages/Dashboard/AddTeams.js'));
 const RegisterTeam = lazy(() => import('../pages/Payment/RegisterTeam.jsx'));
