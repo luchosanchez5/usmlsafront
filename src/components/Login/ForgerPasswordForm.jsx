@@ -4,10 +4,13 @@ import TextField from "../../shared/TextField";
 import { useNavigate } from "react-router-dom";
 import { ForgetPasswordSchema } from "../../Schemas/Schemas";
 import { Formik, Form } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ForgetPassword } from "../../store/person/actions/actionsCreators";
 import { FaEnvelope } from "react-icons/fa";
+import SpinNer from "../LoadingSpinner/SpinNer";
 const ForgerPasswordForm = () => {
+  const { isLoading } = useSelector((state) => state.person);
+
   const Navigate = useNavigate();
   const initialValues = {
     email: "",
@@ -57,7 +60,7 @@ const ForgerPasswordForm = () => {
               </Col>
               <div className="d-flex justify-content-center mb-3 px-0">
                 <button type="submit" className="mt-3 gradient-btn-orange">
-                  Send
+                  {isLoading ? <SpinNer /> : "Send"}
                 </button>
               </div>
             </Row>

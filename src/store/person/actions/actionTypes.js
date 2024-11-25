@@ -6,3 +6,4 @@ export const GET_PERSON = 'GET_PERSON';
 export const FORGET_PASSWORD = 'FORGET_PASSWORD';
 export const UPDATE_PERSON = 'FORGET_PASSWORD';
 export const GET_PERSONS_BY_ID = 'GET_PERSONS_BY_ID'; 
+export const CLEAR_PERSON = 'CLEAR_PERSON'; 

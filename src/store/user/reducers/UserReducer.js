@@ -31,19 +31,15 @@ const UserReducer = (state = initialState, action) => {
                 token: action.payload.access_token,
                 user: action.payload
             };
-        // case actionTypes.USER_LOGOUT:
-        //     return {
-        //         isLogin: false,
-        //         token: '',
-        //         user: {},
-        //         cards: [],
-        //         managers: {}
-        //     };
-        // case actionTypes.OTP_TOKEN:
-        //     return {
-        //         ...state,
-        //         token: action.payload.token
-        //     };
+        case actionTypes.CLEAR_USER:
+            return {
+                isLogin: false,
+                token: '',
+                user: {},
+                cards: [],
+                managers: {},
+                isLoading: false,
+            };
         default:
             return state;
     }

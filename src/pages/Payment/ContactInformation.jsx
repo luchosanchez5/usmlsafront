@@ -20,8 +20,8 @@ const ContactInformation = ({
     (state) => state.tournament
   );
   const [tournamentId, setTournamentId] = useState(null);
-
   const [CardModel, SetCardModel] = useState(false);
+  console.log(CardModel);
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
   };
@@ -63,7 +63,7 @@ const ContactInformation = ({
   };
   const handlePlaceOrderBtn = () => {
     if (!selectedPayment) {
-      return Toast.error("Select Your Payment Option");
+      return Toast.error("Select Your Payment Fees");
     } else {
       SetCardModel(true);
     }
@@ -143,6 +143,7 @@ const ContactInformation = ({
             {CardModel && (
               <CardPaymentModel
                 show={CardModel}
+                SetCardModel={SetCardModel}
                 DivisionDetailsBySearch={DivisionDetailsBySearch}
                 totalAmount={totalAmount}
                 tournamentId={tournamentId}

@@ -15,7 +15,6 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import SpinNer from "../LoadingSpinner/SpinNer";
 const LoginForm = () => {
   const { isLoading } = useSelector((state) => state.user);
-  console.log(isLoading);
   const Dispatch = useDispatch();
   const [ModelShow, SetModelShow] = useState(false);
 
@@ -28,9 +27,7 @@ const LoginForm = () => {
 
   const errorSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
-    password: Yup.string()
-      .min(8, "Password must be 8 characters long")
-      .required("Password is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const loginHandler = (values, action) => {

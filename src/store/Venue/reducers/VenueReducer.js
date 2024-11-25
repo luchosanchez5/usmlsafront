@@ -37,41 +37,15 @@ const VenueReducer = (state = initialState, action) => {
                 VenuDetails: action.payload || [],
                 // VenuDataUpdate: !state.VenuDataUpdate
             }
+        case actionTypes.CLEAR_VENUE:
+            return {
+                VenueData: [],
+                VenuDetails: [],
+                // VenuData: false
+                isLoading: false,
+            }
         default:
             return state;
-        // case actionTypes.UPDATE_ACCOUNT:
-        //     return {
-        //         ...state,
-        //         user: action.payload
-        //     };
-        // case actionTypes.UPDATE_PASSWORD:
-        //     return {
-        //         ...state,
-        //         token: action.payload
-        //     };
-        // case actionTypes.USER_CARDS:
-        //     return {
-        //         ...state,
-        //         cards: action.payload
-        //     };
-        // case actionTypes.USER_MANAGERS:
-        //     return {
-        //         ...state,
-        //         managers: action.payload
-        //     };
-        // case actionTypes.USER_LOGOUT:
-        //     return {
-        //         isLogin: false,
-        //         token: '',
-        //         user: {},
-        //         cards: [],
-        //         managers: {}
-        //     };
-        // case actionTypes.OTP_TOKEN:
-        //     return {
-        //         ...state,
-        //         token: action.payload.token
-        //     };
 
     }
 }

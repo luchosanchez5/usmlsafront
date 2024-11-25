@@ -62,6 +62,18 @@ const TeamReducer = (state = initialState, action) => {
                 ...state,
                 PendingPaymentRecords: action.payload || []
             }
+        case actionTypes.CLEAR_TEAM:
+            return {
+                TeamData: [],
+                TeamDetailsData: [],
+                TeamMembers: {},
+                CoManagerData: [],
+                PaymentRecords: [],
+                PendingPaymentRecords: [],
+                // VenuData: false
+                YourTeamData: [],
+                isLoading: false,
+            }
 
 
 

@@ -53,7 +53,7 @@ const MembersTable = ({ setState }) => {
               {TeamMembers?.members?.length > 0 ? (
                 TeamMembers?.members?.map((item, index) => (
                   <tr key={index} className="main-row">
-                    <td>{item?.name}</td>
+                    <td>{item?.name || item?.firstName}</td>
                     <td>{item?.email}</td>
                     <td>{item?.role}</td>
                     <td>

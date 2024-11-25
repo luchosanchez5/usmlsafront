@@ -1,8 +1,10 @@
 import * as actionTypes from "./actionTypes";
+import * as venueType from '../../Venue/actions/actionTypes';
+import * as tournamentType from '../../tournament/actions/actionTypes';
+import * as personType from '../../person/actions/actionTypes';
+import * as teamType from '../../team/actions/actionTypes';
 import Toast from "../../../shared/Toast";
-
 import axios from "axios";
-import { FaLess } from "react-icons/fa6";
 const Url = process.env.REACT_APP_MAIN_URL;
 export const userLogin = (data, navigate) => (dispatch) => {
   dispatch({
@@ -154,6 +156,21 @@ export const logOut = (token, navigate) => (dispatch) => {
   })
     .then((response) => {
       Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.CLEAR_USER
+      });
+      dispatch({
+        type: venueType.CLEAR_VENUE
+      });
+      dispatch({
+        type: tournamentType.CLEAR_TOURNAMENT
+      });
+      dispatch({
+        type: personType.CLEAR_PERSON
+      });
+      dispatch({
+        type: teamType.CLEAR_TEAM
+      });
       navigate('/auth/login');
       dispatch({
         type: actionTypes.SET_LOADING,
@@ -168,3 +185,6 @@ export const logOut = (token, navigate) => (dispatch) => {
       });
     });
 };
+
+
+

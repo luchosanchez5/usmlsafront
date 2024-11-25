@@ -351,6 +351,7 @@ export const GetPaymentRecords = (teamId, page, Token, isUser = false) => (dispa
       });
     })
     .catch((error) => {
+      Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: true,
@@ -383,6 +384,35 @@ export const getPendingPaymentRecords = (teamId, page, Token) => (dispatch) => {
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: true,
+      });
+    });
+};
+
+
+export const createSubscription = (date, Token, navigate) => (dispatch) => {
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.post(`${Url}api/payment/secure/create-subscription`, date, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      navigate(-1)
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
       });
     });
 };

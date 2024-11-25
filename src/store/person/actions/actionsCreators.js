@@ -215,18 +215,16 @@ export const ForgetPassword = (email, Navigate) => (dispatch) => {
       });
       Navigate('/auth/reset-password')
       Toast.success(response.data.message);
-      //   navigate("/dashboard");
-      // Toast.success(response.data.message);
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
-export const ResetPassword = (email, pass, otp) => (dispatch) => {
+export const ResetPassword = (email, pass, otp, navigate) => (dispatch) => {
 
   dispatch({
     type: actionTypes.SET_LOADING,
@@ -235,6 +233,7 @@ export const ResetPassword = (email, pass, otp) => (dispatch) => {
   axios.post(`${Url}api/persons/reset-password?email=${email}&newPassword=${pass}&token=${otp}
 `, {},)
     .then((response) => {
+      console.log(response)
       dispatch({
         type: actionTypes.GET_PERSON,
         payload: response.data,
@@ -244,14 +243,13 @@ export const ResetPassword = (email, pass, otp) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
-      //   navigate("/dashboard");
-      // Toast.success(response.data.message);
+      navigate("/auth/login");
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };

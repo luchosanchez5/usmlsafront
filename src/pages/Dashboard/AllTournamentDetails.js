@@ -7,6 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { GetTournamentsDetailsByTournamentId } from '../../store/tournament/actions/actionsCreators'
 import AddVenueModel from '../../components/Models/AddVenueModel'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
+import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
+import PendingHistoryTable from '../../components/Paymenthistory/PendingHistoryTable'
 const AllTournamentDetails = () => {
     const { TournamentDetails, isLoading } = useSelector((state) => state.tournament)
     console.log(isLoading, 'isLoading');
@@ -63,11 +65,17 @@ const AllTournamentDetails = () => {
                                 >{TournamentDetails?.status}</h6>
                             </Col>
                         </Row>
+
                     </div>
+
             }
 
 
             {assignVenueBoxModel && <AddVenueModel show={assignVenueBoxModel} onClose={() => SetVenueModel(false)} SetVenueModel={SetVenueModel} setState={setState} />}
+            <h2 className='ps-4 text-danger'>Payment Records:</h2>
+            <PaymentHistoryTable />
+            <h2 className='ps-4 text-danger'>Tournament Registration:</h2>
+            <PendingHistoryTable />
         </>
     )
 }

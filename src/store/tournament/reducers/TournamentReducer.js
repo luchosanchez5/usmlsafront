@@ -71,6 +71,19 @@ const TournamentReducer = (state = initialState, action) => {
                 ...state,
                 DefaultTournamentData: action.payload || []
             };
+        case actionTypes.CLEAR_TOURNAMENT:
+            return {
+                TournamentData: [],
+                TournamentDetails: [],
+                TournamentBySearch: [],
+                DivisionBySearch: [],
+                DivisionDetailsBySearch: {},
+                DivisionDetails: {},
+                AllDivisionsData: [],
+                DefaultTournamentData: [],
+                // VenuData: false
+                isLoading: false,
+            };
 
         default:
             return state;

@@ -4,3 +4,4 @@ export const GET_VENUE = 'GET_VENUE';
 export const Delete_VENUE = 'Delete_VENUE';
 export const SET_LOADING = 'SET_LOADING';
 export const GET_VENUE_BY_ID = 'GET_VENUE_BY_ID';
+export const CLEAR_VENUE = 'CLEAR_VENUE';

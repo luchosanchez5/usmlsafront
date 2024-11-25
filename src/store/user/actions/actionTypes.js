@@ -1,6 +1,8 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_REGISTER = 'USER_REGISTER';
 export const SET_LOADING = 'SET_LOADING';
+export const CLEAR_USER = 'CLEAR_USER';
+
 
 // export const USER_LOGOUT = 'USER_LOGOUT';
 // export const USER_CARDS = 'USER_CARDS';

@@ -2,24 +2,28 @@ import React from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import TextField from "../../shared/TextField";
 import { Formik, Form } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaLock } from "react-icons/fa";
 import { ResetPassword } from "../../store/person/actions/actionsCreators.js";
+import { useNavigate } from "react-router-dom";
+import SpinNer from "../LoadingSpinner/SpinNer.jsx";
 const ResetPasswordForm = () => {
+  const { isLoading } = useSelector((state) => state.person);
+
   const initialValues = {
     password: "",
     otp: "",
   };
   const Dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handlesubmit = (values, action) => {
-    action.resetForm();
-    // Add the logic to handle the password reset here.
     const jsonemail = localStorage?.getItem("forget-password-email");
     const email = jsonemail && JSON?.parse(jsonemail);
     const pass = values?.password;
     const otp = values?.otp;
-    Dispatch(ResetPassword(email, pass, otp));
-    console.log("Email Submitted: ", values);
+    Dispatch(ResetPassword(email, pass, otp, navigate));
+    action.resetForm();
   };
 
   return (
@@ -43,7 +47,7 @@ const ResetPasswordForm = () => {
               <Col className="d-flex flex-column">
                 <TextField
                   icon={<FaLock />}
-                  placeholder="Enter Your Otp"
+                  placeholder="Enter Your Code"
                   name="otp"
                   type="text"
                 />
@@ -58,7 +62,7 @@ const ResetPasswordForm = () => {
               </Col>
               <div className="d-flex justify-content-center mb-3 px-0">
                 <button type="submit" className="mt-3 gradient-btn-orange">
-                  Submit
+                  {isLoading ? <SpinNer /> : "Submit"}
                 </button>
               </div>
             </Row>
