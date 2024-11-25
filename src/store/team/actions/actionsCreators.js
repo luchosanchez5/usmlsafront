@@ -423,3 +423,36 @@ export const createSubscription = (date, Token, navigate) => (dispatch) => {
       });
     });
 };
+
+
+export const completePendingPayment = (teamId,
+  tournamentId,
+  divisionId,
+  pendingAmount,
+  token
+) => (dispatch) => {
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.post(`${Url}api/teams/complete-pending-team-registration/${teamId}/${tournamentId}/${divisionId}?paidAmount=${pendingAmount}&paymentMode=CASH&currency=USD`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};

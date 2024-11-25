@@ -49,6 +49,33 @@ export const userLogin = (data, navigate) => (dispatch) => {
     });
 };
 
+export const changePassword = (data, navigate, token) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  const { password } = data
+  axios.post(`${Url}api/persons/change-password?newPassword=${password}`, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      Toast.success(response.data.message);
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+
+    });
+};
 export const getToken = (token, navigate) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,

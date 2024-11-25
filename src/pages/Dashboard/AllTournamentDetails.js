@@ -4,7 +4,7 @@ import DashboardLayout from '../../layout/DashboardLayout'
 import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { GetTournamentsDetailsByTournamentId } from '../../store/tournament/actions/actionsCreators'
+import { GetTournamentsDetailsByTournamentId, uploadTournamentPicture } from '../../store/tournament/actions/actionsCreators'
 import AddVenueModel from '../../components/Models/AddVenueModel'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
 import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
@@ -28,7 +28,7 @@ const AllTournamentDetails = () => {
         if (file) {
             const imageURL = URL.createObjectURL(file);
             setPreviewImage(imageURL);
-            // Dispatch()     Dispatch here @hussnain
+            dispatch(uploadTournamentPicture(id,token,file))
         }
     };
 

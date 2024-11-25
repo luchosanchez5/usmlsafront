@@ -3,12 +3,15 @@ import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
+import {
+  completePendingPayment,
+  GetPaymentRecords,
+} from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
 const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
-
+  const { user } = useSelector((state) => state.user);
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
   const Dispatch = useDispatch();
@@ -16,8 +19,24 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
   useEffect(() => {
     Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
   }, [Dispatch, state, id, token, tournamentId, divisionId]);
-
   console.log(PaymentRecords?._embedded?.paymentRecordResponseList);
+
+  const handleCashPayment = (
+    teamId,
+    tournamentId,
+    divisionId,
+    pendingAmount
+  ) => {
+    Dispatch(
+      completePendingPayment(
+        teamId,
+        tournamentId,
+        divisionId,
+        pendingAmount,
+        token
+      )
+    );
+  };
 
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
@@ -52,9 +71,9 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
                     <tr key={index} className="main-row">
                       <td>{item?.teamName}</td>
                       <td>{item?.paymentPurpose}</td>
-                      <td>{item?.pendingAmount}</td>
-                      <td>{item?.paidAmount}</td>
-                      <td>{item?.totalAmount}</td>
+                      <td>{item?.pendingAmount}$</td>
+                      <td>{item?.paidAmount}$</td>
+                      <td>{item?.totalAmount}$</td>
                       <td
                         style={{
                           color:
@@ -68,12 +87,34 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
                       <td>
                         <td>
                           <div className="d-flex flex-wrap gap-1">
-                            <button className="btn btn-sm btn-outline-dark d-flex align-items-center">
-                              <AiOutlineDollarCircle className="me-1" /> Cash
-                            </button>
-                            <button className="btn btn-sm btn-outline-danger d-flex align-items-center">
-                              <AiOutlineCreditCard className="me-1" /> Card
-                            </button>
+                            {user?.roles[0] === "ADMIN" &&
+                            parseFloat(item.pendingAmount) !== 0 ? (
+                              <button
+                                onClick={() =>
+                                  handleCashPayment(
+                                    item?.teamId,
+                                    item?.tournamentId,
+                                    item?.divisionId,
+                                    item?.pendingAmount
+                                  )
+                                }
+                                className="btn btn-sm btn-dark d-flex align-items-center"
+                              >
+                                <AiOutlineDollarCircle className="me-1" />
+                                Pay By Cash
+                              </button>
+                            ) : (
+                              ""
+                            )}
+                            {user?.roles[0] === "MANAGER" &&
+                            parseFloat(item.pendingAmount) !== 0 ? (
+                              <button className="btn btn-sm btn-danger d-flex align-items-center">
+                                <AiOutlineCreditCard className="me-1" />
+                                Pay By Card
+                              </button>
+                            ) : (
+                              ""
+                            )}
                           </div>
                         </td>
                       </td>
@@ -82,7 +123,7 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
                 )
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center">
+                  <td colSpan="7" className="text-center">
                     No Payment Record Available
                   </td>
                 </tr>

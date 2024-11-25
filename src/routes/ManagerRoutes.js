@@ -1,6 +1,7 @@
 import React, { lazy } from 'react'
 import { Route } from 'react-router-dom';
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
+const ChangePassword = lazy(() => import('../pages/Dashboard/ChangePassword.js'));
 const PaymentHistory = lazy(() => import('../pages/Dashboard/Payment.js'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
 const AllTeamsDetails = lazy(() => import('../pages/Dashboard/AllTeamsDetails.js'));
@@ -16,6 +17,7 @@ const ManagerRoutes = (
         <Route exact path='/dashboard/payment/history' element={<PaymentHistory />}></Route>
         <Route exact path='/dashboard/addperson' element={<AddPerson />}></Route>
         <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
+        <Route exact path='/dashboard/user/change-password' element={<ChangePassword />}></Route>
         <Route exact path='/dashboard/registerteam/:id' element={<RegisterTeam />}></Route>
     </>
 )

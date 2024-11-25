@@ -57,6 +57,9 @@ const SidebarNav = () => {
                     <NavLink to="/dashboard/user/setting" className='menu-item-link text-white'>
                         <MenuItem  >{!isCollapsed && 'Profile'}</MenuItem>
                     </NavLink>
+                    <NavLink to="/dashboard/user/change-password" className='menu-item-link text-white'>
+                        <MenuItem  >{!isCollapsed && 'Change Password'}</MenuItem>
+                    </NavLink>
 
                 </SubMenu>
             </Menu>

@@ -40,8 +40,7 @@ const AllTeamsDetails = () => {
                     onClick={() => SetCoManagerBoxModel(true)} >Add Co Manager</button>
                 <button className='Team-register-btn mx-2'
                     onClick={() => SetPlayerBoxModel(true)} >Add Player</button>
-                {role === 'ADMIN' || PaymentRecords?._embedded?.paymentRecordResponseList?.length >
-                    0 ? '' :
+                {role === 'ADMIN' ? '' :
                     <button className='Team-register-btn mx-2 '
                         onClick={() => Navigate(`/dashboard/registerteam/${id}`)} >Team Register</button>
                 }

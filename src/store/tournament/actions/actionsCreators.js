@@ -395,3 +395,36 @@ export const SearchTournaments = (Tournamentid, Token, navigate) => (dispatch) =
       // Toast.error(error.response.data.message);
     });
 };
+
+
+export const uploadTournamentPicture = (tournamentId, token, file) => (dispatch) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+
+  axios
+    .post(`${Url}api/tournaments/${tournamentId}/upload-picture`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      Toast.success(response.data.message);
+    })
+    .catch((error) => {
+      Toast.error(error.response?.data?.message || "An error occurred");
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
