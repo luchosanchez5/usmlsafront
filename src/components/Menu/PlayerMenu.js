@@ -2,7 +2,7 @@ import React from 'react'
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
 import { RiTeamFill } from "react-icons/ri";
-import { MdTour, MdOutlinePayment } from "react-icons/md";
+// import { MdTour, MdOutlinePayment } from "react-icons/md";
 const PlayerMenu = ({ isCollapsed }) => {
     return (
         <>

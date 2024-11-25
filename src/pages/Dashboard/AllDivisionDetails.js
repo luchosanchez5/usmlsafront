@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -6,19 +6,58 @@ import DashboardLayout from '../../layout/DashboardLayout'
 import { GetDivisionsDetailsByDivisionId } from '../../store/tournament/actions/actionsCreators'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
 import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
+import { FaCamera } from "react-icons/fa";
 const AllDivisionDetails = () => {
     const { id } = useParams()
     const { token } = useSelector((state) => state.user)
     const { DivisionDetails, isLoading } = useSelector((state) => state.tournament)
+    const [previewImage, setPreviewImage] = useState(null);
+    const fileInputRef = useRef(null);
     const Navigate = useNavigate()
     const Dispatch = useDispatch()
     useEffect(() => {
         Dispatch(GetDivisionsDetailsByDivisionId(id, token))
     }, [Dispatch, id, token])
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const imageURL = URL.createObjectURL(file);
+            setPreviewImage(imageURL);
+            // Dispatch()     Dispatch here @hussnain
+        }
+    };
 
+    const triggerFileInput = () => {
+        fileInputRef.current.click();
+    };
     return (
         <>
             <h1 className="font-bold my-3"> Divisions Details </h1>
+           
+            <div className="Upload-picture d-flex flex-column align-items-center justify-content-center   gap-2   " onClick={triggerFileInput}>
+                {previewImage ? (
+                    <img
+                        src={previewImage}
+                        alt="Preview"
+                       
+                     
+                    />
+                ) : (
+                    <>
+                        <span>Upload Picture</span>
+                        <FaCamera size={30} />
+                    </>
+                )}
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={handleFileUpload}
+                    accept="image/*" // Restrict to image files only
+                />
+
+
+            </div>
             <div className="text-end  pe-4  ">
                 <button className='Team-register-btn'
                     onClick={() => Navigate(-1)}>Go Back</button>

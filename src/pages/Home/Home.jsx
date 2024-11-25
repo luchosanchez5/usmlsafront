@@ -9,7 +9,6 @@ const Home = () => {
   useEffect(() => {
     Dispatch(GetDefaultTournamentsBySearch());
   }, [Dispatch]);
-
   return (
     <>
       {DefaultTournamentData?.data?.map((item, index) => {
@@ -27,8 +26,7 @@ const Home = () => {
         );
       })}
 
-      {/* <EventData title='' img={''}/>
-<EventData title='' img={''}/> */}
+     
     </>
   );
 };
