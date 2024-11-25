@@ -1,8 +1,8 @@
 import React from 'react'
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
-import {  FaUsers } from "react-icons/fa6";
-import {  MdOutlinePayment } from "react-icons/md";
+import { FaUsers } from "react-icons/fa6";
+import { MdOutlinePayment } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
 const ManagerMenu = ({ isCollapsed }) => {
     return (
@@ -33,7 +33,7 @@ const ManagerMenu = ({ isCollapsed }) => {
 
                 <>
                     <NavLink to="/dashboard/payment/history" className='menu-item-link text-white'>
-                        <MenuItem>{!isCollapsed && 'Payment'}</MenuItem>
+                        <MenuItem>{!isCollapsed && 'Payment History'}</MenuItem>
                     </NavLink>
 
                 </>

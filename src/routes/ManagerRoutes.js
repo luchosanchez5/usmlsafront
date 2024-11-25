@@ -17,7 +17,6 @@ const ManagerRoutes = (
         <Route exact path='/dashboard/addperson' element={<AddPerson />}></Route>
         <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
         <Route exact path='/dashboard/registerteam/:id' element={<RegisterTeam />}></Route>
-
     </>
 )
 

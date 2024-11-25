@@ -60,7 +60,6 @@ export const getToken = (token, navigate) => (dispatch) => {
     }
   })
     .then((response) => {
-
       dispatch({
         type: actionTypes.USER_LOGIN,
         payload: response?.data?.data,
@@ -70,7 +69,11 @@ export const getToken = (token, navigate) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
-      navigate('/dashboard/yourteam')
+      if (response?.data?.data?.roles.includes('MANAGER')) {
+        navigate("/dashboard/allteams");
+      } else {
+        navigate("/dashboard/yourteam");
+      }
     })
     .catch((error) => {
       Toast.error(error.response.data.message);

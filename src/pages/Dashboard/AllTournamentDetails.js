@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PageHeader from '../../shared/PageHeader'
 import DashboardLayout from '../../layout/DashboardLayout'
 import { Row, Col } from 'react-bootstrap'
@@ -7,6 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { GetTournamentsDetailsByTournamentId } from '../../store/tournament/actions/actionsCreators'
 import AddVenueModel from '../../components/Models/AddVenueModel'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
+import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
+import { FaCamera } from 'react-icons/fa'
 const AllTournamentDetails = () => {
     const { TournamentDetails, isLoading } = useSelector((state) => state.tournament)
     console.log(isLoading, 'isLoading');
@@ -55,7 +57,7 @@ const AllTournamentDetails = () => {
                     ref={fileInputRef}
                     style={{ display: "none" }}
                     onChange={handleFileUpload}
-                    accept="image/*" 
+                    accept="image/*"
                 />
 
 
