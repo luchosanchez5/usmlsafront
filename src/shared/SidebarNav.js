@@ -4,7 +4,7 @@ import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { RiProfileFill } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Image } from 'react-bootstrap';
 import '../assets/css/sidebar-nav.css';
 import AdminMenu from '../components/Menu/AdminMenu';
@@ -16,9 +16,9 @@ import { GlobalInfo } from '../App';
 import { CgProfile } from "react-icons/cg";
 
 const SidebarNav = () => {
-  
+
     const { user } = useSelector((state) => state.user);
-    const { isCollapsed, setIsCollapsed }=useContext(GlobalInfo)
+    const { isCollapsed, setIsCollapsed } = useContext(GlobalInfo)
     const handleResize = () => {
         if (window.innerWidth <= 1000) {
             setIsCollapsed(true);
@@ -26,7 +26,7 @@ const SidebarNav = () => {
             setIsCollapsed(false);
         }
     };
- 
+
     useEffect(() => {
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -54,11 +54,11 @@ const SidebarNav = () => {
                 width={isCollapsed ? 50 : 200}
             />
             <Menu className='mt-3'>
-             <NavLink to='/dashboard' className='menu-item-link text-white'>
+                <NavLink to='/dashboard' className='menu-item-link text-white'>
                     <MenuItem icon={<AiOutlineDashboard className='menu-icon' />}> Dashboard</MenuItem>
                 </NavLink>
 
-               <AdminMenu isCollapsed={isCollapsed} />
+                {(user?.role === 'ADMIN' || user?.roles?.includes('ADMIN')) && <AdminMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'MANAGER' || user?.roles?.includes('MANAGER')) && <ManagerMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'PLAYER' || user?.roles?.includes('PLAYER')) && <PlayerMenu isCollapsed={isCollapsed} />}
 
@@ -66,8 +66,8 @@ const SidebarNav = () => {
 
 
                 <SubMenu label={!isCollapsed && 'Setting'} icon={<IoSettingsOutline className='menu-icon' />} className='submenu-item'>
-                    <NavLink to="/dashboard/user/setting"  className='menu-item-link text-white'>
-                        <MenuItem className='text-white' >{isCollapsed ? <CgProfile className='menu-icon' /> :'Profile'}</MenuItem>
+                    <NavLink to="/dashboard/user/setting" className='menu-item-link text-white'>
+                        <MenuItem className='text-white' >{isCollapsed ? <CgProfile className='menu-icon' /> : 'Profile'}</MenuItem>
                     </NavLink>
                     <NavLink to="/dashboard/user/change-password" className='menu-item-link text-white'>
                         <MenuItem  >{!isCollapsed && 'Change Password'}</MenuItem>

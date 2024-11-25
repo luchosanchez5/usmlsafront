@@ -12,6 +12,9 @@ const CardPaymentModel = ({
   DivisionDetailsBySearch,
   totalAmount,
   tournamentId,
+  divisionId,
+  teamId,
+  pendingAmount
 }) => {
   return (
     <Modal show={show} onHide={onClose} size="lg" centered className="py-4 ">
@@ -25,6 +28,9 @@ const CardPaymentModel = ({
             totalAmount={totalAmount}
             tournamentId={tournamentId}
             SetCardModel={SetCardModel}
+            divisionId={divisionId}
+            teamId={teamId}
+            pendingAmount={pendingAmount}
           />
         </Elements>
       </Modal.Body>

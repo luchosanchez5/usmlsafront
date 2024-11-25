@@ -37,10 +37,12 @@ const CardPaymentForm = ({
   totalAmount,
   tournamentId,
   SetCardModel,
+  divisionId,
+  teamId,
+  pendingAmount,
 }) => {
   const stripe = useStripe();
   const { isLoading } = useSelector((state) => state.team);
-  console.log(isLoading, "kashdjgasidyiawkd");
   const elements = useElements();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -62,14 +64,17 @@ const CardPaymentForm = ({
       Toast.error(paymentMethod.error.message);
     } else {
       const data = {
-        paidAmount: totalAmount * 100,
+        paidAmount: pendingAmount ? pendingAmount * 100 : totalAmount * 100,
         paymentCurrency: "usd",
         paymentMethod: paymentMethod?.paymentMethod?.id,
-        teamId: Number(id),
+        teamId: Number(id) || teamId,
         tournamentId: tournamentId,
-        divisionId: DivisionDetailsBySearch[0].divisionId,
+        divisionId: divisionId
+          ? divisionId
+          : DivisionDetailsBySearch[0]?.divisionId,
       };
-      Dispatch(createSubscription(data, token,navigate,id));
+      console.log(data);
+      Dispatch(createSubscription(data, token, navigate, id));
       SetCardModel(false);
     }
   };

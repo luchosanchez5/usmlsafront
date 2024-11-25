@@ -12,7 +12,7 @@ const NavigationRoutes = () => {
     return (
         <Routes>
 
-            { AdminRoutes}
+            {user?.roles?.includes('ADMIN')&& AdminRoutes}
             {user?.roles?.includes('MANAGER') && ManagerRoutes}
             {user?.roles?.includes('PLAYER') && PlayerRoutes}
             {user?.roles?.includes('CO_MANAGER') && Co_ManagerRoutes}

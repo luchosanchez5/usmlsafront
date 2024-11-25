@@ -119,18 +119,18 @@ export const GetDefaultTournamentsBySearch = (token, page) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
       // Toast.error(error.response.data.message);
     });
 };
 
-export const GetDivisionsBySearch = (token, page, tournmentname) => (dispatch) => {
+export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(`${Url}api/divisions/search?tournamentName=${tournmentname}&page=0&size=10`, {
+  axios.get(`${Url}api/divisions/all/no-link-with-team/${tournamentId}/${teamId}?page=0&size=10`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -400,6 +400,8 @@ export const SearchTournaments = (Tournamentid, Token, navigate) => (dispatch) =
 export const uploadTournamentPicture = (tournamentId, token, file) => (dispatch) => {
   const formData = new FormData();
   formData.append("file", file);
+  console.log(formData)
+
 
   dispatch({
     type: actionTypes.SET_LOADING,
@@ -408,6 +410,39 @@ export const uploadTournamentPicture = (tournamentId, token, file) => (dispatch)
 
   axios
     .post(`${Url}api/tournaments/${tournamentId}/upload-picture`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      Toast.success(response.data.message);
+    })
+    .catch((error) => {
+      Toast.error(error.response?.data?.message || "An error occurred");
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+export const uploadDivisionPicture = (divisionId, token, file) => (dispatch) => {
+  const formData = new FormData();
+  formData.append("picture", file);
+  console.log(formData)
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+
+  axios
+    .post(`${Url}api/divisions/${divisionId}/upload-picture`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

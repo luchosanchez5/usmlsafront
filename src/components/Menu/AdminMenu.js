@@ -9,41 +9,41 @@ import { MdAddBox } from "react-icons/md";
 import { FaThList } from "react-icons/fa";
 
 const AdminMenu = ({ isCollapsed }) => {
-   
+
     return (
         <>
 
 
-            <SubMenu label={!isCollapsed && 'Venue '} icon={<FaLocationDot className='menu-icon'  />}>
+            <SubMenu label={!isCollapsed && 'Venue '} icon={<FaLocationDot className='menu-icon' />}>
                 <NavLink to='/dashboard/allvenue' className='menu-item-link text-white'>
-                    <MenuItem > {isCollapsed ? <FaThList className='menu-icon' /> :'All Venues'} </MenuItem>
+                    <MenuItem > {isCollapsed ? <FaThList className='menu-icon' /> : 'All Venues'} </MenuItem>
                 </NavLink>
                 <NavLink
                     to='/dashboard/addvenue'
                     className='menu-item-link text-white'
                     activeClassName="active-link"
                 >
-                    <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' />:' Add Venue'} </MenuItem>
+                    <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' /> : ' Add Venue'} </MenuItem>
                 </NavLink>
-               
+
             </SubMenu>
-            <SubMenu label={!isCollapsed  &&'Tournament '} icon={<MdTour className='menu-icon' />}>
-                <NavLink to={isCollapsed && '/dashboard/tournaments'} className='menu-item-link text-white'>
-                    <MenuItem > {isCollapsed ? <FaThList className='menu-icon' />:'All Tournament'}</MenuItem>
+            <SubMenu label={!isCollapsed && 'Tournament '} icon={<MdTour className='menu-icon' />}>
+                <NavLink to='/dashboard/tournaments' className='menu-item-link text-white'>
+                    <MenuItem > {isCollapsed ? <FaThList className='menu-icon' /> : 'All Tournament'}</MenuItem>
                 </NavLink>
                 <NavLink to='/dashboard/addtournaments' className='menu-item-link text-white'>
-                    <MenuItem > {isCollapsed ? <MdAddBox className='menu-icon' />:"Add Tournament"}</MenuItem>
+                    <MenuItem > {isCollapsed ? <MdAddBox className='menu-icon' /> : "Add Tournament"}</MenuItem>
                 </NavLink>
-             
+
             </SubMenu>
             <SubMenu label={!isCollapsed && 'Division '} icon={<IoTrophy className='menu-icon' />}>
                 <NavLink to='/dashboard/alldivisions' className='menu-item-link text-white'>
                     <MenuItem >{isCollapsed ? <FaThList className='menu-icon' /> : 'All Division'} </MenuItem>
                 </NavLink>
                 <NavLink to='/dashboard/addivision' className='menu-item-link text-white'>
-                    <MenuItem >{isCollapsed ? <MdAddBox className='menu-icon' /> :'Add Division'}</MenuItem>
+                    <MenuItem >{isCollapsed ? <MdAddBox className='menu-icon' /> : 'Add Division'}</MenuItem>
                 </NavLink>
-               
+
             </SubMenu>
             <SubMenu label="Team " icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
                 <NavLink to="/dashboard/allteams" className='menu-item-link text-white'>
@@ -54,13 +54,13 @@ const AdminMenu = ({ isCollapsed }) => {
                 </NavLink>
             </SubMenu>
             <SubMenu label="User " icon={<FaUsers className='menu-icon' />} className='submenu-item'>
-                    <NavLink to='/dashboard/allpersons' className='menu-item-link text-white'>
-                    <MenuItem>{isCollapsed ? <FaThList className='menu-icon' /> :'All Users'}</MenuItem>
-                    </NavLink>
-                    <NavLink to="/dashboard/addperson" className='menu-item-link text-white'>
+                <NavLink to='/dashboard/allpersons' className='menu-item-link text-white'>
+                    <MenuItem>{isCollapsed ? <FaThList className='menu-icon' /> : 'All Users'}</MenuItem>
+                </NavLink>
+                <NavLink to="/dashboard/addperson" className='menu-item-link text-white'>
                     <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' /> : 'Add Users'}</MenuItem>
-                    </NavLink>
-                   
+                </NavLink>
+
             </SubMenu>
         </>
     )

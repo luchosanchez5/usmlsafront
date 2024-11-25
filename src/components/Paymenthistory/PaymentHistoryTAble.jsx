@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,12 @@ import {
 } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
+import CardPaymentModel from "../Models/CardPaymentModel";
 const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
+  const [CardModel, SetCardModel] = useState(false);
+  const [SelectedPayment, SetSelectedPayment] = useState(null);
+
   const { user } = useSelector((state) => state.user);
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
@@ -36,6 +40,10 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
         token
       )
     );
+  };
+  const handleCardPayment = (item) => {
+    SetSelectedPayment(item);
+    SetCardModel(true);
   };
 
   return (
@@ -108,7 +116,10 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
                             )}
                             {user?.roles[0] === "MANAGER" &&
                             parseFloat(item.pendingAmount) !== 0 ? (
-                              <button className="btn btn-sm btn-danger d-flex align-items-center">
+                              <button
+                                onClick={() => handleCardPayment(item)}
+                                className="btn btn-sm btn-danger d-flex align-items-center"
+                              >
                                 <AiOutlineCreditCard className="me-1" />
                                 Pay By Card
                               </button>
@@ -132,6 +143,17 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
           </Table>
         )}
       </div>
+      {CardModel && SelectedPayment && (
+        <CardPaymentModel
+          show={CardModel}
+          SetCardModel={SetCardModel}
+          tournamentId={SelectedPayment.tournamentId}
+          teamId={SelectedPayment.teamId}
+          divisionId={SelectedPayment.divisionId}
+          pendingAmount={SelectedPayment.pendingAmount}
+          onClose={() => SetCardModel(false)}
+        />
+      )}
     </div>
   );
 };

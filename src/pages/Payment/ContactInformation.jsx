@@ -7,6 +7,7 @@ import {
 import CardPaymentModel from "../../components/Models/CardPaymentModel";
 import SelectField from "../../components/product/SelectField";
 import Toast from "../../shared/Toast";
+import { useParams } from "react-router-dom";
 const ContactInformation = ({
   selectedPayment,
   setSelectedPayment,
@@ -16,27 +17,26 @@ const ContactInformation = ({
   totalAmount,
 }) => {
   const { token } = useSelector((state) => state.user);
+  const { id } = useParams();
   const { TournamentBySearch, DivisionBySearch } = useSelector(
     (state) => state.tournament
   );
   const [tournamentId, setTournamentId] = useState(null);
   const [CardModel, SetCardModel] = useState(false);
-  console.log(CardModel);
   const handlePaymentChange = (event) => {
     setSelectedPayment(event.target.value);
   };
-
   const dispatch = useDispatch();
-
+  console.log(TournamentBySearch);
   const TournmentOptions =
     TournamentBySearch?.data?.length > 0
       ? TournamentBySearch.data.map((item) => ({
-          value: item?.name,
+          value: item?.tournamentId,
           label: item?.name,
         }))
       : [];
 
-  const DivisionOptions =
+const DivisionOptions =
     DivisionBySearch?.data?.length > 0
       ? DivisionBySearch.data.map((item) => ({
           value: item?.divisionName,
@@ -49,12 +49,9 @@ const ContactInformation = ({
   }, [dispatch, token]);
 
   const handleChange = (e) => {
-    const value = decodeURIComponent(e.target.value);
-    const FindTournamentId = TournamentBySearch.data.find(
-      (item) => item.name === value
-    );
-    setTournamentId(FindTournamentId.tournamentId);
-    dispatch(GetDivisionsBySearch(token, 0, value));
+    const tournamentId = e.target.value; // Directly get the tournamentId
+    setTournamentId(tournamentId); // Set the state
+    dispatch(GetDivisionsBySearch(token, 0, tournamentId, id));
   };
 
   const handleDivisionChange = (e) => {

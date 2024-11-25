@@ -25,7 +25,6 @@ const RegisterTeam = () => {
 
   useEffect(() => {
     if (!DivisionValue) {
-      console.log("DivisionValue is empty, skipping API call");
       return;
     }
 
