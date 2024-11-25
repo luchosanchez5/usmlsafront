@@ -15,10 +15,9 @@ const GlobalLayout = (WrapComponent) => {
                     {!pathname.includes(location.pathname) ?
                         <FindEvents />
                         : null
-                        }
-                    <Container fluid>
-                        <WrapComponent {...props} />
-                    </Container>
+                    }
+                    <main className="main-container">    <WrapComponent {...props} /></main>
+
                 </div>
             </React.Fragment>
         )

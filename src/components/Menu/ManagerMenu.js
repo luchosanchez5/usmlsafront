@@ -4,36 +4,38 @@ import { NavLink } from 'react-router-dom';
 import { FaUsers } from "react-icons/fa6";
 import { MdOutlinePayment } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
+import { FaThList } from "react-icons/fa";
+import { MdAddBox } from "react-icons/md";
 const ManagerMenu = ({ isCollapsed }) => {
     return (
         <>
 
 
 
-            <SubMenu label="Team " icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "Team "} icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
                 <NavLink to="/dashboard/allteams" className='menu-item-link text-white'>
-                    <MenuItem>{!isCollapsed && 'All Teams'}</MenuItem>
+                    <MenuItem>{isCollapsed ? <FaThList className='menu-icon' />:"All Teams"}</MenuItem>
                 </NavLink>
 
 
-                <NavLink to="/dashboard/addteams" className='menu-item-link text-white'>
-                    <MenuItem>{!isCollapsed && 'Add Team'}</MenuItem>
+                <NavLink to={!isCollapsed && "/dashboard/addteams"} className='menu-item-link text-white'>
+                    <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' />:'Add Team'}</MenuItem>
                 </NavLink>
             </SubMenu>
-            <SubMenu label="User " icon={<FaUsers className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "User "} icon={<FaUsers className='menu-icon' />} className='submenu-item'>
 
                 <>
                     <NavLink to="/dashboard/addperson" className='menu-item-link text-white'>
-                        <MenuItem>{!isCollapsed && 'Add Users'}</MenuItem>
+                        <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' /> :'Add Users'}  </MenuItem>
                     </NavLink>
 
                 </>
             </SubMenu>
-            <SubMenu label="Payment " icon={<MdOutlinePayment className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "Payment"}icon={<MdOutlinePayment className='menu-icon' />} className='submenu-item'>
 
                 <>
                     <NavLink to="/dashboard/payment/history" className='menu-item-link text-white'>
-                        <MenuItem>{!isCollapsed && 'Payment History'}</MenuItem>
+                        <MenuItem>{isCollapsed ? <MdOutlinePayment className='menu-icon' /> :"Payment History"}  </MenuItem>
                     </NavLink>
 
                 </>

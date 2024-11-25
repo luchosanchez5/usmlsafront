@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 import { GrNotification } from 'react-icons/gr';
@@ -8,9 +8,12 @@ import { IoIosLogOut } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../store/user/actions/actionCreators';
+import { FaBars } from "react-icons/fa6";
+import { GlobalInfo } from '../App';
 
 const TopBar = () => {
     const [showOptions, setShowOptions] = useState(false);
+    const { isCollapsed, setIsCollapsed } = useContext(GlobalInfo)
     const navigate = useNavigate();
     const { user, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -24,6 +27,13 @@ const TopBar = () => {
 
     return (
         <Row className='bg-black'>
+            <Col className='d-flex flex-coloumn align-items-center ps-3'>
+                <div className='Fa-top-bars  ' onClick={() => setIsCollapsed(prev => !prev)} >
+                    <FaBars color='black' size={20} cursor='pointer' />
+
+                </div>
+
+            </Col>
             <Col className='px-0'>
                 <div className='d-flex justify-content-end py-4 align-items-center'>
 

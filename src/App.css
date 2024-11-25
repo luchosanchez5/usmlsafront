@@ -9,13 +9,16 @@
 body {
   font-family: Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
 }
+html {
+  overflow-y: hidden;
+}
 
 .page-container {
   display: flex;
   height: 100vh;
   width: 100%;
   border: 10px;
-  /* overflow-y: scroll; */
+  /* overflow-y: hidden; */
 }
 
 .main-container {
@@ -317,24 +320,33 @@ li {
         color: white !important;
       }
     }
-  }
 
-  .menu-anchor {
-    a {
-      color: white !important;
+    &:active {
+      background-color: red;
     }
   }
+
+  
 
   .sc-eDvSVe {
-    a {
+     .menu-anchor {
       color: white !important;
+      font-weight: normal;
+
+
+     &:active{
+         background-color: #e30613 !important;
+     }
+      &:hover{
+        background-color: #e30613 !important;
+      }
     }
+    
   }
 
   .sc-eDvSVe {
     .sub-menu-content {
       background-color: black;
-      color: black !important;
     }
   }
 }
@@ -386,9 +398,8 @@ form.pmpro_form #pmpro_payment_information_fields div#CVV {
   background-color: #f8f9fa;
   text-align: center;
   transition: all 0.3s ease;
-  &:hover{
-  border-color: #e30613;
-
+  &:hover {
+    border-color: #e30613;
   }
   img {
     border-radius: 60%;
@@ -401,3 +412,14 @@ form.pmpro_form #pmpro_payment_information_fields div#CVV {
   }
 }
 
+.Fa-top-bars {
+  border: 1px dashed #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 8px;
+  background-color: #f8f9fa;
+  text-align: center;
+  transition: all 0.3s ease;
+}

@@ -2,13 +2,13 @@ import React from 'react'
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import { NavLink } from 'react-bootstrap';
 import { RiTeamFill } from "react-icons/ri";
-import {  MdOutlinePayment } from "react-icons/md";
+import { FaThList } from "react-icons/fa";
 const CoManager = ({ isCollapsed }) => {
     return (
         <>
-            <SubMenu label="Team Management " icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "Team Management " }icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
                 <NavLink to="/dashboard/yourteam" className='menu-item-link text-white'>
-                    <MenuItem>{!isCollapsed && 'Your Teams'}</MenuItem>
+                    <MenuItem>{isCollapsed ? <FaThList className='menu-icon' /> : 'Your Teams'}</MenuItem>
                 </NavLink>
 
 

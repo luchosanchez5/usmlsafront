@@ -20,6 +20,7 @@ function App() {
   const [UserId, SetUserId] = useState(null)
   const [DivisionEdit, SetDivisionEdit] = useState(false)
   const [DivisionId, SetDivisionId] = useState(null)
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   useEffect(() => {
     Aos.init({
@@ -29,7 +30,7 @@ function App() {
   }, [])
   return (
     <Suspense fallback={<Loading />}>
-      <GlobalInfo.Provider value={{VenueEdit,SetVenueEdit,VenueId,SetVenueId,TournamentEdit,SetTournamentEdit,TournamentId,SetTournamentId,TeamEdit, SetTeamEdit,TeamId, SetTeamId,UserEdit, SetUserEdit,UserId, SetUserId,DivisionEdit, SetDivisionEdit,DivisionId, SetDivisionId}}>
+      <GlobalInfo.Provider value={{ VenueEdit, SetVenueEdit, VenueId, SetVenueId, TournamentEdit, SetTournamentEdit, TournamentId, SetTournamentId, TeamEdit, SetTeamEdit, TeamId, SetTeamId, UserEdit, SetUserEdit, UserId, SetUserId, DivisionEdit, SetDivisionEdit, DivisionId, SetDivisionId, isCollapsed, setIsCollapsed }}>
         <ProSidebarProvider>
           <Router>
             <NavigationRoutes />
