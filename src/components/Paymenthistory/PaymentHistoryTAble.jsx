@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
-const PaymentHistoryTable = ({ state, setState }) => {
+import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
+const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
 
   const { id } = useParams();
@@ -13,8 +14,10 @@ const PaymentHistoryTable = ({ state, setState }) => {
   const Dispatch = useDispatch();
 
   useEffect(() => {
-    Dispatch(GetPaymentRecords(id, 0, token));
-  }, [Dispatch, state, id, token]);
+    Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
+  }, [Dispatch, state, id, token, tournamentId, divisionId]);
+
+  console.log(PaymentRecords?._embedded?.paymentRecordResponseList);
 
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
@@ -38,14 +41,10 @@ const PaymentHistoryTable = ({ state, setState }) => {
                 <th>Paid Amount</th>
                 <th>Total Amount</th>
                 <th>Payment Status</th>
+                <th>Payment Methods</th>
               </tr>
             </thead>
             <tbody>
-              {isLoading && (
-                <div className="mb-4">
-                  <h4>Loading...</h4>
-                </div>
-              )}
               {PaymentRecords?._embedded?.paymentRecordResponseList?.length >
               0 ? (
                 PaymentRecords?._embedded?.paymentRecordResponseList?.map(
@@ -64,7 +63,19 @@ const PaymentHistoryTable = ({ state, setState }) => {
                               : "red",
                         }}
                       >
-                        {item.paymentStatus}
+                        {item?.paymentStatus}
+                      </td>
+                      <td>
+                        <td>
+                          <div className="d-flex flex-wrap gap-1">
+                            <button className="btn btn-sm btn-outline-dark d-flex align-items-center">
+                              <AiOutlineDollarCircle className="me-1" /> Cash
+                            </button>
+                            <button className="btn btn-sm btn-outline-danger d-flex align-items-center">
+                              <AiOutlineCreditCard className="me-1" /> Card
+                            </button>
+                          </div>
+                        </td>
                       </td>
                     </tr>
                   )

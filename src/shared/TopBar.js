@@ -15,7 +15,6 @@ const TopBar = () => {
     const { user, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const handleLogout = () => {
-        localStorage.clear();
         dispatch(logOut(token, navigate));
     }
 

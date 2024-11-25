@@ -64,7 +64,7 @@ export const GetTeams = (page, Token, role, userId) => (dispatch) => {
       // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -329,13 +329,20 @@ export const GetYourTeam = (userid, page, Token) => (dispatch) => {
       });
     });
 };
-export const GetPaymentRecords = (teamId, page, Token, isUser = false) => (dispatch) => {
+export const GetPaymentRecords = (teamId, page, Token, isUser = false, tournamentId = null, divisionId = null) => (dispatch) => {
 
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(isUser ? `${Url}api/payment-records?paymentDoneBy=${teamId}&page=${page}&size=10&forceFirstAndLastRels=true` : `${Url}api/payment-records?teamId=${teamId}&page=${page}&size=10&forceFirstAndLastRels=true`, {
+  const queryParams = divisionId
+    ? `divisionId=${divisionId}&page=${page}&size=10&forceFirstAndLastRels=true`
+    : tournamentId
+      ? `tournamentId=${tournamentId}&page=${page}&size=10&forceFirstAndLastRels=true`
+      : isUser
+        ? `paymentDoneBy=${teamId}&page=${page}&size=10&forceFirstAndLastRels=true`
+        : `teamId=${teamId}&page=${page}&size=10&forceFirstAndLastRels=true`;
+  axios.get(`${Url}api/payment-records?${queryParams}`, {
     headers: {
       Authorization: `Bearer ${Token}`
     }
@@ -359,7 +366,7 @@ export const GetPaymentRecords = (teamId, page, Token, isUser = false) => (dispa
     });
 };
 
-export const getPendingPaymentRecords = (teamId, page, Token) => (dispatch) => {
+export const getPendingPaymentRecords = (teamId, page, Token, tournamentId = null) => (dispatch) => {
 
   dispatch({
     type: actionTypes.SET_LOADING,

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPendingPaymentRecords } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
-const PendingHistoryTable = ({ state, setState }) => {
+const PendingHistoryTable = ({ state, setState, }) => {
   const { PendingPaymentRecords, isLoading } = useSelector(
     (state) => state.team
   );
@@ -17,7 +17,6 @@ const PendingHistoryTable = ({ state, setState }) => {
   useEffect(() => {
     Dispatch(getPendingPaymentRecords(id, 0, token));
   }, [Dispatch, state, id, token]);
-  console.log(PendingPaymentRecords, "lasbdhkhaksdhkasd");
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>

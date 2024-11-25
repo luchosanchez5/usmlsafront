@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import DashboardLayout from '../../layout/DashboardLayout'
 import { GetDivisionsDetailsByDivisionId } from '../../store/tournament/actions/actionsCreators'
 import DetailSkeleton from '../../components/SkeletonTable/DetailSkeleton'
+import PaymentHistoryTable from '../../components/Paymenthistory/PaymentHistoryTAble'
 const AllDivisionDetails = () => {
     const { id } = useParams()
     const { token } = useSelector((state) => state.user)
@@ -79,6 +80,8 @@ const AllDivisionDetails = () => {
                         </Col>
                     </Row>
                 </div>}
+            <h2 className='ps-4 text-danger'>Payment Records:</h2>
+            <PaymentHistoryTable divisionId={id} />
 
 
         </>

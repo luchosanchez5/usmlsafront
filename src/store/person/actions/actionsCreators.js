@@ -123,15 +123,11 @@ export const GetPersonsById = (id, Token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
-      console.log("🚀 : ~ file: actionsCreators.js:54 ~ GetPersons ~ error", error);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };

@@ -13,7 +13,6 @@ const AllTournamentDetails = () => {
     const { TournamentDetails, isLoading } = useSelector((state) => state.tournament)
     console.log(isLoading, 'isLoading');
     const [state, setState] = useState(false)
-    console.log(state)
     const [assignVenueBoxModel, SetVenueModel] = useState(false)
     const { token } = useSelector((state) => state.user)
     const Navigate = useNavigate()
@@ -73,9 +72,7 @@ const AllTournamentDetails = () => {
 
             {assignVenueBoxModel && <AddVenueModel show={assignVenueBoxModel} onClose={() => SetVenueModel(false)} SetVenueModel={SetVenueModel} setState={setState} />}
             <h2 className='ps-4 text-danger'>Payment Records:</h2>
-            <PaymentHistoryTable />
-            <h2 className='ps-4 text-danger'>Tournament Registration:</h2>
-            <PendingHistoryTable />
+            <PaymentHistoryTable tournamentId={id} />
         </>
     )
 }

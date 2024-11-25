@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { BiPurchaseTag } from 'react-icons/bi';
 import DashboardCard from './DashboardCard';
 import { useSelector } from 'react-redux';
 import { GetVenue } from '../../store/Venue/actions/actionCreators';
 import { useDispatch } from 'react-redux';
 import { GetPersons } from '../../store/person/actions/actionsCreators';
-import { GetAllDivisions, GetTournaments } from '../../store/tournament/actions/actionsCreators';
+import { GetTournaments } from '../../store/tournament/actions/actionsCreators';
 import { GetTeams } from '../../store/team/actions/actionsCreators';
 import { FaUsers, FaLocationDot } from "react-icons/fa6";
-import { MdTour, MdOutlinePayment } from "react-icons/md";
+import { MdTour } from "react-icons/md";
 import { RiTeamFill } from "react-icons/ri";
-import { IoTrophy } from "react-icons/io5";
 
 const Dashboard = () => {
     const { TeamData } = useSelector((state) => state.team);
@@ -21,14 +19,13 @@ const Dashboard = () => {
     const { token, user } = useSelector((state) => state.user)
     const Dispatch = useDispatch()
     useEffect(() => {
-
         Dispatch(GetVenue(0, token));
         Dispatch(GetPersons(0, token))
         Dispatch(GetTournaments(0, token))
         Dispatch(GetTeams(0, token, user, ''))
         // Dispatch(GetAllDivisions(0, token))
 
-    }, [Dispatch, token])
+    }, [])
     const data = [
 
         { icon: <RiTeamFill className='card-icon' style={{ color: '#fff' }} />, title: 'All Teams', count: TeamData?.totalRecords ? TeamData?.totalRecords : 0, cardColor: '#e30613' },

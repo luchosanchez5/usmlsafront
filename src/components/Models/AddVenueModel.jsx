@@ -39,7 +39,7 @@ const AddVenueModel = ({ show, onClose, SetVenueModel, setState }) => {
   };
 
   return (
-    <Modal show={show} onHide={onClose} size="xl" centered className="py-4">
+    <Modal show={show} onHide={onClose} size="lg" centered className="py-4">
       <Modal.Header closeButton>
         <Modal.Title>Select Venue</Modal.Title>
       </Modal.Header>

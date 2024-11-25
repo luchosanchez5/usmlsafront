@@ -171,11 +171,11 @@ export const logOut = (token, navigate) => (dispatch) => {
       dispatch({
         type: teamType.CLEAR_TEAM
       });
-      navigate('/auth/login');
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
       });
+      navigate('/auth/login');
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
