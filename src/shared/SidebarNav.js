@@ -46,7 +46,7 @@ const SidebarNav = () => {
                 </NavLink>
                 }
 
-               <AdminMenu isCollapsed={isCollapsed} />
+                {(user?.role === 'ADMIN' || user?.roles?.includes('ADMIN')) && <AdminMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'MANAGER' || user?.roles?.includes('MANAGER')) && <ManagerMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'PLAYER' || user?.roles?.includes('PLAYER')) && <PlayerMenu isCollapsed={isCollapsed} />}
 
