@@ -78,9 +78,9 @@ const PendingHistoryTable = ({ state, setState }) => {
           <Table responsive hover size="sm" className="mt-2">
             <thead>
               <tr>
-                <th>Team Name</th>
-                <th>Tournament Name</th>
-                <th>Division Name</th>
+                <th>Team</th>
+                <th>Tournament</th>
+                <th>Division </th>
                 <th>Registration Date</th>
                 <th>Pending Amount</th>
                 <th>Registration Status</th>
@@ -100,7 +100,7 @@ const PendingHistoryTable = ({ state, setState }) => {
                     <td>{item?.tournamentName}</td>
                     <td>{item?.divisionName}</td>
                     <td>{item?.registrationDate}</td>
-                    <td>{item?.pendingAmount}</td>
+                    <td>{item?.pendingAmount}$</td>
                     <td
                       style={{
                         color:
@@ -154,8 +154,8 @@ const PendingHistoryTable = ({ state, setState }) => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center">
-                    No Record Available
+                  <td colSpan="7" className="text-center">
+                    No Tournament Registration Available
                   </td>
                 </tr>
               )}

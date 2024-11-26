@@ -427,7 +427,6 @@ export const createSubscription = (data, Token, navigate, id, isPendingAmount) =
   const endpoint = isPendingAmount
     ? `${Url}api/payment/secure/pay-pending-amount`
     : `${Url}api/payment/secure/create-subscription`;
-  console.log(endpoint)
   axios.post(endpoint, data, {
     headers: {
       Authorization: `Bearer ${Token}`
@@ -444,7 +443,7 @@ export const createSubscription = (data, Token, navigate, id, isPendingAmount) =
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error.response)
       const errorMessage =
         error.response?.data?.error ||
         error.response?.data?.message ||

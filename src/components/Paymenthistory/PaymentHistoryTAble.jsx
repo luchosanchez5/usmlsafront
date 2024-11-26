@@ -15,8 +15,6 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
   useEffect(() => {
     Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
   }, [Dispatch, state, id, token, tournamentId, divisionId]);
-  console.log(PaymentRecords?._embedded?.paymentRecordResponseList);
-
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>

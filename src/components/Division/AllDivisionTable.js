@@ -83,6 +83,7 @@ const AllDivisionTable = () => {
                                 <th>Entry Fee</th>
                                 <th>Initial Deposte Fee</th>
                                 <th>Max Teams</th>
+                                <th>Status</th>
                                 <th>Actions</th>
 
 
@@ -99,6 +100,9 @@ const AllDivisionTable = () => {
                                     <td>{item?.entryFee || 'N/A'}</td>
                                     <td>{item?.initialDepositFee || 'N/A'}</td>
                                     <td>{item?.maxTeams || 'N/A'}</td>
+                                    <td style={{
+                                        color: item?.divisionStatus === 'OPEN' ? 'green' : 'red',
+                                    }}>{item?.divisionStatus || 'N/A'}</td>
 
 
                                     <td>
