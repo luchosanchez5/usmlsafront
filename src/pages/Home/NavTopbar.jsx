@@ -6,7 +6,6 @@ import { HiBars3 } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 function NavTopbar() {
   const [showCanvas, setShowCanvas] = useState(false);
-  console.log(showCanvas);
   const handleShow = () => setShowCanvas(true);
   const { user } = useSelector((state) => state.user);
   const Token = user?.access_token;

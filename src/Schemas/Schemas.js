@@ -89,9 +89,9 @@ export const AllUsersSchema = Yup.object({
 });
 
 export const ProviderRegisterSchemas = Yup.object({
-    name: Yup.string().required("firstName is Required"),
+    name: Yup.string().required("name is Required"),
     lastName: Yup.string().required("lastName  is Required"),
-    firstName: Yup.string().required("lastName  is Required"),
+    firstName: Yup.string().required("firstName  is Required"),
     email: Yup.string().email().required("email is Required"),
     address1: Yup.string().required("address1 is Required"),
     address2: Yup.string().required("address2 is Required"),

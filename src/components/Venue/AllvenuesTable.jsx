@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Col, Row, Table, Form } from "react-bootstrap";
-import {  AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
 import { CiEdit } from "react-icons/ci";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
-import { DelVenue } from "../../store/Venue/actions/actionCreators";
+import { DelVenue, SearchVenue } from "../../store/Venue/actions/actionCreators";
 import DeleteModel from "../Models/DeleteModel";
 import { GetVenue } from "../../store/Venue/actions/actionCreators";
 import { useNavigate } from "react-router-dom";
@@ -56,20 +56,18 @@ const AllMembersTable = () => {
       })
     );
   };
+  const handleSearchVenue = (value) => {
+    Dispatch(SearchVenue(value.target.value))
+  }
 
   return (
     <>
       <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl">
         <Row className="mb-3">
           <Col>
-            <Form.Control type="email" placeholder="Search" className="w-50" />
+            <Form.Control type="text" placeholder="Search" className="w-50" onChange={handleSearchVenue} />
           </Col>
-          {/* <Col>
-                    <div className='text-end'>
-                        <AiFillFilePdf className='pdf-icon' />
-                        <AiFillPrinter className='print-icon' />
-                    </div>
-                </Col> */}
+       
         </Row>
         <div style={{ maxHeight: "400px", overflowY: "auto" }}>
           {isLoading ? (
