@@ -115,7 +115,7 @@ const AllDivisionTable = () => {
 
                                 </tr>
                             )) : <tr>
-                                <td colSpan="6" className='text-center'>No Divisions Available</td>
+                                <td colSpan="7" className='text-center'>No Divisions Available</td>
                             </tr>}
                         </tbody>
                     </Table>}

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
-const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
+const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
 
   const { id } = useParams();
@@ -14,7 +14,7 @@ const PaymentHistoryTable = ({ state, setState, tournamentId, divisionId }) => {
 
   useEffect(() => {
     Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
-  }, [Dispatch, state, id, token, tournamentId, divisionId]);
+  }, [Dispatch, id, token, tournamentId, divisionId]);
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>

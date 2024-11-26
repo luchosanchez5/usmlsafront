@@ -13,7 +13,7 @@ import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
 import CardPaymentModel from "../Models/CardPaymentModel";
 import ConfirmModel from "../Models/ConfirmModel";
 import Toast from "../../shared/Toast";
-const PendingHistoryTable = ({ state, setState }) => {
+const PendingHistoryTable = () => {
   const { PendingPaymentRecords, isLoading } = useSelector(
     (state) => state.team
   );
@@ -24,6 +24,8 @@ const PendingHistoryTable = ({ state, setState }) => {
   const { user } = useSelector((state) => state.user);
   const [SelectedPayment, SetSelectedPayment] = useState(null);
   const [isPendingAmount, setIsPendingAmount] = useState(false);
+  const [apiCall, setApiCall] = useState(false);
+
   const [CardModel, SetCardModel] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [ConfirmPayment, SetConfirmPayment] = useState(null);
@@ -43,6 +45,7 @@ const PendingHistoryTable = ({ state, setState }) => {
       )
     );
     setShowModal(false);
+    setApiCall((prev) => !prev);
   };
 
   const handleCardPayment = (item) => {
@@ -61,7 +64,7 @@ const PendingHistoryTable = ({ state, setState }) => {
 
   useEffect(() => {
     Dispatch(getPendingPaymentRecords(id, 0, token));
-  }, [Dispatch, state, id, token]);
+  }, [Dispatch, id, token, apiCall]);
   return (
     <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>
@@ -187,6 +190,8 @@ const PendingHistoryTable = ({ state, setState }) => {
           pendingAmount={SelectedPayment.pendingAmount}
           onClose={() => SetCardModel(false)}
           isPendingAmount={isPendingAmount}
+          setApiCall={setApiCall}
+          
         />
       )}
     </div>

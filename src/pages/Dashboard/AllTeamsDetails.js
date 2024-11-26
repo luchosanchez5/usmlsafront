@@ -132,7 +132,7 @@ const AllTeamsDetails = () => {
             {PaymentBoxModel && <PaymentModel />
             }
             <h2 className='ps-4 text-danger'>Team Members:</h2>
-            <MembersTable />
+            <MembersTable teamId={id} setState={setState}/>
             <h2 className='ps-4 text-danger'>Payment Records:</h2>
             <PaymentHistoryTable />
             <h2 className='ps-4 text-danger'>Tournament Registration:</h2>

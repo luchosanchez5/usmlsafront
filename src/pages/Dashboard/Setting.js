@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { GetPerson, UploadPersonImg } from "../../store/person/actions/actionsCreators";
@@ -12,9 +12,8 @@ import { FaCamera } from 'react-icons/fa';
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 const Setting = () => {
     const { Persondata, isLoading } = useSelector((state) => state.person);
-    const { user ,token} = useSelector((state) => state.user);
+    const { user, token } = useSelector((state) => state.user);
     const [previewImage, setPreviewImage] = useState(null);
-
     const fileInputRef = useRef(null);
     const [editModel, setEditModel] = useState(false);
     const [state, setState] = useState(true);
@@ -23,10 +22,10 @@ const Setting = () => {
         Dispatch(GetPerson(user.userId));
     }, [Dispatch, state, user]);
     useEffect(() => {
-        if (Persondata?.data?.picture) {
+        if (Persondata?.data?.profilePicture) {
             try {
                 // Decode Base64 if it's encoded
-                const binaryData = atob(Persondata?.data?.picture);
+                const binaryData = atob(Persondata?.data?.profilePicture);
                 const bytes = new Uint8Array(binaryData.length);
 
                 // Populate Uint8Array with decoded bytes
@@ -36,7 +35,9 @@ const Setting = () => {
 
                 // Create a Blob from the decoded bytes (you can adjust the MIME type if necessary)
                 const blob = new Blob([bytes], { type: 'image/jpeg' });
-                const imageURL = URL.createObjectURL(blob);  // Create an object URL for the image
+                const imageURL = URL.createObjectURL(blob);
+                // Create an object URL for the image
+                console.log("Generated Image URL:", imageURL);
 
                 // Set the preview image URL to the state
                 setPreviewImage(imageURL);
@@ -47,20 +48,17 @@ const Setting = () => {
         } else {
             setPreviewImage(null);  // If no picture data, reset to null
         }
-    }, [Persondata]);  
-     // Handle file upload
-     const handleFileUpload = (event) => {
+    }, [Persondata]);
+
+    const handleFileUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            // Set the preview image
             const imageURL = URL.createObjectURL(file);
             setPreviewImage(imageURL);
-           
             Dispatch(UploadPersonImg(user?.userId, token, file));
         }
     };
 
-    // Trigger file input click
     const triggerFileInput = () => {
         fileInputRef.current.click();
     };
@@ -74,18 +72,17 @@ const Setting = () => {
                 btnText="Edit User"
                 onClick={() => setEditModel(true)}
             />
-             <div
+            <div
                 className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
                 onClick={triggerFileInput}
                 style={{ marginLeft: '20px' }}
             >
                 {isLoading ? (
-                    // Show skeleton loader while loading
                     <div className="skeleton-loader" style={{ width: '120px', height: '120px', borderRadius: '50%', backgroundColor: '#ccc' }}></div>
                 ) : previewImage ? (
                     <img
                         src={previewImage}
-                        alt="Division Preview"
+                        alt="img"
                         style={{ width: '120px', height: 'auto', borderRadius: '50%' }}
                     />
                 ) : (
@@ -105,7 +102,6 @@ const Setting = () => {
 
             {isLoading ? <DetailSkeleton /> :
                 <div className="section-main m-3 px-3 py-5 bg-white  shadow-lg">
-                 
                     <Row className="my-3">
                         <Col>
                             <h5 className="fw-bold"> Email : </h5>

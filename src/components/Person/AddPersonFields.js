@@ -1,4 +1,4 @@
-import React, { useEffect,  useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import InputField from '../product/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row } from 'react-bootstrap';
@@ -38,7 +38,7 @@ const AddPersonFields = () => {
         gamesPlayed: null,
     };
 
-    const { values, handleChange, errors, handleSubmit, touched, setValues  } = useFormik({
+    const { values, handleChange, errors, handleSubmit, touched, setValues } = useFormik({
         initialValues: initialValues,
         validationSchema: AddPersonSchema,
         onSubmit: (values, action) => {
@@ -73,7 +73,7 @@ const AddPersonFields = () => {
 
         }
     });
-   
+
     let roleOptions
 
     if (role === "ADMIN") {
@@ -96,7 +96,7 @@ const AddPersonFields = () => {
         if (UserEdit && PersonDetails) {
             Dispatch(GetPersonsById(UserId, Token))
         }
-    }, [UserEdit, Dispatch,UserId,Token])
+    }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
     useEffect(() => {
         if (values.role !== 'PLAYER') {
             setValues({
@@ -107,7 +107,7 @@ const AddPersonFields = () => {
                 gamesPlayed: null,
             });
         }
-    }, [values.role, setValues]);
+    }, [values.role, setValues, values]);
 
     const PersonStatusOptions = [
         { value: "ACTIVE", label: "ACTIVE" },

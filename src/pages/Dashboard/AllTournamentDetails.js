@@ -42,7 +42,9 @@ const AllTournamentDetails = () => {
 
                 // Create a Blob from the decoded bytes (you can adjust the MIME type if necessary)
                 const blob = new Blob([bytes], { type: 'image/jpeg' });
-                const imageURL = URL.createObjectURL(blob);  // Create an object URL for the image
+                const imageURL = URL.createObjectURL(blob);
+                // Create an object URL for the image
+                console.log("Generated Image URL:", imageURL);
 
                 // Set the preview image URL to the state
                 setPreviewImage(imageURL);
@@ -161,7 +163,7 @@ const AllTournamentDetails = () => {
 
             {/* Add Venue Modal */}
             {assignVenueBoxModel && (
-                <AddVenueModel show={assignVenueBoxModel} onClose={() => setVenueModel(false)} SetVenueModel={setVenueModel}  />
+                <AddVenueModel show={assignVenueBoxModel} onClose={() => setVenueModel(false)} SetVenueModel={setVenueModel} />
             )}
 
             {/* Payment History Section */}

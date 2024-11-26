@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row, Table, Form } from 'react-bootstrap';
-import {  AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
 import '../../assets/css/products-table.css';
@@ -60,10 +60,10 @@ const AllTournamentTable = () => {
             <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
                 <Row className='mb-3'>
                     <Col>
-                        <Form.Control type="text" placeholder="Search" className='w-50' onChange={handleSearchTournaments} />
+                        <Form.Control type="text" placeholder="Tournament Name" className='w-50' onChange={handleSearchTournaments} />
                     </Col>
-                    
-                    
+
+
                 </Row>
                 <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     {

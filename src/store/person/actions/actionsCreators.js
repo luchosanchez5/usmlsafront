@@ -114,7 +114,12 @@ export const getPersonsbySearch = (value) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log("🚀 ~ GetPersons ~ error:", error);
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_PERSONS,
+          payload: []
+        });
+      }
     });
 };
 export const GetPersonsById = (id, Token) => (dispatch) => {
@@ -178,39 +183,39 @@ export const DelPersons = (Personid, token, callback) => (dispatch) => {
 
 export const GetPerson =
   (id = "10", Token) =>
-  (dispatch) => {
-    dispatch({
-      type: actionTypes.SET_LOADING,
-      payload: true,
-    });
-    axios
-      .get(
-        `${Url}api/persons/${id}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`,
-          },
-        }
-      )
-      .then((response) => {
-        dispatch({
-          type: actionTypes.GET_PERSON,
-          payload: response.data,
-        });
-        dispatch({
-          type: actionTypes.SET_LOADING,
-          payload: false,
-        });
-      })
-      .catch((error) => {
-        Toast.success(error.response.data.message);
-        dispatch({
-          type: actionTypes.SET_LOADING,
-          payload: false,
-        });
+    (dispatch) => {
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: true,
       });
-  };
+      axios
+        .get(
+          `${Url}api/persons/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${Token}`,
+            },
+          }
+        )
+        .then((response) => {
+          dispatch({
+            type: actionTypes.GET_PERSON,
+            payload: response.data,
+          });
+          dispatch({
+            type: actionTypes.SET_LOADING,
+            payload: false,
+          });
+        })
+        .catch((error) => {
+          Toast.success(error.response.data.message);
+          dispatch({
+            type: actionTypes.SET_LOADING,
+            payload: false,
+          });
+        });
+    };
 export const ForgetPassword = (email, Navigate) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
@@ -274,7 +279,7 @@ export const ResetPassword = (email, pass, otp, navigate) => (dispatch) => {
       });
     });
 };
-export const UploadPersonImg = (id, Token,file) => (dispatch) => {
+export const UploadPersonImg = (id, Token, file) => (dispatch) => {
   const formData = new FormData();
   formData.append("file", file);
   console.log(formData)
@@ -284,14 +289,14 @@ export const UploadPersonImg = (id, Token,file) => (dispatch) => {
     payload: true,
   });
   axios
-    .post(`${Url}api/persons/${id}/upload-picture`,formData, {
+    .post(`${Url}api/persons/${id}/upload-picture`, formData, {
       headers: {
         Authorization: `Bearer ${Token}`,
         "Content-Type": "multipart/form-data",
       },
     })
     .then((response) => {
-      
+
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,

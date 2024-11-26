@@ -83,10 +83,12 @@ export const getTeamsbySearch = (value, Token) => (dispatch) => {
 
     })
     .catch((error) => {
-      console.log("🚀 ~ getTeamsbySearch ~ error:", error)
-
-
-
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TEAMS,
+          payload: []
+        });
+      }
     });
 };
 export const DeleteTeams = (teamId, Token, callback) => (dispatch) => {
@@ -226,10 +228,10 @@ export const AddCoManagerToTeam = (id, selectedCard, Token) => (dispatch) => {
       Toast.success(response.data.message);
     })
     .catch((error) => {
-      Toast.success(error.data.message);
+      Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -254,6 +256,12 @@ export const GetCoManager = (role, token, page) => (dispatch) => {
       });
     })
     .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_CO_MANAGERS,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
@@ -284,10 +292,10 @@ export const AddPlayerToTeam = (id, selectedCard, Token) => (dispatch) => {
       Toast.success(response.data.message);
     })
     .catch((error) => {
-      Toast.success(error.data.message);
+      Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
@@ -482,6 +490,72 @@ export const completePendingPayment = (teamId,
     })
     .catch((error) => {
       Toast.error(error.response.data.error);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+
+
+export const removeCoManager = (id, token) => (dispatch) => {
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.post(`${Url}api/teams/${id}/co-manager/remove`, {}, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      console.log(error.response)
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "An unexpected error occurred";
+      Toast.error(errorMessage);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+export const removePlayer = (id, playerId, token) => (dispatch) => {
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.delete(`${Url}api/teams/${id}/players/${playerId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      console.log(error.response)
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "An unexpected error occurred";
+      Toast.error(errorMessage);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,

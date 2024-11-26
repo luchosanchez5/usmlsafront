@@ -28,7 +28,7 @@ const AllTeamTable = () => {
   const Navigate = useNavigate();
   useEffect(() => {
     Dispatch(GetTeams(page, token, role, userId));
-  }, [Dispatch, page, token, userId,role]);
+  }, [Dispatch, page, token, userId, role]);
   const handleDeleteBtn = (id) => {
     setTeamId(id);
     SetDelTeamModel(true);
@@ -63,7 +63,7 @@ const AllTeamTable = () => {
           <Col>
             <Form.Control
               type="text"
-              placeholder="Search"
+              placeholder="Team Name"
               className="w-50"
               onChange={handleTeamsbySearch}
             />

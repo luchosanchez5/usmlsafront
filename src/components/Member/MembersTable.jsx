@@ -3,27 +3,43 @@ import { Table } from "react-bootstrap";
 import { AiOutlineDelete } from "react-icons/ai";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
-import { DelVenue } from "../../store/Venue/actions/actionCreators";
-import DeleteModel from "../Models/DeleteModel";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
-const MembersTable = ({ setState }) => {
+import DeleteCoManagerModel from "../Models/DeleteCoManagerModel";
+import {
+  removeCoManager,
+  removePlayer,
+} from "../../store/team/actions/actionsCreators";
+import DeletePlayerModel from "../Models/DeletePlayerModel";
+const MembersTable = ({ setState, teamId }) => {
   const { TeamMembers, isLoading } = useSelector((state) => state.team);
-  const [DelVenueModel, SetDelVenueModel] = useState(false);
-  const [VenueId, Setvenueid] = useState(null);
+  const { token } = useSelector((state) => state.user);
+  const [showCoManagerModel, setShowCoManagerModel] = useState(false);
+  const [showPlayerModel, setShowPlayerModel] = useState(false);
+  const [playerId, setPlayerId] = useState(null);
   const Dispatch = useDispatch();
-  const handleDeletebtn = (id) => {
-    Setvenueid(id);
-    SetDelVenueModel(true);
+  const showCoManagerModal = () => {
+    setShowCoManagerModel(true);
   };
 
+  const showPlayerModal = (id) => {
+    setPlayerId(id);
+    setShowPlayerModel(true);
+  };
   const handleCloseModel = () => {
-    SetDelVenueModel(false);
+    setShowCoManagerModel(false);
+    setShowPlayerModel(false);
   };
 
-  const handleDeleteVenue = () => {
-    Dispatch(DelVenue(VenueId));
+  const handleDeleteCoManager = () => {
+    Dispatch(removeCoManager(teamId, token));
+    setShowCoManagerModel(false);
     setState((prev) => !prev);
-    SetDelVenueModel(false);
+  };
+
+  const handleDeletePlayer = () => {
+    Dispatch(removePlayer(teamId, playerId, token));
+    setShowPlayerModel(false);
+    setState((prev) => !prev);
   };
 
   return (
@@ -58,13 +74,27 @@ const MembersTable = ({ setState }) => {
                     <td>{item?.role}</td>
                     <td>
                       <div>
-                        {item?.role === "MANAGER" ? (
-                          ""
+                        {item?.role === "MANAGER" ? null : item?.role ===
+                          "PLAYER" ? (
+                          <button
+                            onClick={() => {
+                              showPlayerModal(item?.playerId);
+                            }}
+                            className="btn btn-sm btn-danger d-flex align-items-center"
+                          >
+                            <AiOutlineDelete className="me-1" />
+                            Remove Player
+                          </button>
                         ) : (
-                          <AiOutlineDelete
-                            className="action-icon delete-icon"
-                            onClick={() => handleDeletebtn(item?.venueId)}
-                          />
+                          <button
+                            onClick={() => {
+                              showCoManagerModal(item?.id);
+                            }}
+                            className="btn btn-sm btn-danger d-flex align-items-center"
+                          >
+                            <AiOutlineDelete className="me-1" />
+                            Remove Co-Manager
+                          </button>
                         )}
                       </div>
                     </td>
@@ -82,12 +112,20 @@ const MembersTable = ({ setState }) => {
         )}
       </div>
 
-      {DelVenueModel && (
-        <DeleteModel
-          show={DelVenueModel}
+      {showCoManagerModel && (
+        <DeleteCoManagerModel
+          show={showCoManagerModal}
           onClose={handleCloseModel}
-          OnDelete={handleDeleteVenue}
-          title="Member"
+          title="Co Manager"
+          OnDelete={handleDeleteCoManager}
+        />
+      )}
+      {showPlayerModel && (
+        <DeletePlayerModel
+          show={showPlayerModel}
+          onClose={handleCloseModel}
+          title="Player"
+          OnDelete={handleDeletePlayer}
         />
       )}
     </div>
