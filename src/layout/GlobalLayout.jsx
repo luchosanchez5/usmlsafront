@@ -1,7 +1,6 @@
 import React from 'react'
 import FindEvents from '../components/product/FindEvents'
 import NavTopbar from '../pages/Home/NavTopbar'
-import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 const GlobalLayout = (WrapComponent) => {
     return function Globally(props) {

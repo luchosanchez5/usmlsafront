@@ -25,7 +25,7 @@ const Dashboard = () => {
         Dispatch(GetTeams(0, token, user, ''))
         // Dispatch(GetAllDivisions(0, token))
 
-    }, [])
+    }, [Dispatch,token,user])
     const data = [
 
         { icon: <RiTeamFill className='card-icon' style={{ color: '#fff' }} />, title: 'All Teams', count: TeamData?.totalRecords ? TeamData?.totalRecords : 0, cardColor: '#e30613' },

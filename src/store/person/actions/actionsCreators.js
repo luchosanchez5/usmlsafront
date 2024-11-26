@@ -274,3 +274,35 @@ export const ResetPassword = (email, pass, otp, navigate) => (dispatch) => {
       });
     });
 };
+export const UploadPersonImg = (id, Token,file) => (dispatch) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  console.log(formData)
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios
+    .post(`${Url}api/persons/${id}/upload-picture`,formData, {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => {
+      
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      Toast.success(response.data.message);
+    })
+    .catch((error) => {
+      Toast.error(error.response?.data?.message || "An error occurred");
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};

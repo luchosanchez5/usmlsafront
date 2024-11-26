@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Col, Row, Table, Form } from "react-bootstrap";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
@@ -12,12 +12,12 @@ import {
 } from "../../store/person/actions/actionsCreators";
 import DeleteModel from "../Models/DeleteModel";
 import { PaginationControl } from "react-bootstrap-pagination-control";
-import { GlobalInfo } from "../../App";
+// import { GlobalInfo } from "../../App";
 import { useNavigate } from "react-router-dom";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 const AllPersonsTable = () => {
   const { PersonData, isLoading } = useSelector((state) => state.person);
-  const { SetUserEdit, SetUserId } = useContext(GlobalInfo);
+//   const { SetUserEdit, SetUserId } = useContext(GlobalInfo);
   const { token } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
   const [deleteModel, setDeleteModel] = useState(false);

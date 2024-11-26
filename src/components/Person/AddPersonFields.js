@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect,  useContext } from 'react'
 import InputField from '../product/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row } from 'react-bootstrap';
@@ -9,9 +9,8 @@ import SpinNer from '../LoadingSpinner/SpinNer';
 import { AddPersonSchema } from '../../Schemas/Schemas';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
-const AddPersonFields = ({ setState }) => {
+const AddPersonFields = () => {
     const Dispatch = useDispatch()
-    const [roleValue, SetRoleValue] = useState("Select Role");
     const { user } = useSelector((state) => state.user)
     const role = user?.roles[0] || user?.role
     const { UserEdit, UserId } = useContext(GlobalInfo)
@@ -39,7 +38,7 @@ const AddPersonFields = ({ setState }) => {
         gamesPlayed: null,
     };
 
-    const { values, handleChange, errors, handleSubmit, touched, setValues, resetForm } = useFormik({
+    const { values, handleChange, errors, handleSubmit, touched, setValues  } = useFormik({
         initialValues: initialValues,
         validationSchema: AddPersonSchema,
         onSubmit: (values, action) => {
@@ -97,7 +96,7 @@ const AddPersonFields = ({ setState }) => {
         if (UserEdit && PersonDetails) {
             Dispatch(GetPersonsById(UserId, Token))
         }
-    }, [UserEdit, Dispatch])
+    }, [UserEdit, Dispatch,UserId,Token])
     useEffect(() => {
         if (values.role !== 'PLAYER') {
             setValues({

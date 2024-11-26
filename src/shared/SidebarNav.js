@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {  useEffect, useContext } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { RiProfileFill } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Image } from 'react-bootstrap';
@@ -11,7 +9,6 @@ import AdminMenu from '../components/Menu/AdminMenu';
 import ManagerMenu from '../components/Menu/ManagerMenu';
 import PlayerMenu from '../components/Menu/PlayerMenu';
 import CoManager from '../components/Menu/CoManager';
-import { getToken } from '../store/user/actions/actionCreators';
 import { GlobalInfo } from '../App';
 import { CgProfile } from "react-icons/cg";
 

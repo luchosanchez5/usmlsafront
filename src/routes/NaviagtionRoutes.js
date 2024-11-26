@@ -5,6 +5,7 @@ import GlobalRoutes from './GlobalRoutes.js';
 import ManagerRoutes from './ManagerRoutes.js';
 import PlayerRoutes from './PlayerRoutes.js';
 import Co_ManagerRoutes from './Co_ManagerRoutes.js';
+import ErrorComponent from '../components/Error/ErrorComponent.jsx';
 import { useSelector } from 'react-redux';
 
 const NavigationRoutes = () => {
@@ -17,7 +18,7 @@ const NavigationRoutes = () => {
             {user?.roles?.includes('PLAYER') && PlayerRoutes}
             {user?.roles?.includes('CO_MANAGER') && Co_ManagerRoutes}
             {GlobalRoutes}
-            <Route path='*' element='' />
+            <Route path='*' element={<ErrorComponent/>} />
 
         </Routes>
     );
