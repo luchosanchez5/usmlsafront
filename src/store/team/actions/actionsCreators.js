@@ -68,6 +68,27 @@ export const GetTeams = (page, Token, role, userId) => (dispatch) => {
       });
     });
 };
+export const getTeamsbySearch = (value, Token) => (dispatch) => {
+  
+  axios.get(`${Url}api/teams/search?name=${value.toLowerCase()}&page=0&size=10`, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_TEAMS,
+        payload: response.data,
+      });
+      
+    })
+    .catch((error) => {
+      console.log("🚀 ~ getTeamsbySearch ~ error:", error)
+      
+     
+     
+    });
+};
 export const DeleteTeams = (teamId, Token, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,

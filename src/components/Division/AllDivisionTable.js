@@ -10,7 +10,7 @@ import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
-import { DeleteDivision, GetAllDivisions } from '../../store/tournament/actions/actionsCreators';
+import { DeleteDivision, GetAllDivisions, getDivisionsbySearch } from '../../store/tournament/actions/actionsCreators';
 import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllDivisionTable = () => {
     const { AllDivisionsData, isLoading } = useSelector((state) => state.tournament);
@@ -53,18 +53,15 @@ const AllDivisionTable = () => {
     const handleCloseModel = () => {
         setDeleteModel(false);
     };
+    const handleSearchDivisions = (value) => {
+        Dispatch(getDivisionsbySearch(value.target.value))
+    }
     return (
         <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
             <Row className='mb-3'>
                 <Col>
-                    <Form.Control type="email" placeholder="Search" className='w-50' />
+                    <Form.Control type="email" placeholder="Search" className='w-50' onChange={handleSearchDivisions} />
                 </Col>
-                {/* <Col>
-                    <div className='text-end'>
-                        <AiFillFilePdf className='pdf-icon' />
-                        <AiFillPrinter className='print-icon' />
-                    </div>
-                </Col> */}
             </Row>
             <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 {isLoading ? (

@@ -18,7 +18,6 @@ const AddVenueFields = ({ show, onClose, SetTeamBoxModel, setState }) => {
   // const[DelVenueModel,SetDelVenueModel]=useState(false)
   const { user } = useSelector((state) => state.user);
   const { VenuDetails, isLoading } = useSelector((state) => state.venue);
-  console.log(isLoading, "loading");
   const { VenueEdit, VenueId } = useContext(GlobalInfo);
 
   const Navigate = useNavigate();

@@ -13,6 +13,7 @@ const ManagerMenu = ({ isCollapsed }) => {
 
 
             <SubMenu label={!isCollapsed && "Team "} icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
+          
                 <NavLink to="/dashboard/allteams" className='menu-item-link text-white'>
                     <MenuItem>{isCollapsed ? <FaThList className='menu-icon' />:"All Teams"}</MenuItem>
                 </NavLink>

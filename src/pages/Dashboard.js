@@ -4,9 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import SidebarNav from '../shared/SidebarNav';
 import TopBar from '../shared/TopBar';
 import Dashboard from '../components/home/Dashboard';
-import PurchaseSale from '../components/home/PurchaseSale';
-import RecentProducts from '../components/home/RecentProducts';
-import ExpiredProducts from '../components/home/ExpiredProducts';
+
 
 const Home = () => {
     return (

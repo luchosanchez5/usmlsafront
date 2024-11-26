@@ -24,7 +24,7 @@ const AdminRoutes = (
         <Route exact path='/dashboard/allteams' element={<AllTeam />}></Route>
         <Route exact path='/dashboard/addteams' element={<AddTeams />}></Route>
         <Route exact path='/dashboard/allteams/:id' element={<AllTeamsDetails />}></Route>
-        <Route exact path='/dashboard/tournaments' element={<AllTournament />}></Route>
+        <Route exact path='/dashboard/alltournaments' element={<AllTournament />}></Route>
         <Route exact path='/dashboard/tournamentsdetails/:id' element={<AllTournamentDetails />}></Route>
         <Route exact path='/dashboard/addtournaments' element={<AddTournament />}></Route>
         <Route exact path='/dashboard/addvenue' element={<AddVenues />}></Route>

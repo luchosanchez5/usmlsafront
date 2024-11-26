@@ -6,7 +6,7 @@ import { CiEdit } from 'react-icons/ci';
 import { IoAddCircle } from "react-icons/io5";
 import '../../assets/css/products-table.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { DelTournaments, GetTournaments } from '../../store/tournament/actions/actionsCreators';
+import { DelTournaments, GetTournaments, getTournamentsbySearch } from '../../store/tournament/actions/actionsCreators';
 import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useNavigate } from 'react-router-dom';
@@ -53,19 +53,18 @@ const AllTournamentTable = () => {
     const handleEyebtn = (id) => {
         Navigate(`/dashboard/tournamentsdetails/${id}`)
     }
+    const handleSearchTournaments = (value) => {
+        Dispatch(getTournamentsbySearch(value.target.value))
+    }
     return (
         <>
             <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
                 <Row className='mb-3'>
                     <Col>
-                        <Form.Control type="email" placeholder="Search" className='w-50' />
+                        <Form.Control type="text" placeholder="Search" className='w-50' onChange={handleSearchTournaments} />
                     </Col>
-                    {/* <Col>
-                        <div className='text-end'>
-                            <AiFillFilePdf className='pdf-icon' />
-                            <AiFillPrinter className='print-icon' />
-                        </div>
-                    </Col> */}
+                    
+                    
                 </Row>
                 <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     {

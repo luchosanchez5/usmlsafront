@@ -12,7 +12,6 @@ import { GlobalInfo } from '../../App';
 const AddPersonFields = ({ setState }) => {
     const Dispatch = useDispatch()
     const [roleValue, SetRoleValue] = useState("Select Role");
-    console.log(roleValue)
     const { user } = useSelector((state) => state.user)
     const role = user?.roles[0] || user?.role
     const { UserEdit, UserId } = useContext(GlobalInfo)

@@ -35,7 +35,6 @@ export const AddVenue = (data, Token, Navigate) => (dispatch) => {
     });
 };
 export const GetVenue = (page) => (dispatch) => {
-  console.log('alsdnlajsd')
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -143,17 +142,15 @@ export const UpdateVenue = (data, Token, VenueId, Navigate) => (dispatch) => {
       Toast.error(error.response.data.message);
     });
 };
-export const SearchVenue = (Venueid) => (dispatch) => {
-  axios.delete(`${Url}api/venues/search`)
+export const SearchVenue = (value) => (dispatch) => {
+  axios.get(`${Url}api/venues/search?name=${value.toLowerCase()}&page=0&size=10`)
     .then((response) => {
       dispatch({
-        type: actionTypes.Add_VENUE,
+        type: actionTypes.GET_VENUE,
         payload: response.data,
       });
-      // navigation("/");
-      // Toast.success(response.data.status);
     })
     .catch((error) => {
-      // Toast.error(error.response.data.message);
+      console.log("🚀 ~ SearchVenue ~ error:", error)
     });
 };

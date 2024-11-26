@@ -18,13 +18,12 @@ const VenueReducer = (state = initialState, action) => {
         case actionTypes.Add_VENUE:
             return {
                 ...state,
-                // VenuData: !state.VenuDataUpdate
             };
 
         case actionTypes.GET_VENUE:
             return {
                 ...state,
-                VenueData: action.payload || [],
+                VenueData:action.payload || [],
             };
         case actionTypes.Delete_VENUE:
             return {

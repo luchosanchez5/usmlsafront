@@ -62,14 +62,37 @@ export const GetTournaments = (page) => (dispatch) => {
       // Toast.error(error.response.data.message);
     });
 };
-export const GetTournamentsBySearch = (token, page) => (dispatch) => {
+export const getTournamentsbySearch = (value) => (dispatch) => {
+  // dispatch({
+  //   type: actionTypes.SET_LOADING,
+  //   payload: true,
+  // });
+  axios.get(`${Url}api/tournaments/search?name=${value.toLowerCase()}&page=0&size=10`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_TOURNAMENT,
+        payload: response.data,
+      });
+      
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TOURNAMENT,
+          payload: []
+        });
+      }
+     
+    });
+};
+export const GetTournamentsBySearch = (token) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(`${Url}api/tournaments/search?status=ACTIVE&page=0&size=10`, {
-    headers: {
-      Authorization: `Bearer ${token}`
+  axios.get(`${Url}api/tournaments/search?status=ACTIVE&page=0&size=10`,{
+    headers:{
+      Authorization:`Bearer ${token}`
     }
   })
     .then((response) => {
@@ -81,8 +104,7 @@ export const GetTournamentsBySearch = (token, page) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
+  
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -98,23 +120,37 @@ export const GetTournamentsBySearch = (token, page) => (dispatch) => {
       // Toast.error(error.response.data.message);
     });
 };
-export const GetDefaultTournamentsBySearch = (token, page) => (dispatch) => {
-  dispatch({
-    type: actionTypes.SET_LOADING,
-    payload: true,
-  });
+export const getTournamentsbyFilter = (searchParams,action) => (dispatch) => {
+  
+  axios.get(`${Url}api/tournaments/search?${searchParams.toString().toLowerCase()}`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.DEFAULT_TOURNAMENTS,
+        payload: response.data,
+      });
+    })
+    .catch((error) => {
+      console.log("🚀 ~ getTournamentsbyFilter ~ error:", error)
+      dispatch({
+        type: actionTypes.DEFAULT_TOURNAMENTS,
+        payload: [],
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: true,
+      });
+    });
+};
+
+export const GetDefaultTournamentsBySearch = (key,value) => (dispatch) => {
+  
   axios.get(`${Url}api/tournaments/search?page=0&size=10`)
     .then((response) => {
       dispatch({
         type: actionTypes.DEFAULT_TOURNAMENTS,
         payload: response.data,
       });
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: false,
-      });
-      //   navigate("/dashboard");
-      // Toast.success(response.data.status);
+      
     })
     .catch((error) => {
       dispatch({
