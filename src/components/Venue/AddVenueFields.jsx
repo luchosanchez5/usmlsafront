@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import { useFormik } from "formik";
 import InputField from "../product/InputField";
 import { AllVenueSchemas } from "../../Schemas/Schemas";
@@ -13,7 +13,7 @@ import { Row } from "react-bootstrap";
 import { GlobalInfo } from "../../App";
 import { useNavigate } from "react-router-dom";
 import SpinNer from "../LoadingSpinner/SpinNer";
-const AddVenueFields = ({ show, onClose, SetTeamBoxModel, setState }) => {
+const AddVenueFields = () => {
   const Dispatch = useDispatch();
   // const[DelVenueModel,SetDelVenueModel]=useState(false)
   const { user } = useSelector((state) => state.user);
@@ -44,7 +44,6 @@ const AddVenueFields = ({ show, onClose, SetTeamBoxModel, setState }) => {
     handleSubmit,
     setValues,
     touched,
-    resetForm,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: AllVenueSchemas,

@@ -121,12 +121,19 @@ export const GetTournamentsBySearch = (token) => (dispatch) => {
     });
 };
 export const getTournamentsbyFilter = (searchParams,action) => (dispatch) => {
-  
-  axios.get(`${Url}api/tournaments/search?${searchParams.toString().toLowerCase()}`)
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/tournaments/search?${searchParams.toString()}`)
     .then((response) => {
       dispatch({
         type: actionTypes.DEFAULT_TOURNAMENTS,
         payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
       });
     })
     .catch((error) => {
@@ -137,18 +144,25 @@ export const getTournamentsbyFilter = (searchParams,action) => (dispatch) => {
       });
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
     });
 };
 
 export const GetDefaultTournamentsBySearch = (key,value) => (dispatch) => {
-  
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
   axios.get(`${Url}api/tournaments/search?page=0&size=10`)
     .then((response) => {
       dispatch({
         type: actionTypes.DEFAULT_TOURNAMENTS,
         payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
       });
       
     })

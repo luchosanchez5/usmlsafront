@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Row, Table, Form } from 'react-bootstrap';
-import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
+import {  AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
-import { IoAddCircle } from "react-icons/io5";
 import '../../assets/css/products-table.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { DelTournaments, GetTournaments, getTournamentsbySearch } from '../../store/tournament/actions/actionsCreators';

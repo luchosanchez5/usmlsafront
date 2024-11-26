@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React  from 'react'
 import { MenuItem, SubMenu } from 'react-pro-sidebar';
 import { NavLink } from 'react-router-dom';
 import { FaUsers, FaLocationDot } from "react-icons/fa6";

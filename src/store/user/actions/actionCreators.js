@@ -131,7 +131,8 @@ export const userRegister = (data, navigation) => (dispatch) => {
 
     })
     .catch((error) => {
-      Toast.error(error.response.data.error);
+      console.log("🚀 ~ userRegister ~ error:", error)
+      Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,

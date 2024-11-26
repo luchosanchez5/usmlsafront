@@ -54,7 +54,7 @@ const Home = () => {
           );
         })
       ) : (
-        <p>No tournaments available.</p>
+        <h2 className="text-center text-danger mt-5">No Records Found.</h2>
       )}
     </>
   );

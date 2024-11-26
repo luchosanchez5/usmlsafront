@@ -17,7 +17,6 @@ const AllTournamentDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
 
-    const [state, setState] = useState(false);
     const [previewImage, setPreviewImage] = useState(null);
     const [assignVenueBoxModel, setVenueModel] = useState(false);
 
@@ -162,7 +161,7 @@ const AllTournamentDetails = () => {
 
             {/* Add Venue Modal */}
             {assignVenueBoxModel && (
-                <AddVenueModel show={assignVenueBoxModel} onClose={() => setVenueModel(false)} SetVenueModel={setVenueModel} setState={setState} />
+                <AddVenueModel show={assignVenueBoxModel} onClose={() => setVenueModel(false)} SetVenueModel={setVenueModel}  />
             )}
 
             {/* Payment History Section */}

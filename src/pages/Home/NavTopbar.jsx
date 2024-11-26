@@ -1,13 +1,14 @@
 import Navbar from "react-bootstrap/Navbar";
-import { useState, useEffect } from "react";
+import {  useEffect,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { HiBars3 } from "react-icons/hi2";
 import { useSelector } from "react-redux";
+import { GlobalInfo } from "../../App";
 function NavTopbar() {
-  const [showCanvas, setShowCanvas] = useState(false);
-  const handleShow = () => setShowCanvas(true);
+
   const { user } = useSelector((state) => state.user);
+  const { setIsSidebarOpen} = useContext(GlobalInfo);
   const Token = user?.access_token;
   const Navigate = useNavigate();
   useEffect(() => {
@@ -59,7 +60,7 @@ function NavTopbar() {
           )}
         </div>
         <div className="d-flex d-lg-none">
-          <HiBars3 onClick={handleShow} fontSize={30} />
+          <HiBars3 onClick={()=>setIsSidebarOpen((prev)=>!prev)} fontSize={30}  />
         </div>
       </Navbar>
     </>
