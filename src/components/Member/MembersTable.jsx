@@ -58,10 +58,14 @@ const MembersTable = ({ setState }) => {
                     <td>{item?.role}</td>
                     <td>
                       <div>
-                        <AiOutlineDelete
-                          className="action-icon delete-icon"
-                          onClick={() => handleDeletebtn(item?.venueId)}
-                        />
+                        {item?.role === "MANAGER" ? (
+                          ""
+                        ) : (
+                          <AiOutlineDelete
+                            className="action-icon delete-icon"
+                            onClick={() => handleDeletebtn(item?.venueId)}
+                          />
+                        )}
                       </div>
                     </td>
                   </tr>

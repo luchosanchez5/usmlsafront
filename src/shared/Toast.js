@@ -21,5 +21,16 @@ const error = (message) => {
         })
     }
 }
+const warning = (message) => {
+    if (message) {
+        toast(message, {
+            status: 'Warning',
+            type: 'warn',
+            autoHide: true,
+            delay: '5000',
+        })
+    }
+}
 
-export default { success, error }
+
+export default { success, error, warning }

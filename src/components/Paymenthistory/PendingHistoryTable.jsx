@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
+
 import { useParams } from "react-router-dom";
 import {
   completePendingPayment,
@@ -10,6 +11,8 @@ import {
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
 import CardPaymentModel from "../Models/CardPaymentModel";
+import ConfirmModel from "../Models/ConfirmModel";
+import Toast from "../../shared/Toast";
 const PendingHistoryTable = ({ state, setState }) => {
   const { PendingPaymentRecords, isLoading } = useSelector(
     (state) => state.team
@@ -20,8 +23,10 @@ const PendingHistoryTable = ({ state, setState }) => {
   const Dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const [SelectedPayment, SetSelectedPayment] = useState(null);
+  const [isPendingAmount, setIsPendingAmount] = useState(false);
   const [CardModel, SetCardModel] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const [ConfirmPayment, SetConfirmPayment] = useState(null);
   const handleCashPayment = (
     teamId,
     tournamentId,
@@ -37,12 +42,23 @@ const PendingHistoryTable = ({ state, setState }) => {
         token
       )
     );
+    setShowModal(false);
   };
 
   const handleCardPayment = (item) => {
     SetSelectedPayment(item);
     SetCardModel(true);
+    setIsPendingAmount(true);
   };
+
+  const confirmCashPayment = (item) => {
+    SetConfirmPayment(item);
+    setShowModal(true);
+  };
+  const showToaster = (item) => {
+    Toast.warning("Please contact help desk");
+  };
+
   useEffect(() => {
     Dispatch(getPendingPaymentRecords(id, 0, token));
   }, [Dispatch, state, id, token]);
@@ -68,6 +84,7 @@ const PendingHistoryTable = ({ state, setState }) => {
                 <th>Registration Date</th>
                 <th>Pending Amount</th>
                 <th>Registration Status</th>
+                <th>Payment Methods</th>
               </tr>
             </thead>
             <tbody>
@@ -100,14 +117,7 @@ const PendingHistoryTable = ({ state, setState }) => {
                           {user?.roles[0] === "ADMIN" &&
                           parseFloat(item.pendingAmount) !== 0 ? (
                             <button
-                              onClick={() =>
-                                handleCashPayment(
-                                  item?.teamId,
-                                  item?.tournamentId,
-                                  item?.divisionId,
-                                  item?.pendingAmount
-                                )
-                              }
+                              onClick={() => confirmCashPayment(item)}
                               className="btn btn-sm btn-dark d-flex align-items-center"
                             >
                               <AiOutlineDollarCircle className="me-1" />
@@ -118,13 +128,22 @@ const PendingHistoryTable = ({ state, setState }) => {
                           )}
                           {user?.roles[0] === "MANAGER" &&
                           parseFloat(item.pendingAmount) !== 0 ? (
-                            <button
-                              onClick={() => handleCardPayment(item)}
-                              className="btn btn-sm btn-danger d-flex align-items-center"
-                            >
-                              <AiOutlineCreditCard className="me-1" />
-                              Pay By Card
-                            </button>
+                            <>
+                              <button
+                                onClick={() => handleCardPayment(item)}
+                                className="btn btn-sm btn-danger d-flex align-items-center"
+                              >
+                                <AiOutlineCreditCard className="me-1" />
+                                Pay By Card
+                              </button>
+                              <button
+                                onClick={() => showToaster()}
+                                className="btn btn-sm btn-dark d-flex align-items-center"
+                              >
+                                <AiOutlineDollarCircle className="me-1" />
+                                Pay By Cash
+                              </button>
+                            </>
                           ) : (
                             ""
                           )}
@@ -144,6 +163,20 @@ const PendingHistoryTable = ({ state, setState }) => {
           </Table>
         )}
       </div>
+      {showModal && (
+        <ConfirmModel
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          OnDelete={() =>
+            handleCashPayment(
+              ConfirmPayment.teamId,
+              ConfirmPayment.tournamentId,
+              ConfirmPayment.divisionId,
+              ConfirmPayment.pendingAmount
+            )
+          }
+        />
+      )}
       {CardModel && SelectedPayment && (
         <CardPaymentModel
           show={CardModel}
@@ -153,6 +186,7 @@ const PendingHistoryTable = ({ state, setState }) => {
           divisionId={SelectedPayment.divisionId}
           pendingAmount={SelectedPayment.pendingAmount}
           onClose={() => SetCardModel(false)}
+          isPendingAmount={isPendingAmount}
         />
       )}
     </div>

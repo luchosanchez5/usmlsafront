@@ -130,9 +130,9 @@ const AllTeamsDetails = () => {
                     </Row>
                 </div>
             }
-            <h2 className='ps-4 text-danger'>Team Members:</h2>
             {PaymentBoxModel && <PaymentModel />
             }
+            <h2 className='ps-4 text-danger'>Team Members:</h2>
             <MembersTable />
             <h2 className='ps-4 text-danger'>Payment Records:</h2>
             <PaymentHistoryTable />

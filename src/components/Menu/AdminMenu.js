@@ -32,7 +32,7 @@ const AdminMenu = ({ isCollapsed }) => {
 
             </SubMenu>
             <SubMenu label={!isCollapsed && 'Tournament '} icon={<MdTour className='menu-icon' />}>
-                <NavLink to='/dashboard/tournaments' className='menu-item-link text-white'>
+                <NavLink to='/dashboard/alltournaments' className='menu-item-link text-white'>
                     <MenuItem > {isCollapsed ? <FaThList className='menu-icon' /> : 'All Tournament'}</MenuItem>
                 </NavLink>
                 <NavLink to='/dashboard/addtournaments' className='menu-item-link text-white'>

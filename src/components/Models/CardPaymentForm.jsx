@@ -40,6 +40,7 @@ const CardPaymentForm = ({
   divisionId,
   teamId,
   pendingAmount,
+  isPendingAmount
 }) => {
   const stripe = useStripe();
   const { isLoading } = useSelector((state) => state.team);
@@ -74,7 +75,7 @@ const CardPaymentForm = ({
           : DivisionDetailsBySearch[0]?.divisionId,
       };
       console.log(data);
-      Dispatch(createSubscription(data, token, navigate, id));
+      Dispatch(createSubscription(data, token, navigate, id,isPendingAmount));
       SetCardModel(false);
     }
   };

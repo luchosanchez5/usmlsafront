@@ -69,7 +69,7 @@ export const GetTeams = (page, Token, role, userId) => (dispatch) => {
     });
 };
 export const getTeamsbySearch = (value, Token) => (dispatch) => {
-  
+
   axios.get(`${Url}api/teams/search?name=${value.toLowerCase()}&page=0&size=10`, {
     headers: {
       Authorization: `Bearer ${Token}`
@@ -80,13 +80,13 @@ export const getTeamsbySearch = (value, Token) => (dispatch) => {
         type: actionTypes.GET_TEAMS,
         payload: response.data,
       });
-      
+
     })
     .catch((error) => {
       console.log("🚀 ~ getTeamsbySearch ~ error:", error)
-      
-     
-     
+
+
+
     });
 };
 export const DeleteTeams = (teamId, Token, callback) => (dispatch) => {
@@ -417,13 +417,18 @@ export const getPendingPaymentRecords = (teamId, page, Token, tournamentId = nul
 };
 
 
-export const createSubscription = (date, Token, navigate) => (dispatch) => {
+export const createSubscription = (data, Token, navigate, id, isPendingAmount) => (dispatch) => {
+  console.log(isPendingAmount)
 
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.post(`${Url}api/payment/secure/create-subscription`, date, {
+  const endpoint = isPendingAmount
+    ? `${Url}api/payment/secure/pay-pending-amount`
+    : `${Url}api/payment/secure/create-subscription`;
+  console.log(endpoint)
+  axios.post(endpoint, data, {
     headers: {
       Authorization: `Bearer ${Token}`
     }
@@ -434,10 +439,17 @@ export const createSubscription = (date, Token, navigate) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      navigate(-1)
+      if (!isPendingAmount) {
+        navigate(-1)
+      }
     })
     .catch((error) => {
-      Toast.error(error.response.data.error);
+      console.log(error)
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "An unexpected error occurred";
+      Toast.error(errorMessage);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
