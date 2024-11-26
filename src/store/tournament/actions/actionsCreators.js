@@ -191,6 +191,23 @@ export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (disp
       // Toast.error(error.response.data.message);
     });
 };
+
+export const getDivisionbySearch = (value) => (dispatch) => {
+  
+  axios.get(`${Url}api/divisions/search?divisionName=${value.toLowerCase()}&page=0&size=10`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_ALL_DIVISIONS,
+        payload: response.data,
+      });
+     
+     
+    })
+    .catch((error) => {
+    console.log("🚀  getDivisionsbySearch  error:", error)
+    
+    });
+};
 export const GetAllDivisions = (page, token) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,

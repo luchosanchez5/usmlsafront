@@ -10,7 +10,7 @@ import DeleteModel from '../Models/DeleteModel';
 import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { GlobalInfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
-import { DeleteDivision, GetAllDivisions, getDivisionsbySearch } from '../../store/tournament/actions/actionsCreators';
+import { DeleteDivision, GetAllDivisions, getDivisionbySearch } from '../../store/tournament/actions/actionsCreators';
 import TableSkeleton from '../SkeletonTable/SkeletonTable';
 const AllDivisionTable = () => {
     const { AllDivisionsData, isLoading } = useSelector((state) => state.tournament);
@@ -54,7 +54,7 @@ const AllDivisionTable = () => {
         setDeleteModel(false);
     };
     const handleSearchDivisions = (value) => {
-        Dispatch(getDivisionsbySearch(value.target.value))
+        Dispatch(getDivisionbySearch(value.target.value))
     }
     return (
         <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
