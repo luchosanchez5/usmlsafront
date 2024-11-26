@@ -16,7 +16,6 @@ import PendingHistoryTable from '../../components/Paymenthistory/PendingHistoryT
 const AllTeamsDetails = () => {
     const { id } = useParams()
     const { TeamDetailsData, isLoading } = useSelector((state) => state.team)
-    const { PaymentRecords } = useSelector((state) => state.team);
     const { token } = useSelector((state) => state.user)
     const [state, setState] = useState(false)
     const [CoManagerBoxModel, SetCoManagerBoxModel] = useState(false)

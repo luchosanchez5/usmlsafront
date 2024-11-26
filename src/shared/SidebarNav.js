@@ -54,10 +54,7 @@ const SidebarNav = () => {
                 width={isCollapsed ? 50 : 200}
             />
             <Menu className='mt-3'>
-                <NavLink to='/dashboard' className='menu-item-link text-white'>
-                    <MenuItem icon={<AiOutlineDashboard className='menu-icon' />}> Dashboard</MenuItem>
-                </NavLink>
-
+    
                 {(user?.role === 'ADMIN' || user?.roles?.includes('ADMIN')) && <AdminMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'MANAGER' || user?.roles?.includes('MANAGER')) && <ManagerMenu isCollapsed={isCollapsed} />}
                 {(user?.role === 'PLAYER' || user?.roles?.includes('PLAYER')) && <PlayerMenu isCollapsed={isCollapsed} />}

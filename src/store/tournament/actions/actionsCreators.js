@@ -434,7 +434,6 @@ export const uploadTournamentPicture = (tournamentId, token, file) => (dispatch)
 export const uploadDivisionPicture = (divisionId, token, file) => (dispatch) => {
   const formData = new FormData();
   formData.append("picture", file);
-  console.log(formData)
 
   dispatch({
     type: actionTypes.SET_LOADING,

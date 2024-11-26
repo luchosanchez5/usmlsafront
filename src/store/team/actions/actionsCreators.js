@@ -436,7 +436,7 @@ export const completePendingPayment = (teamId,
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.post(`${Url}api/teams/complete-pending-team-registration/${teamId}/${tournamentId}/${divisionId}?paidAmount=${pendingAmount}&paymentMode=CASH&currency=USD`, {
+  axios.put(`${Url}api/teams/complete-pending-team-registration/${teamId}/${tournamentId}/${divisionId}?paidAmount=${pendingAmount}&paymentMode=CASH&currency=USD`, {}, {
     headers: {
       Authorization: `Bearer ${token}`
     }

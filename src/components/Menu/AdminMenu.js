@@ -7,14 +7,18 @@ import { RiTeamFill } from "react-icons/ri";
 import { IoTrophy } from "react-icons/io5";
 import { MdAddBox } from "react-icons/md";
 import { FaThList } from "react-icons/fa";
+import { AiOutlineDashboard } from 'react-icons/ai';
 
 const AdminMenu = ({ isCollapsed }) => {
 
     return (
         <>
-
+            <NavLink to='/dashboard' className='menu-item-link text-white'>
+                <MenuItem icon={<AiOutlineDashboard className='menu-icon' />}> Dashboard</MenuItem>
+            </NavLink>
 
             <SubMenu label={!isCollapsed && 'Venue '} icon={<FaLocationDot className='menu-icon' />}>
+
                 <NavLink to='/dashboard/allvenue' className='menu-item-link text-white'>
                     <MenuItem > {isCollapsed ? <FaThList className='menu-icon' /> : 'All Venues'} </MenuItem>
                 </NavLink>

@@ -1,5 +1,6 @@
 import React,{lazy} from 'react'
 import { Route } from 'react-router-dom';
+import ChangePassword from '../pages/Dashboard/ChangePassword.js';
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
 const AllPersonDetails = lazy(() => import('../pages/Dashboard/AllPersonDetails.js'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
@@ -36,6 +37,8 @@ const AdminRoutes = (
         <Route exact path='/dashboard/alldivisions' element={<AllDivision />}></Route>
         <Route exact path='/dashboard/alldivisions/:id' element={<AllDivisionDetails />}></Route>
         <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
+        <Route exact path='/dashboard/user/change-password' element={<ChangePassword />}></Route>
+
 
     </>
 )

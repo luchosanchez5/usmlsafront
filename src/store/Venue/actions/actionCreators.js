@@ -89,7 +89,6 @@ export const GetVenueByVenueId = (VenueId, token) => (dispatch) => {
 
     })
     .catch((error) => {
-      console.log("🚀 : ~ file: actionCreators.js:48 ~ GetVenue ~ error", error);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
