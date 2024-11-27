@@ -87,7 +87,10 @@ const PendingHistoryTable = () => {
                 <th>Registration Date</th>
                 <th>Pending Amount</th>
                 <th>Registration Status</th>
-                <th>Payment Methods</th>
+                {PendingPaymentRecords?.data?.length > 0 &&
+                  PendingPaymentRecords?.data[0].pendingAmount !== 0 && (
+                    <th>Payment Methods</th>
+                  )}
               </tr>
             </thead>
             <tbody>
@@ -191,7 +194,6 @@ const PendingHistoryTable = () => {
           onClose={() => SetCardModel(false)}
           isPendingAmount={isPendingAmount}
           setApiCall={setApiCall}
-          
         />
       )}
     </div>
