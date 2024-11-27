@@ -73,7 +73,7 @@ export const getTournamentsbySearch = (value) => (dispatch) => {
         type: actionTypes.GET_TOURNAMENT,
         payload: response.data,
       });
-      
+
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -82,7 +82,7 @@ export const getTournamentsbySearch = (value) => (dispatch) => {
           payload: []
         });
       }
-     
+
     });
 };
 export const GetTournamentsBySearch = (token) => (dispatch) => {
@@ -90,9 +90,9 @@ export const GetTournamentsBySearch = (token) => (dispatch) => {
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(`${Url}api/tournaments/search?status=ACTIVE&page=0&size=10`,{
-    headers:{
-      Authorization:`Bearer ${token}`
+  axios.get(`${Url}api/tournaments/search?status=ACTIVE&page=0&size=10`, {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
   })
     .then((response) => {
@@ -104,7 +104,7 @@ export const GetTournamentsBySearch = (token) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-  
+
     })
     .catch((error) => {
       if (error.response.status === 404) {
@@ -120,7 +120,7 @@ export const GetTournamentsBySearch = (token) => (dispatch) => {
       // Toast.error(error.response.data.message);
     });
 };
-export const getTournamentsbyFilter = (searchParams,action) => (dispatch) => {
+export const getTournamentsbyFilter = (searchParams, action) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -149,7 +149,7 @@ export const getTournamentsbyFilter = (searchParams,action) => (dispatch) => {
     });
 };
 
-export const GetDefaultTournamentsBySearch = (key,value) => (dispatch) => {
+export const GetDefaultTournamentsBySearch = (key, value) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -164,7 +164,7 @@ export const GetDefaultTournamentsBySearch = (key,value) => (dispatch) => {
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      
+
     })
     .catch((error) => {
       dispatch({
@@ -207,19 +207,19 @@ export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (disp
 };
 
 export const getDivisionbySearch = (value) => (dispatch) => {
-  
+
   axios.get(`${Url}api/divisions/search?divisionName=${value.toLowerCase()}&page=0&size=10`)
     .then((response) => {
       dispatch({
         type: actionTypes.GET_ALL_DIVISIONS,
         payload: response.data,
       });
-     
-     
+
+
     })
     .catch((error) => {
-    console.log("🚀  getDivisionsbySearch  error:", error)
-    
+      console.log("🚀  getDivisionsbySearch  error:", error)
+
     });
 };
 export const GetAllDivisions = (page, token) => (dispatch) => {
@@ -394,7 +394,7 @@ export const UpdateTournaments = (TournamentId, data, Token, Navigate) => (dispa
         type: actionTypes.UPDATE_TOURNAMENT,
       });
       Toast.success(response.data.message);
-      Navigate("/dashboard/tournaments");
+      Navigate("/dashboard/alltournaments");
 
     })
     .catch((error) => {
