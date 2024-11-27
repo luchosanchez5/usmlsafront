@@ -93,7 +93,7 @@ const CardPaymentForm = ({
           type="submit"
           className="gradient-btn-orange w-max-content height-56-important px-5 mt-4"
         >
-          {isLoading ? <SpinNer /> : "Subscribe Now"}
+          {isLoading ? <SpinNer /> : "Pay Now"}
         </button>
       </div>
     </form>
