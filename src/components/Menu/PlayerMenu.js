@@ -7,7 +7,7 @@ import { FaThList } from "react-icons/fa";
 const PlayerMenu = ({ isCollapsed }) => {
     return (
         <>
-            <SubMenu label={isCollapsed && "Team Management"} icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "Team Management"} icon={<RiTeamFill className='menu-icon' />} className='submenu-item'>
                 
 
                 <NavLink to="/dashboard/yourteam" className='menu-item-link text-white'>

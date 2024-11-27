@@ -102,17 +102,17 @@ function AddDivisionFields() {
 
 
             setValues({
-                divisionName: DivisionDetails.data.divisionName || '',
-                entryFee: DivisionDetails.data.entryFee || '',
-                initialDepositFee: DivisionDetails.data.initialDepositFee || '',
-                maxTeams: DivisionDetails.data.maxTeams || '',
-                divisionStatus: DivisionDetails.data.divisionStatus || '',
+                divisionName: DivisionDetails?.data?.divisionName || '',
+                entryFee: DivisionDetails?.data?.entryFee || '',
+                initialDepositFee: DivisionDetails?.data?.initialDepositFee || '',
+                maxTeams: DivisionDetails?.data?.maxTeams || '',
+                divisionStatus: DivisionDetails?.data?.divisionStatus || '',
                 startTime: formattedTime || '',
-                prize1: DivisionDetails.data.prize1 || '',
-                prize2: DivisionDetails.data.prize2 || '',
-                prize3: DivisionDetails.data.prize3 || '',
-                prize4: DivisionDetails.data.prize4 || '',
-                tournamentId: DivisionDetails.data.tournamentId || ''
+                prize1: DivisionDetails?.data?.prize1 || '',
+                prize2: DivisionDetails?.data?.prize2 || '',
+                prize3: DivisionDetails?.data?.prize3 || '',
+                prize4: DivisionDetails?.data?.prize4 || '',
+                tournamentId: DivisionDetails?.data.tournamentId || ''
             });
         }
     }, [AllDivisionsData, DivisionEdit, setValues]);

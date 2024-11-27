@@ -9,6 +9,7 @@ import {
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 import PlayerCardSkeleton from "../SkeletonTable/PlayerCardSkeleton";
+import { setNestedObjectValues } from "formik";
 const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
   const { CoManagerData, isLoading } = useSelector((state) => state.team);
   const { token } = useSelector((state) => state.user);
@@ -23,6 +24,8 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
     setPage(newPage);
   };
   const handleSubmit = () => {
+    console.log(selectedCard);
+    
     Dispatch(AddPlayerToTeam(id, selectedCard, token));
     setState((prev) => !prev);
     SetPlayerBoxModel(false);
@@ -47,11 +50,11 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
               <Col key={card.id} md={12} className="my-2 ">
                 <Card
                   className={`px-3  ${
-                    selectedCard === card.playerId
+                    selectedCard === card.id
                       ? "bg-danger text-white"
                       : "text-black"
                   }`}
-                  onClick={() => handleCardSelect(card.playerId)}
+                  onClick={() => handleCardSelect(card.id)}
                   style={{ cursor: "pointer" }}
                 >
                   <Card.Body className="d-flex justify-content-between align-items-center border-0">
@@ -62,8 +65,8 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
                     <Form.Check
                       type="radio"
                       name="cardSelection"
-                      checked={selectedCard === card.playerId}
-                      onChange={() => handleCardSelect(card.playerId)}
+                      checked={selectedCard === card.id}
+                      onChange={() => handleCardSelect(card.id)}
                     />
                   </Card.Body>
                 </Card>

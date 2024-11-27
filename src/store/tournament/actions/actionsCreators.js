@@ -21,7 +21,7 @@ export const Add_Tournaments = (data, Token, Navigate) => (dispatch) => {
         payload: false,
       });
       Toast.success(response.data.message);
-      Navigate('/dashboard/tournaments')
+      Navigate('/dashboard/alltournaments')
 
     })
     .catch((error) => {

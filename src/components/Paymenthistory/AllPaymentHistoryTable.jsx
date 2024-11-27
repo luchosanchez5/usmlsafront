@@ -12,65 +12,34 @@ import { GetVenue } from "../../store/Venue/actions/actionCreators";
 import { useNavigate } from "react-router-dom";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import { GlobalInfo } from "../../App";
-import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
+import { GetPaymentRecords, getPaymentRecordsbySearch } from "../../store/team/actions/actionsCreators";
 const AllPaymentHistoryTable = () => {
   const { VenueData, isLoading } = useSelector((state) => state.venue);
   const { PaymentRecords } = useSelector((state) => state.team);
-  console.log(
-    "🚀 : ~ file: AllPaymentHistoryTable.jsx:19 ~ AllPaymentHistoryTable ~ PaymentRecords",
-    PaymentRecords
-  );
-  const [DelVenueModel, SetDelVenueModel] = useState(false);
-  const [VenueId, Setvenueid] = useState(null);
-  const [state, setState] = useState(false);
+ 
   const { token, user } = useSelector((state) => state.user);
-  const { SetVenueEdit, SetVenueId } = useContext(GlobalInfo);
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
   const userId = user?.userId;
   const Dispatch = useDispatch();
-  const Navigate = useNavigate();
-  const handleDeletebtn = (id) => {
-    Setvenueid(id);
-    SetDelVenueModel(true);
-  };
+
   const isUser = true;
   useEffect(() => {
     Dispatch(GetPaymentRecords(userId, 0, token, isUser));
-  }, [Dispatch, state, page]);
+  }, [Dispatch]);
 
-  const handleCloseModel = () => {
-    SetDelVenueModel(false);
-  };
-  const handleEditBtn = (id) => {
-    SetVenueId(id);
-    SetVenueEdit(true);
-    Navigate("/dashboard/addvenue");
-  };
-  const handleEyebtn = (id) => {
-    Navigate(`/dashboard/allvenue/${id}`);
-  };
-  const handlePageChange = (newPage) => {
-    setPage(newPage - 1);
-  };
+ 
+  
 
-  const handleDeleteVenue = () => {
-    Dispatch(DelVenue(VenueId, token));
-    setState((prev) => !prev);
-    SetDelVenueModel(false);
+  const handleSearchPayment = (value) => {
+    // Dispatch(getPaymentRecordsbySearch(value.target.value,token));
   };
-
   return (
     <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
       <Row className="mb-3">
         <Col>
-          <Form.Control type="email" placeholder="Search" className="w-50" />
+          <Form.Control type="text" placeholder="Search" className="w-50" onChange={handleSearchPayment} />
         </Col>
-        {/* <Col>
-                    <div className='text-end'>
-                        <AiFillFilePdf className='pdf-icon' />
-                        <AiFillPrinter className='print-icon' />
-                    </div>
-                </Col> */}
+       
       </Row>
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>
         <Table responsive hover size="sm" className="mt-2">
@@ -120,22 +89,7 @@ const AllPaymentHistoryTable = () => {
           </tbody>
         </Table>
       </div>
-      {/* {VenueData?.totalRecords > 10 && <PaginationControl
-                page={page}
-                between={3}
-                limit={10}
-                total={VenueData?.totalRecords}
-                changePage={(page) => handlePageChange(page)}
-                ellipsis={1}
-            />} */}
-      {DelVenueModel && (
-        <DeleteModel
-          show={DelVenueModel}
-          onClose={handleCloseModel}
-          OnDelete={handleDeleteVenue}
-          title="Venue"
-        />
-      )}
+     
     </div>
   );
 };

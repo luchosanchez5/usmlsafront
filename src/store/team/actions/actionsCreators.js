@@ -562,3 +562,26 @@ export const removePlayer = (id, playerId, token) => (dispatch) => {
       });
     });
 };
+export const getPaymentRecordsbySearch = (value, Token) => (dispatch) => {
+
+  axios.get(`${Url}api/teams/search?name=${value.toLowerCase()}&page=0&size=10`, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_PAYMENT_RECORDS,
+        payload: response.data,
+      });
+
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_TEAMS,
+          payload: []
+        });
+      }
+    });
+};

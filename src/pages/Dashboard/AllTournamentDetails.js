@@ -93,7 +93,7 @@ const AllTournamentDetails = () => {
                     <img
                         src={previewImage}
                         alt="Division Preview"
-                        style={{ width: '120px', height: 'auto', borderRadius: '50%' }}
+                        style={{ width: '120px', height: '120px', borderRadius: '50%' }}
                     />
                 ) : (
                     <>
