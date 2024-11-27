@@ -92,51 +92,53 @@ const AddPersonFields = () => {
 
 
     useEffect(() => {
-
+        console.log("Get person by id useEffect....................")
         if (UserEdit && PersonDetails) {
             Dispatch(GetPersonsById(UserId, Token))
         }
     }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
-    useEffect(() => {
-        if (values.role !== 'PLAYER') {
-            setValues({
-                ...values,
-                tournamentsPlayed: null,
-                points: null,
-                ranking: null,
-                gamesPlayed: null,
-            });
-        }
-    }, [values.role, setValues, values]);
+    // useEffect(() => {
+    //     console.log("set values useEffect ......................")
+    //     if (values.role !== 'PLAYER') {
+    //         setValues({
+    //             ...values,
+    //             tournamentsPlayed: null,
+    //             points: null,
+    //             ranking: null,
+    //             gamesPlayed: null,
+    //         });
+    //     }
+    // }, [values.role, setValues, values]);
 
     const PersonStatusOptions = [
         { value: "ACTIVE", label: "ACTIVE" },
         { value: "INACTIVE", label: "INACTIVE" },
         { value: "SUSPENDED", label: "SUSPENDED" }
     ]
-    useEffect(() => {
-        if (UserEdit && PersonDetails) {
-            setValues({
-                email: PersonDetails.email || '',
-                name: PersonDetails.name || '',
-                role: PersonDetails.role || '',
-                firstName: PersonDetails.firstName || '',
-                lastName: PersonDetails.lastName || '',
-                address1: PersonDetails.address1 || '',
-                address2: PersonDetails.address2 || '',
-                points: PersonDetails.points || '',
-                ranking: PersonDetails.ranking || '',
-                division: PersonDetails.division || '',
-                city: PersonDetails.city || '',
-                state: PersonDetails.state || '',
-                zipCode: PersonDetails.zipCode || '',
-                mobilePhone: PersonDetails.mobilePhone || '',
-                playerStatus: PersonDetails || '',
-                tournamentsPlayed: values.tournamentsPlayed || '',
-                gamesPlayed: PersonDetails.gamesPlayed || '',
-            });
-        }
-    }, [PersonDetails, UserEdit, setValues]);
+    // useEffect(() => {
+    //     console.log("User edit and person details use effect ...................")
+    //     if (UserEdit && PersonDetails) {
+    //         setValues({
+    //             email: PersonDetails.email || '',
+    //             name: PersonDetails.name || '',
+    //             role: PersonDetails.role || '',
+    //             firstName: PersonDetails.firstName || '',
+    //             lastName: PersonDetails.lastName || '',
+    //             address1: PersonDetails.address1 || '',
+    //             address2: PersonDetails.address2 || '',
+    //             points: PersonDetails.points || '',
+    //             ranking: PersonDetails.ranking || '',
+    //             division: PersonDetails.division || '',
+    //             city: PersonDetails.city || '',
+    //             state: PersonDetails.state || '',
+    //             zipCode: PersonDetails.zipCode || '',
+    //             mobilePhone: PersonDetails.mobilePhone || '',
+    //             playerStatus: PersonDetails || '',
+    //             tournamentsPlayed: values.tournamentsPlayed || '',
+    //             gamesPlayed: PersonDetails.gamesPlayed || '',
+    //         });
+    //     }
+    // }, [PersonDetails, UserEdit, setValues]);
     return (
         <div className='mt-3'>
             <h2 className='mb-3 fw-bold'>{UserEdit ? 'Update User' : 'Add User'}</h2>

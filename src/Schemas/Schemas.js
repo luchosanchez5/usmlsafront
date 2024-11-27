@@ -22,8 +22,15 @@ export const AllTeamSchemas = Yup.object({
 
 export const AllTournamentSchemas = Yup.object({
     name: Yup.string().required("TeamName is Required"),
-    startDate: Yup.string().required("Start Date is Required"),
-    endDate: Yup.string().required("End Date is Required"),
+    startDate: Yup.date().required("Start Date is Required"),
+    endDate: Yup.date().required("End Date is Required").test(
+        "is-greater",
+        "End date must be greater than start date.",
+        function (value) {
+            const { startDate } = this.parent;
+            return value && startDate && new Date(value) > new Date(startDate)
+        }
+    ),
     tournamentStatus: Yup.string().required("Tournament Status is Required"),
     numberOfDivisions: Yup.number().required('Number Of Divisions is Required'),
 });
