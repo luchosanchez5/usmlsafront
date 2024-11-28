@@ -5,6 +5,7 @@ const initialState = {
     TeamDetailsData: [],
     TeamMembers: {},
     CoManagerData: [],
+    PlayerData:[],
     PaymentRecords: [],
     PendingPaymentRecords: [],
     // VenuData: false
@@ -41,6 +42,11 @@ const TeamReducer = (state = initialState, action) => {
                 ...state,
                 CoManagerData: action.payload || []
             }
+            case actionTypes.GET_PLAYERS:
+                return {
+                    ...state,
+                    PlayerData: action.payload || []
+                }
         case actionTypes.GET_MEMBER_BY_TEAMID:
             return {
                 ...state,

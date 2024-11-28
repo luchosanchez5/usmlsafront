@@ -91,8 +91,8 @@ const AllMembersTable = () => {
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Address1</th>
-                  <th>Address2</th>
+                  <th>Address 1</th>
+                  <th>Address 2</th>
                   <th>City</th>
                   <th>State</th>
                   <th>Number of Fields</th>

@@ -2,7 +2,7 @@ import React, { lazy } from 'react'
 import { Route } from 'react-router-dom';
 import ChangePassword from '../pages/Dashboard/ChangePassword.js';
 const YourTeams = lazy(() => import('../pages/Dashboard/YourTeams.js'));
-const YourTeamDetails = lazy(() => ('../pages/Dashboard/YourTeamDetails.js'));
+const YourTeamDetails = lazy(() => import('../pages/Dashboard/YourTeamDetails.js'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
 const Co_ManagerRoutes = (
     <>

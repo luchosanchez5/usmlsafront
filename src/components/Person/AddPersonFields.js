@@ -44,7 +44,7 @@ const AddPersonFields = () => {
         onSubmit: (values, action) => {
             const data = {
                 email: values.email,
-                password: UserEdit && values.password,
+                password: values.password,
                 name: values.name,
                 role: values.role,
                 firstName: values.firstName,
@@ -91,24 +91,24 @@ const AddPersonFields = () => {
 
 
 
-    useEffect(() => {
-        console.log("Get person by id useEffect....................")
-        if (UserEdit && PersonDetails) {
-            Dispatch(GetPersonsById(UserId, Token))
-        }
-    }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
     // useEffect(() => {
-    //     console.log("set values useEffect ......................")
-    //     if (values.role !== 'PLAYER') {
-    //         setValues({
-    //             ...values,
-    //             tournamentsPlayed: null,
-    //             points: null,
-    //             ranking: null,
-    //             gamesPlayed: null,
-    //         });
+    //     console.log("Get person by id useEffect....................")
+    //     if (UserEdit && PersonDetails) {
+    //         Dispatch(GetPersonsById(UserId, Token))
     //     }
-    // }, [values.role, setValues, values]);
+    // }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
+    useEffect(() => {
+       
+        if (values.role !== 'PLAYER') {
+            setValues({
+                ...values,
+                tournamentsPlayed: null,
+                points: null,
+                ranking: null,
+                gamesPlayed: null,
+            });
+        }
+    }, [values.role]);
 
     const PersonStatusOptions = [
         { value: "ACTIVE", label: "ACTIVE" },

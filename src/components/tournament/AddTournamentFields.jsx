@@ -82,7 +82,6 @@ const AddTournamentFields = () => {
       action.resetForm();
     },
   });
-  console.log(values.venueId);
 
   useEffect(() => {
     if (TournamentEdit && TournamentDetails) {
@@ -198,7 +197,7 @@ const AddTournamentFields = () => {
 
           <div className="d-flex justify-content-center flex-grow-1 ">
             <button type="submit" className="mt-3 gradient-btn-orange">
-              {isLoading ? <SpinNer /> : "Add Tournament"}
+              {isLoading ? <SpinNer /> : "Submit"}
             </button>
           </div>
         </Row>

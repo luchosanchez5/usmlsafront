@@ -98,9 +98,8 @@ function AddDivisionFields() {
     }, [Dispatch, token]);
     useEffect(() => {
         if (DivisionEdit && DivisionDetails) {
-            const formattedTime = new Date(DivisionDetails?.data?.startTime).toISOString().slice(11, 16);
-
-
+            
+            const formattedTime = DivisionDetails?.data?.startTime && new Date(DivisionDetails?.data?.startTime).toISOString().slice(11, 16);
             setValues({
                 divisionName: DivisionDetails?.data?.divisionName || '',
                 entryFee: DivisionDetails?.data?.entryFee || '',
@@ -112,10 +111,10 @@ function AddDivisionFields() {
                 prize2: DivisionDetails?.data?.prize2 || '',
                 prize3: DivisionDetails?.data?.prize3 || '',
                 prize4: DivisionDetails?.data?.prize4 || '',
-                tournamentId: DivisionDetails?.data.tournamentId || ''
+                tournamentId: DivisionDetails?.data?.tournamentId || ''
             });
         }
-    }, [AllDivisionsData, DivisionEdit, setValues]);
+    }, [DivisionDetails, DivisionEdit, setValues]);
 
     return (
         <>
@@ -273,7 +272,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex justify-content-center flex-grow-1 ">
                             <button type="submit" className="mt-3 gradient-btn-orange">
-                                {isLoading ? <SpinNer /> : "Add Division"}
+                                {isLoading ? <SpinNer /> : "Submit"}
                             </button>
                         </div>
 

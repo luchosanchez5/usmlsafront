@@ -12,7 +12,9 @@ import {
 import DeletePlayerModel from "../Models/DeletePlayerModel";
 const MembersTable = ({ setState, teamId }) => {
   const { TeamMembers, isLoading } = useSelector((state) => state.team);
-  const { token } = useSelector((state) => state.user);
+  const { token, user } = useSelector((state) => state.user);
+  const Role = user?.roles[0];
+  
   const [showCoManagerModel, setShowCoManagerModel] = useState(false);
   const [showPlayerModel, setShowPlayerModel] = useState(false);
   const [playerId, setPlayerId] = useState(null);
@@ -62,7 +64,7 @@ const MembersTable = ({ setState, teamId }) => {
                 <th>Email</th>
                 <th>Role</th>
                 {/* <th>Status</th> */}
-                <th>Actions</th>
+                {Role === "CO_MANAGER" ? null :<th>Actions</th>}
               </tr>
             </thead>
             <tbody>
@@ -72,6 +74,7 @@ const MembersTable = ({ setState, teamId }) => {
                     <td>{item?.name || item?.firstName}</td>
                     <td>{item?.email}</td>
                     <td>{item?.role}</td>
+                    {Role==='CO_MANAGER' ? null :
                     <td>
                       <div>
                         {item?.role === "MANAGER" ? null : item?.role ===
@@ -98,6 +101,7 @@ const MembersTable = ({ setState, teamId }) => {
                         )}
                       </div>
                     </td>
+                    }
                   </tr>
                 ))
               ) : (

@@ -183,7 +183,7 @@ const AddVenueFields = () => {
 
           <div className="d-flex justify-content-center flex-grow-1 ">
             <button type="submit" className="mt-3 gradient-btn-orange">
-              {isLoading ? <SpinNer /> : "Add Venue"}
+              {isLoading ? <SpinNer /> : "Submit"}
             </button>
           </div>
         </Row>

@@ -282,7 +282,6 @@ export const ResetPassword = (email, pass, otp, navigate) => (dispatch) => {
 export const UploadPersonImg = (id, Token, file) => (dispatch) => {
   const formData = new FormData();
   formData.append("file", file);
-  console.log(formData)
 
   dispatch({
     type: actionTypes.SET_LOADING,

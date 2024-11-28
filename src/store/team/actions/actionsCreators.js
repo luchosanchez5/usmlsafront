@@ -122,6 +122,7 @@ export const DeleteTeams = (teamId, Token, callback) => (dispatch) => {
     });
 };
 export const UpdateTeams = (teamId, data, Token, Navigate) => (dispatch) => {
+  console.log("🚀 ~ UpdateTeams ~ data:", data)
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -293,6 +294,39 @@ export const AddPlayerToTeam = (id, selectedCard, Token) => (dispatch) => {
     })
     .catch((error) => {
       Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+export const GetPlayers = (id,page,token) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/persons/player-list-not-in-current-team/${id}?page=${page}&size=10`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_PLAYERS,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_PLAYERS,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
@@ -543,14 +577,13 @@ export const removePlayer = (id, playerId, token) => (dispatch) => {
     }
   })
     .then((response) => {
-      Toast.success(response.data.message);
+      Toast.success('Player Remove Successfully!');
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
       });
     })
     .catch((error) => {
-      console.log(error.response)
       const errorMessage =
         error.response?.data?.error ||
         error.response?.data?.message ||
