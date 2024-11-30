@@ -77,8 +77,10 @@ const CardPaymentForm = ({
       };
       console.log(data);
       Dispatch(createSubscription(data, token, navigate, id, isPendingAmount));
-      SetCardModel(false);
-      setApiCall((prev) => !prev);
+      if (!isLoading) {
+        SetCardModel(false);
+        setApiCall((prev) => !prev);
+      }
     }
   };
 

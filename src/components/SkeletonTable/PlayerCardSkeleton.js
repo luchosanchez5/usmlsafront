@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Card, Col } from "react-bootstrap";
 
-const PlayerCardSkeleton = ({ count = 10 }) => {
+const   PlayerCardSkeleton = ({ count = 5 }) => {
     return (
         <>
             {Array.from({ length: count }).map((_, index) => (

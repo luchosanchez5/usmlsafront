@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import { Card, Row, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  
   AddPlayerToTeam,
   GetPlayers,
 } from "../../store/team/actions/actionsCreators";
@@ -25,15 +24,19 @@ const AddPlayerModel = ({ show, onClose, SetPlayerBoxModel, id, setState }) => {
     setPage(newPage);
   };
   const handleSubmit = () => {
-    console.log(selectedCard);
-    
-    Dispatch(AddPlayerToTeam(id, selectedCard, token));
-    setState((prev) => !prev);
+    Dispatch(AddPlayerToTeam(id, selectedCard, token))
+      .then(() => {
+        console.log("Player added successfully");
+        setState((prev) => !prev);
+      })
+      .catch(() => {
+        console.log("Failed to add player");
+      });
     SetPlayerBoxModel(false);
   };
 
   useEffect(() => {
-    Dispatch(GetPlayers(id,page,token))
+    Dispatch(GetPlayers(id, page, token));
   }, [Dispatch, token, page]);
 
   return (

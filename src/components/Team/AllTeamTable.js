@@ -53,7 +53,13 @@ const AllTeamTable = () => {
     Navigate(`/dashboard/allteams/${id}`);
   };
   const handleTeamsbySearch = (value) => {
-    Dispatch(getTeamsbySearch(value.target.value, token));
+    const searchValue = value.target.value;
+    if (searchValue === "") {
+      Dispatch(GetTeams(page, token, role, userId));
+    }
+    else {
+      Dispatch(getTeamsbySearch(searchValue, token));
+    }
   };
 
   return (

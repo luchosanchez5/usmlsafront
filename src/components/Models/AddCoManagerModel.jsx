@@ -9,6 +9,7 @@ import {
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 import PlayerCardSkeleton from "../SkeletonTable/PlayerCardSkeleton";
+import SpinNer from "../LoadingSpinner/SpinNer";
 const AddCoManagerModel = ({
   show,
   onClose,
@@ -29,8 +30,13 @@ const AddCoManagerModel = ({
     setPage(newPage);
   };
   const handleSubmit = () => {
-    Dispatch(AddCoManagerToTeam(id, selectedCard, token));
-    setState((prev) => !prev);
+    Dispatch(AddCoManagerToTeam(id, selectedCard, token))
+      .then(() => {
+        setState((prev) => !prev);
+      })
+      .catch(() => {
+        console.log("Failed to add Co-Manager");
+      });
     SetCoManagerBoxModel(false);
   };
 
@@ -103,7 +109,7 @@ const AddCoManagerModel = ({
                 }
               }}
             >
-              Submit
+              {isLoading ? <SpinNer /> : "Submit"}
             </button>
           </div>
         )}

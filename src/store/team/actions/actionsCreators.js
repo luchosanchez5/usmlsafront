@@ -205,37 +205,40 @@ export const GetMemberByTeamId = (Id, Token) => (dispatch) => {
       });
     });
 };
-export const AddCoManagerToTeam = (id, selectedCard, Token) => (dispatch) => {
-
+export const AddCoManagerToTeam = (id, selectedCard, Token) => async (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.post(`${Url}api/teams/${id}/co-manager/${selectedCard}`, {}, {
-    headers: {
-      Authorization: `Bearer ${Token}`
-    }
-  })
-    .then((response) => {
-      dispatch({
-        type: actionTypes.ADD_CO_MANAGER,
-        // payload: response.data.data,
-      });
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: false,
-      });
-      //   navigate("/dashboard");
-      Toast.success(response.data.message);
-    })
-    .catch((error) => {
-      Toast.error(error.response.data.message);
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: false,
-      });
+
+  try {
+    const response = await axios.post(
+      `${Url}api/teams/${id}/co-manager/${selectedCard}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      }
+    );
+
+    dispatch({
+      type: actionTypes.ADD_CO_MANAGER,
     });
+
+    Toast.success(response.data.message);
+    return Promise.resolve();
+  } catch (error) {
+    Toast.error(error.response?.data?.message || "Something went wrong.");
+    return Promise.reject();
+  } finally {
+    dispatch({
+      type: actionTypes.SET_LOADING,
+      payload: false,
+    });
+  }
 };
+
 export const GetCoManager = (role, token, page) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
@@ -269,38 +272,41 @@ export const GetCoManager = (role, token, page) => (dispatch) => {
       });
     });
 };
-export const AddPlayerToTeam = (id, selectedCard, Token) => (dispatch) => {
-
+export const AddPlayerToTeam = (id, selectedCard, Token) => async (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.post(`${Url}api/teams/${id}/players/${selectedCard}`, {}, {
-    headers: {
-      Authorization: `Bearer ${Token}`
-    }
-  })
-    .then((response) => {
-      dispatch({
-        type: actionTypes.ADD_PLAYER,
-        // payload: response.data.data,
-      });
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: false,
-      });
-      //   navigate("/dashboard");
-      Toast.success(response.data.message);
-    })
-    .catch((error) => {
-      Toast.error(error.response.data.message);
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: false,
-      });
+
+  try {
+    const response = await axios.post(
+      `${Url}api/teams/${id}/players/${selectedCard}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      }
+    );
+
+    dispatch({
+      type: actionTypes.ADD_PLAYER,
     });
+
+    Toast.success('Player added successfully');
+    return Promise.resolve(); // Resolve the promise on success
+  } catch (error) {
+    Toast.error(error.response?.data?.message || "Something went wrong.");
+    return Promise.reject(); // Reject the promise on error
+  } finally {
+    dispatch({
+      type: actionTypes.SET_LOADING,
+      payload: false,
+    });
+  }
 };
-export const GetPlayers = (id,page,token) => (dispatch) => {
+
+export const GetPlayers = (id, page, token) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -595,9 +601,9 @@ export const removePlayer = (id, playerId, token) => (dispatch) => {
       });
     });
 };
-export const getPaymentRecordsbySearch = (value, Token) => (dispatch) => {
+export const getPaymentRecordsBySearch = (value, Token) => (dispatch) => {
 
-  axios.get(`${Url}api/teams/search?name=${value.toLowerCase()}&page=0&size=10`, {
+  axios.get(`${Url}api/payment-records?teamName=${value.toLowerCase()}&page=0&size=10&forceFirstAndLastRels=true`, {
     headers: {
       Authorization: `Bearer ${Token}`
     }
