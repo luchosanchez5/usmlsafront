@@ -4,6 +4,7 @@ import EventData from "../../components/product/EventData";
 import { useDispatch, useSelector } from "react-redux";
 import { GetDefaultTournamentsBySearch } from "../../store/tournament/actions/actionsCreators";
 import SkeletonCard from "../../components/SkeletonTable/SkeletonCard";
+import { Row } from "react-bootstrap";
 
 const Home = () => {
   const { DefaultTournamentData, isLoading } = useSelector(
@@ -20,6 +21,8 @@ const Home = () => {
 
   return (
     <>
+   <Row className="mx-3 mx-lg-3 " >
+    <h2 className="text-center text-uppercase  py-2 fw-bold text-white Login-btn">featured events</h2>
       {isLoading ? (
         <SkeletonCard />
       ) : DefaultTournamentData?.data?.length > 0 ? (
@@ -47,15 +50,19 @@ const Home = () => {
               subtitle={item?.venueName}
               ranking={item?.name}
               points={item?.points}
-              img={image} // Pass the decoded or fallback image
+              img={image} 
               startDate={item?.startDate}
               endDate={item?.endDate}
+           
             />
           );
         })
       ) : (
+        <div className="d-flex justify-content-center flex-grow-1">
         <h2 className="text-center text-danger mt-5">No Records Found.</h2>
+        </div>
       )}
+      </Row>
     </>
   );
 };

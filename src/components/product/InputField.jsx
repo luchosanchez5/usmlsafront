@@ -1,9 +1,10 @@
 import React from 'react'
 
-const InputField = ({ label, type, touched, value, error, className, ...props }) => {
+const InputField = ({ label, type, touched, value, error, className,labelClassName, ...props }) => {
+ 
   return (
     <>
-      <label htmlFor="input">{label}</label>
+      <label htmlFor={label} className={labelClassName && labelClassName}>{label}</label>
       <input
         name={props.name}
         {...props}
