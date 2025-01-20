@@ -15,6 +15,7 @@ import PaymentModel from "../../components/CardModel/PaymentModel";
 import PaymentHistoryTable from "../../components/Paymenthistory/PaymentHistoryTAble";
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 import PendingHistoryTable from "../../components/Paymenthistory/PendingHistoryTable";
+import { FaArrowLeft } from "react-icons/fa6";
 const AllTeamsDetails = () => {
   const { id } = useParams();
   const { TeamDetailsData, isLoading } = useSelector((state) => state.team);
@@ -34,15 +35,15 @@ const AllTeamsDetails = () => {
   return (
     <>
       <h1 className="font-bold my-3 ps-4">Team Details</h1>
-      <div className="text-end  pe-4  ">
+      <div className="text-end   pe-4  ">
         <button
-          className="Team-register-btn mx-2"
+          className="Team-register-btn mb-1 mb-lg-0 mx-1 mx-md-2 mx-lg-2 mx-sm-2 "
           onClick={() => SetCoManagerBoxModel(true)}
         >
           Add Co Manager
         </button>
         <button
-          className="Team-register-btn mx-2"
+          className="Team-register-btn mx-lg-2 mx-md-2 mx-sm-2"
           onClick={() => SetPlayerBoxModel(true)}
         >
           Add Player
@@ -59,8 +60,8 @@ const AllTeamsDetails = () => {
         )}
       </div>
       <div className="text-start  ps-4  ">
-        <button className="Team-register-btn" onClick={() => Navigate(-1)}>
-          Go Back
+        <button className="bg-black">
+          <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
         </button>
       </div>
 
@@ -87,7 +88,7 @@ const AllTeamsDetails = () => {
         <DetailSkeleton />
       ) : (
         <div className="bg-white   rounded-lg shadow-lg max-w-4xl px-3 py-5 m-4">
-          <Row className="row row-cols-3 align-items-center  gy-3">
+          <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center  gy-3">
             <Col>
               <h5 className=" text-nowrap fw-bold">Team Name:</h5>
               <h6 className=" text-nowrap ">{TeamDetailsData?.name}</h6>

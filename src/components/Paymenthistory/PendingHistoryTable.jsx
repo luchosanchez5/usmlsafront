@@ -13,6 +13,7 @@ import { AiOutlineCreditCard, AiOutlineDollarCircle } from "react-icons/ai";
 import CardPaymentModel from "../Models/CardPaymentModel";
 import ConfirmModel from "../Models/ConfirmModel";
 import Toast from "../../shared/Toast";
+import { dateFormat } from "../../utlils/dateFormat";
 const PendingHistoryTable = () => {
   const { PendingPaymentRecords, isLoading } = useSelector(
     (state) => state.team
@@ -105,7 +106,7 @@ const PendingHistoryTable = () => {
                     <td>{item?.teamName}</td>
                     <td>{item?.tournamentName}</td>
                     <td>{item?.divisionName}</td>
-                    <td>{item?.registrationDate}</td>
+                    <td>{dateFormat(item?.registrationDate)}</td>
                     <td>{item?.pendingAmount}$</td>
                     <td
                       style={{

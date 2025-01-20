@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import "../../assets/css/products-table.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,6 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
   const Dispatch = useDispatch();
-
   useEffect(() => {
     Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
   }, [Dispatch, id, token, tournamentId, divisionId]);
@@ -31,37 +30,41 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
           <Table responsive hover size="sm" className="mt-2">
             <thead>
               <tr>
+                <th>Sr#</th>
                 <th>Team Name</th>
                 <th>Payment Purpose</th>
-                <th>Pending Amount</th>
-                <th>Paid Amount</th>
-                <th>Total Amount</th>
-                <th>Payment Status</th>
+                <th>Amount Paid</th>
+                <th>Division</th>
+                {/* <th>Payment Status</th> */}
               </tr>
             </thead>
             <tbody>
               {PaymentRecords?._embedded?.paymentRecordResponseList?.length >
               0 ? (
                 PaymentRecords?._embedded?.paymentRecordResponseList?.map(
-                  (item, index) => (
-                    <tr key={index} className="main-row">
-                      <td>{item?.teamName}</td>
-                      <td>{item?.paymentPurpose}</td>
-                      <td>{item?.pendingAmount}$</td>
-                      <td>{item?.paidAmount}$</td>
-                      <td>{item?.totalAmount}$</td>
-                      <td
-                        style={{
-                          color:
-                            item?.paymentStatus === "succeeded"
-                              ? "green"
-                              : "red",
-                        }}
-                      >
-                        {item?.paymentStatus}
-                      </td>
-                    </tr>
-                  )
+                  (item, index) => {
+                    const serialNumber = index + 1;
+
+                    return (
+                      <tr key={index} className="main-row">
+                        <td>{serialNumber}</td>
+                        <td>{item?.teamName}</td>
+                        <td>{item?.paymentPurpose}</td>
+                        <td>{item?.paidAmount}$</td>
+                        <td>{item?.divisionName}</td>
+                        {/* <td
+                          style={{
+                            color:
+                              item?.paymentStatus === "succeeded"
+                                ? "green"
+                                : "red",
+                          }}
+                        >
+                          {item?.paymentStatus}
+                        </td> */}
+                      </tr>
+                    );
+                  }
                 )
               ) : (
                 <tr>

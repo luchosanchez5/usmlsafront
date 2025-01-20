@@ -7,6 +7,7 @@ import {
   GetPaymentRecords,
   getPaymentRecordsBySearch,
 } from "../../store/team/actions/actionsCreators";
+import { dateFormat } from "../../utlils/dateFormat";
 const AllPaymentHistoryTable = () => {
   const { VenueData, isLoading } = useSelector((state) => state.venue);
   const { PaymentRecords } = useSelector((state) => state.team);
@@ -66,7 +67,8 @@ const AllPaymentHistoryTable = () => {
                     <td>{item?.totalAmount}</td>
                     <td>{item?.paymentChannel}</td>
                     <td>{item?.paymentCurrency}</td>
-                    <td>{item?.paymentDate}</td>
+                    <td>{dateFormat(item?.paymentDate)}</td>
+
                     <td
                       style={{
                         color:

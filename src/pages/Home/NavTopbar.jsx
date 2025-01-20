@@ -59,8 +59,8 @@ function NavTopbar() {
             </>
           )}
         </div>
-        <div className="d-flex d-lg-none">
-          <HiBars3 onClick={()=>setIsSidebarOpen((prev)=>!prev)} fontSize={30}  />
+        <div className="d-flex d-lg-none ">
+          <HiBars3 className="icon"   onClick={()=>setIsSidebarOpen((prev)=>!prev)} fontSize={30} />
         </div>
       </Navbar>
     </>

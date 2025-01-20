@@ -202,7 +202,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
-                                type="number"
+                                type="text"
                                 name="prize1"
                                 label="Prize 1"
                                 onChange={handleChange}
@@ -215,7 +215,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
-                                type="number"
+                                type="text"
                                 name="prize2"
                                 label="Prize 2"
                                 onChange={handleChange}
@@ -228,7 +228,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
-                                type="number"
+                                type="text"
                                 name="prize3"
                                 label="Prize 3"
                                 onChange={handleChange}
@@ -241,7 +241,7 @@ function AddDivisionFields() {
                         </div>
                         <div className="d-flex flex-column flex-grow-1">
                             <InputField
-                                type="number"
+                                type="text"
                                 name="prize4"
                                 label="Prize 4"
                                 onChange={handleChange}

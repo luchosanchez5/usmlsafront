@@ -67,11 +67,10 @@ const AllMembersTable = () => {
     <>
       <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl">
         <Row className="mb-3">
-          <Col>
+          <Col sm={12} md={4} lg={4}>
             <Form.Control
               type="text"
               placeholder="Venue Name"
-              className="w-50"
               onChange={handleSearchVenue}
             />
           </Col>

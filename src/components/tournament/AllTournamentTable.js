@@ -11,6 +11,7 @@ import { PaginationControl } from 'react-bootstrap-pagination-control';
 import { useNavigate } from 'react-router-dom';
 import { GlobalInfo } from '../../App';
 import TableSkeleton from '../SkeletonTable/SkeletonTable';
+import { dateFormat } from '../../utlils/dateFormat';
 const AllTournamentTable = () => {
     const { TournamentData, isLoading } = useSelector((state) => state.tournament)
     const { token } = useSelector((state) => state.user)
@@ -59,8 +60,8 @@ const AllTournamentTable = () => {
         <>
             <div className='section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl '>
                 <Row className='mb-3'>
-                    <Col>
-                        <Form.Control type="text" placeholder="Tournament Name" className='w-50' onChange={handleSearchTournaments} />
+                    <Col sm={12} md={4} lg={4}>
+                        <Form.Control type="text" placeholder="Tournament Name"  onChange={handleSearchTournaments} />
                     </Col>
 
 
@@ -92,8 +93,8 @@ const AllTournamentTable = () => {
                                         <tr key={index} className='main-row'>
                                             <td>{item?.name}</td>
                                             <td>{item?.venueName ? item?.venueName : 'No Venue Selected Yet'}</td>
-                                            <td>{item?.startDate}</td>
-                                            <td>{item?.endDate}</td>
+                                            <td>{dateFormat(item?.startDate)}</td>
+                                            <td>{dateFormat(item?.endDate)}</td>
                                             <td
                                                 style={{
                                                     color: item?.status === 'ACTIVE' ? 'green' : 'red',

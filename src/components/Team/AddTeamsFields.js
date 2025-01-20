@@ -340,7 +340,7 @@ function AddTeamsFields() {
           <Col md={4}>
             <SelectTag
               options={teamStatusOptions}
-              deFaultValue="Select Team Status"
+              deFaultValue="ACTIVE"
               onChange={handleChange}
               label="Team Status"
               name="teamStatus"

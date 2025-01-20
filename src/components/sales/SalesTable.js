@@ -3,6 +3,7 @@ import { Col, Row, Table, Form } from 'react-bootstrap';
 import { AiFillPrinter, AiFillFilePdf, AiOutlineDelete } from 'react-icons/ai';
 import { BsEye } from 'react-icons/bs';
 import { CiEdit } from 'react-icons/ci';
+import { dateFormat } from '../../utlils/dateFormat';
 
 const SalesTable = () => {
 
@@ -50,7 +51,7 @@ const SalesTable = () => {
                 <tbody>
                     {data.map((item, index) => (
                         <tr key={index} className='main-row'>
-                            <td>{item.date}</td>
+                            <td>{dateFormat(item.date)}</td>
                             <td>{item.customer}</td>
                             <td>{item.reference}</td>
                             <td>{item.status}</td>

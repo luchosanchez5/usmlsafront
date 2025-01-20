@@ -56,8 +56,7 @@ const AllTeamTable = () => {
     const searchValue = value.target.value;
     if (searchValue === "") {
       Dispatch(GetTeams(page, token, role, userId));
-    }
-    else {
+    } else {
       Dispatch(getTeamsbySearch(searchValue, token));
     }
   };
@@ -66,11 +65,10 @@ const AllTeamTable = () => {
     <>
       <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
         <Row className="mb-3">
-          <Col>
+          <Col sm={12} md={4} lg={4}>
             <Form.Control
               type="text"
               placeholder="Team Name"
-              className="w-50"
               onChange={handleTeamsbySearch}
             />
           </Col>

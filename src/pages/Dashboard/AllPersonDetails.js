@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { GetPersonsById } from '../../store/person/actions/actionsCreators'
 import DashboardLayout from '../../layout/DashboardLayout'
+import { FaArrowLeft } from 'react-icons/fa6'
 const AllPersonDetails = () => {
     const { id } = useParams()
     const { token } = useSelector((state) => state.user)
@@ -20,13 +21,14 @@ const AllPersonDetails = () => {
         <>
             <h1 className="font-bold my-3">Person Details</h1>
             <div className="text-end  pe-4  ">
-                <button className='Team-register-btn'
-                    onClick={() => Navigate(-1)}>Go Back</button>
+              <button className="bg-black">
+                       <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
+                     </button>
             </div>
 
             <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
 
-                <Row className="row row-cols-3 align-items-center  gy-3">
+                <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center  gy-3">
                     <Col >
                         <h5 className=" text-nowrap  fw-bold">Name:</h5>
                         <h6 className=" text-nowrap ">{PersonDetails?.name}</h6>

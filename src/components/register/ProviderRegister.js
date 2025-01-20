@@ -16,6 +16,7 @@ const ProviderRegisterForm = () => {
   const { isLoading } = useSelector((state) => state.user);
   const [roleValue, SetRoleValue] = useState("");
   const [eye, setEye] = useState(false);
+  const[confirmEye,setConfirmEye]=useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,6 +40,7 @@ const ProviderRegisterForm = () => {
     mobilePhone: "",
     email: "",
     password: "",
+    confirmPassword:"",
     tournamentsPlayed: null,
     gamesPlayed: null,
     role: "",
@@ -100,7 +102,7 @@ const ProviderRegisterForm = () => {
               <Col>
                 <TextField
                   icon={<FaUser />}
-                  placeholder="Name"
+                  placeholder="First Name"
                   name="name"
                   type="text"
                 />
@@ -108,7 +110,7 @@ const ProviderRegisterForm = () => {
               <Col>
                 <TextField
                   icon={<FaUser />}
-                  placeholder="First Name"
+                  placeholder="Middle Name"
                   name="firstName"
                   type="text"
                 />
@@ -251,6 +253,21 @@ const ProviderRegisterForm = () => {
                   placeholder="Password"
                   name="password"
                   type={eye ? "text" : "password"}
+                />
+              </Col>
+              <Col>
+                <TextField
+                  icon={<FaLock />}
+                  righticon={
+                    confirmEye ? (
+                      <AiFillEyeInvisible onClick={() => setConfirmEye(!confirmEye)} />
+                    ) : (
+                      <AiFillEye onClick={() => setConfirmEye(!confirmEye)} />
+                    )
+                  }
+                  placeholder="Confirm Password"
+                  name="confirmPassword"
+                  type={confirmEye ? "text" : "password"}
                 />
               </Col>
             </Row>

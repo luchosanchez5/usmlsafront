@@ -8,7 +8,7 @@ const AllTournament = () => {
     return (
         <>
 
-            <PageHeader title="All Tournament list" btnText="Add New Tournament" subtitle="Manage Your Tournament" onClick={() => Navigate('/dashboard/addtournaments')} />
+            <PageHeader  className='px-2' title="All Tournament list" btnText="Add New Tournament" subtitle="Manage Your Tournament" onClick={() => Navigate('/dashboard/addtournaments')} />
 
             <AllTournamentTable />
 

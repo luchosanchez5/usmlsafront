@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Table, Form } from "react-bootstrap";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsEye } from "react-icons/bs";
@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 const AllPersonsTable = () => {
   const { PersonData, isLoading } = useSelector((state) => state.person);
-//   const { SetUserEdit, SetUserId } = useContext(GlobalInfo);
+  //   const { SetUserEdit, SetUserId } = useContext(GlobalInfo);
   const { token } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
   const [deleteModel, setDeleteModel] = useState(false);
@@ -27,7 +27,7 @@ const AllPersonsTable = () => {
 
   useEffect(() => {
     Dispatch(GetPersons(page, token));
-  }, [Dispatch,page,token]);
+  }, [Dispatch, page, token]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage - 1);
@@ -40,11 +40,11 @@ const AllPersonsTable = () => {
   const handleEyebtn = (id) => {
     Navigate(`/dashboard/allpersons/${id}`);
   };
-//   const handleEditbtn = (id) => {
-//     SetUserEdit(true);
-//     SetUserId(id);
-//     Navigate("/dashboard/addperson");
-//   };
+  //   const handleEditbtn = (id) => {
+  //     SetUserEdit(true);
+  //     SetUserId(id);
+  //     Navigate("/dashboard/addperson");
+  //   };
   const handleDeletePerson = () => {
     Dispatch(
       DelPersons(personId, token, () => {
@@ -62,11 +62,10 @@ const AllPersonsTable = () => {
   return (
     <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
       <Row className="mb-3">
-        <Col>
+        <Col sm={12} md={4} lg={4}>
           <Form.Control
             type="text"
             placeholder="Search"
-            className="w-50"
             onChange={handleSearchPersons}
           />
         </Col>

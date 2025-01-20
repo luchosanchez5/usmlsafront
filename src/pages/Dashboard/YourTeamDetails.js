@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { GetMemberByTeamId, GetTeamsbyTeamId } from "../../store/team/actions/actionsCreators";
+import {
+  GetMemberByTeamId,
+  GetTeamsbyTeamId,
+} from "../../store/team/actions/actionsCreators";
 import DashboardLayout from "../../layout/DashboardLayout";
 import AddPlayerModel from "../../components/Models/AddPlayerModel";
 import MembersTable from "../../components/Member/MembersTable";
+import { FaArrowLeft } from "react-icons/fa6";
 const YourTeamDetails = () => {
   const { id } = useParams();
   const { TeamDetailsData } = useSelector((state) => state.team);
@@ -20,13 +24,13 @@ const YourTeamDetails = () => {
   useEffect(() => {
     Dispatch(GetMemberByTeamId(id, token));
     Dispatch(GetTeamsbyTeamId(id, token));
-  }, [id, Dispatch,state, token]);
+  }, [id, Dispatch, state, token]);
   return (
     <>
       <h1 className="font-bold my-3"> Team Details </h1>
       <div className="text-end  pe-4  ">
-        <button className="Team-register-btn" onClick={() => Navigate(-1)}>
-          Go Back
+        <button className="bg-black">
+          <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
         </button>
         {role === "CO_MANAGER" && (
           <button
@@ -39,7 +43,7 @@ const YourTeamDetails = () => {
       </div>
 
       <div className="bg-white  rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
-        <Row className="row row-cols-3 align-items-center  gy-3">
+        <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center  gy-3">
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Name:</h5>
             <h6 className=" text-nowrap ">{TeamDetailsData?.name}</h6>
