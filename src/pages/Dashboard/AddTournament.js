@@ -9,13 +9,13 @@ const AddTournament = () => {
       <div className="d-flex gap-3 justify-content-center">
         <button
           className="bg-black py-1 text-white"
-          onClick={()=>setState("tournamentForm")}
+          onClick={() => setState("tournamentForm")}
         >
           Add Tournament
         </button>
         <button
-          className="gradient-btn-orange px-1 py-1  text-white"
-          onClick={()=>setState("divisionForm")}
+          className="bg-danger px-1 py-1  text-white"
+          onClick={() => setState("divisionForm")}
         >
           Add Division
         </button>

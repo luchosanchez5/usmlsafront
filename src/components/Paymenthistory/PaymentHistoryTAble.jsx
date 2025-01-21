@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GetPaymentRecords } from "../../store/team/actions/actionsCreators";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
+import { dateFormat } from "../../utlils/dateFormat";
 const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
+  console.log(PaymentRecords);
 
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
@@ -30,9 +32,9 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
           <Table responsive hover size="sm" className="mt-2">
             <thead>
               <tr>
-                <th>Sr#</th>
+                <th>Sr #</th>
                 <th>Team Name</th>
-                <th>Payment Purpose</th>
+                <th>Registered Date </th>
                 <th>Amount Paid</th>
                 <th>Division</th>
                 {/* <th>Payment Status</th> */}
@@ -49,7 +51,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                       <tr key={index} className="main-row">
                         <td>{serialNumber}</td>
                         <td>{item?.teamName}</td>
-                        <td>{item?.paymentPurpose}</td>
+                        <td>{dateFormat(item?.paymentDate)}</td>
                         <td>{item?.paidAmount}$</td>
                         <td>{item?.divisionName}</td>
                         {/* <td

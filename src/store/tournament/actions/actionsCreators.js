@@ -424,7 +424,7 @@ export const AddDivisions = (data, token, Navigate) => (dispatch) => {
       Toast.success(response.data.message);
     })
     .catch((error) => {
-      Toast.error(error.response.data.message);
+      Toast.error(error.response.data.error);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
