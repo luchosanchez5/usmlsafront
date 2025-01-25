@@ -12,7 +12,6 @@ import {
 import { GlobalInfo } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { AllTeamSchemas } from "../../Schemas/Schemas";
-import { tab } from "@testing-library/user-event/dist/tab";
 
 function AddTeamsFields() {
   const { user } = useSelector((state) => state.user);
@@ -26,19 +25,19 @@ function AddTeamsFields() {
     name: "",
     email: "",
     address: "",
-    points: null,
-    ranking: null,
-    division: "",
+    // points: null,
+    // ranking: null,
+    // division: "",
     city: "",
     state: "",
-    gamesWin: null,
-    gamesLost: null,
-    gamesTied: null,
-    avgRunsScored: null,
-    avgRunsAllowed: null,
-    avgRunsDiff: null,
-    runScored: null,
-    runAllowed: null,
+    // gamesWin: null,
+    // gamesLost: null,
+    // gamesTied: null,
+    // avgRunsScored: null,
+    // avgRunsAllowed: null,
+    // avgRunsDiff: null,
+    // runScored: null,
+    // runAllowed: null,
     teamStatus: "",
   };
 
@@ -56,25 +55,25 @@ function AddTeamsFields() {
     onSubmit: (values, action) => {
       let data;
       if (TeamEdit) {
-        
+
         data = {
           name: values.name,
           email: values.email,
           address: values.address,
-          points: values.points,
-          ranking: values.ranking,
-          division: values.division,
+          // points: values.points,
+          // ranking: values.ranking,
+          // division: values.division,
           city: values.city,
           state: values.state,
-          gamesWin: values.gamesWin,
-          gamesLost: values.gamesLost,
-          gamesTied: values.gamesTied,
-          avgRunsScored: values.avgRunsScored,
-          avgRunsAllowed: values.avgRunsAllowed,
-          avgRunsDiff: values.avgRunsDiff,
-          runScored: values.runScored,
-          runAllowed: values.runAllowed,
-          teamStatus: values.teamStatus,
+          // gamesWin: values.gamesWin,
+          // gamesLost: values.gamesLost,
+          // gamesTied: values.gamesTied,
+          // avgRunsScored: values.avgRunsScored,
+          // avgRunsAllowed: values.avgRunsAllowed,
+          // avgRunsDiff: values.avgRunsDiff,
+          // runScored: values.runScored,
+          // runAllowed: values.runAllowed,
+          teamStatus: "ACTIVE",
           managerId: TeamDetailsData.managerId,
         };
         Dispatch(UpdateTeams(TeamId, data, Token, Navigate));
@@ -83,20 +82,20 @@ function AddTeamsFields() {
           name: values.name,
           email: values.email,
           address: values.address,
-          points: values.points,
-          ranking: values.ranking,
-          division: values.division,
+          // points: values.points,
+          // ranking: values.ranking,
+          // division: values.division,
           city: values.city,
           state: values.state,
-          gamesWin: values.gamesWin,
-          gamesLost: values.gamesLost,
-          gamesTied: values.gamesTied,
-          avgRunsScored: values.avgRunsScored,
-          avgRunsAllowed: values.avgRunsAllowed,
-          avgRunsDiff: values.avgRunsDiff,
-          runScored: values.runScored,
-          runAllowed: values.runAllowed,
-          teamStatus: values.teamStatus,
+          // gamesWin: values.gamesWin,
+          // gamesLost: values.gamesLost,
+          // gamesTied: values.gamesTied,
+          // avgRunsScored: values.avgRunsScored,
+          // avgRunsAllowed: values.avgRunsAllowed,
+          // avgRunsDiff: values.avgRunsDiff,
+          // runScored: values.runScored,
+          // runAllowed: values.runAllowed,
+          teamStatus: "ACTIVE",
         };
         Dispatch(AddTeams(data, Token, Navigate));
       }
@@ -181,7 +180,7 @@ function AddTeamsFields() {
               error={errors.address}
             />
           </Col>
-          <Col md={4}>
+          {/* <Col md={4}>
             <InputField
               type="number"
               name="points"
@@ -192,8 +191,8 @@ function AddTeamsFields() {
               touched={touched.points}
               error={errors.points}
             />
-          </Col>
-          <Col md={4}>
+          </Col> */}
+          {/* <Col md={4}>
             <InputField
               type="number"
               name="ranking"
@@ -204,8 +203,8 @@ function AddTeamsFields() {
               touched={touched.ranking}
               error={errors.ranking}
             />
-          </Col>
-          <Col md={4}>
+          </Col> */}
+          {/* <Col md={4}>
             <InputField
               type="text"
               name="division"
@@ -216,7 +215,7 @@ function AddTeamsFields() {
               touched={touched.division}
               error={errors.division}
             />
-          </Col>
+          </Col> */}
           <Col md={4}>
             <InputField
               type="text"
@@ -241,7 +240,7 @@ function AddTeamsFields() {
               error={errors.state}
             />
           </Col>
-          <Col md={4}>
+          {/* <Col md={4}>
             <InputField
               type="number"
               name="gamesWin"
@@ -336,8 +335,8 @@ function AddTeamsFields() {
               touched={touched.runAllowed}
               error={errors.runAllowed}
             />
-          </Col>
-          <Col md={4}>
+          </Col> */}
+          {/* <Col md={4}>
             <SelectTag
               options={teamStatusOptions}
               deFaultValue="ACTIVE"
@@ -349,7 +348,7 @@ function AddTeamsFields() {
               value={values.teamStatus}
               className="form-control"
             />
-          </Col>
+          </Col> */}
         </Row>
         <div className="d-flex justify-content-center">
           <button type="submit" className="mt-3 gradient-btn-orange">
