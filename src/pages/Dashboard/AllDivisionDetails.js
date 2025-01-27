@@ -71,61 +71,34 @@ const AllDivisionDetails = () => {
       <div
         className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
         onClick={triggerFileInput}
-        style={{ marginLeft: "20px" }}
+        style={{ marginLeft: "20px", background: !previewImage && "black" }}
       >
         {isLoading ? (
-                 <div
-                   className="skeleton-loader"
-                   style={{
-                     width: "120px",
-                     height: "120px",
-                     borderRadius: "50%",
-                     backgroundColor: "#ccc",
-                   }}
-                 ></div>
-               ) : (
-                 <div
-                   className="image-container d-flex flex-column align-items-center justify-content-center gap-2"
-                   onClick={triggerFileInput}
-                   style={{
-                     width: "120px",
-                     height: "120px",
-                     borderRadius: "50%",
-                     background:!previewImage &&  "black",
-                     overflow: "hidden",
-                   }}
-                 >
-                   <img
-                     src={
-                       previewImage
-                         ? previewImage
-                         : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
-                     }
-                     alt="Picture"
-                     style={{
-                       width: "120px",
-                       height: "120px",
-                       borderRadius: "50%",
-                       objectFit: !previewImage &&  "contain" 
-                     }}
-                   />
-                   {!previewImage && (
-                     <div
-                       className="upload-icon-container d-flex flex-column align-items-center justify-content-center"
-                       style={{
-                         position: "absolute",
-                         color: "#555",
-                         top: "50%",
-                         left: "50%",
-                         transform: "translate(-50%, -50%)",
-                       }}
-                     >
-                       <FaCamera size={30} />
-                       <span>Upload Picture</span>
-                     </div>
-                   )}
-                 </div>
-               )}
+          <div
+            className="skeleton-loader"
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              backgroundColor: "#ccc",
+            }}
+          ></div>
+        ) : (
+          <img
+            src={
+              previewImage
+                ? previewImage
+                : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
+            }
+            alt="Division Preview"
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              objectFit: !previewImage && "contain",
+            }}
+          />
+        )}
         <input
           type="file"
           ref={fileInputRef}

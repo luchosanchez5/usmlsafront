@@ -75,10 +75,11 @@ const Setting = () => {
         btnText="Edit User"
         onClick={() => setEditModel(true)}
       />
+
       <div
         className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
         onClick={triggerFileInput}
-        style={{ marginLeft: "20px" }}
+        style={{ marginLeft: "20px", background: !previewImage && "black" }}
       >
         {isLoading ? (
           <div
@@ -91,49 +92,21 @@ const Setting = () => {
             }}
           ></div>
         ) : (
-          <div
-            className="image-container d-flex flex-column align-items-center justify-content-center gap-2"
-            onClick={triggerFileInput}
+          <img
+            src={
+              previewImage
+                ? previewImage
+                : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
+            }
+            alt="Division Preview"
             style={{
               width: "120px",
               height: "120px",
               borderRadius: "50%",
-              background: !previewImage && "black",
-              overflow: "hidden",
+              objectFit: !previewImage && "contain",
             }}
-          >
-            <img
-              src={
-                previewImage
-                  ? previewImage
-                  : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
-              }
-              alt="Picture"
-              style={{
-                width: "120px",
-                height: "120px",
-                borderRadius: "50%",
-                objectFit: !previewImage && "contain",
-              }}
-            />
-            {!previewImage && (
-              <div
-                className="upload-icon-container d-flex flex-column align-items-center justify-content-center"
-                style={{
-                  position: "absolute",
-                  color: "#555",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                <FaCamera size={30} />
-                <span>Upload Picture</span>
-              </div>
-            )}
-          </div>
+          />
         )}
-
         <input
           type="file"
           ref={fileInputRef}
