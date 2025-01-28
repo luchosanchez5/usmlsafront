@@ -102,9 +102,9 @@ const AddTournamentFields = () => {
 
   return (
     <>
-      <h2 className="my-3 fw-bold">
+      <h4 className="my-3 fw-bold">
         {TournamentEdit ? "Update Tournament" : "Add Tournament"}
-      </h2>
+      </h4>
       <form onSubmit={handleSubmit}>
         <Row className="row gy-3 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2">
           <div className="d-flex flex-column flex-grow-1">

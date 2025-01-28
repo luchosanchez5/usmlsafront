@@ -58,18 +58,18 @@ const ProviderRegisterForm = () => {
       lastName: values.lastName,
       address1: values.address1,
       address2: values.address2,
-      points: values.points,
-      ranking: values.ranking,
-      division: values.division,
+      // points: values.points,
+      // ranking: values.ranking,
+      // division: values.division,
       city: values.city,
       state: values.state,
       zipCode: values.zipCode,
       mobilePhone: values.mobilePhone,
-      tournamentsPlayed: values.tournamentsPlayed,
-      gamesPlayed: values.gamesPlayed,
+      // tournamentsPlayed: values.tournamentsPlayed,
+      // gamesPlayed: values.gamesPlayed,
       playerStatus: 'ACTIVE',
       personAPlayer: roleValue === 'PLAYER' ? true : false,
-      country: 'Pakistan',
+      // country: 'Pakistan',
 
     };
     dispatch(userRegister(data, navigate));
@@ -110,7 +110,7 @@ const ProviderRegisterForm = () => {
               <Col>
                 <TextField
                   icon={<FaUser />}
-                  placeholder="Middle Name"
+                  placeholder="Middle Name (optional)"
                   name="firstName"
                   type="text"
                 />
@@ -156,7 +156,7 @@ const ProviderRegisterForm = () => {
                   touched={touched.role}
                 />
               </Col>
-              {values.role === 'PLAYER' && (
+              {/* {values.role === 'PLAYER' && (
                 <>
                   <Col>
                     <TextField
@@ -199,7 +199,7 @@ const ProviderRegisterForm = () => {
                     />
                   </Col>
                 </>
-              )}
+              )} */}
               <Col>
                 <TextField
                   icon={<FaCity />}

@@ -18,7 +18,7 @@ const AddTournament = () => {
           <span className="slider"></span>
         </label>
         <p className="p-0 m-0 fw-bold">
-          {state === "tournamentForm" ? "Tournament Form" : "Division Form"}
+          {state === "tournamentForm" ? "Division Form" : "Tournament Form"}
         </p>
       </div>
       {state === "tournamentForm" ? (
@@ -31,5 +31,3 @@ const AddTournament = () => {
 };
 
 export default DashboardLayout(AddTournament);
-
-

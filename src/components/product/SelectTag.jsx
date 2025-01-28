@@ -1,5 +1,4 @@
 import React from "react";
-import { FaUserTie } from "react-icons/fa"; // Import the icon
 import { useLocation } from "react-router-dom";
 
 const SelectTag = ({

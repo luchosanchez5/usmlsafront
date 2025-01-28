@@ -68,45 +68,50 @@ const AllDivisionDetails = () => {
       <h1 className="font-bold my-3">Divisions Details</h1>
 
       {/* Image Upload Section */}
-      <div
-        className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
-        onClick={triggerFileInput}
-        style={{ marginLeft: "20px", background: !previewImage && "black" }}
-      >
-        {isLoading ? (
-          <div
-            className="skeleton-loader"
-            style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "50%",
-              backgroundColor: "#ccc",
-            }}
-          ></div>
-        ) : (
-          <img
-            src={
-              previewImage
-                ? previewImage
-                : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
-            }
-            alt="Division Preview"
-            style={{
-              width: "120px",
-              height: "120px",
-              borderRadius: "50%",
-              objectFit: !previewImage && "contain",
-            }}
-          />
-        )}
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          onChange={handleFileUpload}
-          accept="image/*"
-        />
-      </div>
+       <div className="d-flex align-items-center gap-3">
+             <div
+               className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
+               style={{ marginLeft: "20px", background: !previewImage && "black" }}
+             >
+               {isLoading ? (
+                 <div
+                   className="skeleton-loader"
+                   style={{
+                     width: "120px",
+                     height: "120px",
+                     borderRadius: "50%",
+                     backgroundColor: "#ccc",
+                   }}
+                 ></div>
+               ) : (
+                 <img
+                   src={
+                     previewImage
+                       ? previewImage
+                       : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
+                   }
+                   alt="Division Preview"
+                   style={{
+                     width: "120px",
+                     height: "120px",
+                     borderRadius: "50%",
+                     objectFit: !previewImage && "contain",
+                   }}
+                 />
+               )}
+               <input
+                 type="file"
+                 ref={fileInputRef}
+                 style={{ display: "none" }}
+                 onChange={handleFileUpload}
+                 accept="image/*"
+               />
+             </div>
+             <div className="d-flex flex-column align-items-center gap-2">
+               <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
+               <span>Upload picture</span>
+             </div>
+           </div>
 
       {/* Go Back Button */}
       <div className="text-end pe-4">

@@ -60,19 +60,19 @@ function AddTeamsFields() {
           name: values.name,
           email: values.email,
           address: values.address,
-          // points: values.points,
-          // ranking: values.ranking,
-          // division: values.division,
+          points: values.points,
+          ranking: values.ranking,
+          division: values.division,
           city: values.city,
           state: values.state,
-          // gamesWin: values.gamesWin,
-          // gamesLost: values.gamesLost,
-          // gamesTied: values.gamesTied,
-          // avgRunsScored: values.avgRunsScored,
-          // avgRunsAllowed: values.avgRunsAllowed,
-          // avgRunsDiff: values.avgRunsDiff,
-          // runScored: values.runScored,
-          // runAllowed: values.runAllowed,
+          gamesWin: values.gamesWin,
+          gamesLost: values.gamesLost,
+          gamesTied: values.gamesTied,
+          avgRunsScored: values.avgRunsScored,
+          avgRunsAllowed: values.avgRunsAllowed,
+          avgRunsDiff: values.avgRunsDiff,
+          runScored: values.runScored,
+          runAllowed: values.runAllowed,
           teamStatus: "ACTIVE",
           managerId: TeamDetailsData.managerId,
         };
@@ -180,7 +180,10 @@ function AddTeamsFields() {
               error={errors.address}
             />
           </Col>
-          {/* <Col md={4}>
+          {
+            TeamEdit && 
+            <>
+               <Col md={4}>
             <InputField
               type="number"
               name="points"
@@ -191,8 +194,8 @@ function AddTeamsFields() {
               touched={touched.points}
               error={errors.points}
             />
-          </Col> */}
-          {/* <Col md={4}>
+          </Col>
+          <Col md={4}>
             <InputField
               type="number"
               name="ranking"
@@ -203,8 +206,8 @@ function AddTeamsFields() {
               touched={touched.ranking}
               error={errors.ranking}
             />
-          </Col> */}
-          {/* <Col md={4}>
+          </Col>
+          <Col md={4}>
             <InputField
               type="text"
               name="division"
@@ -215,32 +218,8 @@ function AddTeamsFields() {
               touched={touched.division}
               error={errors.division}
             />
-          </Col> */}
-          <Col md={4}>
-            <InputField
-              type="text"
-              name="city"
-              label="City"
-              onChange={handleChange}
-              value={values.city}
-              className="form-control"
-              touched={touched.city}
-              error={errors.city}
-            />
           </Col>
-          <Col md={4}>
-            <InputField
-              type="text"
-              name="state"
-              label="State"
-              onChange={handleChange}
-              value={values.state}
-              className="form-control"
-              touched={touched.state}
-              error={errors.state}
-            />
-          </Col>
-          {/* <Col md={4}>
+            <Col md={4}>
             <InputField
               type="number"
               name="gamesWin"
@@ -335,8 +314,8 @@ function AddTeamsFields() {
               touched={touched.runAllowed}
               error={errors.runAllowed}
             />
-          </Col> */}
-          {/* <Col md={4}>
+          </Col>
+          <Col md={4}>
             <SelectTag
               options={teamStatusOptions}
               deFaultValue="ACTIVE"
@@ -348,7 +327,35 @@ function AddTeamsFields() {
               value={values.teamStatus}
               className="form-control"
             />
-          </Col> */}
+          </Col>
+            </>
+          }
+       
+          <Col md={4}>
+            <InputField
+              type="text"
+              name="city"
+              label="City"
+              onChange={handleChange}
+              value={values.city}
+              className="form-control"
+              touched={touched.city}
+              error={errors.city}
+            />
+          </Col>
+          <Col md={4}>
+            <InputField
+              type="text"
+              name="state"
+              label="State"
+              onChange={handleChange}
+              value={values.state}
+              className="form-control"
+              touched={touched.state}
+              error={errors.state}
+            />
+          </Col>
+        
         </Row>
         <div className="d-flex justify-content-center">
           <button type="submit" className="mt-3 gradient-btn-orange">
