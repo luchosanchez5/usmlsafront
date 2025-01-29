@@ -4,6 +4,8 @@ import ChangePassword from '../pages/Dashboard/ChangePassword.js';
 const AddPerson = lazy(() => import('../pages/Dashboard/AddPerson.js'));
 const AllPersonDetails = lazy(() => import('../pages/Dashboard/AllPersonDetails.js'));
 const Setting = lazy(() => import('../pages/Dashboard/Setting.js'));
+const Payment = lazy(() => import('../pages/Dashboard/Payment.js'));
+
 const AllTeamsDetails = lazy(() => import('../pages/Dashboard/AllTeamsDetails.js'));
 const AddTeams = lazy(() => import('../pages/Dashboard/AddTeams.js'));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
@@ -26,6 +28,7 @@ const AdminRoutes = (
         <Route exact path='/dashboard/allteams/:id' element={<AllTeamsDetails />}></Route>
         <Route exact path='/dashboard/alltournaments' element={<AllTournament />}></Route>
         <Route exact path='/dashboard/tournamentsdetails/:id' element={<AllTournamentDetails />}></Route>
+        <Route exact path='/dashboard/allpaymenthistory' element={<Payment />}></Route>
         <Route exact path='/dashboard/addtournaments' element={<AddTournament />}></Route>
         <Route exact path='/dashboard/addvenue' element={<AddVenues />}></Route>
         <Route exact path='/dashboard/allvenue' element={<AllVenues />}></Route>
@@ -38,8 +41,7 @@ const AdminRoutes = (
         <Route exact path='/dashboard/alldivisions/:id' element={<AllDivisionDetails />}></Route>
         <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
         <Route exact path='/dashboard/user/change-password' element={<ChangePassword />}></Route>
-
-
+        
     </>
 )
 
