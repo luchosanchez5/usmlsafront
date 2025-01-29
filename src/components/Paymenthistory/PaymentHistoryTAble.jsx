@@ -36,8 +36,9 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                 <th>Team Name</th>
                 <th>Registered Date </th>
                 <th>Amount Paid</th>
+                <th>Pending Amount</th>
                 <th>Division</th>
-                {/* <th>Payment Status</th> */}
+                <th>Payment Status</th> 
               </tr>
             </thead>
             <tbody>
@@ -53,8 +54,9 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                         <td>{item?.teamName}</td>
                         <td>{dateFormat(item?.paymentDate)}</td>
                         <td>{item?.paidAmount}$</td>
+                        <td>{item?.pendingAmount}$</td>
                         <td>{item?.divisionName}</td>
-                        {/* <td
+                   <td
                           style={{
                             color:
                               item?.paymentStatus === "succeeded"
@@ -63,7 +65,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                           }}
                         >
                           {item?.paymentStatus}
-                        </td> */}
+                        </td> 
                       </tr>
                     );
                   }
