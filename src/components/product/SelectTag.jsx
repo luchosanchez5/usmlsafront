@@ -26,11 +26,15 @@ const SelectTag = ({
             onChange={onChange}
             className={` ${className}   bg-white`}
           >
-         
+            {deFaultValue && (
+              <option value={deFaultValue} defaultValue={deFaultValue} >
+                {deFaultValue}
+              </option>
+            )}
+
             {options?.map((option) => (
               <option
                 key={option?.value}
-                defaultValue={deFaultValue}
                 value={option?.value}
                 className="bg-dark text-white"
               >

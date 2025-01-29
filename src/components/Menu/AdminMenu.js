@@ -43,24 +43,7 @@ const AdminMenu = ({ isCollapsed }) => {
           </MenuItem>
         </NavLink>
       </SubMenu>
-      <SubMenu
-        label={!isCollapsed && "Payment "}
-        icon={<MdOutlinePayment className="menu-icon" />}
-      >
-        <NavLink
-          to="/dashboard/allpaymenthistory"
-          className="menu-item-link text-white"
-        >
-          <MenuItem>
-            {" "}
-            {isCollapsed ? (
-              <FaThList className="menu-icon" />
-            ) : (
-              "Payments History"
-            )}{" "}
-          </MenuItem>
-        </NavLink>
-      </SubMenu>
+      
 
       <SubMenu
         label={!isCollapsed && "Tournament "}
@@ -127,6 +110,24 @@ const AdminMenu = ({ isCollapsed }) => {
         <NavLink to="/dashboard/addteams" className="menu-item-link text-white">
           <MenuItem>
             {isCollapsed ? <MdAddBox className="menu-icon" /> : "Add Team"}
+          </MenuItem>
+        </NavLink>
+      </SubMenu>
+      <SubMenu
+        label={!isCollapsed && "Payment "}
+        icon={<MdOutlinePayment className="menu-icon" />}
+      >
+        <NavLink
+          to="/dashboard/payment/history"
+          className="menu-item-link text-white"
+        >
+          <MenuItem>
+            {" "}
+            {isCollapsed ? (
+              <FaThList className="menu-icon" />
+            ) : (
+              "Payments History"
+            )}{" "}
           </MenuItem>
         </NavLink>
       </SubMenu>
