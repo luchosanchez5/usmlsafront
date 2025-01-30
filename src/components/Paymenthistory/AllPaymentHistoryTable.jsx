@@ -68,9 +68,9 @@ const AllPaymentHistoryTable = () => {
                 (item, index) => (
                   <tr key={index} className="main-row">
                     <td>{item?.teamName}</td>
-                    <td>{item?.pendingAmount}</td>
-                    <td>{item?.paidAmount}</td>
-                    <td>{item?.totalAmount}</td>
+                    <td>{item?.pendingAmount}$</td>
+                    <td>{item?.paidAmount}$</td>
+                    <td>{item?.totalAmount}$</td>
                     <td>{item?.paymentChannel}</td>
                     <td>{item?.paymentCurrency}</td>
                     <td>{dateFormat(item?.paymentDate)}</td>
