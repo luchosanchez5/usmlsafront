@@ -82,7 +82,6 @@ const AddTournamentFields = () => {
       action.resetForm();
     },
   });
-console.log(values.venueId);
 
   useEffect(() => {
     if (TournamentEdit && TournamentDetails) {

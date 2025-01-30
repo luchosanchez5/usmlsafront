@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db180a76-2b21-48f2-b912-670f6c65f692" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Allplayers/AllplayersTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Allplayers/AllplayersTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Models/AllTournamentModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Models/AllTournamentModel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Models/AllVenuusModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Models/AllVenuusModel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Models/AllteamModel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Models/AllteamModel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Venue/AllvenuesTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Venue/AllvenuesTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/product/AllTournamentTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/product/AllTournamentTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/purchase/AllTeamTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/purchase/AllTeamTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard/AllTournament.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard/AllTournament.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Dashboard/AllVenus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Dashboard/AllVenus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/NaviagtionRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/NaviagtionRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/PageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/PageHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/SidebarNav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/SidebarNav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/Venue/actions/actionCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/Venue/actions/actionCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/Venue/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/Venue/actions/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/Venue/reducers/VenueReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/Venue/reducers/VenueReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/team/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/team/actions/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/team/actions/actionsCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/team/actions/actionsCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/tournament/actions/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/tournament/actions/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/tournament/actions/actionsCreators.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/tournament/actions/actionsCreators.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/user/reducers/UserReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/user/reducers/UserReducer.js" afterDir="false" />
-    </list>
+    <list default="true" id="db180a76-2b21-48f2-b912-670f6c65f692" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,12 +18,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;05-Nov-24&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

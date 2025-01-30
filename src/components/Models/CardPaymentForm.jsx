@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { createSubscription } from "../../store/team/actions/actionsCreators";
 import Toast from "../../shared/Toast";
 import SpinNer from "../LoadingSpinner/SpinNer";
-console.log(CardElement);
 
 const CARD_ELEMENT_OPTIONS = {
   iconStyle: "solid",

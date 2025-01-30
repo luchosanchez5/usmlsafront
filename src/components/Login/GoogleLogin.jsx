@@ -6,7 +6,6 @@ const GoogleLogin = ({title}) => {
   // Handle successful login
   const handleGoogleLogin = (data) => {
     const { code } = data; // Extract authorization code
-    console.log("Google Login Code:", code);
 
     // Optional: Perform further actions, such as sending the code to your backend for authentication
     fetch("https://your-backend-endpoint.com/auth/google", {

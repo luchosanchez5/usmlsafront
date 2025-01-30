@@ -4,11 +4,7 @@ const OrderSummeryCard = ({
   DivisionDetailsBySearch,
   totalAmount,
 }) => {
-  console.log(
-    "🚀 : ~ file: OrderSummeryCard.jsx:7 ~ OrderSummeryCard ~ totalAmount",
-    totalAmount
-  );
-
+  
   // const [showCouponInput, setShowCouponInput] = useState(false);
   const DivisionDetails = DivisionDetailsBySearch[0];
 

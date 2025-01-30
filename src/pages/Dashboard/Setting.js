@@ -41,7 +41,6 @@ const Setting = () => {
         const blob = new Blob([bytes], { type: "image/jpeg" });
         const imageURL = URL.createObjectURL(blob);
         // Create an object URL for the image
-        console.log("Generated Image URL:", imageURL);
 
         // Set the preview image URL to the state
         setPreviewImage(imageURL);
@@ -115,11 +114,11 @@ const Setting = () => {
             accept="image/*"
           />
         </div>
-        <div className="d-flex flex-column align-items-center gap-2">
-          <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
-          <span className="fw-bold">Upload picture</span>
-        </div>
+       
       </div>
+      <div className="d-flex flex-column ms-5 ps-4 pt-3  gap-2 ">
+          <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
+        </div>
       {isLoading ? (
         <DetailSkeleton />
       ) : (

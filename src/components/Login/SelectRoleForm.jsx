@@ -42,7 +42,6 @@ const SelectRoleForm = () => {
   ];
 
   const handleRoleChange = (e) => {
-    console.log(e.target.value);
     setRoleValue(e.target.value);
   };
 

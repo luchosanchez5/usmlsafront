@@ -434,7 +434,35 @@ export const GetPaymentRecords = (teamId, page, Token, isUser = false, tournamen
       });
     });
 };
+export const GetPaymentRecordsByAdmin = (Token) => (dispatch) => {
 
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/payment-records?page=0&size=10&forceFirstAndLastRels=true`, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_PAYMENT_RECORDS,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      Toast.error(error.response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: true,
+      });
+    });
+};
 export const getPendingPaymentRecords = (teamId, page, Token, tournamentId = null) => (dispatch) => {
 
   dispatch({

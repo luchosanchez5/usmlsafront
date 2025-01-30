@@ -4,7 +4,6 @@ import TopBar from '../shared/TopBar';
 import SidebarNav from '../shared/SidebarNav';
 
 const MainLayout = ({ children }) => {
-    console.log("🚀 : ~ file: MainLayout.js:7 ~ MainLayout ~ children", children);
     return (
       <React.Fragment>
         <TopBar />

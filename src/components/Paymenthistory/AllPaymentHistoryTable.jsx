@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import {
   GetPaymentRecords,
+  GetPaymentRecordsByAdmin,
   getPaymentRecordsBySearch,
 } from "../../store/team/actions/actionsCreators";
 import { dateFormat } from "../../utlils/dateFormat";
@@ -15,10 +16,15 @@ const AllPaymentHistoryTable = () => {
   // const [page, setPage] = useState(0);
   const userId = user?.userId;
   const Dispatch = useDispatch();
+  const role = user.roles[0];
 
   const isUser = true;
   useEffect(() => {
-    Dispatch(GetPaymentRecords(userId, 0, token, isUser));
+    if (role === "ADMIN") {
+      Dispatch(GetPaymentRecordsByAdmin(token));
+    } else {
+      Dispatch(GetPaymentRecords(userId, 0, token, isUser, role));
+    }
   }, [Dispatch]);
 
   const handleSearchPayment = (value) => {

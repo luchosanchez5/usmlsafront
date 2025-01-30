@@ -39,7 +39,6 @@ const AllPersonModel = ({ show, onClose, SetTeamBoxModel, setState }) => {
         initialValues: initialValues,
         validationSchema: AllVenueSchemas,
         onSubmit: (values, action) => {
-            console.log("🚀 : ~ file: AllPersonModel.jsx:40 ~ AllPersonModel ~ values", values);
             action.resetForm();
 
             const data = {

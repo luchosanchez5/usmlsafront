@@ -5,7 +5,6 @@ import { Col, Form } from 'react-bootstrap';
 import InputField from '../product/InputField';
 import { Formik, useFormik } from 'formik';
 function ModelBox({ show, onClose, SetTeamBoxModel, title }) {
-    console.log("🚀 : ~ file: ModelBox.jsx:9 ~ ModelBox ~ title", title);
     const TitleTournamentList = 'All Tournament lists'
   
     const initialValues = {
@@ -24,7 +23,6 @@ function ModelBox({ show, onClose, SetTeamBoxModel, title }) {
         initialValues: initialValues,
         // validationSchema: errorSchema,
         onSubmit: (values, action) => {
-            console.log("🚀 : ~ file: ModelBox.jsx:34 ~ ModelBox ~ values", values);
             action.resetForm();
             SetTeamBoxModel(false)
         }

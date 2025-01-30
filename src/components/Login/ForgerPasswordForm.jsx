@@ -25,7 +25,6 @@ const ForgerPasswordForm = () => {
     );
     Dispatch(ForgetPassword(values.email, Navigate));
 
-    console.log("Email Submitted: ", values);
   };
 
   return (

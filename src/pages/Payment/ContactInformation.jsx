@@ -27,7 +27,6 @@ const ContactInformation = ({
     setSelectedPayment(event.target.value);
   };
   const dispatch = useDispatch();
-  console.log(TournamentBySearch);
   const TournmentOptions =
     TournamentBySearch?.data?.length > 0
       ? TournamentBySearch.data.map((item) => ({
