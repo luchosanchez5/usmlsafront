@@ -23,14 +23,18 @@ const AllPaymentHistoryTable = () => {
     if (role === "ADMIN") {
       Dispatch(GetPaymentRecordsByAdmin(token));
     } else {
-      Dispatch(GetPaymentRecords(userId, 0, token, isUser, role));
+      Dispatch(GetPaymentRecords(userId, 0, token, isUser));
     }
   }, [Dispatch]);
 
   const handleSearchPayment = (value) => {
     const searchValue = value.target.value;
     if (searchValue === "") {
+      if(role === "ADMIN"){
+      Dispatch(GetPaymentRecordsByAdmin(token));
+    }else{
       Dispatch(GetPaymentRecords(userId, 0, token, isUser));
+    }
     } else {
       Dispatch(getPaymentRecordsBySearch(searchValue, token));
     }
