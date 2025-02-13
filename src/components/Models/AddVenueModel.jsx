@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Card, Row, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AddVenue,
-} from "../../store/team/actions/actionsCreators";
+import { AddVenue } from "../../store/team/actions/actionsCreators";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 import { useParams } from "react-router-dom";

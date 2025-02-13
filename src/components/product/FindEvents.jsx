@@ -2,14 +2,16 @@ import React, { useContext } from "react";
 import InputField from "./InputField";
 import { useFormik } from "formik";
 import SelectField from "./SelectField";
-import { useDispatch } from "react-redux";
-import { getTournamentsbyFilter } from "../../store/tournament/actions/actionsCreators";
+import { useDispatch, useSelector } from "react-redux";
+import { getTournamentsFilter } from "../../store/tournament/actions/actionsCreators";
 import { GlobalInfo } from "../../App";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Col, Row } from "react-bootstrap";
+import SpinNer from "../LoadingSpinner/SpinNer";
 
 const FindEvents = () => {
   const Dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.tournament);
   const tournamentStatusOptions = [
     { value: "ACTIVE", label: "ACTIVE" },
     { value: "COMPLETED", label: "COMPLETED" },
@@ -25,6 +27,7 @@ const FindEvents = () => {
     division: "",
     startDate: "",
     endDate: "",
+    venueZipCode: "",
   };
   const { handleChange, handleSubmit, values } = useFormik({
     initialValues: initialValues,
@@ -35,28 +38,23 @@ const FindEvents = () => {
         .filter(([key, value]) => value)
         .forEach(([key, value]) => {
           searchParams.append(key, value);
-
           searchParams.append("page", 0);
           searchParams.append("size", 10);
         });
-      Dispatch(getTournamentsbyFilter(searchParams));
+      Dispatch(getTournamentsFilter(searchParams));
       setIsSidebarOpen(false);
     },
   });
 
   return (
-    <Row
-      className="event-data-container px-0 mt-2 pt-0 "
-    >
+    <div className="p-2 mt-2">
       <div
-        className={` d-none d-lg-flex flex-column text-white mx-3 mx-lg-3 `}
+        className={`d-none d-lg-flex flex-column text-white mx-3 mx-lg-3 `}
         style={{
           transition: "all 0.3s ease-in-out",
         }}
       >
-        <h2
-          className="text-center text-uppercase  py-2 fw-bold py-2 px-4 text-black Login-btn text-white"
-        >
+        <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded">
           Find Tournaments
         </h2>
         <Offcanvas
@@ -129,20 +127,23 @@ const FindEvents = () => {
           </Offcanvas.Body>
         </Offcanvas>
         <form onSubmit={handleSubmit}>
-          <Row className="row-cols-4   gap-1 ms-4 mt-2">
-            <div className="d-flex flex-column  px-0">
+          <Row
+            className="gx-3 gy-2"
+            style={{ overflowX: "auto", whiteSpace: "nowrap" }}
+          >
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <InputField
                 type="text"
                 name="name"
                 value={values.name}
                 onChange={handleChange}
-                placeholder="Name"
-                label="Name"
+                placeholder="Tournament Name"
+                label="Tournament Name"
                 labelClassName="text-black"
                 className="py-1 px-2 form-control"
               />
-            </div>
-            <div className="d-flex flex-column justify-content-center px-0">
+            </Col>
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <SelectField
                 options={tournamentStatusOptions}
                 value={values.status}
@@ -153,43 +154,43 @@ const FindEvents = () => {
                 labelClassName="text-black"
                 onChange={handleChange}
               />
-            </div>
-            <div className="d-flex flex-column px-0">
+            </Col>
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <InputField
                 type="text"
                 name="venueName"
                 onChange={handleChange}
                 value={values.venueName}
-                placeholder="Venue Name"
+                placeholder="Location"
                 labelClassName="text-black"
-                label="Venue Name"
+                label="Location"
                 className="py-1 px-2 form-control"
               />
-            </div>
-            <div className="d-flex flex-column px-0">
+            </Col>
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <InputField
                 type="text"
-                name="division"
+                name="venueZipCode"
                 onChange={handleChange}
-                value={values.division}
-                placeholder="Division Name"
+                value={values.venueZipCode}
+                placeholder="Zip Code"
                 labelClassName="text-black"
-                label="Division Name"
+                label="Zip Code"
                 className="py-1 px-2 form-control"
               />
-            </div>
-            <div className="d-flex flex-column px-0">
+            </Col>
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <InputField
                 type="date"
                 name="startDate"
-                label="End Date"
+                label="Start Date"
                 labelClassName="text-black"
                 onChange={handleChange}
                 className="py-1 px-2 form-control"
                 value={values.startDate}
               />
-            </div>
-            <div className="d-flex flex-column px-0">
+            </Col>
+            <Col xs={12} sm={6} md={4} className="d-flex flex-column">
               <InputField
                 type="date"
                 name="endDate"
@@ -199,16 +200,20 @@ const FindEvents = () => {
                 onChange={handleChange}
                 value={values.endDate}
               />
-            </div>
-            <div className="d-flex px-0">
-              <button className="Login-btn text-white mt-3 px-5" type="submit">
-                Search
+            </Col>
+            <Col xs={12} className="d-flex">
+              <button
+                className="bg-dark text-white mt-3 px-2 py-2 d-flex align-items-center justify-content-center rounded"
+                type="submit"
+                style={{ minWidth: "180px" }}
+              >
+                {isLoading ? <SpinNer /> : <span>Search Tournament</span>}
               </button>
-            </div>
+            </Col>
           </Row>
         </form>
       </div>
-    </Row>
+    </div>
   );
 };
 

@@ -12,7 +12,6 @@ import AddVenueModel from "../../components/Models/AddVenueModel";
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 import PaymentHistoryTable from "../../components/Paymenthistory/PaymentHistoryTAble";
 import { FaCamera } from "react-icons/fa";
-import { BiLeftArrow } from "react-icons/bi";
 import { FaArrowLeft } from "react-icons/fa6";
 import { dateFormat } from "../../utlils/dateFormat";
 
@@ -27,134 +26,120 @@ const AllTournamentDetails = () => {
 
   const [previewImage, setPreviewImage] = useState(null);
   const [assignVenueBoxModel, setVenueModel] = useState(false);
-
+  const [state, setState] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    // Fetch tournament details by ID
     dispatch(GetTournamentsDetailsByTournamentId(id, token));
-  }, [id, dispatch, token]);
+  }, [id, dispatch, token, state]);
 
-  // Handle image preview from tournament details
   useEffect(() => {
     if (TournamentDetails?.picture) {
       try {
-        // Decode Base64 if it's encoded
         const binaryData = atob(TournamentDetails.picture);
         const bytes = new Uint8Array(binaryData.length);
 
-        // Populate Uint8Array with decoded bytes
         for (let i = 0; i < binaryData.length; i++) {
           bytes[i] = binaryData.charCodeAt(i);
         }
 
-        // Create a Blob from the decoded bytes (you can adjust the MIME type if necessary)
         const blob = new Blob([bytes], { type: "image/jpeg" });
         const imageURL = URL.createObjectURL(blob);
-        // Create an object URL for the image
-
-        // Set the preview image URL to the state
         setPreviewImage(imageURL);
       } catch (e) {
         console.error("Error decoding image", e);
-        setPreviewImage(null); // Reset preview if an error occurs
+        setPreviewImage(null);
       }
     } else {
-      setPreviewImage(null); // If no picture data, reset to null
+      setPreviewImage(null);
     }
-  }, [TournamentDetails]); // Runs whenever TournamentDetails changes
-
-  // Handle file upload
+  }, [TournamentDetails]);
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // Set the preview image
       const imageURL = URL.createObjectURL(file);
       setPreviewImage(imageURL);
-      // Upload the image to the server
       dispatch(uploadTournamentPicture(id, token, file));
     }
   };
 
-  // Trigger file input click
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
 
   return (
     <>
-      <h1 className="font-bold my-3">Tournament Details</h1>
-
-      {/* Image Upload Section */}
-     <div className="d-flex align-items-center gap-3">
-           <div
-             className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
-             style={{ marginLeft: "20px", background: !previewImage && "black" }}
-           >
-             {isLoading ? (
-               <div
-                 className="skeleton-loader"
-                 style={{
-                   width: "120px",
-                   height: "120px",
-                   borderRadius: "50%",
-                   backgroundColor: "#ccc",
-                 }}
-               ></div>
-             ) : (
-               <img
-                 src={
-                   previewImage
-                     ? previewImage
-                     : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
-                 }
-                 alt="Division Preview"
-                 style={{
-                   width: "120px",
-                   height: "120px",
-                   borderRadius: "50%",
-                   objectFit: !previewImage && "contain",
-                 }}
-               />
-             )}
-             <input
-               type="file"
-               ref={fileInputRef}
-               style={{ display: "none" }}
-               onChange={handleFileUpload}
-               accept="image/*"
-             />
-           </div>
-          
-         </div>
- <div className="d-flex flex-column ms-5 ps-4 pt-3  gap-2 ">
-          <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
+      <div className="d-flex align-items-center gap-3">
+        <div
+          className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
+          style={{ marginLeft: "20px", background: !previewImage && "black" }}
+        >
+          {isLoading ? (
+            <div
+              className="skeleton-loader"
+              style={{
+                width: "120px",
+                height: "120px",
+                borderRadius: "50%",
+                backgroundColor: "#ccc",
+              }}
+            ></div>
+          ) : (
+            <img
+              src={
+                previewImage
+                  ? previewImage
+                  : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
+              }
+              alt="Tournament Preview"
+              style={{
+                width: "120px",
+                height: "120px",
+                borderRadius: "50%",
+                objectFit: !previewImage && "contain",
+              }}
+            />
+          )}
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileUpload}
+            accept="image/*"
+          />
         </div>
-      {/* Go Back Button */}
+
+      </div>
+      <div className="d-flex flex-column ms-5 ps-4 pt-3  gap-2 ">
+        <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
+      </div>
       <div className="text-end pe-4">
         <button className="bg-black">
           <FaArrowLeft onClick={() => navigate(-1)} color="white" size={20} />
         </button>
       </div>
-
-      {/* Add Venue Button (only if no venue is assigned) */}
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "black",
+        }}>
+          Tournament Details
+        </span>
+      </div>
       {TournamentDetails.venueName === null && (
         <PageHeader btnText="Add Venue" onClick={() => setVenueModel(true)} />
       )}
-
-      {/* Tournament Details */}
       {isLoading ? (
         <DetailSkeleton />
       ) : (
-        <div className="bg-white rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
+        <div className="bg-white rounded shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
           <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center gy-3">
             <Col>
               <h5 className="text-nowrap fw-bold">Tournament Name:</h5>
-              <h6 className="text-nowrap">{TournamentDetails?.name}</h6>
+              <h6 className="">{TournamentDetails?.name}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Venue Name:</h5>
-              <h6 className="text-nowrap">
+              <h6 className="">
                 {TournamentDetails?.venueName
                   ? TournamentDetails?.venueName
                   : "No Venue Selected Yet"}
@@ -174,31 +159,39 @@ const AllTournamentDetails = () => {
             </Col>
             <Col>
               <h5 className="text-green fw-bold">Status Tournament:</h5>
+              <h6>
+                <span className="text-white fw-bold p-2 rounded"
+                  style={{
+                    background:
+                      TournamentDetails?.status === "ACTIVE" ? "green" : "red",
+                  }}>  {TournamentDetails?.status}</span>
+              </h6>
+            </Col>
+            <Col>
+              <h5 className="text-green fw-bold">No of Divisions:</h5>
               <h6
-                className="text-nowrap"
-                style={{
-                  color:
-                    TournamentDetails?.status === "ACTIVE" ? "green" : "red",
-                }}
               >
-                {TournamentDetails?.status}
+                {TournamentDetails?.numberOfDivisions}
               </h6>
             </Col>
           </Row>
         </div>
       )}
-
-      {/* Add Venue Modal */}
       {assignVenueBoxModel && (
         <AddVenueModel
           show={assignVenueBoxModel}
           onClose={() => setVenueModel(false)}
           SetVenueModel={setVenueModel}
+          setState={setState}
         />
       )}
-
-      {/* Payment History Section */}
-      <h2 className="ps-4 text-danger">Payment Records:</h2>
+      <div className="ps-4">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "red",
+        }}>
+          Payment Records
+        </span>
+      </div>
       <PaymentHistoryTable tournamentId={id} />
     </>
   );

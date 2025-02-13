@@ -30,15 +30,15 @@ const AllVenusDetails = () => {
           <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3  align-items-center  gy-3">
             <Col>
               <h5 className=" text-nowrap fw-bold ">Name:</h5>
-              <h6 className=" text-nowrap ">{VenuDetails?.name}</h6>
+              <h6 className=" ">{VenuDetails?.name}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold ">Address 1:</h5>
-              <h6 className=" text-nowrap ">{VenuDetails?.address1}</h6>
+              <h6 className=" ">{VenuDetails?.address1}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Address 2:</h5>
-              <h6 className=" text-nowrap ">{VenuDetails?.address2}</h6>
+              <h6 className=" ">{VenuDetails?.address2}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold ">Created On:</h5>

@@ -11,6 +11,7 @@ import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 import PaymentHistoryTable from "../../components/Paymenthistory/PaymentHistoryTAble";
 import { FaCamera } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa6";
+import { dateFormat } from "../../utlils/dateFormat";
 
 const AllDivisionDetails = () => {
   const { id } = useParams();
@@ -41,33 +42,29 @@ const AllDivisionDetails = () => {
     fileInputRef.current.click();
   };
 
-  // Image handling for the division picture (similar to tournament picture)
   useEffect(() => {
     if (DivisionDetails?.data?.picture) {
       try {
-        // Only process if picture exists
-        const binaryData = atob(DivisionDetails.data.picture); // Decode Base64 if it's encoded
+        const binaryData = atob(DivisionDetails.data.picture);
         const bytes = new Uint8Array(binaryData.length);
         for (let i = 0; i < binaryData.length; i++) {
           bytes[i] = binaryData.charCodeAt(i);
         }
-        const blob = new Blob([bytes], { type: "image/jpeg" }); // Adjust MIME type if needed
+        const blob = new Blob([bytes], { type: "image/jpeg" });
         const imageURL = URL.createObjectURL(blob);
-        setPreviewImage(imageURL); // Set the generated URL as the image source
+        setPreviewImage(imageURL);
       } catch (e) {
         console.error("Error decoding image", e);
-        setPreviewImage(null); // Reset to null if decoding fails
+        setPreviewImage(null);
       }
     } else {
-      setPreviewImage(null); // Set to null if no picture data
+      setPreviewImage(null);
     }
   }, [DivisionDetails]);
 
   return (
     <>
       <h1 className="font-bold my-3">Divisions Details</h1>
-
-      {/* Image Upload Section */}
       <div className="d-flex align-items-center gap-3">
         <div
           className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
@@ -108,11 +105,9 @@ const AllDivisionDetails = () => {
           />
         </div>
       </div>
-      <div className="d-flex flex-column align-items-center gap-2">
+      <div className="d-flex flex-column ms-5 ps-4 pt-3  gap-2 ">
         <FaCamera size={20} onClick={triggerFileInput} cursor="pointer" />
-        <span>Upload picture</span>
       </div>
-      {/* Go Back Button */}
       <div className="text-end pe-4">
         <button className="bg-black">
           <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
@@ -122,55 +117,69 @@ const AllDivisionDetails = () => {
       {isLoading ? (
         <DetailSkeleton />
       ) : (
-        <div className="bg-white rounded-lg shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
+        <div className="bg-white rounded shadow-lg max-w-4xl px-3 pt-4 py-5 m-4">
           <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3  align-items-center gy-3">
             <Col>
               <h5 className="text-nowrap fw-bold">Name:</h5>
-              <h6 className="text-nowrap">
+              <h6 className=" ">
                 {DivisionDetails?.data?.divisionName}
               </h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Tournament Name:</h5>
-              <h6 className="text-nowrap">
+              <h6 className=" ">
                 {DivisionDetails?.data?.tournamentName}
               </h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Initial Deposit Fee:</h5>
-              <h6 className="text-nowrap">
-                {DivisionDetails?.data?.initialDepositFee}
+              <h6 className=" ">
+                ${DivisionDetails?.data?.initialDepositFee}
               </h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Entry Fee:</h5>
-              <h6 className="text-nowrap">{DivisionDetails?.data?.entryFee}</h6>
+              <h6 className=" ">${DivisionDetails?.data?.entryFee}</h6>
             </Col>
             <Col>
-              <h5 className="text-nowrap">Max Teams:</h5>
-              <h6 className="text-nowrap">{DivisionDetails?.data?.maxTeams}</h6>
+              <h5 className="text-nowrap fw-bold">Max Teams:</h5>
+              <h6 className=" ">{DivisionDetails?.data?.maxTeams}</h6>
             </Col>
             <Col>
-              <h5 className="text-nowrap fw-bold">Division StartTime:</h5>
-              <h6 className="text-nowrap">
-                {DivisionDetails?.data?.startTime}
+              <h5 className="text-nowrap fw-bold">Division Start Time:</h5>
+              <h6 className=" ">
+                {dateFormat(DivisionDetails?.data?.startTime)}
               </h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 1:</h5>
-              <h6 className="text-nowrap">${DivisionDetails?.data?.prize1}</h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize1 &&
+                !isNaN(parseFloat(DivisionDetails?.data?.prize1))
+                ? `$${parseFloat(DivisionDetails.data.prize1).toLocaleString()}`
+                : DivisionDetails?.data?.prize1}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 2:</h5>
-              <h6 className="text-nowrap">${DivisionDetails?.data?.prize2}</h6>
+              <h6 className=" ">
+                {DivisionDetails?.data?.prize2 &&
+                  !isNaN(parseFloat(DivisionDetails?.data?.prize2))
+                  ? `$${parseFloat(DivisionDetails.data.prize2).toLocaleString()}`
+                  : DivisionDetails?.data?.prize2}
+              </h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 3:</h5>
-              <h6 className="text-nowrap">${DivisionDetails?.data?.prize3}</h6>
+              <h6 className=" "> {DivisionDetails?.data?.prize3 &&
+                !isNaN(parseFloat(DivisionDetails?.data?.prize3))
+                ? `$${parseFloat(DivisionDetails.data.prize3).toLocaleString()}`
+                : DivisionDetails?.data?.prize3}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 4:</h5>
-              <h6 className="text-nowrap">${DivisionDetails?.data?.prize4}</h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize4 &&
+                !isNaN(parseFloat(DivisionDetails?.data?.prize4))
+                ? `$${parseFloat(DivisionDetails.data.prize4).toLocaleString()}`
+                : DivisionDetails?.data?.prize4}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Division Status:</h5>
@@ -189,8 +198,6 @@ const AllDivisionDetails = () => {
           </Row>
         </div>
       )}
-
-      {/* Payment History Section */}
       <h2 className="ps-4 text-danger">Payment Records:</h2>
       <PaymentHistoryTable divisionId={id} />
     </>

@@ -9,6 +9,7 @@ export const AllTeamSchemas = Yup.object({
   // division: Yup.string().required("Division is Required"),
   city: Yup.string().required("City is Required"),
   state: Yup.string().required("State is Required"),
+  zipCode: Yup.string().required("Zip Code is Required"),
   // gamesWin: Yup.number().required("Games Win is Required"),
   // gamesLost: Yup.number().required("Games Lost is Required"),
   // gamesTied: Yup.number().required("Games Tied is Required"),
@@ -33,6 +34,7 @@ export const AllVenueSchemas = Yup.object({
   address2: Yup.string().required("Address2 is Required"),
   city: Yup.string().required("City is Required"),
   state: Yup.string().required("State is Required"),
+  zipCode: Yup.string().required("Zip Code is Required"),
   numberOfFields: Yup.number().required("Number of Fields is Required"),
   venueStatus: Yup.string().required("Venue Status is Required"),
 });
@@ -52,17 +54,30 @@ export const ManagerUpdateValuesSchemas = Yup.object({
 export const AllDivisionSchemas = Yup.object({
   divisionName: Yup.string().required("Division Name is Required"),
 
-  entryFee: Yup.number().required("Entry Fee is Required"),
-  initialDepositFee: Yup.number().required("Initial Deposit Fee is Required"),
+  entryFee: Yup.number()
+    .typeError("Entry Fee must be a valid number")
+    .required("Entry Fee is Required")
+    .test("is-greater", "Entry Fee must be greater than Initial Deposit Fee", function (value) {
+      return value > this.parent.initialDepositFee;
+    }),
+  initialDepositFee: Yup.number()
+    .typeError("Initial Deposit Fee must be a valid number")
+    .required("Initial Deposit Fee is Required"),
   divisionStatus: Yup.string().required("Division Status is Required"),
-  maxTeams: Yup.number().required("Max Teams is Required"),
+  maxTeams: Yup.number()
+    .min(1, "Max Teams must be at least 1")
+    .typeError("Max Teams must be a valid number")
+    .required("Max Teams is Required"),
   startTime: Yup.string().required("Start Time is Required"),
-  prize1: Yup.string().required("Prize1 is Required"),
-  prize2: Yup.string().required("Prize2  is Required"),
-  prize3: Yup.string().required("Prize3 is Required"),
-  prize4: Yup.string().required("Prize4  is Required"),
-  tournamentId: Yup.number().required("Tournament is Required"),
+  prize1: Yup.string().typeError("Prize 1 must be a valid value").required("Prize 1 is Required"),
+  prize2: Yup.string().typeError("Prize 1 must be a valid value").nullable(),
+  prize3: Yup.string().typeError("Prize 1 must be a valid value").nullable(),
+  prize4: Yup.string().typeError("Prize 1 must be a valid value").nullable(),
+  tournamentId: Yup.number()
+    .typeError("Please Select Tournament")
+    .required("Tournament is Required"),
 });
+
 
 export const AllUsersSchema = Yup.object({
   name: Yup.string().required("Name is Required"),

@@ -1,14 +1,14 @@
 import Navbar from "react-bootstrap/Navbar";
-import {  useEffect,useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { HiBars3 } from "react-icons/hi2";
 import { useSelector } from "react-redux";
 import { GlobalInfo } from "../../App";
+import logo from "../../assets/images/usmlsa_logo.png";
 function NavTopbar() {
-
   const { user } = useSelector((state) => state.user);
-  const { setIsSidebarOpen} = useContext(GlobalInfo);
+  const { setIsSidebarOpen } = useContext(GlobalInfo);
   const Token = user?.access_token;
   const Navigate = useNavigate();
   useEffect(() => {
@@ -18,12 +18,7 @@ function NavTopbar() {
   return (
     <>
       <Navbar className="bg-dark py-3 text-white justify-content-between justify-content-lg-baseline">
-        <Image
-          width={200}
-          className="ps-2"
-          src="https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
-          alt=""
-        />
+        <Image width={200} className="ps-2" src={logo} alt="" />
         <div className="d-none d-lg-flex gap-3 me-4">
           {Token ? (
             <>
@@ -45,13 +40,13 @@ function NavTopbar() {
           ) : (
             <>
               <button
-                className="text-white py-2 px-3 Login-btn"
+                className="text-white py-2 px-3 Login-btn rounded fw-bold"
                 onClick={() => Navigate("/auth/login")}
               >
                 Login
               </button>
               <button
-                className="text-white py-2 px-3 Signup-btn"
+                className="text-white py-2 px-3 Signup-btn rounded fw-bold"
                 onClick={() => Navigate("/auth/register")}
               >
                 Sign Up
@@ -60,7 +55,11 @@ function NavTopbar() {
           )}
         </div>
         <div className="d-flex d-lg-none ">
-          <HiBars3 className="icon"   onClick={()=>setIsSidebarOpen((prev)=>!prev)} fontSize={30} />
+          <HiBars3
+            className="icon"
+            onClick={() => setIsSidebarOpen((prev) => !prev)}
+            fontSize={30}
+          />
         </div>
       </Navbar>
     </>

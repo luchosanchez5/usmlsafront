@@ -120,7 +120,7 @@ export const GetTournamentsBySearch = (token) => (dispatch) => {
       // Toast.error(error.response.data.message);
     });
 };
-export const getTournamentsbyFilter = (searchParams, action) => (dispatch) => {
+export const getTournamentsFilter = (searchParams, action) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,

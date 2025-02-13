@@ -31,6 +31,7 @@ const AddVenueFields = () => {
     state: "",
     numberOfFields: null,
     venueStatus: "",
+    zipCode:""
   };
   const VenueStatusOptions = [
     { value: "CLOSED", label: "CLOSED" },
@@ -56,6 +57,7 @@ const AddVenueFields = () => {
         address2: values.address2,
         city: values.city,
         state: values.state,
+        zipCode: values.zipCode,
         numberOfFields: values.numberOfFields,
         venueStatus: values.venueStatus,
       };
@@ -81,6 +83,7 @@ const AddVenueFields = () => {
         address2: VenuDetails.address2 || "",
         city: VenuDetails.city || "",
         state: VenuDetails.state || "",
+        zipCode: VenuDetails.zipCode || "",
         numberOfFields: VenuDetails.numberOfFields || "",
         venueStatus: VenuDetails.statusVenue || "",
       });
@@ -157,6 +160,18 @@ const AddVenueFields = () => {
           </div>
           <div className="d-flex flex-column flex-grow-1">
             <InputField
+              type="text"
+              name="zipCode"
+              label="Zip Code"
+              onChange={handleChange}
+              value={values.zipCode}
+              className="form-control"
+              touched={touched.zipCode}
+              error={errors.zipCode}
+            />
+          </div>
+          <div className="d-flex flex-column flex-grow-1">
+            <InputField
               type="number"
               name="numberOfFields"
               label="Number Of Fields"
@@ -180,8 +195,6 @@ const AddVenueFields = () => {
               className="form-control"
             />
           </div>
-          <div className="d-flex flex-column  flex-grow-1"></div>
-
           <div className="d-flex justify-content-center flex-grow-1 ">
             <button type="submit" className="mt-3 gradient-btn-orange">
               {isLoading ? <SpinNer /> : "Submit"}

@@ -12,10 +12,10 @@ import AdminInfoEditModel from "../../components/Models/AdminInfoEditModel";
 import PlayerInfoEditModel from "../../components/Models/PlayerInfoEditModel";
 import CoManagerInfoEditModel from "../../components/Models/CoManagerInfoEditModel";
 import { FaCamera } from "react-icons/fa";
-
+import logo from "../../assets/images/usmlsa_logo.png";
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 const Setting = () => {
-  const { Persondata, isLoading } = useSelector((state) => state.person);
+  const { personData, isLoading } = useSelector((state) => state.person);
   const { user, token } = useSelector((state) => state.user);
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
@@ -26,32 +26,24 @@ const Setting = () => {
     Dispatch(GetPerson(user.userId));
   }, [Dispatch, state, user]);
   useEffect(() => {
-    if (Persondata?.data?.profilePicture) {
+    if (personData?.data?.profilePicture) {
       try {
-        // Decode Base64 if it's encoded
-        const binaryData = atob(Persondata?.data?.profilePicture);
+        const binaryData = atob(personData?.data?.profilePicture);
         const bytes = new Uint8Array(binaryData.length);
-
-        // Populate Uint8Array with decoded bytes
         for (let i = 0; i < binaryData.length; i++) {
           bytes[i] = binaryData.charCodeAt(i);
         }
-
-        // Create a Blob from the decoded bytes (you can adjust the MIME type if necessary)
         const blob = new Blob([bytes], { type: "image/jpeg" });
         const imageURL = URL.createObjectURL(blob);
-        // Create an object URL for the image
-
-        // Set the preview image URL to the state
         setPreviewImage(imageURL);
       } catch (e) {
         console.error("Error decoding image", e);
-        setPreviewImage(null); // Reset preview if an error occurs
+        setPreviewImage(null);
       }
     } else {
-      setPreviewImage(null); // If no picture data, reset to null
+      setPreviewImage(null);
     }
-  }, [Persondata]);
+  }, [personData]);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -66,7 +58,7 @@ const Setting = () => {
     fileInputRef.current.click();
   };
 
-  const handleConfrim = () => {};
+  const handleConfrim = () => { };
   return (
     <>
       <PageHeader
@@ -95,7 +87,8 @@ const Setting = () => {
               src={
                 previewImage
                   ? previewImage
-                  : "https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
+                  : logo
+
               }
               alt="Division Preview"
               style={{
@@ -114,11 +107,11 @@ const Setting = () => {
             accept="image/*"
           />
         </div>
-       
+
       </div>
       <div className="d-flex flex-column ms-5 ps-4 pt-3  gap-2 ">
-          <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
-        </div>
+        <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
+      </div>
       {isLoading ? (
         <DetailSkeleton />
       ) : (
@@ -126,26 +119,26 @@ const Setting = () => {
           <Row className="my-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
             <Col>
               <h5 className="fw-bold"> Email : </h5>
-              <h6>{Persondata?.data?.email}</h6>
+              <h6>{personData?.data?.email}</h6>
             </Col>
 
             <Col>
               <h5 className="fw-bold"> Role : </h5>
-              <h6>{Persondata?.data?.role}</h6>
+              <h6>{personData?.data?.role}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">First Name : </h5>
-              <h6>{Persondata?.data?.firstName}</h6>
+              <h6>{personData?.data?.firstName}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">Last Name : </h5>
-              <h6> {Persondata?.data?.lastName}</h6>
+              <h6> {personData?.data?.lastName}</h6>
             </Col>
           </Row>
         </div>
       )}
       {editModel &&
-        (Persondata?.data?.role === "ADMIN" ? (
+        (personData?.data?.role === "ADMIN" ? (
           <AdminInfoEditModel
             show={editModel}
             onClose={() => setEditModel(false)}
@@ -153,7 +146,7 @@ const Setting = () => {
             setEditModel={setEditModel}
             setState={setState}
           />
-        ) : Persondata?.data?.role === "MANAGER" ? (
+        ) : personData?.data?.role === "MANAGER" ? (
           <ManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
@@ -161,14 +154,14 @@ const Setting = () => {
             onClick={handleConfrim}
             setState={setState}
           />
-        ) : Persondata?.data?.role === "PLAYER" ? (
+        ) : personData?.data?.role === "PLAYER" ? (
           <PlayerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
             onClose={() => setEditModel(false)}
             onClick={handleConfrim}
           />
-        ) : Persondata?.data?.role === "CO_MANAGER" ? (
+        ) : personData?.data?.role === "CO_MANAGER" ? (
           <CoManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}

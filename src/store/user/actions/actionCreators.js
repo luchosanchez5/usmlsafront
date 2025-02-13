@@ -17,6 +17,7 @@ export const userLogin = (data, navigate) => (dispatch) => {
         type: actionTypes.USER_LOGIN,
         payload: response?.data?.data,
       });
+      console.log("Setting loading to false...");
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
@@ -25,10 +26,10 @@ export const userLogin = (data, navigate) => (dispatch) => {
         navigate("/dashboard");
 
       } else if (response?.data?.data?.roles?.includes('MANAGER') || response?.data?.data?.role === 'MANAGER') {
-        navigate("/dashboard/allteams");
+        navigate("/dashboard/all-teams");
       }
       else {
-        navigate("/dashboard/yourteam");
+        navigate("/dashboard/your-team");
       }
       const roles = response.data.data.roles;
       if (roles && roles.length > 0) {

@@ -98,7 +98,7 @@ function AddDivisionFields() {
     }, [Dispatch, token]);
     useEffect(() => {
         if (DivisionEdit && DivisionDetails) {
-            
+
             const formattedTime = DivisionDetails?.data?.startTime && new Date(DivisionDetails?.data?.startTime).toISOString().slice(11, 16);
             setValues({
                 divisionName: DivisionDetails?.data?.divisionName || '',
@@ -166,7 +166,7 @@ function AddDivisionFields() {
                             <InputField
                                 type="number"
                                 name="initialDepositFee"
-                                label="Initial Depsote Fee"
+                                label="Initial Deposit Fee"
                                 onChange={handleChange}
                                 value={values.initialDepositFee}
                                 className="form-control"
@@ -210,6 +210,7 @@ function AddDivisionFields() {
                                 className="form-control"
                                 touched={touched.prize1}
                                 error={errors.prize1}
+                            
                             />
 
                         </div>

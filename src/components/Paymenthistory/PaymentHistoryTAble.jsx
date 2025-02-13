@@ -17,7 +17,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
     Dispatch(GetPaymentRecords(id, 0, token, false, tournamentId, divisionId));
   }, [Dispatch, id, token, tournamentId, divisionId]);
   return (
-    <div className="section-main m-3 px-3 py-4 bg-white  shadow-lg mb-5">
+    <div className="section-main m-3 px-3 py-4 bg-white rounded  shadow-lg mb-5">
       <div style={{ maxHeight: "400px", overflowY: "auto" }}>
         {isLoading ? (
           <Table>
@@ -38,7 +38,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                 <th>Amount Paid</th>
                 <th>Pending Amount</th>
                 <th>Division</th>
-                <th>Payment Status</th> 
+                <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                         <td>{item?.paidAmount}$</td>
                         <td>{item?.pendingAmount}$</td>
                         <td>{item?.divisionName}</td>
-                   <td
+                        <td
                           style={{
                             color:
                               item?.paymentStatus === "succeeded"
@@ -65,7 +65,7 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                           }}
                         >
                           {item?.paymentStatus}
-                        </td> 
+                        </td>
                       </tr>
                     );
                   }

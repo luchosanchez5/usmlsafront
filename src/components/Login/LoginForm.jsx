@@ -117,13 +117,11 @@ const LoginForm = () => {
           </p>
           <div className="text-center text-white py-2">OR</div>
           <div className="d-flex  justify-content-center">
-            {/* <GoogleLogin title='Login With Google' /> */}
-
             <a
               className="google-login-button px-5"
               href="http://localhost:8082/oauth2/authorization/google"
             >
-              <BiLogoGoogle size={24} /> Login with Google {/* Google icon */}
+              <BiLogoGoogle size={24} /> Login with Google
             </a>
           </div>
         </Form>

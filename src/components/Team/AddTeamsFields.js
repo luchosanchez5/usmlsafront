@@ -25,20 +25,20 @@ function AddTeamsFields() {
     name: "",
     email: "",
     address: "",
-    // points: null,
-    // ranking: null,
-    // division: "",
+    points: null,
+    ranking: null,
     city: "",
     state: "",
-    // gamesWin: null,
-    // gamesLost: null,
-    // gamesTied: null,
-    // avgRunsScored: null,
-    // avgRunsAllowed: null,
-    // avgRunsDiff: null,
-    // runScored: null,
-    // runAllowed: null,
+    gamesWin: null,
+    gamesLost: null,
+    gamesTied: null,
+    avgRunsScored: null,
+    avgRunsAllowed: null,
+    avgRunsDiff: null,
+    runScored: null,
+    runAllowed: null,
     teamStatus: "",
+    zipCode: ""
   };
 
   const {
@@ -55,14 +55,13 @@ function AddTeamsFields() {
     onSubmit: (values, action) => {
       let data;
       if (TeamEdit) {
-
         data = {
           name: values.name,
           email: values.email,
           address: values.address,
           points: values.points,
           ranking: values.ranking,
-          division: values.division,
+          zipCode: values.zipCode,
           city: values.city,
           state: values.state,
           gamesWin: values.gamesWin,
@@ -82,6 +81,7 @@ function AddTeamsFields() {
           name: values.name,
           email: values.email,
           address: values.address,
+          zipCode: values.zipCode,
           // points: values.points,
           // ranking: values.ranking,
           // division: values.division,
@@ -118,26 +118,27 @@ function AddTeamsFields() {
   useEffect(() => {
     if (TeamEdit && TeamDetailsData) {
       setValues({
-        name: TeamDetailsData.name || "",
-        email: TeamDetailsData.email || "",
-        address: TeamDetailsData.address || "",
-        points: TeamDetailsData.points || "",
-        ranking: TeamDetailsData.ranking || "",
-        division: TeamDetailsData.division || 0,
-        city: TeamDetailsData.city || "",
-        state: TeamDetailsData.state || "",
-        gamesWin: TeamDetailsData.gamesWin || "",
-        gamesLost: TeamDetailsData.gamesLost || "",
-        gamesTied: TeamDetailsData.gamesTied || "",
-        avgRunsScored: TeamDetailsData.avgRunsScored || "",
-        avgRunsAllowed: TeamDetailsData.avgRunsAllowed || "",
-        avgRunsDiff: TeamDetailsData.avgRunsDiff || "",
-        runScored: TeamDetailsData.runScored || "",
-        runAllowed: TeamDetailsData.runAllowed || "",
-        teamStatus: TeamDetailsData.teamStatus || "",
+        name: TeamDetailsData.name ?? "",
+        email: TeamDetailsData.email ?? "",
+        address: TeamDetailsData.address ?? "",
+        points: TeamDetailsData.points ?? 0,
+        ranking: TeamDetailsData.ranking ?? 0,
+        city: TeamDetailsData.city ?? "",
+        state: TeamDetailsData.state ?? "",
+        gamesWin: TeamDetailsData.gamesWin ?? 0,
+        gamesLost: TeamDetailsData.gamesLost ?? 0,
+        gamesTied: TeamDetailsData.gamesTied ?? 0,
+        avgRunsScored: TeamDetailsData.avgRunsScored ?? 0,
+        avgRunsAllowed: TeamDetailsData.avgRunsAllowed ?? 0,
+        avgRunsDiff: TeamDetailsData.avgRunsDiff ?? 0,
+        runScored: TeamDetailsData.runScored ?? 0,
+        runAllowed: TeamDetailsData.runAllowed ?? 0,
+        teamStatus: TeamDetailsData.teamStatus ?? "",
+        zipCode: TeamDetailsData.zipCode ?? "",
       });
     }
   }, [TeamDetailsData, TeamEdit, setValues]);
+
 
   return (
     <div className="mt-3">
@@ -181,156 +182,144 @@ function AddTeamsFields() {
             />
           </Col>
           {
-            TeamEdit && 
+            TeamEdit &&
             <>
-               <Col md={4}>
-            <InputField
-              type="number"
-              name="points"
-              label="Team Points"
-              onChange={handleChange}
-              value={values.points}
-              className="form-control"
-              touched={touched.points}
-              error={errors.points}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="ranking"
-              label="Team Ranking"
-              onChange={handleChange}
-              value={values.ranking}
-              className="form-control"
-              touched={touched.ranking}
-              error={errors.ranking}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="text"
-              name="division"
-              label="Team Division"
-              onChange={handleChange}
-              value={values.division}
-              className="form-control"
-              touched={touched.division}
-              error={errors.division}
-            />
-          </Col>
-            <Col md={4}>
-            <InputField
-              type="number"
-              name="gamesWin"
-              label="Games Win"
-              onChange={handleChange}
-              value={values.gamesWin}
-              className="form-control"
-              touched={touched.gamesWin}
-              error={errors.gamesWin}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="gamesLost"
-              label="Games Lost"
-              onChange={handleChange}
-              value={values.gamesLost}
-              className="form-control"
-              touched={touched.gamesLost}
-              error={errors.gamesLost}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="gamesTied"
-              label="Games Tied"
-              onChange={handleChange}
-              value={values.gamesTied}
-              className="form-control"
-              touched={touched.gamesTied}
-              error={errors.gamesTied}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="avgRunsScored"
-              label="Avg Runs Scored"
-              onChange={handleChange}
-              value={values.avgRunsScored}
-              className="form-control"
-              touched={touched.avgRunsScored}
-              error={errors.avgRunsScored}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="avgRunsAllowed"
-              label="Avg Runs Allowed"
-              onChange={handleChange}
-              value={values.avgRunsAllowed}
-              className="form-control"
-              touched={touched.avgRunsAllowed}
-              error={errors.avgRunsAllowed}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="avgRunsDiff"
-              label="Avg Runs Diff"
-              onChange={handleChange}
-              value={values.avgRunsDiff}
-              className="form-control"
-              touched={touched.avgRunsDiff}
-              error={errors.avgRunsDiff}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="runScored"
-              label="Run Scored"
-              onChange={handleChange}
-              value={values.runScored}
-              className="form-control"
-              touched={touched.runScored}
-              error={errors.runScored}
-            />
-          </Col>
-          <Col md={4}>
-            <InputField
-              type="number"
-              name="runAllowed"
-              label="Run Allowed"
-              onChange={handleChange}
-              value={values.runAllowed}
-              className="form-control"
-              touched={touched.runAllowed}
-              error={errors.runAllowed}
-            />
-          </Col>
-          <Col md={4}>
-            <SelectTag
-              options={teamStatusOptions}
-              deFaultValue="ACTIVE"
-              onChange={handleChange}
-              label="Team Status"
-              name="teamStatus"
-              touched={touched.teamStatus}
-              error={errors.teamStatus}
-              value={values.teamStatus}
-              className="form-control"
-            />
-          </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="points"
+                  label="Team Points"
+                  onChange={handleChange}
+                  value={values.points}
+                  className="form-control"
+                  touched={touched.points}
+                  error={errors.points}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="ranking"
+                  label="Team Ranking"
+                  onChange={handleChange}
+                  value={values.ranking}
+                  className="form-control"
+                  touched={touched.ranking}
+                  error={errors.ranking}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="gamesWin"
+                  label="Games Win"
+                  onChange={handleChange}
+                  value={values.gamesWin}
+                  className="form-control"
+                  touched={touched.gamesWin}
+                  error={errors.gamesWin}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="gamesLost"
+                  label="Games Lost"
+                  onChange={handleChange}
+                  value={values.gamesLost}
+                  className="form-control"
+                  touched={touched.gamesLost}
+                  error={errors.gamesLost}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="gamesTied"
+                  label="Games Tied"
+                  onChange={handleChange}
+                  value={values.gamesTied}
+                  className="form-control"
+                  touched={touched.gamesTied}
+                  error={errors.gamesTied}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="avgRunsScored"
+                  label="Avg Runs Scored"
+                  onChange={handleChange}
+                  value={values.avgRunsScored}
+                  className="form-control"
+                  touched={touched.avgRunsScored}
+                  error={errors.avgRunsScored}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="avgRunsAllowed"
+                  label="Avg Runs Allowed"
+                  onChange={handleChange}
+                  value={values.avgRunsAllowed}
+                  className="form-control"
+                  touched={touched.avgRunsAllowed}
+                  error={errors.avgRunsAllowed}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="avgRunsDiff"
+                  label="Avg Runs Diff"
+                  onChange={handleChange}
+                  value={values.avgRunsDiff}
+                  className="form-control"
+                  touched={touched.avgRunsDiff}
+                  error={errors.avgRunsDiff}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="runScored"
+                  label="Run Scored"
+                  onChange={handleChange}
+                  value={values.runScored}
+                  className="form-control"
+                  touched={touched.runScored}
+                  error={errors.runScored}
+                />
+              </Col>
+              <Col md={4}>
+                <InputField
+                  type="number"
+                  name="runAllowed"
+                  label="Run Allowed"
+                  onChange={handleChange}
+                  value={values.runAllowed}
+                  className="form-control"
+                  touched={touched.runAllowed}
+                  error={errors.runAllowed}
+                />
+              </Col>
+              <Col md={4}>
+                <SelectTag
+                  options={teamStatusOptions}
+                  deFaultValue="ACTIVE"
+                  onChange={handleChange}
+                  label="Team Status"
+                  name="teamStatus"
+                  touched={touched.teamStatus}
+                  error={errors.teamStatus}
+                  value={values.teamStatus}
+                  className="form-control"
+                />
+              </Col>
             </>
           }
-       
+
           <Col md={4}>
             <InputField
               type="text"
@@ -355,7 +344,19 @@ function AddTeamsFields() {
               error={errors.state}
             />
           </Col>
-        
+          <Col md={4}>
+            <InputField
+              type="text"
+              name="zipCode"
+              label="Zip Code"
+              onChange={handleChange}
+              value={values.zipCode}
+              className="form-control"
+              touched={touched.zipCode}
+              error={errors.zipCode}
+            />
+          </Col>
+
         </Row>
         <div className="d-flex justify-content-center">
           <button type="submit" className="mt-3 gradient-btn-orange">
