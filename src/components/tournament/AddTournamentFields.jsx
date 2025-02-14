@@ -29,6 +29,8 @@ const AddTournamentFields = () => {
     tournamentStatus: "",
     numberOfDivisions: null,
     venueId: null,
+    whoIsComing: false,
+    showRegisteredTeams: false,
   };
   const tournamentStatusOptions = [
     { value: "ACTIVE", label: "ACTIVE" },
@@ -49,7 +51,7 @@ const AddTournamentFields = () => {
     handleSubmit,
     setValues,
     touched,
-   
+    setFieldValue,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: AllTournamentSchemas,
@@ -62,6 +64,8 @@ const AddTournamentFields = () => {
           endDate: values.endDate,
           tournamentStatus: values.tournamentStatus,
           numberOfDivisions: values.numberOfDivisions,
+          showWhoIsComing: values.whoIsComing,
+          showNumberOfRegisteredTeams: values.showRegisteredTeams,
         };
       } else {
         data = {
@@ -71,6 +75,8 @@ const AddTournamentFields = () => {
           tournamentStatus: values.tournamentStatus,
           numberOfDivisions: values.numberOfDivisions,
           venueId: Number(values.venueId),
+          showWhoIsComing: values.whoIsComing,
+          showNumberOfRegisteredTeams: values.showRegisteredTeams,
         };
       }
 
@@ -96,6 +102,8 @@ const AddTournamentFields = () => {
         endDate: TournamentDetails.endDate || "",
         tournamentStatus: TournamentDetails.status || "",
         numberOfDivisions: TournamentDetails.numberOfDivisions || "",
+        whoIsComing: TournamentDetails.whoIsComing,
+        showRegisteredTeams: TournamentDetails.showRegisteredTeams,
       });
     }
   }, [TournamentDetails, TournamentEdit, setValues]);
@@ -157,17 +165,6 @@ const AddTournamentFields = () => {
               value={values.tournamentStatus}
               className="form-control"
             />
-
-            {/* <InputField
-                            type="text"
-                            name="tournamentStatus"
-                            label="TournamentStatus"
-                            onChange={handleChange}
-                            value={values.tournamentStatus}
-                            className="form-control"
-                            touched={touched.tournamentStatus}
-                            error={errors.tournamentStatus}
-                        /> */}
           </div>
           <div className="d-flex flex-column flex-grow-1">
             <InputField
@@ -194,9 +191,50 @@ const AddTournamentFields = () => {
               className="form-control"
             />
           </div>
+          <div className="d-flex flex-column flex-grow-1">
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="whoIsComingSwitch"
+                name="whoIsComing"
+                checked={values.whoIsComing}
+                onChange={() =>
+                  setFieldValue("whoIsComing", !values.whoIsComing)
+                }
+              />
+              <label className="form-check-label" htmlFor="whoIsComingSwitch">
+                Who's Coming
+              </label>
+            </div>
+          </div>
+
+          <div className="d-flex flex-column flex-grow-1">
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="showRegisteredTeamsSwitch"
+                name="showRegisteredTeams"
+                checked={values.showRegisteredTeams}
+                onChange={() =>
+                  setFieldValue(
+                    "showRegisteredTeams",
+                    !values.showRegisteredTeams
+                  )
+                }
+              />
+              <label
+                className="form-check-label"
+                htmlFor="showRegisteredTeamsSwitch"
+              >
+                Show Registered Teams
+              </label>
+            </div>
+          </div>
 
           <div className="d-flex justify-content-center flex-grow-1 ">
-            <button type="submit" className="mt-3 gradient-btn-orange">
+            <button type="submit" className="mt-3 gradient-btn-orange rounded">
               {isLoading ? <SpinNer /> : "Submit"}
             </button>
           </div>

@@ -34,16 +34,15 @@ const AllTeamsDetails = () => {
   const role = user?.roles[0];
   return (
     <>
-      <h1 className="font-bold my-3 ps-4">Team Details</h1>
       <div className="text-end   pe-4  ">
         <button
-          className="Team-register-btn mb-1 mb-lg-0 mx-1 mx-md-2 mx-lg-2 mx-sm-2 "
+          className="Team-register-btn mb-1 mb-lg-0 mx-1 mx-md-2 mx-lg-2 mx-sm-2 rounded "
           onClick={() => SetCoManagerBoxModel(true)}
         >
           Add Co Manager
         </button>
         <button
-          className="Team-register-btn mx-lg-2 mx-md-2 mx-sm-2"
+          className="Team-register-btn mx-lg-2 mx-md-2 mx-sm-2 rounded"
           onClick={() => SetPlayerBoxModel(true)}
         >
           Add Player
@@ -52,7 +51,7 @@ const AllTeamsDetails = () => {
           ""
         ) : (
           <button
-            className="Team-register-btn mx-2 "
+            className="Team-register-btn mx-2 rounded"
             onClick={() => Navigate(`/dashboard/registerteam/${id}`)}
           >
             Team Register
@@ -60,7 +59,7 @@ const AllTeamsDetails = () => {
         )}
       </div>
       <div className="text-start  ps-4  ">
-        <button className="bg-black">
+        <button className="bg-black rounded">
           <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
         </button>
       </div>
@@ -83,11 +82,18 @@ const AllTeamsDetails = () => {
           setState={setState}
         />
       )}
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "black",
+        }}>
+          Team Details
+        </span>
+      </div>
 
       {isLoading ? (
         <DetailSkeleton />
       ) : (
-        <div className="bg-white   rounded-lg shadow-lg max-w-4xl px-3 py-5 m-4">
+        <div className="bg-white   rounded-lg shadow-lg max-w-4xl px-3 py-5 m-4 rounded">
           <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center  gy-3">
             <Col>
               <h5 className=" text-nowrap fw-bold">Team Name:</h5>
@@ -170,11 +176,29 @@ const AllTeamsDetails = () => {
         </div>
       )}
       {PaymentBoxModel && <PaymentModel />}
-      <h2 className="ps-4 text-danger">Team Members:</h2>
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "red",
+        }}>
+          Team Members
+        </span>
+      </div>
       <MembersTable teamId={id} setState={setState} />
-      <h2 className="ps-4 text-danger">Payment Records:</h2>
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "red",
+        }}>
+          Payment Records
+        </span>
+      </div>
       <PaymentHistoryTable />
-      <h2 className="ps-4 text-danger">Tournament Registration:</h2>
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "black",
+        }}>
+          Tournament Registration
+        </span>
+      </div>
       <PendingHistoryTable />
     </>
   );

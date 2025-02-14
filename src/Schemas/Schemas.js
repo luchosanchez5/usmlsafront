@@ -26,7 +26,8 @@ export const AllTournamentSchemas = Yup.object({
   startDate: Yup.date().required("Start Date is Required"),
   endDate: Yup.date().required("End Date is Required"),
   tournamentStatus: Yup.string().required("Tournament Status is Required"),
-  numberOfDivisions: Yup.number().required("Number Of Divisions is Required"),
+  numberOfDivisions: Yup.number().typeError("No Of Division must be a valid number")
+    .required("Number Of Divisions is Required"),
 });
 export const AllVenueSchemas = Yup.object({
   name: Yup.string().required("Venue Name is Required"),

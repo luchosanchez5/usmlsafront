@@ -64,7 +64,6 @@ const AllDivisionDetails = () => {
 
   return (
     <>
-      <h1 className="font-bold my-3">Divisions Details</h1>
       <div className="d-flex align-items-center gap-3">
         <div
           className="Upload-picture d-flex flex-column align-items-center justify-content-center gap-2"
@@ -109,9 +108,16 @@ const AllDivisionDetails = () => {
         <FaCamera size={20} onClick={triggerFileInput} cursor="pointer" />
       </div>
       <div className="text-end pe-4">
-        <button className="bg-black">
+        <button className="bg-black rounded">
           <FaArrowLeft onClick={() => Navigate(-1)} color="white" size={20} />
         </button>
+      </div>
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "black",
+        }}>
+          Divisions Details
+        </span>
       </div>
 
       {isLoading ? (
@@ -198,7 +204,13 @@ const AllDivisionDetails = () => {
           </Row>
         </div>
       )}
-      <h2 className="ps-4 text-danger">Payment Records:</h2>
+      <div className="ps-4 my-3">
+        <span className="text-white fs-4 fw-bold p-2 rounded" style={{
+          background: "red",
+        }}>
+          Payment Records
+        </span>
+      </div>
       <PaymentHistoryTable divisionId={id} />
     </>
   );

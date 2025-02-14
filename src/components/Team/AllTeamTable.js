@@ -105,11 +105,13 @@ const AllTeamTable = () => {
                     <td>{item?.avgRunsDiff}</td>
                     <td>{item?.runAllowed}</td>
                     <td
-                      style={{
-                        color: item?.teamStatus === "ACTIVE" ? "green" : "red",
-                      }}
                     >
-                      {item?.teamStatus}
+                      <span className="text-white fw-bold p-2 fs-6 rounded"
+                        style={{
+                          background:
+                            item?.teamStatus === "ACTIVE" ? "green" : "red",
+                        }}> {item?.teamStatus}
+                      </span>
                     </td>
 
                     <td>

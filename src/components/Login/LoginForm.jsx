@@ -105,7 +105,7 @@ const LoginForm = () => {
             </Link>
           </Row>
           <div className="d-flex justify-content-center mb-3  px-0">
-            <button type="submit" className=" mt-3 gradient-btn-orange">
+            <button type="submit" className=" mt-3 gradient-btn-orange rounded">
               {isLoading ? <SpinNer /> : "Login"}
             </button>
           </div>
@@ -118,7 +118,7 @@ const LoginForm = () => {
           <div className="text-center text-white py-2">OR</div>
           <div className="d-flex  justify-content-center">
             <a
-              className="google-login-button px-5"
+              className="google-login-button px-5 rounded"
               href="http://localhost:8082/oauth2/authorization/google"
             >
               <BiLogoGoogle size={24} /> Login with Google

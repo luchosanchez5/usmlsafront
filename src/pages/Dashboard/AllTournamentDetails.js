@@ -114,7 +114,7 @@ const AllTournamentDetails = () => {
         <FaCamera size={20} onClick={triggerFileInput} cursor='pointer' />
       </div>
       <div className="text-end pe-4">
-        <button className="bg-black">
+        <button className="bg-black rounded">
           <FaArrowLeft onClick={() => navigate(-1)} color="white" size={20} />
         </button>
       </div>

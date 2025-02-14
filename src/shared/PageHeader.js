@@ -26,7 +26,7 @@ const PageHeader = ({ title, subtitle, btnText, onClick, className }) => {
                     </div>
                 </Col>
                 <Col className='text-start text-md-end text-lg-end'>
-                    <button className={`${btnText.trim() === 'Team Register' ? 'Team-register-btn' : 'gradient-btn-orange'} p-2`}
+                    <button className={`rounded ${btnText.trim() === 'Team Register' ? 'Team-register-btn' : 'gradient-btn-orange'} p-2`}
                         onClick={onClick}><MdOutlineAdd fontSize={20} />{btnText}</button>
                 </Col>
             </Row>

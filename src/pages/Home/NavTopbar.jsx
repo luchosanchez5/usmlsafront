@@ -23,7 +23,7 @@ function NavTopbar() {
           {Token ? (
             <>
               <button
-                className="text-white py-2 px-3 Login-btn"
+                className="text-white py-2 px-3 Login-btn rounded"
                 onClick={() => {
                   if (user.roles[0] === "ADMIN") {
                     Navigate("/dashboard");

@@ -50,7 +50,10 @@ const Home = () => {
                   title={item?.status}
                   subtitle={item?.venueName}
                   ranking={item?.name}
+                  numberOfRegisteredTeams={item.numberOfRegisteredTeams}
+                  showNumberOfRegisteredTeams={item.showNumberOfRegisteredTeams}
                   points={item?.points}
+                  showWhoIsComing={item.showWhoIsComing}
                   img={image}
                   startDate={item?.startDate}
                   endDate={item?.endDate}

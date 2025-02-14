@@ -25,7 +25,7 @@ const Dashboard = () => {
         Dispatch(GetTeams(0, token, user, ''))
         // Dispatch(GetAllDivisions(0, token))
 
-    }, [Dispatch,token,user])
+    }, [Dispatch, token, user])
     const data = [
 
         { icon: <RiTeamFill className='card-icon' style={{ color: '#fff' }} />, title: 'All Teams', count: TeamData?.totalRecords ? TeamData?.totalRecords : 0, cardColor: '#e30613' },
@@ -39,7 +39,7 @@ const Dashboard = () => {
         <Row className='mx-2 mx-sm-3 me-lg-0'>
             {data?.map((item, index) => {
                 return (
-                    <Col key={index} xs='12' md='6' xl='3' className=''>
+                    <Col key={index} xs='12' md='6' xl='3' className='rounded'>
                         <DashboardCard
                             icon={item?.icon}
                             title={item?.title}

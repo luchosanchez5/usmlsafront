@@ -2,7 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 
-const EventData = ({ title, subtitle, ranking, startDate, endDate, img }) => {
+const EventData = ({
+  title,
+  subtitle,
+  ranking,
+  startDate,
+  endDate,
+  img,
+  numberOfRegisteredTeams,
+  showNumberOfRegisteredTeams,
+  showWhoIsComing,
+}) => {
   console.log(img, "alsjndbkasd");
   const getitem = localStorage.getItem("Login");
   const IsLoggedIn = JSON.parse(getitem);
@@ -37,14 +47,28 @@ const EventData = ({ title, subtitle, ranking, startDate, endDate, img }) => {
         <h3 className="event-title fs-5">{ranking}</h3>
         <span className="event-date">Start Date: {startDate}</span>
         <span className="event-date">End Date: {endDate}</span>
+        {showNumberOfRegisteredTeams && (
+          <div>
+            <span className="bg-dark text-white rounded p-1">
+              No of Register Teams:{" "}
+              {numberOfRegisteredTeams > 0 ? numberOfRegisteredTeams : 0}
+            </span>
+          </div>
+        )}
+
         <div className="event-buttons">
-          <button className="event-button bg-warning">Who's Coming</button>
-          <button
-            className="event-button bg-dark text-white"
-            onClick={handleRegister}
-          >
-            Division
-          </button>
+          {showWhoIsComing && (
+            <>
+              <button className="event-button bg-warning">Who's Coming</button>
+              <button
+                className="event-button bg-dark text-white"
+                onClick={handleRegister}
+              >
+                Division
+              </button>
+            </>
+          )}
+
           <button
             className="event-button Login-btn text-white"
             onClick={handleRegister}
