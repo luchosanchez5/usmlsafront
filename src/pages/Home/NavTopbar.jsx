@@ -17,7 +17,7 @@ function NavTopbar() {
 
   return (
     <>
-      <Navbar className="bg-dark py-3 text-white justify-content-between justify-content-lg-baseline">
+      <Navbar className="bg-dark py-3 text-white justify-content-between justify-content-lg-baseline px-lg-5 ">
         <Image width={200} className="ps-2" src={logo} alt="" />
         <div className="d-none d-lg-flex gap-3 me-4">
           {Token ? (

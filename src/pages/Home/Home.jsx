@@ -4,7 +4,6 @@ import EventData from "../../components/product/EventData";
 import { useDispatch, useSelector } from "react-redux";
 import { GetDefaultTournamentsBySearch } from "../../store/tournament/actions/actionsCreators";
 import SkeletonCard from "../../components/SkeletonTable/SkeletonCard";
-import { Container } from "react-bootstrap";
 
 const Home = () => {
   const { DefaultTournamentData, isLoading } = useSelector(
@@ -20,50 +19,51 @@ const Home = () => {
   }, [Dispatch]);
 
   return (
-    <div className="p-4 mt-2">
-      <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded">
-        Featured Events
-      </h2>
-
-      {isLoading ? (
-        <SkeletonCard />
-      ) : DefaultTournamentData?.data?.length > 0 ? (
-        <div className="event-grid">
-          {DefaultTournamentData.data.map((item, index) => {
-            let image = fallbackImage;
-            if (item.picture) {
-              try {
-                const binaryData = atob(item.picture);
-                const bytes = new Uint8Array(binaryData.length);
-                for (let i = 0; i < binaryData.length; i++) {
-                  bytes[i] = binaryData.charCodeAt(i);
+    <div className="p-2 mt-2">
+      <div className="mx-lg-5 search-box rounded">
+        <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded-top">
+          Featured Events
+        </h2>
+        {isLoading ? (
+          <SkeletonCard />
+        ) : DefaultTournamentData?.data?.length > 0 ? (
+          <div className="event-grid">
+            {DefaultTournamentData.data.map((item, index) => {
+              let image = fallbackImage;
+              if (item.picture) {
+                try {
+                  const binaryData = atob(item.picture);
+                  const bytes = new Uint8Array(binaryData.length);
+                  for (let i = 0; i < binaryData.length; i++) {
+                    bytes[i] = binaryData.charCodeAt(i);
+                  }
+                  const blob = new Blob([bytes], { type: "image/jpeg" });
+                  image = URL.createObjectURL(blob);
+                } catch (e) {
+                  console.error("Error decoding image", e);
                 }
-                const blob = new Blob([bytes], { type: "image/jpeg" });
-                image = URL.createObjectURL(blob);
-              } catch (e) {
-                console.error("Error decoding image", e);
               }
-            }
 
-            return (
-              <EventData
-                key={index}
-                title={item?.status}
-                subtitle={item?.venueName}
-                ranking={item?.name}
-                points={item?.points}
-                img={image}
-                startDate={item?.startDate}
-                endDate={item?.endDate}
-              />
-            );
-          })}
-        </div>
-      ) : (
-        <div className="d-flex justify-content-center flex-grow-1">
-          <h2 className="text-center text-danger mt-5">No Records Found.</h2>
-        </div>
-      )}
+              return (
+                <EventData
+                  key={index}
+                  title={item?.status}
+                  subtitle={item?.venueName}
+                  ranking={item?.name}
+                  points={item?.points}
+                  img={image}
+                  startDate={item?.startDate}
+                  endDate={item?.endDate}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="d-flex justify-content-center flex-grow-1">
+            <h2 className="text-center text-danger mt-5">No Records Found.</h2>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

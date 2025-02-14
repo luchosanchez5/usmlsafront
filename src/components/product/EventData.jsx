@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 
 const EventData = ({ title, subtitle, ranking, startDate, endDate, img }) => {
+  console.log(img, "alsjndbkasd");
   const getitem = localStorage.getItem("Login");
   const IsLoggedIn = JSON.parse(getitem);
   const Navigate = useNavigate();
@@ -17,38 +18,38 @@ const EventData = ({ title, subtitle, ranking, startDate, endDate, img }) => {
 
   return (
     <div className="event-card">
-      {/* Left Image */}
       <div className="event-card-img">
         <img src={img} alt="tournament" />
       </div>
-
-      {/* Right Content */}
       <div className="event-card-body">
-        {/* Location & Event Info */}
-        <div className="event-info">
-          <span className="event-location">{subtitle}</span>
-          <h3 className="event-title">{ranking}</h3>
-          <p className="event-date">
-            {startDate} - {endDate}
-          </p>
+        <div>
+          <span
+            className="event-location p-1 text-white rounded fs-6"
+            style={{ background: title === "ACTIVE" ? "green" : "red" }}
+          >
+            {title}
+          </span>
         </div>
-
-        {/* Buttons */}
+        <h6 className="text-black fs-6">
+          <CiLocationOn color="black" />
+          {subtitle}
+        </h6>
+        <h3 className="event-title fs-5">{ranking}</h3>
+        <span className="event-date">Start Date: {startDate}</span>
+        <span className="event-date">End Date: {endDate}</span>
         <div className="event-buttons">
-          <button className="event-button btn-small bg-warning">
-            WHO'S COMING
-          </button>
+          <button className="event-button bg-warning">Who's Coming</button>
           <button
-            className="event-button btn-small bg-dark text-white"
+            className="event-button bg-dark text-white"
             onClick={handleRegister}
           >
-            DIVISIONS
+            Division
           </button>
           <button
-            className="event-button btn-small Login-btn text-white"
+            className="event-button Login-btn text-white"
             onClick={handleRegister}
           >
-            {IsLoggedIn ? "REGISTER" : "BUY NOW"}
+            {IsLoggedIn ? "Buy Now" : "Register"}
           </button>
         </div>
       </div>

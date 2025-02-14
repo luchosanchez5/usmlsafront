@@ -1,71 +1,36 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const SkeletonCard = () => {
     return (
-        <Row className="event-data-container mx-5 my-3 py-5">
-            <Col md={8} className="d-flex align-items-center">
-                {/* Skeleton for image */}
-                <div
-                    style={{
-                        width: "300px",
-                        height: "200px",
-                        backgroundColor: "#e0e0e0",
-                        borderRadius: "8px",
-                    }}
-                ></div>
-                <div className="d-flex flex-column ms-3 text-center text-md-start">
-                    {/* Skeleton for text */}
-                    <div
-                        style={{
-                            width: "100px",
-                            height: "20px",
-                            backgroundColor: "#e0e0e0",
-                            marginBottom: "10px",
-                            borderRadius: "4px",
-                        }}
-                    ></div>
-                    <div
-                        style={{
-                            width: "200px",
-                            height: "30px",
-                            backgroundColor: "#e0e0e0",
-                            marginBottom: "10px",
-                            borderRadius: "4px",
-                        }}
-                    ></div>
-                    <div
-                        style={{
-                            width: "150px",
-                            height: "20px",
-                            backgroundColor: "#e0e0e0",
-                            marginBottom: "10px",
-                            borderRadius: "4px",
-                        }}
-                    ></div>
-                    <div
-                        style={{
-                            width: "150px",
-                            height: "20px",
-                            backgroundColor: "#e0e0e0",
-                            marginBottom: "10px",
-                            borderRadius: "4px",
-                        }}
-                    ></div>
-                </div>
-            </Col>
-            <Col md={4} className="d-flex justify-content-end flex-column">
-                {/* Skeleton for button */}
-                <div
-                    style={{
-                        width: "100px",
-                        height: "40px",
-                        backgroundColor: "#e0e0e0",
-                        borderRadius: "8px",
-                        alignSelf: "flex-end",
-                    }}
-                ></div>
-            </Col>
+        <Row className="g-4">
+            {[...Array(2)].map((_, index) => (
+                <Col key={index} xs={12} md={6}>
+                    <div className="event-card">
+                        <div className="event-card-img">
+                            <Skeleton height="100%" width="100%" />
+                        </div>
+
+                        <div className="event-card-body">
+                            <Skeleton width={80} height={15} />
+
+                            <Skeleton width={150} height={20} />
+
+                            <Skeleton width={200} height={25} />
+
+                            <Skeleton width={120} height={15} />
+                            <Skeleton width={120} height={15} />
+                            <div className="event-buttons">
+                                <Skeleton width={80} height={30} />
+                                <Skeleton width={80} height={30} />
+                                <Skeleton width={80} height={30} />
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+            ))}
         </Row>
     );
 };

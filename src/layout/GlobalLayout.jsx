@@ -10,8 +10,8 @@ const GlobalLayout = (WrapComponent) => {
     return (
       <React.Fragment>
         <NavTopbar />
-        <div className="page-container">
-          <main className="main-container">
+        <div className="">
+          <main className="">
             {!pathname.includes(location.pathname) ? <FindEvents /> : null}
             <WrapComponent {...props} />
           </main>

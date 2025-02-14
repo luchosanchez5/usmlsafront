@@ -1,0 +1,45 @@
+Skeleton Loading Effect .skeleton-box {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Skeleton Card Layout */
+.skeleton.event-card {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 250px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+/* Skeleton Buttons */
+.skeleton-button {
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+/* Animation for Skeleton */
+@keyframes shimmer {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #d6d6d6;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+  .skeleton.event-card {
+    grid-template-columns: 1fr;
+  }
+}

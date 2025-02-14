@@ -48,13 +48,8 @@ const FindEvents = () => {
 
   return (
     <div className="p-2 mt-2">
-      <div
-        className={`d-none d-lg-flex flex-column text-white mx-3 mx-lg-3 `}
-        style={{
-          transition: "all 0.3s ease-in-out",
-        }}
-      >
-        <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded">
+      <div className="d-none d-lg-flex flex-column text-white mx-3 mx-lg-5 search-box rounded">
+        <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded-top">
           Find Tournaments
         </h2>
         <Offcanvas
@@ -128,7 +123,7 @@ const FindEvents = () => {
         </Offcanvas>
         <form onSubmit={handleSubmit}>
           <Row
-            className="gx-3 gy-2"
+            className="gx-3 gy-2 p-2"
             style={{ overflowX: "auto", whiteSpace: "nowrap" }}
           >
             <Col xs={12} sm={6} md={4} className="d-flex flex-column">
