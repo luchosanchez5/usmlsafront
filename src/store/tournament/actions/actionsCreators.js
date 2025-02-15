@@ -529,3 +529,31 @@ export const uploadDivisionPicture = (divisionId, token, file) => (dispatch) => 
       });
     });
 };
+
+export const getTournamentDivisions = (name) => (dispatch) => {
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  axios.get(`${Url}api/divisions/search?${name.toString()}`)
+    .then((response) => {
+      dispatch({
+        type: actionTypes.GET_TOURNAMENT_DIVISIONS,
+        payload: response.data,
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: actionTypes.DEFAULT_TOURNAMENTS,
+        payload: [],
+      });
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};

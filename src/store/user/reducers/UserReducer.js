@@ -13,7 +13,6 @@ const UserReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case actionTypes.SET_LOADING:
-            console.log("Reducer is updating isLoading:", action.payload)
             return {
                 ...state,
                 isLoading: action.payload

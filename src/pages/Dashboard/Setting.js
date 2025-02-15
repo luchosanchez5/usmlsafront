@@ -15,7 +15,7 @@ import { FaCamera } from "react-icons/fa";
 import logo from "../../assets/images/usmlsa_logo.png";
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 const Setting = () => {
-  const { personData, isLoading } = useSelector((state) => state.person);
+  const { PersonData, isLoading } = useSelector((state) => state.person);
   const { user, token } = useSelector((state) => state.user);
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
@@ -26,9 +26,9 @@ const Setting = () => {
     Dispatch(GetPerson(user.userId));
   }, [Dispatch, state, user]);
   useEffect(() => {
-    if (personData?.data?.profilePicture) {
+    if (PersonData?.data[0]?.profilePicture) {
       try {
-        const binaryData = atob(personData?.data?.profilePicture);
+        const binaryData = atob(PersonData?.data[0]?.profilePicture);
         const bytes = new Uint8Array(binaryData.length);
         for (let i = 0; i < binaryData.length; i++) {
           bytes[i] = binaryData.charCodeAt(i);
@@ -43,7 +43,7 @@ const Setting = () => {
     } else {
       setPreviewImage(null);
     }
-  }, [personData]);
+  }, [PersonData]);
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -115,30 +115,30 @@ const Setting = () => {
       {isLoading ? (
         <DetailSkeleton />
       ) : (
-        <div className="section-main m-3 px-3 py-5 bg-white  shadow-lg">
+        <div className="section-main m-3 px-3 py-5 bg-white  shadow-lg rounded">
           <Row className="my-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
             <Col>
               <h5 className="fw-bold"> Email : </h5>
-              <h6>{personData?.data?.email}</h6>
+              <h6>{PersonData?.data[0]?.email}</h6>
             </Col>
 
             <Col>
               <h5 className="fw-bold"> Role : </h5>
-              <h6>{personData?.data?.role}</h6>
+              <h6>{PersonData?.data[0]?.role}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">First Name : </h5>
-              <h6>{personData?.data?.firstName}</h6>
+              <h6>{PersonData?.data[0]?.firstName}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">Last Name : </h5>
-              <h6> {personData?.data?.lastName}</h6>
+              <h6> {PersonData?.data[0]?.lastName}</h6>
             </Col>
           </Row>
         </div>
       )}
       {editModel &&
-        (personData?.data?.role === "ADMIN" ? (
+        (PersonData?.data[0]?.role === "ADMIN" ? (
           <AdminInfoEditModel
             show={editModel}
             onClose={() => setEditModel(false)}
@@ -146,7 +146,7 @@ const Setting = () => {
             setEditModel={setEditModel}
             setState={setState}
           />
-        ) : personData?.data?.role === "MANAGER" ? (
+        ) : PersonData?.data[0]?.role === "MANAGER" ? (
           <ManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
@@ -154,14 +154,14 @@ const Setting = () => {
             onClick={handleConfrim}
             setState={setState}
           />
-        ) : personData?.data?.role === "PLAYER" ? (
+        ) : PersonData?.data[0]?.role === "PLAYER" ? (
           <PlayerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
             onClose={() => setEditModel(false)}
             onClick={handleConfrim}
           />
-        ) : personData?.data?.role === "CO_MANAGER" ? (
+        ) : PersonData?.data[0]?.role === "CO_MANAGER" ? (
           <CoManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}

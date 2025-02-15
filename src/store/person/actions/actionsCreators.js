@@ -182,7 +182,7 @@ export const DelPersons = (Personid, token, callback) => (dispatch) => {
 };
 
 export const GetPerson =
-  (id = "10", Token) =>
+  (id, Token) =>
     (dispatch) => {
       dispatch({
         type: actionTypes.SET_LOADING,

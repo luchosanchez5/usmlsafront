@@ -35,7 +35,7 @@ const ContactInformation = ({
         }))
       : [];
 
-const DivisionOptions =
+  const DivisionOptions =
     DivisionBySearch?.data?.length > 0
       ? DivisionBySearch.data.map((item) => ({
           value: item?.divisionName,
@@ -67,7 +67,16 @@ const DivisionOptions =
 
   return (
     <>
-      <h2>Register Your Team</h2>
+      <div className="ps-4 my-3">
+        <span
+          className="text-white fs-4 fw-bold p-2 rounded"
+          style={{
+            background: "black",
+          }}
+        >
+          Register Your Team
+        </span>
+      </div>
       <div className="mt-5 d-flex flex-column gap-2">
         <div className="d-flex  me-1">
           <SelectField

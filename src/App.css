@@ -588,3 +588,7 @@ input:checked + .slider:before {
     font-weight: bold;
   }
 }
+
+.modal-header .btn-close {
+  filter: invert(1) !important; /* Ensures the close button is black */
+}

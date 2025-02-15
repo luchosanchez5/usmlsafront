@@ -11,6 +11,7 @@ const initialState = {
     DefaultTournamentData: [],
     // VenuData: false
     isLoading: false,
+    tournamentDivision: {}
 };
 
 const TournamentReducer = (state = initialState, action) => {
@@ -71,6 +72,11 @@ const TournamentReducer = (state = initialState, action) => {
                 ...state,
                 DefaultTournamentData: action.payload || []
             };
+        case actionTypes.GET_TOURNAMENT_DIVISIONS:
+            return {
+                ...state,
+                tournamentDivision: action.payload || {}
+            };
         case actionTypes.CLEAR_TOURNAMENT:
             return {
                 TournamentData: [],
@@ -83,6 +89,7 @@ const TournamentReducer = (state = initialState, action) => {
                 DefaultTournamentData: [],
                 // VenuData: false
                 isLoading: false,
+                tournamentDivision: {}
             };
 
         default:
