@@ -46,7 +46,7 @@ const DashboardLayout = (WrapComponent) => {
                 <main className='main-container '>
                     <Container fluid >
                         <TopBar />
-                        <div className='m-4'>
+                        <div className='m-lg-4'>
                             <WrapComponent {...props} />
 
                         </div>

@@ -34,7 +34,7 @@ const AllTeamsDetails = () => {
   const role = user?.roles[0];
   return (
     <>
-      <div className="text-end   pe-4  ">
+      <div className="text-end   pe-4  mt-4">
         <button
           className="Team-register-btn mb-1 mb-lg-0 mx-1 mx-md-2 mx-lg-2 mx-sm-2 rounded "
           onClick={() => SetCoManagerBoxModel(true)}

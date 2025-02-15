@@ -8,6 +8,7 @@ import { GlobalInfo } from "../../App";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Col, Row } from "react-bootstrap";
 import SpinNer from "../LoadingSpinner/SpinNer";
+import Toast from "../../shared/Toast";
 
 const FindEvents = () => {
   const Dispatch = useDispatch();
@@ -32,6 +33,13 @@ const FindEvents = () => {
   const { handleChange, handleSubmit, values } = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
+      const isAnyFieldFilled = Object.values(values).some(
+        (value) => value.trim() !== ""
+      );
+
+      if (!isAnyFieldFilled) {
+        return Toast.error("Please fill at least one field before submitting.");
+      }
       const searchParams = new URLSearchParams();
 
       Object.entries(values)

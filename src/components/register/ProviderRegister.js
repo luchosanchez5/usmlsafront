@@ -16,7 +16,7 @@ const ProviderRegisterForm = () => {
   const { isLoading } = useSelector((state) => state.user);
   const [roleValue, SetRoleValue] = useState("");
   const [eye, setEye] = useState(false);
-  const[confirmEye,setConfirmEye]=useState(false)
+  const [confirmEye, setConfirmEye] = useState(false)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ const ProviderRegisterForm = () => {
     mobilePhone: "",
     email: "",
     password: "",
-    confirmPassword:"",
+    confirmPassword: "",
     tournamentsPlayed: null,
     gamesPlayed: null,
     role: "",
@@ -273,7 +273,7 @@ const ProviderRegisterForm = () => {
             </Row>
             <Row className="my-3">
               <Col xs="12 d-flex flex-grow-1 justify-content-center">
-                <button type="submit" className="h-56px gradient-btn-orange">
+                <button type="submit" className="h-56px gradient-btn-orange rounded">
                   {isLoading ? <SpinNer /> : "Submit"}
                 </button>
               </Col>

@@ -17,7 +17,6 @@ const AuthLayout = (WrappedComponent) => {
                   <WrappedComponent {...props} />
                 </ErrorBoundary>
               </Col>
-
             </Row>
           </Container>
         </div>
