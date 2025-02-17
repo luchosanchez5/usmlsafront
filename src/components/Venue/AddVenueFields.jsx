@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import InputField from "../product/InputField";
 import { AllVenueSchemas } from "../../Schemas/Schemas";
@@ -31,45 +31,39 @@ const AddVenueFields = () => {
     state: "",
     numberOfFields: null,
     venueStatus: "",
-    zipCode:""
+    zipCode: "",
   };
   const VenueStatusOptions = [
     { value: "CLOSED", label: "CLOSED" },
     { value: "OPEN", label: "OPEN" },
     { value: "UNDER_MAINTENANCE", label: "UNDER_MAINTENANCE" },
   ];
-  const {
-    values,
-    handleChange,
-    errors,
-    handleSubmit,
-    setValues,
-    touched,
-  } = useFormik({
-    initialValues: initialValues,
-    validationSchema: AllVenueSchemas,
-    onSubmit: (values, action) => {
-      action.resetForm();
+  const { values, handleChange, errors, handleSubmit, setValues, touched } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: AllVenueSchemas,
+      onSubmit: (values, action) => {
+        action.resetForm();
 
-      const data = {
-        name: values.name,
-        address1: values.address1,
-        address2: values.address2,
-        city: values.city,
-        state: values.state,
-        zipCode: values.zipCode,
-        numberOfFields: values.numberOfFields,
-        venueStatus: values.venueStatus,
-      };
+        const data = {
+          name: values.name,
+          address1: values.address1,
+          address2: values.address2,
+          city: values.city,
+          state: values.state,
+          zipCode: values.zipCode,
+          numberOfFields: values.numberOfFields,
+          venueStatus: values.venueStatus,
+        };
 
-      if (VenueEdit) {
-        Dispatch(UpdateVenue(data, Token, VenueId, Navigate));
-      } else {
-        Dispatch(AddVenue(data, Token, Navigate));
-      }
-    },
-  });
-  
+        if (VenueEdit) {
+          Dispatch(UpdateVenue(data, Token, VenueId, Navigate));
+        } else {
+          Dispatch(AddVenue(data, Token, Navigate));
+        }
+      },
+    });
+
   useEffect(() => {
     if (VenueEdit && VenueId) {
       Dispatch(GetVenueByVenueId(VenueId, Token));
@@ -85,6 +79,7 @@ const AddVenueFields = () => {
         state: VenuDetails.state || "",
         zipCode: VenuDetails.zipCode || "",
         numberOfFields: VenuDetails.numberOfFields || "",
+        zipCode: VenuDetails.zipCode,
         venueStatus: VenuDetails.statusVenue || "",
       });
     }

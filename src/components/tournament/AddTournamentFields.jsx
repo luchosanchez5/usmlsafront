@@ -102,12 +102,12 @@ const AddTournamentFields = () => {
         endDate: TournamentDetails.endDate || "",
         tournamentStatus: TournamentDetails.status || "",
         numberOfDivisions: TournamentDetails.numberOfDivisions || "",
-        whoIsComing: TournamentDetails.whoIsComing,
-        showRegisteredTeams: TournamentDetails.showRegisteredTeams,
+        whoIsComing: TournamentDetails.showWhoIsComing,
+        showRegisteredTeams: TournamentDetails.showNumberOfRegisteredTeams,
       });
     }
   }, [TournamentDetails, TournamentEdit, setValues]);
-
+  const today = new Date().toISOString().split("T")[0];
   return (
     <>
       <h4 className="my-3 fw-bold">
@@ -138,6 +138,7 @@ const AddTournamentFields = () => {
               className="form-control"
               touched={touched.startDate}
               error={errors.startDate}
+              min={today}
             />
           </div>
 
@@ -151,6 +152,7 @@ const AddTournamentFields = () => {
               className="form-control"
               touched={touched.endDate}
               error={errors.endDate}
+              min={values.startDate || today}
             />
           </div>
           <div className="d-flex flex-column flex-grow-1">

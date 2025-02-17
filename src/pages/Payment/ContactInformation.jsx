@@ -21,6 +21,7 @@ const ContactInformation = ({
   const { TournamentBySearch, DivisionBySearch } = useSelector(
     (state) => state.tournament
   );
+  console.log(DivisionBySearch);
   const [tournamentId, setTournamentId] = useState(null);
   const [CardModel, SetCardModel] = useState(false);
   const handlePaymentChange = (event) => {

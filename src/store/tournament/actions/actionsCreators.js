@@ -198,6 +198,12 @@ export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (disp
       // Toast.success(response.data.status);
     })
     .catch((error) => {
+      if (error.response.status === 404) {
+        dispatch({
+          type: actionTypes.GET_DIVISION_BY_SEARCH,
+          payload: []
+        });
+      }
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: true,

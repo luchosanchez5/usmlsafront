@@ -8,6 +8,7 @@ const InputField = ({
   error,
   className,
   labelClassName,
+  min,
   ...props
 }) => {
   return (
@@ -22,7 +23,7 @@ const InputField = ({
         type={type}
         className={className}
         autoComplete="off"
-        min={type === "number" ? 0 : undefined}
+        min={type === "number" ? 0 : min}
       />
       {touched && error ? <p className="text-danger">{error}</p> : null}
     </>

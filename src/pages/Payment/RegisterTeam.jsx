@@ -55,7 +55,7 @@ const RegisterTeam = () => {
     <>
       <div className="container mt-5">
         <Row className="justify-content-center">
-          <Col className="d-flex flex-column " lg={4}>
+          <Col className="d-flex flex-column " lg={6}>
             <ContactInformation
               selectedPayment={selectedPayment}
               setSelectedPayment={setSelectedPayment}

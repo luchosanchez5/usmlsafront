@@ -37,20 +37,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(23, 29, 37, 0) 0%, #171D25 83.85%);
+  background: linear-gradient(180deg, rgba(23, 29, 37, 0) 0%, #171d25 83.85%);
 }
 .form-space {
-height: 95vh;
+  height: 95vh;
 }
 
-
-@media screen and (max-width:991px) {
+@media screen and (max-width: 991px) {
   .auth-section-2 {
     padding: 70px !important;
   }
-
- 
-
 
   .auth-section-2 {
     padding: 50px !important;
@@ -62,20 +58,19 @@ height: 95vh;
   }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   .auth-section-1 {
     padding: 0 100px;
   }
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 700px) {
   .auth-section-1 {
-
     padding: 0 80px;
   }
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
   .auth-section-1 {
     padding: 0 50px;
   }
@@ -85,16 +80,11 @@ height: 95vh;
   }
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width: 400px) {
   .auth-section-1 {
     padding: 0 20px;
   }
-
 }
-
-
-
-
 
 /* .auth-section-2 {
   background: linear-gradient(90deg, #ff9f43 1.2%, #000000 180%);
@@ -112,19 +102,17 @@ height:100vh;
 .gradient-btn-orange {
   border-color: #e30613;
   background-color: #e30613;
-  border-radius: 0;
+  border-radius: 5px;
   font-weight: 700;
   color: #000000;
   padding: 13px 46px 12px;
   font-size: 16px;
   letter-spacing: 0;
-
-
 }
-.img-auth{
+.img-auth {
   transition: transform 0.3s ease;
   overflow-x: hidden;
-  &:hover{
+  &:hover {
     transform: scale(1.2);
   }
 }
