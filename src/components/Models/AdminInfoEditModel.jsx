@@ -20,6 +20,7 @@ const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
     email: PersonDetails.data.email,
     firstName: PersonDetails?.data.firstName || "",
     lastName: PersonDetails?.data.lastName || "",
+    middleName: PersonDetails?.data.middleName || "",
   };
 
   const { values, handleChange, errors, handleSubmit, touched } = useFormik({
@@ -29,7 +30,7 @@ const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
       action.resetForm();
 
       const data = {
-        name: values.name,
+        middleName: values.middleName,
         email: values.email,
         Password: null,
         role: "ADMIN",
@@ -91,6 +92,18 @@ const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
                 className="form-control"
                 touched={touched.firstName}
                 error={errors.firstName}
+              />
+            </Col>
+            <Col md={4}>
+              <InputField
+                type="text"
+                name="middleName"
+                label="Middle Name"
+                onChange={handleChange}
+                value={values.middleName}
+                className="form-control"
+                touched={touched.firstName}
+                error={errors.middleName}
               />
             </Col>
             <Col md={4}>

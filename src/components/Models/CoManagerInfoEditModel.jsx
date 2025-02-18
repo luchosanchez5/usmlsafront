@@ -28,13 +28,14 @@ const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
     mobilePhone: PersonDetails?.data?.mobilePhone || "",
     zipCode: PersonDetails?.data?.zipCode || "",
     country: PersonDetails?.data?.country || "",
+    middleName: PersonDetails?.data.middleName || "",
   };
   const { values, handleChange, errors, handleSubmit, touched } = useFormik({
     initialValues: initialValues,
     validationSchema: ManagerUpdateValuesSchemas,
     onSubmit: (values, action) => {
       const data = {
-        name: values.name,
+        middleName: values.middleName,
         email: PersonDetails.data.email,
         Password: null,
         role: "CO_MANAGER",
@@ -113,6 +114,18 @@ const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
                 className="form-control"
                 touched={touched.firstName}
                 error={errors.firstName}
+              />
+            </div>
+            <div className="d-flex flex-column flex-grow-1">
+              <InputField
+                type="text"
+                name="middleName"
+                label="Middle Name"
+                onChange={handleChange}
+                value={values.middleName}
+                className="form-control"
+                touched={touched.middleName}
+                error={errors.middleName}
               />
             </div>
 

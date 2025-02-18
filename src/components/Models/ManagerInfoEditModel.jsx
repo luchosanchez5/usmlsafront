@@ -195,7 +195,7 @@ const ManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
               />
             </div>
             <div className="d-flex flex-column flex-grow-1">
-              {/* <InputField
+              <InputField
                 type="text"
                 name="mobilePhone"
                 label="mobilePhone"
@@ -204,7 +204,7 @@ const ManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
                 className="form-control"
                 touched={touched.mobilePhone}
                 error={errors.mobilePhone}
-              /> */}
+              />
             </div>
 
             <div className="d-flex flex-column flex-grow-1">
