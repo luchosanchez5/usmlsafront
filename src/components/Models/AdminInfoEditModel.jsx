@@ -1,79 +1,57 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import Modal from "react-bootstrap/Modal";
 import InputField from "../product/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "react-bootstrap";
-import SelectTag from "../product/SelectTag";
 import { Update_Persons } from "../../store/person/actions/actionsCreators";
 import { AdminValuesSchemas } from "../../Schemas/Schemas";
-const AdminInfoEditModel = ({
-  show,
-  onClose,
-  SetTeamBoxModel,
-  setState,
-  setEditModel,
-}) => {
+const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
   const Dispatch = useDispatch();
-  const { Persondata } = useSelector((state) => state.person);
+  const { PersonDetails } = useSelector((state) => state.person);
   const { user } = useSelector((state) => state.user);
   const userId = user.userId;
-  const [roleValue, SetRoleValue] = useState("");
   const Token = user?.access_token;
 
   const initialValues = {
-    email: Persondata.data.email,
-    firstName: Persondata?.data.firstName || "",
-    lastName: Persondata?.data.lastName || "",
+    email: PersonDetails.data.email,
+    firstName: PersonDetails?.data.firstName || "",
+    lastName: PersonDetails?.data.lastName || "",
   };
 
-  const { values, handleChange, errors, handleSubmit, touched, resetForm } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: AdminValuesSchemas,
-      onSubmit: (values, action) => {
-        action.resetForm();
+  const { values, handleChange, errors, handleSubmit, touched } = useFormik({
+    initialValues: initialValues,
+    validationSchema: AdminValuesSchemas,
+    onSubmit: (values, action) => {
+      action.resetForm();
 
-        const data = {
-          name: values.name,
-          email: values.email,
-          Password: null,
-          role: "ADMIN",
-          firstName: values.firstName,
-          lastName: values.lastName,
-          address1: null,
-          address2: null,
-          points: null,
-          ranking: null,
-          division: null,
-          city: null,
-          state: null,
-          zipCode: null,
-          mobilePhone: null,
-          tournamentsPlayed: null,
-          gamesPlayed: null,
-          personAPlayer: false,
-          playerStatus: "ACTIVE",
-          country: "",
-        };
-        Dispatch(Update_Persons(data, userId, Token));
-        setState((prev) => !prev);
-        setEditModel(false);
-      },
-    });
-  const playerStatusOptions = [
-    { value: "ACTIVE", label: "ACTIVE" },
-    { value: "INACTIVE", label: "INACTIVE" },
-    { value: "SUSPENDED", label: "SUSPENDED" },
-  ];
-  const handleRole = (e) => {
-    SetRoleValue(e.target.value);
-  };
-  const roleOptions = [
-    { value: "CO_MANAGER", label: " CO MANAGER" },
-    { value: "MANAGER", label: " MANAGER" },
-    { value: "PLAYER", label: "PLAYER" },
-  ];
+      const data = {
+        name: values.name,
+        email: values.email,
+        Password: null,
+        role: "ADMIN",
+        firstName: values.firstName,
+        lastName: values.lastName,
+        address1: null,
+        address2: null,
+        points: null,
+        ranking: null,
+        division: null,
+        city: null,
+        state: null,
+        zipCode: null,
+        // mobilePhone: null,
+        tournamentsPlayed: null,
+        gamesPlayed: null,
+        personAPlayer: false,
+        playerStatus: "ACTIVE",
+        country: "",
+      };
+      Dispatch(Update_Persons(data, userId, Token));
+      setState((prev) => !prev);
+      setEditModel(false);
+    },
+  });
   return (
     <Modal show={show} onHide={onClose} size="xl" centered className="py-4 ">
       <Modal.Header closeButton>

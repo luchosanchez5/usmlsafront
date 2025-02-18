@@ -41,9 +41,6 @@ const AllTeamTable = () => {
       })
     );
 
-  const handlePageChange = (newPage) => {
-    setPage(newPage);
-  };
   const handleEditBtn = (id) => {
     SetTeamId(id);
     SetTeamEdit(true);
@@ -63,7 +60,7 @@ const AllTeamTable = () => {
 
   return (
     <>
-      <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
+      <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl rounded ">
         <Row className="mb-3">
           <Col sm={12} md={4} lg={4}>
             <Form.Control
@@ -83,14 +80,13 @@ const AllTeamTable = () => {
             />
           </Table>
         ) : (
-          <Table responsive hover className=" mt-2">
+          <Table border={true} responsive hover className=" mt-2">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>State</th>
-                <th>Run Scored</th>
-                <th>Run Allowed</th>
                 <th>Team Status</th>
                 <th>Actions</th>
               </tr>
@@ -99,17 +95,17 @@ const AllTeamTable = () => {
               {TeamData?.data?.length > 0 ? (
                 TeamData?.data?.map((item, index) => (
                   <tr key={index} className="main-row">
+                    <td>{index + 1}</td>
                     <td>{item?.name}</td>
                     <td>{item?.email}</td>
                     <td>{item?.state}</td>
-                    <td>{item?.avgRunsDiff}</td>
-                    <td>{item?.runAllowed}</td>
                     <td
                     >
-                      <span className="text-white fw-bold p-2 fs-6 rounded"
+                      <span className="text-white fw-bold p-2 rounded"
                         style={{
                           background:
                             item?.teamStatus === "ACTIVE" ? "green" : "red",
+                          fontSize: "12px",
                         }}> {item?.teamStatus}
                       </span>
                     </td>
@@ -151,13 +147,13 @@ const AllTeamTable = () => {
           title="Team"
         />
       )}
-      {TeamData?.data?.length > 10 && (
+      {TeamData?.totalRecords > 10 && (
         <PaginationControl
-          page={page}
+          page={page + 1}
           between={3}
           limit={10}
           total={TeamData?.totalRecords}
-          changePage={(page) => handlePageChange(page)}
+          changePage={(page) => setPage(page - 1)}
           ellipsis={1}
         />
       )}

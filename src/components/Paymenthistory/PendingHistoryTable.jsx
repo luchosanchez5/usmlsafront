@@ -108,15 +108,19 @@ const PendingHistoryTable = () => {
                     <td>{item?.divisionName}</td>
                     <td>{dateFormat(item?.registrationDate)}</td>
                     <td>{item?.pendingAmount}$</td>
-                    <td
-                      style={{
-                        color:
-                          item?.registrationStatus === "PARTIAL_REGISTRATION"
-                            ? "red"
-                            : "green",
-                      }}
-                    >
-                      {item?.registrationStatus}
+                    <td>
+                      <span
+                        className="text-white fw-bold p-2 rounded"
+                        style={{
+                          background:
+                            item?.registrationStatus === "PARTIAL_REGISTRATION"
+                              ? "red"
+                              : "green",
+                          fontSize: "12px",
+                        }}
+                      >
+                        {item?.registrationStatus}
+                      </span>
                     </td>
                     <td>
                       <td>

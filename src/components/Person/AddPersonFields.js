@@ -98,7 +98,6 @@ const AddPersonFields = () => {
     //     }
     // }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
     useEffect(() => {
-       
         if (values.role !== 'PLAYER') {
             setValues({
                 ...values,

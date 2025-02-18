@@ -19,6 +19,7 @@ const AllDivisionTable = () => {
   const { AllDivisionsData, isLoading } = useSelector(
     (state) => state.tournament
   );
+  console.log(AllDivisionsData?.totalRecords, 'AllDivisionsData?.totalRecords');
   const { SetDivisionEdit, SetDivisionId } = useContext(GlobalInfo);
   const { token } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
@@ -30,9 +31,7 @@ const AllDivisionTable = () => {
   useEffect(() => {
     Dispatch(GetAllDivisions(page, token));
   }, [Dispatch, token, page]);
-  const handlePageChange = (newPage) => {
-    setPage(newPage - 1);
-  };
+
   const handleDeletePersonbtn = (id) => {
     setDeleteModel(true);
     setDivisionid(id);
@@ -60,110 +59,112 @@ const AllDivisionTable = () => {
     Dispatch(getDivisionbySearch(value.target.value));
   };
   return (
-    <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
-      <Row className="mb-3">
-        <Col sm={12} md={4} lg={4}>
-          <Form.Control
-            type="email"
-            placeholder="Search"
-            onChange={handleSearchDivisions}
-          />
-        </Col>
-      </Row>
-      <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-        {isLoading ? (
-          <Table>
-            <TableSkeleton
-              rows={10}
-              columns={7}
-              baseColor="#afafaf"
-              highlightColor="#afafaf"
-            />
-          </Table>
-        ) : (
-          <Table responsive hover size="sm" className=" mt-2">
-            <thead>
-              <tr>
-                <th>Division Name</th>
-                <th>Tournament Name</th>
-                <th>Entry Fee</th>
-                <th>Initial Deposte Fee</th>
-                <th>Max Teams</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {isLoading && <div>Loading...</div>} */}
-              {AllDivisionsData?.data?.length > 0 ? (
-                AllDivisionsData?.data?.map((item, index) => (
-                  <tr key={index} className="main-row">
-                    <td>{item?.divisionName || "N/A"}</td>
-                    <td>{item?.tournamentName || "N/A"}</td>
-                    <td>{item?.entryFee || "N/A"}</td>
-                    <td>{item?.initialDepositFee || "N/A"}</td>
-                    <td>{item?.maxTeams || "N/A"}</td>
-                    <td
-                      style={{
-                        color:
-                          item?.divisionStatus === "OPEN" ? "green" : "red",
-                      }}
-                    >
-                      {item?.divisionStatus || "N/A"}
-                    </td>
+    <>
 
-                    <td>
-                      <div>
-                        <BsEye
-                          className="action-icon eye-icon"
-                          onClick={() => handleEyebtn(item?.divisionId)}
-                        />
-                        <CiEdit
-                          className="action-icon edit-icon"
-                          onClick={() => handleEditbtn(item?.divisionId)}
-                        />
-                        <AiOutlineDelete
-                          className="action-icon delete-icon"
-                          onClick={() =>
-                            handleDeletePersonbtn(item?.divisionId)
-                          }
-                        />
-                      </div>
+      <div className="section-main m-3 px-3 py-4 rounded shadow-lg max-w-4xl ">
+        <Row className="mb-3">
+          <Col sm={12} md={4} lg={4}>
+            <Form.Control
+              type="email"
+              placeholder="Search"
+              onChange={handleSearchDivisions}
+            />
+          </Col>
+        </Row>
+        <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+          {isLoading ? (
+            <Table>
+              <TableSkeleton
+                rows={10}
+                columns={7}
+                baseColor="#afafaf"
+                highlightColor="#afafaf"
+              />
+            </Table>
+          ) : (
+            <Table border={true} responsive hover size="sm" className=" mt-2">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Division Name</th>
+                  <th>Tournament Name</th>
+                  <th>Entry Fee</th>
+                  <th>Initial Deposte Fee</th>
+                  <th>Max Teams</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AllDivisionsData?.data?.length > 0 ? (
+                  AllDivisionsData?.data?.map((item, index) => (
+                    <tr key={index} className="main-row">
+                      <td>{index + 1}</td>
+                      <td>{item?.divisionName}</td>
+                      <td>{item?.tournamentName}</td>
+                      <td>{item?.entryFee}</td>
+                      <td>{item?.initialDepositFee}</td>
+                      <td>{item?.maxTeams}</td>
+                      <td>
+                        <span className="text-white fw-bold p-2 rounded"
+                          style={{
+                            background:
+                              item?.divisionStatus === "OPEN" ? "green" : "red",
+                            fontSize: "12px"
+                          }}> {item?.divisionStatus || item?.divisionStatus}
+                        </span>
+                      </td>
+                      <td>
+                        <div>
+                          <BsEye
+                            className="action-icon eye-icon"
+                            onClick={() => handleEyebtn(item?.divisionId)}
+                          />
+                          <CiEdit
+                            className="action-icon edit-icon"
+                            onClick={() => handleEditbtn(item?.divisionId)}
+                          />
+                          <AiOutlineDelete
+                            className="action-icon delete-icon"
+                            onClick={() =>
+                              handleDeletePersonbtn(item?.divisionId)
+                            }
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7" className="text-center">
+                      No Divisions Available
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className="text-center">
-                    No Divisions Available
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        )}
-
-        {AllDivisionsData?.data?.length > 10 && (
-          <PaginationControl
-            page={page}
-            between={3}
-            limit={10}
-            total={AllDivisionsData?.data?.totalRecords}
-            changePage={(page) => handlePageChange(page)}
-            ellipsis={1}
-          />
-        )}
-
-        {deleteModel && (
-          <DeleteModel
-            show={DeleteModel}
-            onClose={handleCloseModel}
-            OnDelete={handleDeletePerson}
-            title="Division"
-          />
-        )}
+                )}
+              </tbody>
+            </Table>
+          )}
+          {deleteModel && (
+            <DeleteModel
+              show={DeleteModel}
+              onClose={handleCloseModel}
+              OnDelete={handleDeletePerson}
+              title="Division"
+            />
+          )}
+        </div>
       </div>
-    </div>
+      {AllDivisionsData?.totalRecords > 10 && (
+        <PaginationControl
+          page={page + 1}
+          between={3}
+          limit={10}
+          total={AllDivisionsData?.totalRecords}
+          changePage={(page) => setPage(page - 1)}
+          ellipsis={1}
+        />
+      )}
+    </>
   );
 };
 

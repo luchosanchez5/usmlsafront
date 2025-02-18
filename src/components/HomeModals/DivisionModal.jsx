@@ -32,7 +32,7 @@ const DivisionModal = ({
               >
                 <span className="fw-bold fs-6">{division.divisionName}</span>
                 <span className="text-dark fw-bold fs-6">
-                  {division.entryFee}
+                  ${division.entryFee}
                 </span>
               </div>
             ))}

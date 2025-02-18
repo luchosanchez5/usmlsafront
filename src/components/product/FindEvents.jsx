@@ -53,6 +53,7 @@ const FindEvents = () => {
       setIsSidebarOpen(false);
     },
   });
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <div className="p-2 mt-2">
@@ -191,6 +192,7 @@ const FindEvents = () => {
                 onChange={handleChange}
                 className="py-1 px-2 form-control"
                 value={values.startDate}
+                min={today}
               />
             </Col>
             <Col xs={12} sm={6} md={4} className="d-flex flex-column">
@@ -202,6 +204,7 @@ const FindEvents = () => {
                 className="py-1 px-2 form-control"
                 onChange={handleChange}
                 value={values.endDate}
+                min={values.startDate || today}
               />
             </Col>
             <Col xs={12} className="d-flex">

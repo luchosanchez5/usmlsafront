@@ -4,13 +4,11 @@ import DashboardLayout from '../../layout/DashboardLayout';
 import AllPersonsTable from '../../components/Person/AllPersonsTable.js';
 import { useNavigate } from 'react-router-dom';
 const AllPerson = () => {
-    const Navigate=useNavigate()
+    const Navigate = useNavigate()
     return (
         <>
-            <PageHeader title="All Persons" subtitle="Manage Your Persons" btnText="Add New Person" onClick={() =>Navigate('/dashboard/addperson')} />
-            <AllPersonsTable  />
-     {/* <CardPaymentForm/> */}
-
+            <PageHeader title="All User" subtitle="Manage Your Users" btnText="Add New User" onClick={() => Navigate('/dashboard/addperson')} />
+            <AllPersonsTable />
         </>
 
 

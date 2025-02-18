@@ -8,7 +8,7 @@ export const Add_Persons = (data, Token, Navigate, role) => (dispatch) => {
     payload: true,
   });
   axios
-    .post(`${Url}api/persons`, data, {
+    .post(`${Url}api/persons/initial-registration`, data, {
       headers: {
         Authorization: `Bearer ${Token}`,
       },
@@ -63,7 +63,6 @@ export const Update_Persons = (data, id, Token, Navigate) => (dispatch) => {
     })
     .catch((error) => {
       Toast.success(error.data.message);
-      // Toast.error(error.response.data.message);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
@@ -82,6 +81,7 @@ export const GetPersons = (page, token) => (dispatch) => {
       },
     })
     .then((response) => {
+      console.log(response, 'response')
       dispatch({
         type: actionTypes.GET_PERSONS,
         payload: response.data,
@@ -104,9 +104,9 @@ export const GetPersons = (page, token) => (dispatch) => {
       });
     });
 };
-export const getPersonsbySearch = (value) => (dispatch) => {
+export const getPersonsbySearch = (value, page) => (dispatch) => {
   axios
-    .get(`${Url}api/persons/search?name=${value.toLowerCase()}&page=0&size=10`)
+    .get(`${Url}api/persons/search?name=${value.toLowerCase()}&page=${page}&size=10`)
     .then((response) => {
       dispatch({
         type: actionTypes.GET_PERSONS,
@@ -136,7 +136,7 @@ export const GetPersonsById = (id, Token) => (dispatch) => {
     .then((response) => {
       dispatch({
         type: actionTypes.GET_PERSONS_BY_ID,
-        payload: response.data.data,
+        payload: response.data,
       });
       dispatch({
         type: actionTypes.SET_LOADING,
@@ -199,9 +199,11 @@ export const GetPerson =
           }
         )
         .then((response) => {
+          console.log('aljsbdjagbsdjkaldhnkahsdk')
+          console.log(response, 'res')
           dispatch({
             type: actionTypes.GET_PERSON,
-            payload: response.data,
+            payload: response.data.data,
           });
           dispatch({
             type: actionTypes.SET_LOADING,

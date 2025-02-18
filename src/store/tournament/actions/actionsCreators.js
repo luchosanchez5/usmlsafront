@@ -149,12 +149,12 @@ export const getTournamentsFilter = (searchParams, action) => (dispatch) => {
     });
 };
 
-export const GetDefaultTournamentsBySearch = (key, value) => (dispatch) => {
+export const GetDefaultTournamentsBySearch = (page) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
   });
-  axios.get(`${Url}api/tournaments/search?page=0&size=10`)
+  axios.get(`${Url}api/tournaments/search?page=${page}&size=10`)
     .then((response) => {
       dispatch({
         type: actionTypes.DEFAULT_TOURNAMENTS,
@@ -198,7 +198,8 @@ export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (disp
       // Toast.success(response.data.status);
     })
     .catch((error) => {
-      if (error.response.status === 404) {
+      console.log(error)
+      if (error.response.status === 400) {
         dispatch({
           type: actionTypes.GET_DIVISION_BY_SEARCH,
           payload: []

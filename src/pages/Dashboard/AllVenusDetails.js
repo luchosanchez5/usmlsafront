@@ -60,13 +60,15 @@ const AllVenusDetails = () => {
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold"> Venue Status:</h5>
-              <h6
-                className=""
-                style={{
-                  color: VenuDetails?.statusVenue === "OPEN" ? "green" : "red",
-                }}
-              >
-                {VenuDetails?.statusVenue}
+              <h6>
+                <span className="text-white fw-bold p-2 rounded"
+                  style={{
+                    background:
+                      VenuDetails?.statusVenue === "OPEN" ? "green" : "red",
+                    fontSize: "12px",
+                  }}>
+                  {VenuDetails?.statusVenue}
+                </span>
               </h6>
             </Col>
           </Row>

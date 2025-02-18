@@ -17,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import TableSkeleton from "../SkeletonTable/SkeletonTable";
 const AllPersonsTable = () => {
   const { PersonData, isLoading } = useSelector((state) => state.person);
-  //   const { SetUserEdit, SetUserId } = useContext(GlobalInfo);
   const { token } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
   const [deleteModel, setDeleteModel] = useState(false);
@@ -40,11 +39,7 @@ const AllPersonsTable = () => {
   const handleEyebtn = (id) => {
     Navigate(`/dashboard/allpersons/${id}`);
   };
-  //   const handleEditbtn = (id) => {
-  //     SetUserEdit(true);
-  //     SetUserId(id);
-  //     Navigate("/dashboard/addperson");
-  //   };
+
   const handleDeletePerson = () => {
     Dispatch(
       DelPersons(personId, token, () => {
@@ -57,96 +52,111 @@ const AllPersonsTable = () => {
     setDeleteModel(false);
   };
   const handleSearchPersons = (value) => {
-    Dispatch(getPersonsbySearch(value.target.value));
+    const searchValue = value.target.value;
+    if (searchValue === "") {
+      Dispatch(GetPersons(page, token));
+    } else {
+      Dispatch(getPersonsbySearch(value.target.value, page));
+
+    }
   };
   return (
-    <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
-      <Row className="mb-3">
-        <Col sm={12} md={4} lg={4}>
-          <Form.Control
-            type="text"
-            placeholder="Search"
-            onChange={handleSearchPersons}
-          />
-        </Col>
-      </Row>
-      <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-        {isLoading ? (
-          <Table>
-            <TableSkeleton
-              rows={10}
-              columns={7}
-              baseColor="#afafaf"
-              highlightColor="#afafaf"
+    <>
+      <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
+        <Row className="mb-3">
+          <Col sm={12} md={4} lg={4}>
+            <Form.Control
+              type="text"
+              placeholder="Search"
+              onChange={handleSearchPersons}
             />
-          </Table>
-        ) : (
-          <Table responsive hover size="sm" className=" mt-2">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>email</th>
-                <th>ranking</th>
-                <th>Person A Player</th>
-                <th>Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* {isLoading && <div>Loading...</div>} */}
-              {PersonData?.data?.length > 0 ? (
-                PersonData?.data?.map((item, index) => (
-                  <tr key={index} className="main-row">
-                    <td>{item.name || "N/A"}</td>
-                    <td>{item.email}</td>
-                    <td>{item.ranking}</td>
-                    <td>{item.role}</td>
-
-                    <td>
-                      <div>
-                        <BsEye
-                          className="action-icon eye-icon"
-                          onClick={() => handleEyebtn(item?.id)}
-                        />
-                        {/* <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.id)} /> */}
-                        <AiOutlineDelete
-                          className="action-icon delete-icon"
-                          onClick={() => handleDeletePersonbtn(item?.id)}
-                        />
-                      </div>
+          </Col>
+        </Row>
+        <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+          {isLoading ? (
+            <Table>
+              <TableSkeleton
+                rows={10}
+                columns={7}
+                baseColor="#afafaf"
+                highlightColor="#afafaf"
+              />
+            </Table>
+          ) : (
+            <Table responsive hover size="sm" className=" mt-2">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>email</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* {isLoading && <div>Loading...</div>} */}
+                {PersonData?.data?.length > 0 ? (
+                  PersonData?.data?.map((item, index) => (
+                    <tr key={index} className="main-row">
+                      <td>{item.firstName + " " + item.lastName}</td>
+                      <td>{item.email}</td>
+                      <td>{item.role}</td>
+                      <td>
+                        <div>
+                          <BsEye
+                            className="action-icon eye-icon"
+                            onClick={() => handleEyebtn(item?.id)}
+                          />
+                          {/* <CiEdit className='action-icon edit-icon' onClick={() => handleEditbtn(item?.id)} /> */}
+                          <AiOutlineDelete
+                            className="action-icon delete-icon"
+                            onClick={() => handleDeletePersonbtn(item?.id)}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="text-center">
+                      No Persons Available
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="5" className="text-center">
-                    No Persons Available
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </Table>
-        )}
-        {PersonData?.totalRecords > 10 && (
-          <PaginationControl
-            page={page + 1}
-            between={1}
-            limit={10}
-            total={PersonData?.totalRecords}
-            changePage={(page) => handlePageChange(page)}
-            ellipsis={1}
-          />
-        )}
+                )}
+              </tbody>
+            </Table>
+          )}
+          {PersonData?.totalRecords > 10 && (
+            <PaginationControl
+              page={page + 1}
+              between={1}
+              limit={10}
+              total={PersonData?.totalRecords}
+              changePage={(page) => handlePageChange(page)}
+              ellipsis={1}
+            />
+          )}
 
-        {deleteModel && (
-          <DeleteModel
-            show={DeleteModel}
-            onClose={handleCloseModel}
-            OnDelete={handleDeletePerson}
-            title="Person"
-          />
-        )}
+          {deleteModel && (
+            <DeleteModel
+              show={DeleteModel}
+              onClose={handleCloseModel}
+              OnDelete={handleDeletePerson}
+              title="Person"
+            />
+          )}
+        </div>
       </div>
-    </div>
+      {PersonData?.totalRecords > 10 && (
+        <PaginationControl
+          page={page + 1}
+          between={3}
+          limit={10}
+          total={PersonData?.totalRecords}
+          changePage={(page) => setPage(page - 1)}
+          ellipsis={1}
+        />
+      )}
+    </>
   );
 };
 

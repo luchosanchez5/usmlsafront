@@ -46,75 +46,82 @@ const YourTeamDetails = () => {
         <Row className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 align-items-center  gy-3">
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Name:</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.name}</h6>
+            <h6 className="  ">{TeamDetailsData?.name}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Email:</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.email}</h6>
+            <h6 className="  ">{TeamDetailsData?.email}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Address:</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.address}</h6>
+            <h6 className="  ">{TeamDetailsData?.address}</h6>
           </Col>
 
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team City :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.city}</h6>
+            <h6 className="  ">{TeamDetailsData?.city}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team State :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.state}</h6>
+            <h6 className="  ">{TeamDetailsData?.state}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Points :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.points}</h6>
+            <h6 className="  ">{TeamDetailsData?.points}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team Ranking :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.ranking}</h6>
+            <h6 className="  ">{TeamDetailsData?.ranking}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Games Win :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.gamesWin}</h6>
+            <h6 className="  ">{TeamDetailsData?.gamesWin}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team Games Lost :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.gamesLost}</h6>
+            <h6 className="  ">{TeamDetailsData?.gamesLost}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Games Tied :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.gamesTied}</h6>
+            <h6 className="  ">{TeamDetailsData?.gamesTied}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Avg Runs Scored :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.avgRunsScored}</h6>
+            <h6 className="  ">{TeamDetailsData?.avgRunsScored}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team Avg Runs Allowed :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.avgRunsAllowed}</h6>
+            <h6 className="  ">{TeamDetailsData?.avgRunsAllowed}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team Avg Runs Diff :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.avgRunsDiff}</h6>
+            <h6 className="  ">{TeamDetailsData?.avgRunsDiff}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold"> Team Run Scored :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.runScored}</h6>
+            <h6 className="  ">{TeamDetailsData?.runScored}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Run Allowed :</h5>
-            <h6 className=" text-nowrap ">{TeamDetailsData?.runAllowed}</h6>
+            <h6 className="  ">{TeamDetailsData?.runAllowed}</h6>
           </Col>
           <Col>
             <h5 className=" text-nowrap fw-bold">Team Status :</h5>
             <h6
-              className="text-nowrap fw-bold"
-              style={{
-                color:
-                  TeamDetailsData?.teamStatus === "ACTIVE" ? "green" : "red",
-              }}
+              className=" fw-bold"
             >
-              {TeamDetailsData?.teamStatus ?? "N/A"}
+              <span
+                className="text-white fw-bold p-2 rounded"
+                style={{
+                  background:
+                    TeamDetailsData?.teamStatus === "succeeded"
+                      ? "green"
+                      : "red",
+                  fontSize: "12px",
+                }}
+              >
+                {TeamDetailsData?.teamStatus}
+              </span>
             </h6>
           </Col>
         </Row>

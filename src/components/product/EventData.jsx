@@ -111,13 +111,13 @@ const EventData = ({
             <>
               <button
                 className="event-button bg-warning"
-                onClick={() => handleShowTeamModal(subtitle)}
+                onClick={() => handleShowTeamModal(ranking)}
               >
                 Who's Coming
               </button>
               <button
                 className="event-button bg-dark text-white"
-                onClick={() => handleShowModal(subtitle)}
+                onClick={() => handleShowModal(ranking)}
               >
                 Division
               </button>
@@ -132,6 +132,7 @@ const EventData = ({
           </button>
         </div>
       </div>
+
       <DivisionModal
         show={show}
         onClose={handleCloseModel}

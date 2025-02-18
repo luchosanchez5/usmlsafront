@@ -12,10 +12,11 @@ import {
 import { GlobalInfo } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { AllTeamSchemas } from "../../Schemas/Schemas";
+import SpinNer from "../LoadingSpinner/SpinNer";
 
 function AddTeamsFields() {
   const { user } = useSelector((state) => state.user);
-  const { TeamDetailsData } = useSelector((state) => state.team);
+  const { TeamDetailsData, isLoading } = useSelector((state) => state.team);
   const { TeamEdit, TeamId } = useContext(GlobalInfo);
   const Token = user?.access_token;
   const Dispatch = useDispatch();
@@ -360,7 +361,7 @@ function AddTeamsFields() {
         </Row>
         <div className="d-flex justify-content-center">
           <button type="submit" className="mt-3 gradient-btn-orange">
-            Submit
+            {isLoading ? <SpinNer /> : "Submit"}
           </button>
         </div>
       </form>

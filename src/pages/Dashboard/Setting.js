@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import DashboardLayout from "../../layout/DashboardLayout";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  GetPerson,
+  GetPersonsById,
   UploadPersonImg,
 } from "../../store/person/actions/actionsCreators";
 import { Col, Row } from "react-bootstrap";
@@ -15,20 +15,24 @@ import { FaCamera } from "react-icons/fa";
 import logo from "../../assets/images/usmlsa_logo.png";
 import DetailSkeleton from "../../components/SkeletonTable/DetailSkeleton";
 const Setting = () => {
-  const { PersonData, isLoading } = useSelector((state) => state.person);
+  const { PersonDetails, isLoading } = useSelector((state) => state.person);
   const { user, token } = useSelector((state) => state.user);
   const [previewImage, setPreviewImage] = useState(null);
   const fileInputRef = useRef(null);
   const [editModel, setEditModel] = useState(false);
   const [state, setState] = useState(true);
   const Dispatch = useDispatch();
+
+
   useEffect(() => {
-    Dispatch(GetPerson(user.userId));
-  }, [Dispatch, state, user]);
+    Dispatch(GetPersonsById(user.userId, token));
+  }, [Dispatch, state, user, token]);
+
+
   useEffect(() => {
-    if (PersonData?.data[0]?.profilePicture) {
+    if (PersonDetails?.data?.profilePicture) {
       try {
-        const binaryData = atob(PersonData?.data[0]?.profilePicture);
+        const binaryData = atob(PersonDetails?.data?.profilePicture);
         const bytes = new Uint8Array(binaryData.length);
         for (let i = 0; i < binaryData.length; i++) {
           bytes[i] = binaryData.charCodeAt(i);
@@ -43,10 +47,10 @@ const Setting = () => {
     } else {
       setPreviewImage(null);
     }
-  }, [PersonData]);
+  }, [PersonDetails]);
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files;
     if (file) {
       const imageURL = URL.createObjectURL(file);
       setPreviewImage(imageURL);
@@ -119,26 +123,26 @@ const Setting = () => {
           <Row className="my-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
             <Col>
               <h5 className="fw-bold"> Email : </h5>
-              <h6>{PersonData?.data[0]?.email}</h6>
+              <h6>{PersonDetails?.data?.email}</h6>
             </Col>
 
             <Col>
               <h5 className="fw-bold"> Role : </h5>
-              <h6>{PersonData?.data[0]?.role}</h6>
+              <h6>{PersonDetails?.data?.role}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">First Name : </h5>
-              <h6>{PersonData?.data[0]?.firstName}</h6>
+              <h6>{PersonDetails?.data?.firstName}</h6>
             </Col>
             <Col>
               <h5 className="fw-bold">Last Name : </h5>
-              <h6> {PersonData?.data[0]?.lastName}</h6>
+              <h6> {PersonDetails?.data?.lastName}</h6>
             </Col>
           </Row>
         </div>
       )}
       {editModel &&
-        (PersonData?.data[0]?.role === "ADMIN" ? (
+        (PersonDetails?.data?.role === "ADMIN" ? (
           <AdminInfoEditModel
             show={editModel}
             onClose={() => setEditModel(false)}
@@ -146,7 +150,7 @@ const Setting = () => {
             setEditModel={setEditModel}
             setState={setState}
           />
-        ) : PersonData?.data[0]?.role === "MANAGER" ? (
+        ) : PersonDetails?.data?.role === "MANAGER" ? (
           <ManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
@@ -154,14 +158,14 @@ const Setting = () => {
             onClick={handleConfrim}
             setState={setState}
           />
-        ) : PersonData?.data[0]?.role === "PLAYER" ? (
+        ) : PersonDetails?.data?.role === "PLAYER" ? (
           <PlayerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}
             onClose={() => setEditModel(false)}
             onClick={handleConfrim}
           />
-        ) : PersonData?.data[0]?.role === "CO_MANAGER" ? (
+        ) : PersonDetails?.data?.role === "CO_MANAGER" ? (
           <CoManagerInfoEditModel
             show={editModel}
             setEditModel={setEditModel}

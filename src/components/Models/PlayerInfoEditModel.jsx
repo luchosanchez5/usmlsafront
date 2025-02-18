@@ -7,30 +7,30 @@ import { Row } from "react-bootstrap";
 import { Update_Persons } from "../../store/person/actions/actionsCreators";
 const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   const Dispatch = useDispatch();
-  const { Persondata } = useSelector((state) => state.person);
+  const { PersonDetails } = useSelector((state) => state.person);
   const { user } = useSelector((state) => state.user);
   const userId = user.userId;
   const Token = user?.access_token;
   const initialValues = {
-    email: Persondata.data.email,
-    name: Persondata?.data.name || "",
-    firstName: Persondata?.data.firstName || "",
-    lastName: Persondata?.data.lastName || "",
-    address1: Persondata?.data.address1 || "",
-    address2: Persondata?.data.address2 || "",
-    ranking: Persondata?.data?.ranking || null,
-    city: Persondata?.data?.city || "",
-    state: Persondata?.data?.state || "",
-    mobilePhone: Persondata?.data?.mobilePhone || "",
-    zipCode: Persondata?.data?.zipCode || "",
-    country: Persondata?.data?.country || "",
+    email: PersonDetails.data.email,
+    name: PersonDetails?.data.name || "",
+    firstName: PersonDetails?.data.firstName || "",
+    lastName: PersonDetails?.data.lastName || "",
+    address1: PersonDetails?.data.address1 || "",
+    address2: PersonDetails?.data.address2 || "",
+    ranking: PersonDetails?.data?.ranking || null,
+    city: PersonDetails?.data?.city || "",
+    state: PersonDetails?.data?.state || "",
+    mobilePhone: PersonDetails?.data?.mobilePhone || "",
+    zipCode: PersonDetails?.data?.zipCode || "",
+    country: PersonDetails?.data?.country || "",
   };
   const { values, handleChange, errors, handleSubmit, touched } = useFormik({
     initialValues: initialValues,
     onSubmit: (values, action) => {
       const data = {
         name: values.name,
-        email: Persondata.data.email,
+        email: PersonDetails.data.email,
         Password: null,
         role: "PLAYER",
         firstName: values.firstName,

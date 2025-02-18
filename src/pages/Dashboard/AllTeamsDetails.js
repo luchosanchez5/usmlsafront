@@ -163,13 +163,20 @@ const AllTeamsDetails = () => {
             <Col>
               <h5 className=" text-nowrap fw-bold">Team Status :</h5>
               <h6
-                className="text-nowrap fw-bold"
-                style={{
-                  color:
-                    TeamDetailsData?.teamStatus === "ACTIVE" ? "green" : "red",
-                }}
+                className="fw-bold"
               >
-                {TeamDetailsData?.teamStatus ?? "N/A"}
+                <span
+                  className="text-white fw-bold p-2 rounded"
+                  style={{
+                    background:
+                      TeamDetailsData?.teamStatus === "ACTIVE"
+                        ? "green"
+                        : "red",
+                    fontSize: "12px",
+                  }}
+                >
+                  {TeamDetailsData?.teamStatus ?? "N/A"}
+                </span>
               </h6>
             </Col>
           </Row>

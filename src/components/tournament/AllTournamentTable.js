@@ -77,9 +77,10 @@ const AllTournamentTable = () => {
                                     highlightColor="#afafaf"
                                 />
                             </Table>) :
-                            <Table responsive hover className='page-main-table mt-2'>
+                            <Table border={true} responsive hover className='page-main-table mt-2'>
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Tournament Name</th>
                                         <th>Venue Name</th>
                                         <th> Start Date </th>
@@ -91,15 +92,17 @@ const AllTournamentTable = () => {
                                 <tbody>
                                     {TournamentData?.data?.length > 0 ? TournamentData?.data?.map((item, index) => (
                                         <tr key={index} className='main-row'>
+                                            <td>{index + 1}</td>
                                             <td>{item?.name}</td>
                                             <td>{item?.venueName ? item?.venueName : 'No Venue Selected Yet'}</td>
                                             <td>{dateFormat(item?.startDate)}</td>
                                             <td>{dateFormat(item?.endDate)}</td>
                                             <td>
-                                                <span className="text-white fw-bold p-2 fs-6 rounded"
+                                                <span className="text-white fw-bold p-2 rounded"
                                                     style={{
                                                         background:
                                                             item?.status === "ACTIVE" ? "green" : "red",
+                                                        fontSize: "12px"
                                                     }}> {item?.tournamentStatus || item?.status}
                                                 </span>
                                             </td>
@@ -118,19 +121,19 @@ const AllTournamentTable = () => {
 
                             </Table>
                     }
-
-                    {TournamentData?.totalRecords > 10 && <PaginationControl
-                        page={page}
-                        between={3}
-                        limit={10}
-                        total={TournamentData?.totalRecords}
-                        changePage={(page) => handlePageChange(page)}
-                        ellipsis={1}
-                    />}
                     {DelTournamentModel && <DeleteModel title='Tournament' show={DelTournamentModel} onClose={handleCloseModel} OnDelete={handleDeleteTournament} />
                     }
                 </div>
+
             </div>
+            {TournamentData?.totalRecords > 10 && <PaginationControl
+                page={page + 1}
+                between={3}
+                limit={10}
+                total={TournamentData?.totalRecords}
+                changePage={(page) => setPage(page - 1)}
+                ellipsis={1}
+            />}
         </>
     )
 }

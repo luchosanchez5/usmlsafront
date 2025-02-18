@@ -21,7 +21,6 @@ const ContactInformation = ({
   const { TournamentBySearch, DivisionBySearch } = useSelector(
     (state) => state.tournament
   );
-  console.log(DivisionBySearch);
   const [tournamentId, setTournamentId] = useState(null);
   const [CardModel, SetCardModel] = useState(false);
   const handlePaymentChange = (event) => {
@@ -49,8 +48,8 @@ const ContactInformation = ({
   }, [dispatch, token]);
 
   const handleChange = (e) => {
-    const tournamentId = e.target.value; // Directly get the tournamentId
-    setTournamentId(tournamentId); // Set the state
+    const tournamentId = e.target.value;
+    setTournamentId(tournamentId);
     dispatch(GetDivisionsBySearch(token, 0, tournamentId, id));
   };
 

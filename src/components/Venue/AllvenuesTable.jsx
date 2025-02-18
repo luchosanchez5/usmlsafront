@@ -45,16 +45,11 @@ const AllMembersTable = () => {
   const handleEyebtn = (id) => {
     Navigate(`/dashboard/allvenue/${id}`);
   };
-  const handlePageChange = (newPage) => {
-    setPage(newPage - 1);
-  };
 
   const handleDeleteVenue = () => {
     Dispatch(
       DelVenue(VenueId, token, () => {
-        // Fetch updated venues after successful deletion
         Dispatch(GetVenue(page));
-        // Close the modal
         SetDelVenueModel(false);
       })
     );
@@ -86,15 +81,13 @@ const AllMembersTable = () => {
               />
             </Table>
           ) : (
-            <Table responsive hover size="sm" className="mt-2">
+            <Table border={true} responsive hover size="sm" className="mt-2">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
-                  <th>Address 1</th>
-                  <th>Address 2</th>
                   <th>City</th>
                   <th>State</th>
-                  <th>Number of Fields</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -102,12 +95,10 @@ const AllMembersTable = () => {
                 {VenueData?.data?.length > 0 ? (
                   VenueData?.data?.map((item, index) => (
                     <tr key={index} className="main-row">
+                      <td>{index + 1}</td>
                       <td>{item.name}</td>
-                      <td>{item.address1}</td>
-                      <td>{item.address2}</td>
                       <td>{item.city}</td>
                       <td>{item.state}</td>
-                      <td>{item.numberOfFields}</td>
                       <td>
                         <div>
                           <BsEye
@@ -137,16 +128,6 @@ const AllMembersTable = () => {
             </Table>
           )}
         </div>
-        {VenueData?.totalRecords > 10 && (
-          <PaginationControl
-            page={page}
-            between={3}
-            limit={10}
-            total={VenueData?.totalRecords}
-            changePage={(page) => handlePageChange(page)}
-            ellipsis={1}
-          />
-        )}
         {DelVenueModel && (
           <DeleteModel
             show={DelVenueModel}
@@ -156,6 +137,16 @@ const AllMembersTable = () => {
           />
         )}
       </div>
+      {VenueData?.totalRecords > 10 && (
+        <PaginationControl
+          page={page + 1}
+          between={3}
+          limit={10}
+          total={VenueData?.totalRecords}
+          changePage={(page) => setPage(page - 1)}
+          ellipsis={1}
+        />
+      )}
     </>
   );
 };

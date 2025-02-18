@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Accordion, Card, Button } from "react-bootstrap";
+import { Modal, Accordion, Card, Button, ProgressBar } from "react-bootstrap";
 import SpinNer from "../LoadingSpinner/SpinNer";
 
 const DivisionAndTeamModal = ({
@@ -31,30 +31,60 @@ const DivisionAndTeamModal = ({
                 <Accordion.Header>
                   <div className="d-flex justify-content-between w-100">
                     <span className="fw-bold">{division.divisionName}</span>
-                    <span className="fw-bold text-primary">
-                      ${division.entryFee}
-                    </span>
                   </div>
+                  <div style={{ width: "100%", maxWidth: "300px" }}>
+                    <ProgressBar
+                      now={(division.entryFee / 1000) * 100}
+                      variant="danger"
+                      label={`${((division.entryFee / 1000) * 100).toFixed(
+                        1
+                      )}%`}
+                    />
+                  </div>
+                  <span className="fw-bold text-dark mx-2">
+                    ${division.entryFee}
+                  </span>
                 </Accordion.Header>
                 <Accordion.Body>
                   {division.registeredTeamsData?.length > 0 ? (
-                    <div className="list-group">
-                      {division.registeredTeamsData.map((team, teamIndex) => (
-                        <div key={teamIndex} className="border-bottom py-2">
-                          <p className="mb-1">
-                            <strong>Team:</strong> {team.name}
-                          </p>
-                          <p className="mb-1">
-                            <strong>Email:</strong> {team.email}
-                          </p>
-                          <p className="mb-1">
-                            <strong>Address:</strong> {team.address}
-                          </p>
-                          <p className="mb-1">
-                            <strong>Zip Code:</strong> {team.zipCode}
-                          </p>
-                        </div>
-                      ))}
+                    <div className="table-responsive">
+                      <table className="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Team Name</th>
+                            <th>Division Name</th>
+                            <th>Zip Code</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {division.registeredTeamsData.map(
+                            (team, teamIndex) => (
+                              <tr key={teamIndex}>
+                                <td>{teamIndex + 1}</td>
+                                <td>{team.name}</td>
+                                <td>{division.divisionName}</td>
+                                <td>{team.zipCode}</td>
+                                <td>
+                                  <span
+                                    className="text-white my-2 p-2 rounded"
+                                    style={{
+                                      background:
+                                        team?.teamStatus === "ACTIVE"
+                                          ? "green"
+                                          : "red",
+                                      fontSize: "12px",
+                                    }}
+                                  >
+                                    {team?.teamStatus}
+                                  </span>
+                                </td>
+                              </tr>
+                            )
+                          )}
+                        </tbody>
+                      </table>
                     </div>
                   ) : (
                     <p className="text-muted">No teams registered.</p>

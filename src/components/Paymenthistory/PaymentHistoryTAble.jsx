@@ -56,15 +56,19 @@ const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
                         <td>{item?.paidAmount}$</td>
                         <td>{item?.pendingAmount}$</td>
                         <td>{item?.divisionName}</td>
-                        <td
-                          style={{
-                            color:
-                              item?.paymentStatus === "succeeded"
-                                ? "green"
-                                : "red",
-                          }}
-                        >
-                          {item?.paymentStatus}
+                        <td>
+                          <span
+                            className="text-white fw-bold p-2 rounded"
+                            style={{
+                              background:
+                                item?.paymentStatus === "succeeded"
+                                  ? "green"
+                                  : "red",
+                              fontSize: "12px",
+                            }}
+                          >
+                            {item?.paymentStatus}
+                          </span>
                         </td>
                       </tr>
                     );

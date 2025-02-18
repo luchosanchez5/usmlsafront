@@ -30,13 +30,11 @@ const PersonsReducer = (state = initialState, action) => {
         case actionTypes.Delete_PERSONS:
             return {
                 ...state,
-                // VenuDataUpdate: !state.VenuDataUpdate
             }
         case actionTypes.GET_PERSONS_BY_ID:
             return {
                 ...state,
                 PersonDetails: action.payload || {},
-                // VenuDataUpdate: !state.VenuDataUpdate
             }
         case actionTypes.GET_PERSON:
             return {
