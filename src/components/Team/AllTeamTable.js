@@ -26,9 +26,15 @@ const AllTeamTable = () => {
   const Dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const Navigate = useNavigate();
+
+
+
   useEffect(() => {
     Dispatch(GetTeams(page, token, role, userId));
   }, [Dispatch, page, token, userId, role]);
+
+
+
   const handleDeleteBtn = (id) => {
     setTeamId(id);
     SetDelTeamModel(true);

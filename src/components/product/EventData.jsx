@@ -51,9 +51,14 @@ const EventData = ({
 
   useEffect(() => {
     if (tournamentName) {
+      console.log(tournamentName, "tournamentName");
       setLoading(true);
       axios
-        .get(`${Url}api/divisions/search?${encodeURIComponent(tournamentName)}`)
+        .get(
+          `${Url}api/divisions/search?tournamentName=${encodeURIComponent(
+            tournamentName
+          )}`
+        )
         .then((response) => {
           setDivisionsData(response.data);
         })

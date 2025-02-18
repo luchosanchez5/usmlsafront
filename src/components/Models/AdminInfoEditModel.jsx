@@ -40,7 +40,7 @@ const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
         city: null,
         state: null,
         zipCode: null,
-        // mobilePhone: null,
+        mobilePhone: null,
         tournamentsPlayed: null,
         gamesPlayed: null,
         personAPlayer: false,

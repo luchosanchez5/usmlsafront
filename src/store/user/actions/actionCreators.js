@@ -13,23 +13,23 @@ export const userLogin = (data, navigate) => (dispatch) => {
   });
   axios.post(`${Url}api/v1/auth/authenticate`, data)
     .then((response) => {
+      console.log(response?.data?.data?.roles[0])
       dispatch({
         type: actionTypes.USER_LOGIN,
         payload: response?.data?.data,
       });
-      console.log("Setting loading to false...");
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,
       });
-      if (response?.data?.data?.roles.includes('ADMIN') || response?.data?.data?.roles.includes('ADMIN')) {
+      if (response?.data?.data?.roles[0] === "ADMIN") {
         navigate("/dashboard");
 
-      } else if (response?.data?.data?.roles?.includes('MANAGER') || response?.data?.data?.role === 'MANAGER') {
-        navigate("/dashboard/all-teams");
+      } else if (response?.data?.data?.roles[0] === "MANAGER") {
+        navigate("/dashboard/allteams");
       }
       else {
-        navigate("/dashboard/your-team");
+        navigate("/dashboard/yourteam");
       }
       const roles = response.data.data.roles;
       if (roles && roles.length > 0) {

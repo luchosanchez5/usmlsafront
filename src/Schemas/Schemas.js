@@ -104,7 +104,7 @@ export const AllUsersSchema = Yup.object({
 });
 
 export const ProviderRegisterSchemas = Yup.object({
-  name: Yup.string().required("First Name is Required"),
+  firstName: Yup.string().required("First Name is Required"),
   lastName: Yup.string().required("Last Name  is Required"),
   email: Yup.string().email().required("Email is Required"),
   address1: Yup.string().required("Address 1 is Required"),
@@ -132,36 +132,10 @@ export const AddPersonSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  password: Yup.string().required("Password is required"),
-  name: Yup.string().required("Name is required"),
   role: Yup.string().required("Role is required"),
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  address1: Yup.string().required("Address 1 is required"),
-  address2: Yup.string().required("Address 2 is required"),
-  city: Yup.string().required("City is required"),
-  state: Yup.string().required("State is required"),
-  zipCode: Yup.string().required("Zip Code is required"),
   mobilePhone: Yup.string().required("Mobile Phone is required"),
-  playerStatus: Yup.string().required("Player Status is required"),
-  tournamentsPlayed: Yup.number().when("role", {
-    is: "PLAYER",
-    then: Yup.number().required("Tournaments Played is required"),
-    otherwise: Yup.number().nullable(),
-  }),
-  points: Yup.number().when("role", {
-    is: "PLAYER",
-    then: Yup.number().required("Points are required"),
-    otherwise: Yup.number().nullable(),
-  }),
-  ranking: Yup.number().when("role", {
-    is: "PLAYER",
-    then: Yup.number().required("Ranking is required"),
-    otherwise: Yup.number().nullable(),
-  }),
-  gamesPlayed: Yup.number().when("role", {
-    is: "PLAYER",
-    then: Yup.number().required("Games Played is required"),
-    otherwise: Yup.number().nullable(),
-  }),
+  driverLicenseId: Yup.string().required("Driver License Id is required"),
+  dateOfBirth: Yup.string().required("Date of Birth is required"),
 });

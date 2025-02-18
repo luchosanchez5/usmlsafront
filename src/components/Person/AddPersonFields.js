@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import InputField from '../product/InputField';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import SelectTag from '../product/SelectTag';
-import { Add_Persons, GetPersonsById, Update_Persons } from '../../store/person/actions/actionsCreators';
+import { Add_Persons, Update_Persons } from '../../store/person/actions/actionsCreators';
 import { useFormik } from 'formik';
 import SpinNer from '../LoadingSpinner/SpinNer';
 import { AddPersonSchema } from '../../Schemas/Schemas';
@@ -14,54 +14,46 @@ const AddPersonFields = () => {
     const { user } = useSelector((state) => state.user)
     const role = user?.roles[0] || user?.role
     const { UserEdit, UserId } = useContext(GlobalInfo)
-    const { PersonDetails, isLoading } = useSelector((state) => state.person)
+    const { isLoading } = useSelector((state) => state.person)
     const Token = user?.access_token
     const Navigate = useNavigate()
     const initialValues = {
         email: '',
-        password: '',
-        name: '',
         role: '',
         firstName: '',
         lastName: '',
-        address1: '',
-        address2: '',
-        points: null,
-        ranking: null,
-        division: "",
-        city: "",
-        state: "",
-        zipCode: "",
         mobilePhone: "",
         tournamentsPlayed: null,
         playerStatus: '',
         gamesPlayed: null,
+        driverLicenseId: '',
+        dateOfBirth: '',
+        middleName: ''
     };
 
     const { values, handleChange, errors, handleSubmit, touched, setValues } = useFormik({
         initialValues: initialValues,
         validationSchema: AddPersonSchema,
         onSubmit: (values, action) => {
+            let formattedDate = "";
+            if (values.dateOfBirth) {
+                const date = new Date(values.dateOfBirth);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                formattedDate = `${day}/${month}/${year}`;
+            }
             const data = {
                 email: values.email,
-                password: values.password,
-                name: values.name,
                 role: values.role,
                 firstName: values.firstName,
                 lastName: values.lastName,
-                address1: values.address1,
-                address2: values.address2,
-                points: values.points,
-                ranking: values.ranking,
-                division: values.division,
-                city: values.city,
-                state: values.state,
-                zipCode: values.zipCode,
                 mobilePhone: values.mobilePhone,
-                playerStatus: values.playerStatus,
-                tournamentsPlayed: values.tournamentsPlayed,
-                gamesPlayed: values.gamesPlayed,
-                personAPlayer: values?.role === 'PLAYER' ? true : false
+                playerStatus: "INACTIVE",
+                personAPlayer: values?.role === 'PLAYER' ? true : false,
+                driverLicenseId: values.driverLicenseId,
+                dateOfBirth: formattedDate,
+                middleName: values.middleName
             }
             if (UserEdit) {
                 Dispatch(Update_Persons(data, UserId, Token, Navigate, role))
@@ -89,32 +81,6 @@ const AddPersonFields = () => {
         ]
     }
 
-
-
-    // useEffect(() => {
-    //     console.log("Get person by id useEffect....................")
-    //     if (UserEdit && PersonDetails) {
-    //         Dispatch(GetPersonsById(UserId, Token))
-    //     }
-    // }, [UserEdit, Dispatch, UserId, Token, PersonDetails])
-    useEffect(() => {
-        if (values.role !== 'PLAYER') {
-            setValues({
-                ...values,
-                tournamentsPlayed: null,
-                points: null,
-                ranking: null,
-                gamesPlayed: null,
-            });
-        }
-    }, [values.role]);
-
-    const PersonStatusOptions = [
-        { value: "ACTIVE", label: "ACTIVE" },
-        { value: "INACTIVE", label: "INACTIVE" },
-        { value: "SUSPENDED", label: "SUSPENDED" }
-    ]
-    // useEffect(() => {
     //     console.log("User edit and person details use effect ...................")
     //     if (UserEdit && PersonDetails) {
     //         setValues({
@@ -145,62 +111,6 @@ const AddPersonFields = () => {
                 <Row className='row gy-3 row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2'>
                     <div className="d-flex flex-column flex-grow-1">
                         <InputField
-                            type="email"
-                            name="email"
-                            label="Email"
-                            onChange={handleChange}
-                            value={values.email}
-                            className="form-control"
-                            touched={touched.email}
-                            error={errors.email}
-                        />
-                    </div>
-
-                    {/* Password Field */}
-
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
-                            type="password"
-                            name="password"
-                            label="Password"
-                            onChange={handleChange}
-                            value={values.password}
-                            className="form-control"
-                            touched={touched.password}
-                            error={errors.password}
-                        />
-                    </div>
-
-                    {/* Name Field */}
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
-                            type="text"
-                            name="name"
-                            label="Name"
-                            onChange={handleChange}
-                            value={values.name}
-                            className="form-control"
-                            touched={touched.name}
-                            error={errors.name}
-                        />
-                    </div>
-
-                    <div className="d-flex  flex-column flex-grow-1">
-                        <SelectTag
-                            options={roleOptions}
-                            className="d-flex flex-grow-1  bg-white form-control  "
-                            name="role"
-                            label='Role'
-                            value={values.role}
-                            deFaultValue="Select Role"
-                            onChange={handleChange}
-                            touched={touched.role}
-                            error={errors.role}
-                        />
-                    </div>
-
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
                             type="text"
                             name="firstName"
                             label="First Name"
@@ -224,72 +134,43 @@ const AddPersonFields = () => {
                             error={errors.lastName}
                         />
                     </div>
-
                     <div className="d-flex flex-column flex-grow-1">
                         <InputField
                             type="text"
-                            name="address1"
-                            label="Address 1"
+                            name="middleName"
+                            label="Middle Name (Optional)"
                             onChange={handleChange}
-                            value={values.address1}
+                            value={values.middleName}
                             className="form-control"
-                            touched={touched.address1}
-                            error={errors.address1}
+                            touched={touched.middleName}
+                            error={errors.middleName}
                         />
                     </div>
-
                     <div className="d-flex flex-column flex-grow-1">
                         <InputField
-                            type="text"
-                            name="address2"
-                            label="Address 2"
+                            type="email"
+                            name="email"
+                            label="Email"
                             onChange={handleChange}
-                            value={values.address2}
+                            value={values.email}
                             className="form-control"
-                            touched={touched.address2}
-                            error={errors.address2}
+                            touched={touched.email}
+                            error={errors.email}
                         />
                     </div>
-
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
-                            type="text"
-                            name="city"
-                            label="City"
+                    <div className="d-flex  flex-column flex-grow-1">
+                        <SelectTag
+                            options={roleOptions}
+                            className="d-flex flex-grow-1  bg-white form-control  "
+                            name="role"
+                            label='User Type'
+                            value={values.role}
+                            deFaultValue="Select User Type"
                             onChange={handleChange}
-                            value={values.city}
-                            className="form-control"
-                            touched={touched.city}
-                            error={errors.city}
+                            touched={touched.role}
+                            error={errors.role}
                         />
                     </div>
-
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
-                            type="text"
-                            name="state"
-                            label="State"
-                            onChange={handleChange}
-                            value={values.state}
-                            className="form-control"
-                            touched={touched.state}
-                            error={errors.state}
-                        />
-                    </div>
-
-                    <div className="d-flex flex-column flex-grow-1">
-                        <InputField
-                            type="text"
-                            name="zipCode"
-                            label="Zip Code"
-                            onChange={handleChange}
-                            value={values.zipCode}
-                            className="form-control"
-                            touched={touched.zipCode}
-                            error={errors.zipCode}
-                        />
-                    </div>
-
                     <div className="d-flex flex-column flex-grow-1">
                         <InputField
                             type="text"
@@ -302,79 +183,30 @@ const AddPersonFields = () => {
                             error={errors.mobilePhone}
                         />
                     </div>
-
-
                     <div className="d-flex flex-column flex-grow-1">
-                        <SelectTag
-                            options={PersonStatusOptions}
+                        <InputField
+                            type="date"
+                            name="dateOfBirth"
+                            label="Date of Birth"
                             onChange={handleChange}
-                            deFaultValue='Select Status'
-                            name='playerStatus'
-                            label='Select Status'
-                            touched={touched.playerStatus}
-                            error={errors.playerStatus}
-                            value={values.playerStatus}
+                            value={values.dateOfBirth}
                             className="form-control"
+                            touched={touched.mobilePhone}
+                            error={errors.dateOfBirth}
                         />
                     </div>
-
-                    {values?.role === 'PLAYER' && (
-                        <>
-                            <div className="d-flex flex-column flex-grow-1">
-                                <InputField
-                                    type="number"
-                                    name="tournamentsPlayed"
-                                    label="Tournaments Played"
-                                    onChange={handleChange}
-                                    value={values.tournamentsPlayed}
-                                    className="form-control"
-                                    touched={touched.tournamentsPlayed}
-                                    error={errors.tournamentsPlayed}
-                                />
-                            </div>
-                            <div className="d-flex flex-column flex-grow-1">
-                                <InputField
-                                    type="number"
-                                    name="points"
-                                    label="Points"
-                                    onChange={handleChange}
-                                    value={values.points}
-                                    className="form-control"
-                                    touched={touched.points}
-                                    error={errors.points}
-                                />
-                            </div>
-
-
-                            {/* Ranking Field */}
-                            <div className="d-flex flex-column flex-grow-1">
-                                <InputField
-                                    type="number"
-                                    name="ranking"
-                                    label="Ranking"
-                                    onChange={handleChange}
-                                    value={values.ranking}
-                                    className="form-control"
-                                    touched={touched.ranking}
-                                    error={errors.ranking}
-                                />
-                            </div>
-                            {/* Games Played Field */}
-                            <div className="d-flex flex-column flex-grow-1">
-                                <InputField
-                                    type="number"
-                                    name="gamesPlayed"
-                                    label="Games Played"
-                                    onChange={handleChange}
-                                    value={values.gamesPlayed}
-                                    className="form-control"
-                                    touched={touched.gamesPlayed}
-                                    error={errors.gamesPlayed}
-                                />
-                            </div>
-                        </>
-                    )}
-
+                    <div className="d-flex flex-column flex-grow-1">
+                        <InputField
+                            type="text"
+                            name="driverLicenseId"
+                            label="Driver License Id"
+                            onChange={handleChange}
+                            value={values.driverLicenseId}
+                            className="form-control"
+                            touched={touched.driverLicenseId}
+                            error={errors.driverLicenseId}
+                        />
+                    </div>
                 </Row>
                 <div className="d-flex justify-content-center ">
                     <button type="submit" className="mt-3 gradient-btn-orange" >

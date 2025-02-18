@@ -13,7 +13,7 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   const Token = user?.access_token;
   const initialValues = {
     email: PersonDetails.data.email,
-    name: PersonDetails?.data.name || "",
+    middleName: PersonDetails?.data.middleName || "",
     firstName: PersonDetails?.data.firstName || "",
     lastName: PersonDetails?.data.lastName || "",
     address1: PersonDetails?.data.address1 || "",
@@ -29,7 +29,7 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
     initialValues: initialValues,
     onSubmit: (values, action) => {
       const data = {
-        name: values.name,
+        middleName: values.middleName,
         email: PersonDetails.data.email,
         Password: null,
         role: "PLAYER",
@@ -84,13 +84,13 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
             <div className="d-flex flex-column flex-grow-1">
               <InputField
                 type="text"
-                name="name"
-                label="Name"
+                name="middleName"
+                label="Middle Name"
                 onChange={handleChange}
-                value={values.name}
+                value={values.middleName}
                 className="form-control"
-                touched={touched.name}
-                error={errors.name}
+                touched={touched.middleName}
+                error={errors.middleName}
               />
             </div>
 
@@ -220,6 +220,57 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
                 className="form-control"
                 touched={touched.country}
                 error={errors.country}
+              />
+            </div>
+            <div className="d-flex flex-column flex-grow-1">
+              <InputField
+                type="number"
+                name="tournamentsPlayed"
+                label="Tournaments Played"
+                onChange={handleChange}
+                value={values.tournamentsPlayed}
+                className="form-control"
+                touched={touched.tournamentsPlayed}
+                error={errors.tournamentsPlayed}
+              />
+            </div>
+            <div className="d-flex flex-column flex-grow-1">
+              <InputField
+                type="number"
+                name="points"
+                label="Points"
+                onChange={handleChange}
+                value={values.points}
+                className="form-control"
+                touched={touched.points}
+                error={errors.points}
+              />
+            </div>
+
+            {/* Ranking Field */}
+            <div className="d-flex flex-column flex-grow-1">
+              <InputField
+                type="number"
+                name="ranking"
+                label="Ranking"
+                onChange={handleChange}
+                value={values.ranking}
+                className="form-control"
+                touched={touched.ranking}
+                error={errors.ranking}
+              />
+            </div>
+            {/* Games Played Field */}
+            <div className="d-flex flex-column flex-grow-1">
+              <InputField
+                type="number"
+                name="gamesPlayed"
+                label="Games Played"
+                onChange={handleChange}
+                value={values.gamesPlayed}
+                className="form-control"
+                touched={touched.gamesPlayed}
+                error={errors.gamesPlayed}
               />
             </div>
           </Row>

@@ -25,6 +25,7 @@ const Setting = () => {
 
 
   useEffect(() => {
+    console.log('runnnnn')
     Dispatch(GetPersonsById(user.userId, token));
   }, [Dispatch, state, user, token]);
 
@@ -164,6 +165,7 @@ const Setting = () => {
             setEditModel={setEditModel}
             onClose={() => setEditModel(false)}
             onClick={handleConfrim}
+            setState={setState}
           />
         ) : PersonDetails?.data?.role === "CO_MANAGER" ? (
           <CoManagerInfoEditModel
@@ -171,6 +173,7 @@ const Setting = () => {
             setEditModel={setEditModel}
             onClose={() => setEditModel(false)}
             onClick={handleConfrim}
+            setState={setState}
           />
         ) : (
           ""

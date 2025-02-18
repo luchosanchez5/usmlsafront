@@ -34,11 +34,17 @@ const DivisionAndTeamModal = ({
                   </div>
                   <div style={{ width: "100%", maxWidth: "300px" }}>
                     <ProgressBar
-                      now={(division.entryFee / 1000) * 100}
+                      now={
+                        (division.registeredTeamsData.length /
+                          division.maxTeams) *
+                        100
+                      }
                       variant="danger"
-                      label={`${((division.entryFee / 1000) * 100).toFixed(
-                        1
-                      )}%`}
+                      label={`${(
+                        (division.registeredTeamsData.length /
+                          division.maxTeams) *
+                        100
+                      ).toFixed(1)}%`}
                     />
                   </div>
                   <span className="fw-bold text-dark mx-2">

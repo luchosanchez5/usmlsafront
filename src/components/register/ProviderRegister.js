@@ -26,8 +26,8 @@ const ProviderRegisterForm = () => {
   ]
 
   const initialValues = {
-    name: "",
     firstName: "",
+    middleName: "",
     lastName: "",
     address1: "",
     address2: "",
@@ -48,9 +48,8 @@ const ProviderRegisterForm = () => {
 
 
   const RegisterHandler = (values, action) => {
-
     const data = {
-      name: values.name,
+      middleName: values.middleName,
       email: values.email,
       password: values.password,
       role: roleValue,
@@ -80,8 +79,8 @@ const ProviderRegisterForm = () => {
   // };
 
   return (
-    <div className="form-space px-lg-5 mx-xl-5 d-flex flex-column mt-5 pt-5 align-content-center justify-content-center " >
-      <div className="text-align-center d-flex justify-content-center flex-column align-items-center">
+    <div className="p-4" >
+      <div className="text-align-center d-flex justify-content-center flex-column align-items-center py-2">
         <Image
           fluid
           src="https://usmlsa.com/wp-content/uploads/2023/10/usmlsa_new_png-Copy.png"
@@ -103,7 +102,7 @@ const ProviderRegisterForm = () => {
                 <TextField
                   icon={<FaUser />}
                   placeholder="First Name"
-                  name="name"
+                  name="firstName"
                   type="text"
                 />
               </Col>
@@ -111,7 +110,7 @@ const ProviderRegisterForm = () => {
                 <TextField
                   icon={<FaUser />}
                   placeholder="Middle Name (optional)"
-                  name="firstName"
+                  name="middleName"
                   type="text"
                 />
               </Col>

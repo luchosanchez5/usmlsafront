@@ -14,7 +14,7 @@ const ManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   const Token = user?.access_token;
   const initialValues = {
     email: PersonDetails.data.email,
-    name: PersonDetails?.data.name || "",
+    middleName: PersonDetails?.data.middleName || "",
     firstName: PersonDetails?.data.firstName || "",
     lastName: PersonDetails?.data.lastName || "",
     address1: PersonDetails?.data.address1 || "",
@@ -33,7 +33,7 @@ const ManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
       action.resetForm();
 
       const data = {
-        name: values.name,
+        middleName: values.middleName,
         email: PersonDetails.data.email,
         Password: null,
         role: "MANAGER",
@@ -87,13 +87,13 @@ const ManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
             <div className="d-flex flex-column flex-grow-1">
               <InputField
                 type="text"
-                name="name"
-                label="Name"
+                name="middleName"
+                label="Middle Name"
                 onChange={handleChange}
-                value={values.name}
+                value={values.middleName}
                 className="form-control"
-                touched={touched.name}
-                error={errors.name}
+                touched={touched.middleName}
+                error={errors.middleName}
               />
             </div>
 

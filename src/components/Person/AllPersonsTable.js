@@ -24,6 +24,7 @@ const AllPersonsTable = () => {
   const Dispatch = useDispatch();
   const Navigate = useNavigate();
 
+
   useEffect(() => {
     Dispatch(GetPersons(page, token));
   }, [Dispatch, page, token]);
@@ -60,6 +61,7 @@ const AllPersonsTable = () => {
 
     }
   };
+
   return (
     <>
       <div className="section-main m-3 px-3 py-4 rounded-lg shadow-lg max-w-4xl ">
