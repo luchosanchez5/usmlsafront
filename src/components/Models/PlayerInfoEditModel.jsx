@@ -4,7 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import InputField from "../product/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import { Row } from "react-bootstrap";
-import { Update_Persons } from "../../store/person/actions/actionsCreators";
+import {
+  GetPersonsById,
+  Update_Persons,
+} from "../../store/person/actions/actionsCreators";
+import { ManagerUpdateValuesSchemas } from "../../Schemas/Schemas";
 const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   const Dispatch = useDispatch();
   const { PersonDetails } = useSelector((state) => state.person);
@@ -27,6 +31,7 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   };
   const { values, handleChange, errors, handleSubmit, touched } = useFormik({
     initialValues: initialValues,
+    validationSchema: ManagerUpdateValuesSchemas,
     onSubmit: (values, action) => {
       const data = {
         middleName: values.middleName,
@@ -50,9 +55,13 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
         personAPlayer: true,
         country: values.country,
       };
-      Dispatch(Update_Persons(data, userId, Token));
+      Dispatch(
+        Update_Persons(data, userId, Token, () => {
+          Dispatch(GetPersonsById(user.userId, Token));
+          setEditModel(false);
+        })
+      );
       action.resetForm();
-      setEditModel(false);
       setState((prev) => !prev);
     },
   });

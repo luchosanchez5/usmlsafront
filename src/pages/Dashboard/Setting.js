@@ -25,7 +25,6 @@ const Setting = () => {
 
 
   useEffect(() => {
-    console.log('runnnnn')
     Dispatch(GetPersonsById(user.userId, token));
   }, [Dispatch, state, user, token]);
 

@@ -37,7 +37,7 @@ export const Add_Persons = (data, Token, Navigate, role) => (dispatch) => {
       });
     });
 };
-export const Update_Persons = (data, id, Token, Navigate) => (dispatch) => {
+export const Update_Persons = (data, id, Token, callback) => (dispatch) => {
   dispatch({
     type: actionTypes.SET_LOADING,
     payload: true,
@@ -50,6 +50,7 @@ export const Update_Persons = (data, id, Token, Navigate) => (dispatch) => {
     })
 
     .then((response) => {
+      console.log(response)
       dispatch({
         type: actionTypes.UPDATE_PERSON,
       });
@@ -59,10 +60,11 @@ export const Update_Persons = (data, id, Token, Navigate) => (dispatch) => {
       });
 
       Toast.success(response.data.message);
-      Navigate("/dashboard/allpersons");
+      if (callback) callback();
+
     })
     .catch((error) => {
-      Toast.success(error.data.message);
+      Toast.success(error?.data?.message);
       dispatch({
         type: actionTypes.SET_LOADING,
         payload: false,

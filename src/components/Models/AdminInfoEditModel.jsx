@@ -4,7 +4,10 @@ import Modal from "react-bootstrap/Modal";
 import InputField from "../product/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "react-bootstrap";
-import { Update_Persons } from "../../store/person/actions/actionsCreators";
+import {
+  GetPersonsById,
+  Update_Persons,
+} from "../../store/person/actions/actionsCreators";
 import { AdminValuesSchemas } from "../../Schemas/Schemas";
 const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
   const Dispatch = useDispatch();
@@ -47,9 +50,13 @@ const AdminInfoEditModel = ({ show, onClose, setState, setEditModel }) => {
         playerStatus: "ACTIVE",
         country: "",
       };
-      Dispatch(Update_Persons(data, userId, Token));
+      Dispatch(
+        Update_Persons(data, userId, Token, () => {
+          Dispatch(GetPersonsById(user.userId, Token));
+          setEditModel(false);
+        })
+      );
       setState((prev) => !prev);
-      setEditModel(false);
     },
   });
   return (
