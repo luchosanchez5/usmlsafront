@@ -74,12 +74,16 @@ const CardPaymentForm = ({
           ? divisionId
           : DivisionDetailsBySearch[0]?.divisionId,
       };
-      console.log(data);
-      Dispatch(createSubscription(data, token, navigate, id, isPendingAmount));
-      if (!isLoading) {
-        SetCardModel(false);
-        setApiCall((prev) => !prev);
-      }
+      Dispatch(
+        createSubscription(
+          data,
+          token,
+          navigate,
+          id,
+          isPendingAmount,
+          SetCardModel
+        )
+      );
     }
   };
 
@@ -88,7 +92,6 @@ const CardPaymentForm = ({
       <div className="d-flex flex-column align-items-center">
         <CardElement options={CARD_ELEMENT_OPTIONS} className="card-input" />
       </div>
-
       <div className="text-center mt-3">
         <button
           type="submit"

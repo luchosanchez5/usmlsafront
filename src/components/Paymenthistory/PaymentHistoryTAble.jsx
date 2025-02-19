@@ -8,8 +8,6 @@ import TableSkeleton from "../SkeletonTable/SkeletonTable";
 import { dateFormat } from "../../utlils/dateFormat";
 const PaymentHistoryTable = ({ tournamentId, divisionId }) => {
   const { PaymentRecords, isLoading } = useSelector((state) => state.team);
-  console.log(PaymentRecords);
-
   const { id } = useParams();
   const { token } = useSelector((state) => state.user);
   const Dispatch = useDispatch();

@@ -493,8 +493,8 @@ export const getPendingPaymentRecords = (teamId, page, Token, tournamentId = nul
 };
 
 
-export const createSubscription = (data, Token, navigate, id, isPendingAmount) => (dispatch) => {
-  console.log(isPendingAmount)
+export const createSubscription = (data, Token, navigate, id, isPendingAmount, SetCardModel) => (dispatch) => {
+  console.log(SetCardModel, 'SetCardModel')
 
   dispatch({
     type: actionTypes.SET_LOADING,
@@ -514,6 +514,7 @@ export const createSubscription = (data, Token, navigate, id, isPendingAmount) =
         type: actionTypes.SET_LOADING,
         payload: false,
       });
+      SetCardModel(false);
       if (!isPendingAmount) {
         navigate(-1)
       }

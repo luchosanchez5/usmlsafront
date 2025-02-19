@@ -12,7 +12,6 @@ import { dateFormat } from "../../utlils/dateFormat";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 const AllPaymentHistoryTable = () => {
   const { PaymentRecords } = useSelector((state) => state.team);
-  console.log(PaymentRecords);
   const { token, user } = useSelector((state) => state.user);
   const [page, setPage] = useState(0);
 
