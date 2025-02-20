@@ -224,7 +224,7 @@ const CoManagerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
               <InputField
                 type="text"
                 name="mobilePhone"
-                label="mobilePhone"
+                label="Mobile Phone"
                 onChange={handleChange}
                 value={values.mobilePhone}
                 className="form-control"
