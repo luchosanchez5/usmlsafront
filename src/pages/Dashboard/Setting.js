@@ -50,7 +50,8 @@ const Setting = () => {
   }, [PersonDetails]);
 
   const handleFileUpload = (event) => {
-    const file = event.target.files;
+    const file = event.target.files[0];
+    console.log(file)
     if (file) {
       const imageURL = URL.createObjectURL(file);
       setPreviewImage(imageURL);
