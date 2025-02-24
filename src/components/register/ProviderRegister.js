@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "../../store/user/actions/actionCreators";
 import TextField from "../../shared/TextField";
 import SelectTag from "../product/SelectTag";
-import { FaUser, FaAddressBook, FaMedal, FaCity, FaFlag, FaMapMarkerAlt, FaMobileAlt, FaEnvelope, FaLock, FaUserTie } from "react-icons/fa";
-import { MdGames } from "react-icons/md";
+import { FaUser, FaAddressBook, FaMapMarkerAlt, FaMobileAlt, FaEnvelope, FaLock, FaUserTie, FaCity } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import "../../assets/css/login-form.css";
 import { ProviderRegisterSchemas } from "../../Schemas/Schemas";
@@ -22,7 +21,6 @@ const ProviderRegisterForm = () => {
 
   const roleOptions = [
     { value: 'MANAGER', label: 'MANAGER' },
-    { value: 'PLAYER', label: 'PLAYER' },
   ]
 
   const initialValues = {
@@ -57,19 +55,12 @@ const ProviderRegisterForm = () => {
       lastName: values.lastName,
       address1: values.address1,
       address2: values.address2,
-      // points: values.points,
-      // ranking: values.ranking,
-      // division: values.division,
       city: values.city,
       state: values.state,
       zipCode: values.zipCode,
       mobilePhone: values.mobilePhone,
-      // tournamentsPlayed: values.tournamentsPlayed,
-      // gamesPlayed: values.gamesPlayed,
       playerStatus: 'ACTIVE',
       personAPlayer: roleValue === 'PLAYER' ? true : false,
-      // country: 'Pakistan',
-
     };
     dispatch(userRegister(data, navigate));
     action.resetForm();
@@ -155,50 +146,6 @@ const ProviderRegisterForm = () => {
                   touched={touched.role}
                 />
               </Col>
-              {/* {values.role === 'PLAYER' && (
-                <>
-                  <Col>
-                    <TextField
-                      icon={<FaMedal />}
-                      placeholder="Points"
-                      name="points"
-                      type="number"
-                    />
-                  </Col>
-                  <Col>
-                    <TextField
-                      icon={<FaMedal />}
-                      placeholder="Ranking"
-                      name="ranking"
-                      type="number"
-                    />
-                  </Col>
-                  <Col>
-                    <TextField
-                      icon={<FaMedal />}
-                      placeholder="Tournaments Played"
-                      name="tournamentsPlayed"
-                      type="number"
-                    />
-                  </Col>
-                  <Col>
-                    <TextField
-                      icon={<MdGames />}
-                      placeholder="Games Played"
-                      name="gamesPlayed"
-                      type="number"
-                    />
-                  </Col>
-                  <Col>
-                    <TextField
-                      icon={<FaFlag />}
-                      placeholder="Division"
-                      name="division"
-                      type="text"
-                    />
-                  </Col>
-                </>
-              )} */}
               <Col>
                 <TextField
                   icon={<FaCity />}

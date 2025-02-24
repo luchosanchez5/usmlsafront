@@ -38,7 +38,6 @@ const SelectRoleForm = () => {
   const roleOptions = [
     { value: "MANAGER", label: "MANAGER" },
     { value: "CO_MANAGER", label: "CO MANAGER" },
-    { value: "PLAYER", label: "PLAYER" },
   ];
 
   const handleRoleChange = (e) => {

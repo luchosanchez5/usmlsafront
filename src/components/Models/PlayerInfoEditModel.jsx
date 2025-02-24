@@ -12,6 +12,7 @@ import { ManagerUpdateValuesSchemas } from "../../Schemas/Schemas";
 const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
   const Dispatch = useDispatch();
   const { PersonDetails } = useSelector((state) => state.person);
+  console.log(PersonDetails?.data.playerResponse.gamesPlayed);
   const { user } = useSelector((state) => state.user);
   const userId = user.userId;
   const Token = user?.access_token;
@@ -22,7 +23,11 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
     lastName: PersonDetails?.data.lastName || "",
     address1: PersonDetails?.data.address1 || "",
     address2: PersonDetails?.data.address2 || "",
-    ranking: PersonDetails?.data?.ranking || null,
+    ranking: PersonDetails?.data?.playerResponse?.ranking || "",
+    points: PersonDetails?.data?.playerResponse?.points || "",
+    gamesPlayed: PersonDetails?.data?.playerResponse?.gamesPlayed || "",
+    tournamentsPlayed:
+      PersonDetails?.data?.playerResponse?.tournamentsPlayed || "",
     city: PersonDetails?.data?.city || "",
     state: PersonDetails?.data?.state || "",
     mobilePhone: PersonDetails?.data?.mobilePhone || "",
@@ -42,16 +47,16 @@ const PlayerInfoEditModel = ({ show, onClose, setEditModel, setState }) => {
         lastName: values.lastName,
         address1: values.address1,
         address2: values.address2,
-        points: null,
+        points: values.points,
         ranking: values.ranking,
-        division: null,
+        division: values.division,
         city: values.city,
         state: values.state,
         zipCode: values.zipCode,
         mobilePhone: values.mobilePhone,
         playerStatus: "ACTIVE",
-        tournamentsPlayed: null,
-        gamesPlayed: null,
+        tournamentsPlayed: values.tournamentsPlayed,
+        gamesPlayed: values.gamesPlayed,
         personAPlayer: true,
         country: values.country,
       };

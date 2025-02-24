@@ -109,7 +109,6 @@ export const ProviderRegisterSchemas = Yup.object({
   lastName: Yup.string().required("Last Name  is Required"),
   email: Yup.string().email().required("Email is Required"),
   address1: Yup.string().required("Address 1 is Required"),
-  address2: Yup.string().required("Address 2 is Required"),
   city: Yup.string().required("City is Required"),
   state: Yup.string().required("State is Required"),
   zipCode: Yup.string().required("Zip Code is Required"),
