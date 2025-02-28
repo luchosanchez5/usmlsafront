@@ -20,7 +20,6 @@ export const AllTournamentSchemas = Yup.object({
 export const AllVenueSchemas = Yup.object({
   name: Yup.string().required("Venue Name is Required"),
   address1: Yup.string().required("Address1 is Required"),
-  address2: Yup.string().required("Address2 is Required"),
   city: Yup.string().required("City is Required"),
   state: Yup.string().required("State is Required"),
   zipCode: Yup.string().required("Zip Code is Required"),
@@ -77,7 +76,6 @@ export const AllUsersSchema = Yup.object({
   lastName: Yup.string().required("Last Name  is Required"),
   password: Yup.string().required("Password  is Required"),
   address1: Yup.string().required("Address1 is Required"),
-  address2: Yup.string().required("Address2 is Required"),
   division: Yup.string().required("Division is Required"),
   points: Yup.number().nullable().required("Points is Required"),
   ranking: Yup.number().nullable().required("Ranking is Required"),

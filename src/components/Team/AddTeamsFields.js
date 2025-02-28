@@ -140,7 +140,7 @@ function AddTeamsFields() {
         <Form.Check
           type="switch"
           id="use-user-email-switch"
-          label="Use User Email"
+          label="Use My Email"
           className="custom-switch"
           checked={useUserEmail}
           onChange={() => {
