@@ -4,21 +4,9 @@ export const AllTeamSchemas = Yup.object({
   name: Yup.string().required("Team Name is Required"),
   email: Yup.string().email().required("Email  is Required"),
   address: Yup.string().required("Address is Required"),
-  // points: Yup.string().required("Points is Required"),
-  // ranking: Yup.string().required("Ranking is Required"),
-  // division: Yup.string().required("Division is Required"),
   city: Yup.string().required("City is Required"),
   state: Yup.string().required("State is Required"),
   zipCode: Yup.string().required("Zip Code is Required"),
-  // gamesWin: Yup.number().required("Games Win is Required"),
-  // gamesLost: Yup.number().required("Games Lost is Required"),
-  // gamesTied: Yup.number().required("Games Tied is Required"),
-  // avgRunsScored: Yup.number().required("Avg Runs Scored is Required"),
-  // avgRunsAllowed: Yup.number().required("Avg Runs Allowed is Required"),
-  // avgRunsDiff: Yup.number().required("Avg Runs Diff is Required"),
-  // runScored: Yup.number().required("Run Scored is Required"),
-  // runAllowed: Yup.number().required("Run Allowed is Required"),
-  // teamStatus: Yup.string().required("Team Status is Required"),
 });
 
 export const AllTournamentSchemas = Yup.object({

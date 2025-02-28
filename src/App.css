@@ -592,3 +592,8 @@ input:checked + .slider:before {
 .modal-header .btn-close {
   filter: invert(1) !important; /* Ensures the close button is black */
 }
+
+.custom-switch .form-check-input:checked {
+  background-color: red !important;
+  border-color: red !important;
+}

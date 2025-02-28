@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Row, Col, Form } from "react-bootstrap";
 import InputField from "../product/InputField";
 import SelectTag from "../product/SelectTag";
 import { useFormik } from "formik";
@@ -18,13 +18,14 @@ function AddTeamsFields() {
   const { user } = useSelector((state) => state.user);
   const { TeamDetailsData, isLoading } = useSelector((state) => state.team);
   const { TeamEdit, TeamId } = useContext(GlobalInfo);
+  const [useUserEmail, setUseUserEmail] = useState(false);
   const Token = user?.access_token;
   const Dispatch = useDispatch();
   const Navigate = useNavigate();
 
   const initialValues = {
     name: "",
-    email: "",
+    email: useUserEmail ? user?.email : "",
     address: "",
     points: null,
     ranking: null,
@@ -54,6 +55,7 @@ function AddTeamsFields() {
     initialValues: initialValues,
     validationSchema: AllTeamSchemas,
     onSubmit: (values, action) => {
+      console.log(values, "values")
       let data;
       if (TeamEdit) {
         data = {
@@ -80,25 +82,15 @@ function AddTeamsFields() {
       } else {
         data = {
           name: values.name,
-          email: values.email,
+          email: useUserEmail ? user?.email : values.email,
           address: values.address,
           zipCode: values.zipCode,
-          // points: values.points,
-          // ranking: values.ranking,
-          // division: values.division,
           city: values.city,
           state: values.state,
-          // gamesWin: values.gamesWin,
-          // gamesLost: values.gamesLost,
-          // gamesTied: values.gamesTied,
-          // avgRunsScored: values.avgRunsScored,
-          // avgRunsAllowed: values.avgRunsAllowed,
-          // avgRunsDiff: values.avgRunsDiff,
-          // runScored: values.runScored,
-          // runAllowed: values.runAllowed,
           teamStatus: "ACTIVE",
         };
         Dispatch(AddTeams(data, Token, Navigate));
+        setUseUserEmail(false)
       }
       action.resetForm();
     },
@@ -114,7 +106,7 @@ function AddTeamsFields() {
     if (TeamEdit && TeamDetailsData) {
       Dispatch(GetTeamsbyTeamId(TeamId, Token));
     }
-  }, [TeamEdit, Dispatch]);
+  }, [TeamEdit, Dispatch,]);
 
   useEffect(() => {
     if (TeamEdit && TeamDetailsData) {
@@ -145,6 +137,20 @@ function AddTeamsFields() {
     <div className="mt-3">
       <h4 className="mb-3 fw-bold">{TeamEdit ? "Update Team" : "Add Team"}</h4>
       <form onSubmit={handleSubmit}>
+        <Form.Check
+          type="switch"
+          id="use-user-email-switch"
+          label="Use User Email"
+          className="custom-switch"
+          checked={useUserEmail}
+          onChange={() => {
+            setUseUserEmail(!useUserEmail);
+            setValues((prevValues) => ({
+              ...prevValues,
+              email: !useUserEmail ? user?.email : "",
+            }));
+          }}
+        />
         <Row className="gy-3">
           <Col md={4}>
             <InputField

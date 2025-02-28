@@ -1,6 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import axios from "axios";
 import Toast from "../../../shared/Toast";
+import { FaBullseye } from "react-icons/fa";
 const Url = process.env.REACT_APP_MAIN_URL;
 export const AddTeams = (data, Token, Navigate) => (dispatch) => {
   dispatch({
@@ -25,11 +26,13 @@ export const AddTeams = (data, Token, Navigate) => (dispatch) => {
       Toast.success(response.data.message);
     })
     .catch((error) => {
+      if (error.status === 400) {
+        dispatch({
+          type: actionTypes.SET_LOADING,
+          payload: false,
+        });
+      }
       Toast.error(error.response.data.message);
-      dispatch({
-        type: actionTypes.SET_LOADING,
-        payload: true,
-      });
     });
 };
 export const GetTeams = (page, Token, role, userId) => (dispatch) => {
