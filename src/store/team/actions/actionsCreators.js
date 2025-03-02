@@ -23,7 +23,7 @@ export const AddTeams = (data, Token, Navigate) => (dispatch) => {
         payload: false,
       });
       Navigate('/dashboard/allteams')
-      Toast.success(response.data.message);
+      Toast.success('Team added successfully');
     })
     .catch((error) => {
       if (error.status === 400) {
