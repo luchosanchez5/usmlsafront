@@ -9,7 +9,6 @@ const DivisionModal = ({
   loading,
   tournamentName,
 }) => {
-  console.log(divisionsData);
   return (
     <Modal
       size="xl"

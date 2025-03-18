@@ -207,7 +207,7 @@ export const GetDivisionsBySearch = (token, page, tournamentId, teamId) => (disp
       }
       dispatch({
         type: actionTypes.SET_LOADING,
-        payload: true,
+        payload: false,
       });
       // Toast.error(error.response.data.message);
     });
