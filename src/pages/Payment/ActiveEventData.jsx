@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import DivisionSearchModel from "./DivisionSearchModel";
-import { useDispatch, useSelector } from "react-redux";
 
 const ActiveEventData = ({
   title,
