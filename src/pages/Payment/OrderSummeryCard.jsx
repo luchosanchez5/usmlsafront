@@ -4,7 +4,6 @@ const OrderSummeryCard = ({
   DivisionDetailsBySearch,
   totalAmount,
 }) => {
-  
   // const [showCouponInput, setShowCouponInput] = useState(false);
   const DivisionDetails = DivisionDetailsBySearch[0];
 
@@ -26,12 +25,13 @@ const OrderSummeryCard = ({
             <p className="description ">
               Status:{" "}
               <span
-                className="fw-bold"
+                className="fw-bold p-2 rounded text-white"
                 style={{
-                  color:
-                    DivisionDetails?.divisionStatus === "OPEN"
+                  background:
+                    DivisionDetails?.divisionStatus === "ACTIVE"
                       ? "green"
                       : "red",
+                  fontSize: "12px",
                 }}
               >
                 {DivisionDetails?.divisionStatus}

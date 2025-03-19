@@ -4,7 +4,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
-import thunk  from "redux-thunk";
+import thunk from "redux-thunk";
 import { ToastContainer } from "react-toastify";
 import UserReducer from "./store/user/reducers/UserReducer";
 import VenueReducer from "./store/Venue/reducers/VenueReducer";
@@ -14,11 +14,11 @@ import TournamentReducer from "./store/tournament/reducers/TournamentReducer";
 import './index.css'
 const rootReducer = combineReducers({
   user: UserReducer,
-  venue:VenueReducer,
-  person:PersonsReducer,
-  team:TeamReducer,
-  tournament:TournamentReducer
- 
+  venue: VenueReducer,
+  person: PersonsReducer,
+  team: TeamReducer,
+  tournament: TournamentReducer
+
 });
 
 const { persistStore, persistReducer } = require("redux-persist");
@@ -32,16 +32,16 @@ if (isClient) {
 
   const storage = require("redux-persist/lib/storage").default;
   const persistConfig = {
-    key: "grow-share",
+    key: "usmlsa",
     storage,
   };
 
   store = createStore(
-    
+
     persistReducer(persistConfig, rootReducer),
     compose(applyMiddleware(thunk), devtools)
   );
-  
+
 
   store.__PERSISTOR = persistStore(store);
 } else {

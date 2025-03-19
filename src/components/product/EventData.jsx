@@ -69,11 +69,9 @@ const EventData = ({
         .finally(() => {
           setLoading(false);
           if (teamData) {
-            console.log("if");
             setTeamData(false);
             setShowTeamModal(true);
           } else {
-            console.log("else");
             setShow(true);
             setTeamData(false);
           }

@@ -5,26 +5,43 @@ import PlayerCardSkeleton from "../../components/SkeletonTable/PlayerCardSkeleto
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 import SpinNer from "../../components/LoadingSpinner/SpinNer";
+import axios from "axios";
+const Url = process.env.REACT_APP_MAIN_URL;
 
 const DivisionSearchModel = ({
   show,
   onClose,
-  // tournamentID,
   setDivisionValue,
+  divisionsData,
+  loading,
+  SetDivisionDetailsBySearch,
 }) => {
   const [divisionName, setDivisionName] = useState(null);
-  const { DivisionBySearch, isLoading } = useSelector(
-    (state) => state.tournament
-  );
-  console.log("🚀 ~ isLoading:", isLoading)
   const [page, setPage] = useState(0);
-
   const [selectedCard, setSelectedCard] = useState(null);
   const handleCardSelect = (id) => {
     setSelectedCard(id);
   };
-  const handleSubmit = () => {
+  const { token } = useSelector((state) => state.user);
+
+  const handleSubmit = async () => {
     setDivisionValue(divisionName);
+    if (!token || !divisionName) {
+      return;
+    }
+    try {
+      const res = await axios.get(
+        `${Url}api/divisions/search?divisionName=${divisionName}&page=0&size=10`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      SetDivisionDetailsBySearch(res.data.data);
+    } catch (e) {
+      console.error("Error fetching division details:", e);
+    }
   };
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -42,10 +59,10 @@ const DivisionSearchModel = ({
       </Modal.Header>
       <Modal.Body>
         <Row className="d-flex flex-column align-items-center">
-          {isLoading ? (
+          {loading ? (
             <PlayerCardSkeleton />
-          ) : DivisionBySearch?.data?.length > 0 ? (
-            DivisionBySearch?.data?.map((card, index) => (
+          ) : divisionsData?.data?.length > 0 ? (
+            divisionsData?.data?.map((card, index) => (
               <Col key={index} md={12} className="my-2 ">
                 <Card
                   className={`px-3  ${
@@ -77,18 +94,18 @@ const DivisionSearchModel = ({
           ) : (
             <span className="text-center pt-3">No Divisions Available</span>
           )}
-          {DivisionBySearch?.data?.length > 10 && (
+          {divisionsData?.data?.length > 10 && (
             <PaginationControl
               page={page}
               between={3}
               limit={10}
-              total={DivisionBySearch?.totalRecords}
+              total={divisionsData?.totalRecords}
               changePage={(page) => handlePageChange(page)}
               ellipsis={1}
             />
           )}
 
-          {DivisionBySearch?.data?.length > 0 && (
+          {divisionsData?.data?.length > 0 && (
             <div className="d-flex justify-content-end">
               <button
                 type="button"
@@ -101,7 +118,7 @@ const DivisionSearchModel = ({
                   }
                 }}
               >
-                {isLoading ? <SpinNer /> : "Next"}
+                {loading ? <SpinNer /> : "Next"}
               </button>
             </div>
           )}

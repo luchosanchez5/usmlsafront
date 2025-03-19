@@ -1,34 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  GetDefaultTournamentsBySearch,
-  GetTournamentsBySearch,
-} from "../../store/tournament/actions/actionsCreators";
+import { GetDefaultTournamentsBySearch } from "../../store/tournament/actions/actionsCreators";
 import SkeletonCard from "../../components/SkeletonTable/SkeletonCard";
 import { PaginationControl } from "react-bootstrap-pagination-control";
 import ActiveEventData from "./ActiveEventData";
 
-const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
+const ActiveEvents = ({ setDivisionValue, setTournamentId,SetDivisionDetailsBySearch }) => {
   const [page, setPage] = useState(0);
-  const { token } = useSelector((state) => state.user);
 
   const { DefaultTournamentData, isLoading } = useSelector(
     (state) => state.tournament
   );
 
+  console.log(DefaultTournamentData);
   const Dispatch = useDispatch();
   const fallbackImage =
     "https://media.bleacherreport.com/image/upload/c_fill,g_faces,w_3800,h_2000,q_95/v1677098974/ajakxjd0xfrxtu8ru7bo.jpg"; // Default image URL
 
   useEffect(() => {
     Dispatch(GetDefaultTournamentsBySearch(page));
-    Dispatch(GetTournamentsBySearch(token));
   }, [Dispatch, page]);
   return (
     <div className="p-2 mt-2">
       <div className="mx-lg-5 search-box rounded">
         <h2 className="text-center text-uppercase py-2 fw-bold Login-btn text-white rounded-top">
-          Featured Events
+          Registered Tournament
         </h2>
         {isLoading ? (
           <SkeletonCard />
@@ -52,8 +48,9 @@ const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
 
               return (
                 <ActiveEventData
+                SetDivisionDetailsBySearch={SetDivisionDetailsBySearch}
                   key={index}
-                  title={item?.status}
+                  status={item?.status}
                   subtitle={item?.venueName}
                   ranking={item?.name}
                   points={item?.points}

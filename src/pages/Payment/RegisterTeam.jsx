@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import OrderSummeryCard from "./OrderSummeryCard";
 import DashboardLayout from "../../layout/DashboardLayout";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import ActiveEvents from "./ActiveEvents";
 import FindEvents from "../../components/product/FindEvents";
 import CardPaymentModel from "../../components/Models/CardPaymentModel";
 import Toast from "../../shared/Toast";
-import { GetDivisionsBySearch } from "../../store/tournament/actions/actionsCreators";
-import { useParams } from "react-router-dom";
-const Url = process.env.REACT_APP_MAIN_URL;
+import { FaArrowLeft } from "react-icons/fa6";
 
 const RegisterTeam = () => {
   const [selectedPayment, setSelectedPayment] = useState("");
@@ -20,43 +16,10 @@ const RegisterTeam = () => {
   const [tournamentId, setTournamentId] = useState(null);
   const DivisionDetails = DivisionDetailsBySearch[0];
   const totalAmount =
-    selectedPayment === "IntialDeposit"
+    selectedPayment === "InitialDeposit"
       ? DivisionDetails?.initialDepositFee
       : DivisionDetails?.entryFee;
-  const { token } = useSelector((state) => state.user);
-  const Dispatch = useDispatch();
-  const { id } = useParams();
 
-  useEffect(() => {
-    if (!DivisionValue) {
-      return;
-    }
-
-    const fetchDivisionDetails = async () => {
-      if (!token || !DivisionValue) {
-        return;
-      }
-
-      try {
-        const res = await axios.get(
-          `${Url}api/divisions/search?divisionName=${DivisionValue}&page=0&size=10`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        SetDivisionDetailsBySearch(res.data.data);
-      } catch (e) {
-        console.error("Error fetching division details:", e);
-      }
-    };
-
-    fetchDivisionDetails();
-  }, [DivisionValue, token]);
-  useEffect(() => {
-    Dispatch(GetDivisionsBySearch(token, 0, tournamentId, id));
-  }, [tournamentId]);
   const handlePlaceOrderBtn = () => {
     if (!selectedPayment) {
       return Toast.error("Select Your Payment Fees");
@@ -85,13 +48,24 @@ const RegisterTeam = () => {
           <ActiveEvents
             setDivisionValue={setDivisionValue}
             setTournamentId={setTournamentId}
+            SetDivisionDetailsBySearch={SetDivisionDetailsBySearch}
           />
         </>
       )}
       <div className="container mt-5">
         <Row className="justify-content-center">
-          {DivisionDetailsBySearch.length > 0 && (
+          {DivisionValue && (
             <>
+              <div className="text-start">
+                <button className="bg-black rounded">
+                  <FaArrowLeft
+                    onClick={() => setDivisionValue(null)}
+                    color="white"
+                    size={20}
+                  />
+                </button>
+              </div>
+
               <Col>
                 <h2 className="py-3">Payment Options</h2>
                 <div className="payment-option border p-3 mb-2 rounded">
@@ -106,31 +80,31 @@ const RegisterTeam = () => {
                       onChange={handlePaymentChange}
                     />
                     <label className="form-check-label" htmlFor="EntryFee">
-                      Entry Fee{" "}
+                      Entry Fee
                       <span className="fw-bolder">
-                        ${DivisionDetailsBySearch?.[0]?.entryFee || "N/A"}
+                        ${DivisionDetailsBySearch?.[0]?.entryFee}
                       </span>
                     </label>
                   </div>
                 </div>
-
                 <div className="payment-option border p-3 mb-2 rounded">
                   <div className="form-check">
                     <input
                       type="radio"
                       className="form-check-input"
-                      name="IntialDeposit"
-                      value="IntialDeposit"
-                      id="IntialDeposit"
-                      checked={selectedPayment === "IntialDeposit"}
+                      name="InitialDeposit"
+                      value="InitialDeposit"
+                      id="InitialDeposit"
+                      checked={selectedPayment === "InitialDeposit"}
                       onChange={handlePaymentChange}
                     />
-                    <label className="form-check-label" htmlFor="IntialDeposit">
-                      Initial Deposit Fee{" "}
+                    <label
+                      className="form-check-label"
+                      htmlFor="InitialDeposit"
+                    >
+                      Initial Deposit Fee
                       <span className="fw-bolder">
-                        $
-                        {DivisionDetailsBySearch?.[0]?.initialDepositFee ||
-                          "N/A"}
+                        ${DivisionDetailsBySearch?.[0]?.initialDepositFee || 0}
                       </span>
                     </label>
                   </div>
@@ -143,16 +117,15 @@ const RegisterTeam = () => {
                   Place Your Order
                 </button>
               </Col>
-              {CardModel && (
-                <CardPaymentModel
-                  show={CardModel}
-                  SetCardModel={SetCardModel}
-                  DivisionDetailsBySearch={DivisionDetailsBySearch}
-                  totalAmount={totalAmount}
-                  tournamentId={tournamentId}
-                  onClose={() => SetCardModel(false)}
-                />
-              )}
+
+              <CardPaymentModel
+                show={CardModel}
+                SetCardModel={SetCardModel}
+                DivisionDetailsBySearch={DivisionDetailsBySearch}
+                totalAmount={totalAmount}
+                tournamentId={tournamentId}
+                onClose={() => SetCardModel(false)}
+              />
             </>
           )}
           <Col className="mt-4">
