@@ -56,8 +56,6 @@ const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
                   title={item?.status}
                   subtitle={item?.venueName}
                   ranking={item?.name}
-                  numberOfRegisteredTeams={item.numberOfRegisteredTeams}
-                  showNumberOfRegisteredTeams={item.showNumberOfRegisteredTeams}
                   points={item?.points}
                   img={image}
                   startDate={item?.startDate}

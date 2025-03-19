@@ -132,7 +132,7 @@ const AdminMenu = ({ isCollapsed }) => {
         </NavLink>
       </SubMenu>
       <SubMenu
-        label="User "
+        label="Member"
         icon={<FaUsers className="menu-icon" />}
         className="submenu-item"
       >
@@ -141,7 +141,7 @@ const AdminMenu = ({ isCollapsed }) => {
           className="menu-item-link text-white"
         >
           <MenuItem>
-            {isCollapsed ? <FaThList className="menu-icon" /> : "All Users"}
+            {isCollapsed ? <FaThList className="menu-icon" /> : "All Members"}
           </MenuItem>
         </NavLink>
         <NavLink
@@ -149,7 +149,7 @@ const AdminMenu = ({ isCollapsed }) => {
           className="menu-item-link text-white"
         >
           <MenuItem>
-            {isCollapsed ? <MdAddBox className="menu-icon" /> : "Add Users"}
+            {isCollapsed ? <MdAddBox className="menu-icon" /> : "Add Member"}
           </MenuItem>
         </NavLink>
       </SubMenu>

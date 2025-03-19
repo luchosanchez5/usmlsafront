@@ -9,8 +9,7 @@ const ActiveEventData = ({
   startDate,
   endDate,
   img,
-  numberOfRegisteredTeams,
-  showNumberOfRegisteredTeams,
+
   tournamentId,
   setDivisionValue,
   setTournamentId,
@@ -39,14 +38,7 @@ const ActiveEventData = ({
         <h3 className="event-title fs-5">{ranking}</h3>
         <span className="event-date">Start Date: {startDate}</span>
         <span className="event-date">End Date: {endDate}</span>
-        {showNumberOfRegisteredTeams && (
-          <div>
-            <span className="bg-dark text-white rounded p-1">
-              No of Registered Teams:{" "}
-              {numberOfRegisteredTeams > 0 ? numberOfRegisteredTeams : 0}
-            </span>
-          </div>
-        )}
+      
 
         <div className="event-buttons">
           <button

@@ -23,11 +23,11 @@ const ManagerMenu = ({ isCollapsed }) => {
                     <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' />:'Add Team'}</MenuItem>
                 </NavLink>
             </SubMenu>
-            <SubMenu label={!isCollapsed && "User "} icon={<FaUsers className='menu-icon' />} className='submenu-item'>
+            <SubMenu label={!isCollapsed && "Member "} icon={<FaUsers className='menu-icon' />} className='submenu-item'>
 
                 <>
                     <NavLink to="/dashboard/addperson" className='menu-item-link text-white'>
-                        <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' /> :'Add Users'}  </MenuItem>
+                        <MenuItem>{isCollapsed ? <MdAddBox className='menu-icon' /> :'Add Member'}  </MenuItem>
                     </NavLink>
 
                 </>
