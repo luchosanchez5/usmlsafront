@@ -1,10 +1,8 @@
-import React, {useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import DivisionSearchModel from "./DivisionSearchModel";
-import { GetDivisionsBySearch } from "../../store/tournament/actions/actionsCreators";
 import { useDispatch, useSelector } from "react-redux";
-const Url = process.env.REACT_APP_MAIN_URL;
 
 const ActiveEventData = ({
   title,
@@ -15,62 +13,12 @@ const ActiveEventData = ({
   img,
   numberOfRegisteredTeams,
   showNumberOfRegisteredTeams,
-  showWhoIsComing,
   tournamentId,
   setDivisionValue,
-  setTournamentId
+  setTournamentId,
 }) => {
-    
-  const getitem = localStorage.getItem("Login");
-  const IsLoggedIn = JSON.parse(getitem);
-  const Navigate = useNavigate();
-    const Dispatch = useDispatch();
-    const { token } = useSelector((state) => state.user);
-    const { id } = useParams();
   const [show, setShow] = useState(false);
-  const handleRegister = () => {
-    if (!IsLoggedIn) {
-      Navigate("/auth/login");
-    } else {
-      Navigate("/myaccount");
-    }
-  };
-//   useEffect(()=>{
-//       Dispatch(GetDivisionsBySearch(token, 0, tournamentId, id))
-//   },[tournamentId])
   const handleClose = () => setShow(false);
-
-
-  //     if (tournamentName) {
-  //       console.log(tournamentName, "tournamentName");
-  //       setLoading(true);
-  //       axios
-  //         .get(
-  //           `${Url}api/divisions/search?tournamentName=${encodeURIComponent(
-  //             tournamentName
-  //           )}`
-  //         )
-  //         .then((response) => {
-  //           setDivisionsData(response.data);
-  //         })
-  //         .catch((error) => {
-  //           console.error("API Error:", error);
-  //           setDivisionsData([]);
-  //         })
-  //         .finally(() => {
-  //           setLoading(false);
-  //           if (teamData) {
-  //             console.log("if");
-  //             setTeamData(false);
-  //             setShowTeamModal(true);
-  //           } else {
-  //             console.log("else");
-  //             setShow(true);
-  //             setTeamData(false);
-  //           }
-  //         });
-  //     }
-  //   }, [tournamentName]);
 
   return (
     <div className="event-card">
@@ -103,19 +51,12 @@ const ActiveEventData = ({
         )}
 
         <div className="event-buttons">
-
-          <button
-            className="event-button bg-dark text-white"
-            onClick={() => {
-              setShow(true);
-              setTournamentId(tournamentId);
-            }}
-          >
-            Select Division
-          </button>
           <button
             className="event-button Login-btn text-white"
-            onClick={handleRegister}
+            onClick={() => {
+              setShow((prev) => !prev);
+              setTournamentId(tournamentId);
+            }}
           >
             Register
           </button>
@@ -125,11 +66,10 @@ const ActiveEventData = ({
         <DivisionSearchModel
           show={show}
           onClose={handleClose}
-          tournamentId={tournamentId}
+          tournamentID={tournamentId}
           setDivisionValue={setDivisionValue}
         />
       )}
-   
     </div>
   );
 };

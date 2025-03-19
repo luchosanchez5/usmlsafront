@@ -1,25 +1,22 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { Card, Col, Modal, Row, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { GetDivisionsBySearch } from "../../store/tournament/actions/actionsCreators";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PlayerCardSkeleton from "../../components/SkeletonTable/PlayerCardSkeleton";
 import { PaginationControl } from "react-bootstrap-pagination-control";
-const Url = process.env.REACT_APP_MAIN_URL;
+import Toast from "../../shared/Toast";
+import SpinNer from "../../components/LoadingSpinner/SpinNer";
 
 const DivisionSearchModel = ({
   show,
   onClose,
-  tournamentId,
+  // tournamentID,
   setDivisionValue,
 }) => {
-    
-  const Dispatch = useDispatch();
-  const { token } = useSelector((state) => state.user);
-  const { id } = useParams();
-  const { TournamentBySearch, DivisionBySearch, isLoading } = useSelector(
+  const [divisionName, setDivisionName] = useState(null);
+  const { DivisionBySearch, isLoading } = useSelector(
     (state) => state.tournament
   );
+  console.log("🚀 ~ isLoading:", isLoading)
   const [page, setPage] = useState(0);
 
   const [selectedCard, setSelectedCard] = useState(null);
@@ -27,14 +24,7 @@ const DivisionSearchModel = ({
     setSelectedCard(id);
   };
   const handleSubmit = () => {
-    //   Dispatch(AddCoManagerToTeam(id, selectedCard, token))
-    //     .then(() => {
-    //     //   setState((prev) => !prev);
-    //     })
-    //     .catch(() => {
-    //       console.log("Failed to add Co-Manager");
-    //     });
-    //   onClose()
+    setDivisionValue(divisionName);
   };
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -50,13 +40,13 @@ const DivisionSearchModel = ({
       <Modal.Header closeButton className="text-light">
         <Modal.Title id="division-modal-title">Select Division</Modal.Title>
       </Modal.Header>
-      <Modal.Body >
+      <Modal.Body>
         <Row className="d-flex flex-column align-items-center">
           {isLoading ? (
             <PlayerCardSkeleton />
           ) : DivisionBySearch?.data?.length > 0 ? (
             DivisionBySearch?.data?.map((card, index) => (
-              <Col key={card.id} md={12} className="my-2 ">
+              <Col key={index} md={12} className="my-2 ">
                 <Card
                   className={`px-3  ${
                     selectedCard === card.divisionId
@@ -64,15 +54,15 @@ const DivisionSearchModel = ({
                       : "text-black"
                   }`}
                   onClick={() => {
-                    setDivisionValue(card.divisionName);
-                    setSelectedCard(card.divisionId);
+                    setDivisionName(card?.divisionName);
+                    setSelectedCard(card?.divisionId);
                   }}
                   style={{ cursor: "pointer" }}
                 >
                   <Card.Body className="d-flex justify-content-between align-items-center border-0 m-0 p-3">
                     <div>
-                      <Card.Title>{card.divisionName}</Card.Title>
-                      <Card.Text>{card.email}</Card.Text>
+                      <Card.Title>{card?.divisionName}</Card.Title>
+                      <Card.Text>Entry Fee ${card?.entryFee}</Card.Text>
                     </div>
                     <Form.Check
                       type="radio"
@@ -98,23 +88,23 @@ const DivisionSearchModel = ({
             />
           )}
 
-          {/* {DivisionBySearch?.data?.length > 0 && (
-          <div className="d-flex justify-content-end">
-            <button
-              type="button"
-              className="mt-3 gradient-btn-orange"
-              onClick={() => {
-                if (selectedCard) {
-                  handleSubmit();
-                } else {
-                  Toast.error("Please Select atleast One ");
-                }
-              }}
-            >
-              {isLoading ? <SpinNer /> : "Submit"}
-            </button>
-          </div>
-        )} */}
+          {DivisionBySearch?.data?.length > 0 && (
+            <div className="d-flex justify-content-end">
+              <button
+                type="button"
+                className="mt-3 gradient-btn-orange"
+                onClick={() => {
+                  if (selectedCard) {
+                    handleSubmit();
+                  } else {
+                    Toast.error("Please Select at least One ");
+                  }
+                }}
+              >
+                {isLoading ? <SpinNer /> : "Next"}
+              </button>
+            </div>
+          )}
         </Row>
       </Modal.Body>
     </Modal>

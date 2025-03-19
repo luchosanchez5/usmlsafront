@@ -2,34 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import OrderSummeryCard from "./OrderSummeryCard";
 import DashboardLayout from "../../layout/DashboardLayout";
-import ContactInformation from "./ContactInformation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import RegisterComponent from "./ActiveEvents";
 import ActiveEvents from "./ActiveEvents";
 import FindEvents from "../../components/product/FindEvents";
 import CardPaymentModel from "../../components/Models/CardPaymentModel";
 import Toast from "../../shared/Toast";
+import { GetDivisionsBySearch } from "../../store/tournament/actions/actionsCreators";
+import { useParams } from "react-router-dom";
 const Url = process.env.REACT_APP_MAIN_URL;
 
 const RegisterTeam = () => {
-  // const [isFormValid, setIsFormValid] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("");
   const [DivisionDetailsBySearch, SetDivisionDetailsBySearch] = useState([]);
   const [DivisionValue, setDivisionValue] = useState("");
   const [CardModel, SetCardModel] = useState(false);
   const [tournamentId, setTournamentId] = useState(null);
-
   const DivisionDetails = DivisionDetailsBySearch[0];
   const totalAmount =
     selectedPayment === "IntialDeposit"
       ? DivisionDetails?.initialDepositFee
       : DivisionDetails?.entryFee;
   const { token } = useSelector((state) => state.user);
-
-  // const handleFormValidityChange = (validity) => {
-  //   setIsFormValid(validity);
-  // };
+  const Dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
     if (!DivisionValue) {
@@ -58,6 +54,9 @@ const RegisterTeam = () => {
 
     fetchDivisionDetails();
   }, [DivisionValue, token]);
+  useEffect(() => {
+    Dispatch(GetDivisionsBySearch(token, 0, tournamentId, id));
+  }, [tournamentId]);
   const handlePlaceOrderBtn = () => {
     if (!selectedPayment) {
       return Toast.error("Select Your Payment Fees");
@@ -83,26 +82,18 @@ const RegisterTeam = () => {
       {!DivisionValue && (
         <>
           <FindEvents />
-          <ActiveEvents setDivisionValue={setDivisionValue} setTournamentId={setTournamentId}  />
+          <ActiveEvents
+            setDivisionValue={setDivisionValue}
+            setTournamentId={setTournamentId}
+          />
         </>
       )}
       <div className="container mt-5">
         <Row className="justify-content-center">
-          {/* <Col className="d-flex flex-column " lg={6}>
-            <ContactInformation
-              selectedPayment={selectedPayment}
-              setSelectedPayment={setSelectedPayment}
-              DivisionValue={DivisionValue}
-              setDivisionValue={setDivisionValue}
-              DivisionDetailsBySearch={DivisionDetailsBySearch}
-              totalAmount={totalAmount}
-            />
-          </Col> */}
           {DivisionDetailsBySearch.length > 0 && (
             <>
               <Col>
                 <h2 className="py-3">Payment Options</h2>
-
                 <div className="payment-option border p-3 mb-2 rounded">
                   <div className="form-check">
                     <input

@@ -2,27 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetDefaultTournamentsBySearch,
-  GetDivisionsBySearch,
   GetTournamentsBySearch,
 } from "../../store/tournament/actions/actionsCreators";
 import SkeletonCard from "../../components/SkeletonTable/SkeletonCard";
 import { PaginationControl } from "react-bootstrap-pagination-control";
-import DashboardLayout from "../../layout/DashboardLayout";
 import ActiveEventData from "./ActiveEventData";
-import { useParams } from "react-router-dom";
 
 const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
   const [page, setPage] = useState(0);
   const { token } = useSelector((state) => state.user);
-  const { id } = useParams();
 
-  const { DefaultTournamentData, TournamentBySearch, isLoading } = useSelector(
+  const { DefaultTournamentData, isLoading } = useSelector(
     (state) => state.tournament
   );
-  console.log("🚀 ~ ActiveEvents ~ TournamentBySearch:", TournamentBySearch);
-  // const { TournamentBySearch, DivisionBySearch } = useSelector(
-  //   (state) => state.tournament
-  // );
+
   const Dispatch = useDispatch();
   const fallbackImage =
     "https://media.bleacherreport.com/image/upload/c_fill,g_faces,w_3800,h_2000,q_95/v1677098974/ajakxjd0xfrxtu8ru7bo.jpg"; // Default image URL
@@ -41,7 +34,7 @@ const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
           <SkeletonCard />
         ) : DefaultTournamentData?.data?.length > 0 ? (
           <div className="event-grid">
-            {TournamentBySearch?.data?.map((item, index) => {
+            {DefaultTournamentData?.data?.map((item, index) => {
               let image = fallbackImage;
               if (item.picture) {
                 try {
@@ -66,7 +59,6 @@ const ActiveEvents = ({ setDivisionValue, setTournamentId }) => {
                   numberOfRegisteredTeams={item.numberOfRegisteredTeams}
                   showNumberOfRegisteredTeams={item.showNumberOfRegisteredTeams}
                   points={item?.points}
-                  showWhoIsComing={item.showWhoIsComing}
                   img={image}
                   startDate={item?.startDate}
                   endDate={item?.endDate}
