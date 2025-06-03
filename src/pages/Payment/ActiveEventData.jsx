@@ -76,7 +76,7 @@ const ActiveEventData = ({
               className="event-button Login-btn text-white"
               onClick={handleShowModal}
             >
-              Register
+              Buy Now
             </button>
           </div>
         )}

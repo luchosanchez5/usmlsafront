@@ -15,7 +15,7 @@ const ActiveEvents = ({ setDivisionValue, setTournamentId,SetDivisionDetailsBySe
   console.log(DefaultTournamentData);
   const Dispatch = useDispatch();
   const fallbackImage =
-    "https://media.bleacherreport.com/image/upload/c_fill,g_faces,w_3800,h_2000,q_95/v1677098974/ajakxjd0xfrxtu8ru7bo.jpg"; // Default image URL
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSODrOmJ3WpjTw4bF7GJOhMXehYvpJO8H7PvA&s"; // Default image URL
 
   useEffect(() => {
     Dispatch(GetDefaultTournamentsBySearch(page));

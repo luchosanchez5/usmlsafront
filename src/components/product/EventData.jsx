@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import DivisionModal from "../HomeModals/DivisionModal";
+import DetailsModal from "../HomeModals/DetailsModal";
 import axios from "axios";
 import DivisionAndTeamModal from "../HomeModals/DivisionAndTeamModal";
 const Url = process.env.REACT_APP_MAIN_URL;
 
 const EventData = ({
+  id, // tournament id
+  description, //Tournament Description
   title,
   subtitle,
   ranking,
@@ -26,6 +29,8 @@ const EventData = ({
   const [tournamentName, setTournamentName] = useState("");
   const [loading, setLoading] = useState(false);
   const [divisionsData, setDivisionsData] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+  const [tournamnetInfo, setTournamentInfo] = useState(false);
 
   const handleRegister = () => {
     if (!IsLoggedIn) {
@@ -38,15 +43,24 @@ const EventData = ({
   const handleCloseModel = () => {
     setShow(false);
     setShowTeamModal(false);
+    setShowDetails(false);
     setTournamentName("");
   };
 
   const handleShowModal = (name) => {
     setTournamentName(name);
   };
+  
   const handleShowTeamModal = (name) => {
     setTeamData(true);
     setTournamentName(name);
+    setTournamentInfo(false);
+  };
+
+  const handleShowInfo = (name) => {
+    setTeamData(false);
+    setTournamentName(name);
+    setTournamentInfo(true);
   };
 
   useEffect(() => {
@@ -61,6 +75,7 @@ const EventData = ({
         )
         .then((response) => {
           setDivisionsData(response.data);
+          console.log("TOURNEY DETAILS", response.data);
         })
         .catch((error) => {
           console.error("API Error:", error);
@@ -72,8 +87,15 @@ const EventData = ({
             setTeamData(false);
             setShowTeamModal(true);
           } else {
-            setShow(true);
-            setTeamData(false);
+
+              if (tournamnetInfo) {
+                setShowDetails(true);
+                setTournamentInfo(true);
+                setTeamData(false);
+              } else {
+                setShow(true);
+                setTeamData(false);
+              }
           }
         });
     }
@@ -110,6 +132,15 @@ const EventData = ({
         )}
 
         <div className="event-buttons">
+          <>
+          <button
+                className="event-button bg-green"
+                onClick={() => handleShowInfo(ranking)}
+              >
+                More Info
+              </button>
+          </>
+          
           {showWhoIsComing && (
             <>
               <button
@@ -149,6 +180,13 @@ const EventData = ({
         divisionsData={divisionsData}
         loading={loading}
         tournamentName={tournamentName}
+      />
+
+      <DetailsModal
+        show={showDetails}
+        onClose={handleCloseModel}
+        description={divisionsData?.data?.[0]?.description || ""}
+        loading={loading}
       />
     </div>
   );

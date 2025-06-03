@@ -54,7 +54,7 @@ const AllTeamsDetails = () => {
             className="Team-register-btn mx-2 rounded"
             onClick={() => Navigate(`/dashboard/registerteam/${id}`)}
           >
-            Team Register
+            
           </button>
         )}
       </div>

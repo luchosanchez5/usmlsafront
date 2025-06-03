@@ -2,6 +2,7 @@
   "name": "usmlsa",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tournaments.usmlsa.com",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.8",
     "@stripe/react-stripe-js": "^2.9.0",

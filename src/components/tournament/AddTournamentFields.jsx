@@ -31,6 +31,7 @@ const AddTournamentFields = () => {
     venueId: null,
     whoIsComing: false,
     showRegisteredTeams: false,
+    description : ""
   };
   const tournamentStatusOptions = [
     { value: "ACTIVE", label: "ACTIVE" },
@@ -66,6 +67,7 @@ const AddTournamentFields = () => {
           numberOfDivisions: values.numberOfDivisions,
           showWhoIsComing: values.whoIsComing,
           showNumberOfRegisteredTeams: values.showRegisteredTeams,
+          description : values.description
         };
       } else {
         data = {
@@ -77,6 +79,7 @@ const AddTournamentFields = () => {
           venueId: Number(values.venueId),
           showWhoIsComing: values.whoIsComing,
           showNumberOfRegisteredTeams: values.showRegisteredTeams,
+          description : values.description
         };
       }
 
@@ -94,6 +97,7 @@ const AddTournamentFields = () => {
       Dispatch(GetTournamentsDetailsByTournamentId(TournamentId, Token));
     }
   }, [TournamentEdit, Dispatch, Token, TournamentId]);
+
   useEffect(() => {
     if (TournamentEdit && TournamentDetails) {
       setValues({
@@ -104,6 +108,7 @@ const AddTournamentFields = () => {
         numberOfDivisions: TournamentDetails.numberOfDivisions || "",
         whoIsComing: TournamentDetails.showWhoIsComing,
         showRegisteredTeams: TournamentDetails.showNumberOfRegisteredTeams,
+        description : TournamentDetails.description
       });
     }
   }, [TournamentDetails, TournamentEdit, setValues]);
@@ -126,7 +131,23 @@ const AddTournamentFields = () => {
               touched={touched.name}
               error={errors.name}
             />
+
+
           </div>
+
+            <div className="d-flex flex-column flex-grow-1">          
+            <InputField
+                type="textarea"
+                name="description"
+                label="Tournament Description"
+                onChange={handleChange}
+                value={values.description}
+                className="form-control"
+                touched={touched.description}
+                error={errors.description}
+              />
+            </div>
+
 
           <div className="d-flex flex-column flex-grow-1">
             <InputField

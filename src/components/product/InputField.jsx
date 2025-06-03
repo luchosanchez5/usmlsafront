@@ -11,20 +11,30 @@ const InputField = ({
   min,
   ...props
 }) => {
+  const isTextArea = type === "textarea";
+
   return (
     <>
-      <label htmlFor={label} className={labelClassName && labelClassName}>
+      <label htmlFor={props.name} className={labelClassName ?? ""}>
         {label}
       </label>
-      <input
-        name={props.name}
-        {...props}
-        value={value ?? ""}
-        type={type}
-        className={className}
-        autoComplete="off"
-        min={type === "number" ? 0 : min}
-      />
+      {isTextArea ? (
+        <textarea
+          {...props}
+          value={value ?? ""}
+          className={className}
+          rows={4} // You can adjust number of rows here
+        />
+      ) : (
+        <input
+          {...props}
+          value={value ?? ""}
+          type={type}
+          className={className}
+          autoComplete="off"
+          min={type === "number" ? 0 : min}
+        />
+      )}
       {touched && error ? <p className="text-danger">{error}</p> : null}
     </>
   );

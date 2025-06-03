@@ -48,6 +48,8 @@ const Home = () => {
               return (
                 <EventData
                   key={index}
+                  id = ""
+                  description = ""
                   title={item?.status}
                   subtitle={item?.venueName}
                   ranking={item?.name}

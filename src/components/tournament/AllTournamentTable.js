@@ -95,8 +95,8 @@ const AllTournamentTable = () => {
                                             <td>{index + 1}</td>
                                             <td>{item?.name}</td>
                                             <td>{item?.venueName ? item?.venueName : 'No Venue Selected Yet'}</td>
-                                            <td>{dateFormat(item?.startDate)}</td>
-                                            <td>{dateFormat(item?.endDate)}</td>
+                                            <td>{(item?.startDate)}</td>
+                                            <td>{(item?.endDate)}</td>
                                             <td>
                                                 <span className="text-white fw-bold p-2 rounded"
                                                     style={{

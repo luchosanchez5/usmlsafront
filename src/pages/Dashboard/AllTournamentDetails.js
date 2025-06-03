@@ -28,9 +28,11 @@ const AllTournamentDetails = () => {
   const [assignVenueBoxModel, setVenueModel] = useState(false);
   const [state, setState] = useState(false);
   const fileInputRef = useRef(null);
+  
 
   useEffect(() => {
     dispatch(GetTournamentsDetailsByTournamentId(id, token));
+    console.log("Tournament Details : ", TournamentDetails)
   }, [id, dispatch, token, state]);
 
   useEffect(() => {
@@ -138,6 +140,12 @@ const AllTournamentDetails = () => {
               <h6 className="">{TournamentDetails?.name}</h6>
             </Col>
             <Col>
+              <h5 className="text-nowrap fw-bold">Description</h5>
+              <h6 style={{ whiteSpace: 'pre-line' }}>
+              {TournamentDetails?.description}
+            </h6>
+            </Col>
+            <Col>
               <h5 className="text-nowrap fw-bold">Venue Name:</h5>
               <h6 className="">
                 {TournamentDetails?.venueName
@@ -183,6 +191,7 @@ const AllTournamentDetails = () => {
           onClose={() => setVenueModel(false)}
           SetVenueModel={setVenueModel}
           setState={setState}
+          selectedVenueId={TournamentDetails?.venueId}
         />
       )}
       <div className="ps-4">

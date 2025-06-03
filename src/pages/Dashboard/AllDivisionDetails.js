@@ -60,6 +60,7 @@ const AllDivisionDetails = () => {
     } else {
       setPreviewImage(null);
     }
+    console.log("Division Details : ",DivisionDetails ) 
   }, [DivisionDetails]);
 
   return (
@@ -159,33 +160,19 @@ const AllDivisionDetails = () => {
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 1:</h5>
-              <h6 className=" ">{DivisionDetails?.data?.prize1 &&
-                !isNaN(parseFloat(DivisionDetails?.data?.prize1))
-                ? `$${parseFloat(DivisionDetails.data.prize1).toLocaleString()}`
-                : DivisionDetails?.data?.prize1}</h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize1 || ""}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 2:</h5>
-              <h6 className=" ">
-                {DivisionDetails?.data?.prize2 &&
-                  !isNaN(parseFloat(DivisionDetails?.data?.prize2))
-                  ? `$${parseFloat(DivisionDetails.data.prize2).toLocaleString()}`
-                  : DivisionDetails?.data?.prize2}
-              </h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize2 || ""}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 3:</h5>
-              <h6 className=" "> {DivisionDetails?.data?.prize3 &&
-                !isNaN(parseFloat(DivisionDetails?.data?.prize3))
-                ? `$${parseFloat(DivisionDetails.data.prize3).toLocaleString()}`
-                : DivisionDetails?.data?.prize3}</h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize3 || ""}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Prize 4:</h5>
-              <h6 className=" ">{DivisionDetails?.data?.prize4 &&
-                !isNaN(parseFloat(DivisionDetails?.data?.prize4))
-                ? `$${parseFloat(DivisionDetails.data.prize4).toLocaleString()}`
-                : DivisionDetails?.data?.prize4}</h6>
+              <h6 className=" ">{DivisionDetails?.data?.prize4 || ""}</h6>
             </Col>
             <Col>
               <h5 className="text-nowrap fw-bold">Division Status:</h5>

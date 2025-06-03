@@ -7,7 +7,10 @@ import { PaginationControl } from "react-bootstrap-pagination-control";
 import Toast from "../../shared/Toast";
 import { useParams } from "react-router-dom";
 import { GetVenue } from "../../store/Venue/actions/actionCreators";
-const AddVenueModel = ({ show, onClose, SetVenueModel, setState }) => {
+
+
+
+const AddVenueModel = ({ show, onClose, SetVenueModel, setState, selectedVenueId }) => {
   const { id } = useParams();
   const { VenueData } = useSelector((state) => state.venue);
   const { token } = useSelector((state) => state.user);
@@ -15,21 +18,31 @@ const AddVenueModel = ({ show, onClose, SetVenueModel, setState }) => {
   const [page, setPage] = useState(0);
 
   const Dispatch = useDispatch();
+
   const handleCardSelect = (id) => {
     setSelectedCard(id);
   };
+  
   useEffect(() => {
     Dispatch(GetVenue(page));
   }, [Dispatch, page]);
   const handlePageChange = (newPage) => {
     setPage(newPage);
   };
+
+  useEffect(() => {
+    if (selectedVenueId) {
+      setSelectedCard(selectedVenueId);
+    }
+  }, [selectedVenueId]);
+
   const handleSubmit = () => {
     Dispatch(AddVenue(id, selectedCard, token));
     setState(true);
     SetVenueModel(false);
   };
 
+  
   return (
     <Modal show={show} onHide={onClose} size="lg" centered className="py-4">
       <Modal.Header closeButton>
@@ -40,7 +53,7 @@ const AddVenueModel = ({ show, onClose, SetVenueModel, setState }) => {
         <Row className="d-flex flex-column align-items-center">
           {VenueData?.data?.length > 0 ? (
             VenueData?.data?.map((card, index) => (
-              <Col key={card.id} md={12} className="my-2 ">
+              <Col key={card.venueId} md={12} className="my-2 ">
                 <Card
                   className={`px-3  ${
                     selectedCard === card.venueId
