@@ -48,7 +48,12 @@ const AllTeamsDetails = () => {
           Add Player
         </button>
         {role === "ADMIN" ? (
-          ""
+          <button
+          className="Team-register-btn mx-2 rounded"
+          onClick={() => Navigate(`/dashboard/registerteam/${id}`)}
+        >
+          Add Tournament
+        </button>
         ) : (
           <button
             className="Team-register-btn mx-2 rounded"

@@ -5,10 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { createSubscription } from "../../store/team/actions/actionsCreators";
 import Toast from "../../shared/Toast";
 import SpinNer from "../LoadingSpinner/SpinNer";
+import { FaBedPulse } from "react-icons/fa6";
 
 const CARD_ELEMENT_OPTIONS = {
   iconStyle: "solid",
-  hidePostalCode: true,
+  hidePostalCode: false,
   style: {
     base: {
       color: "black",
@@ -74,6 +75,7 @@ const CardPaymentForm = ({
           ? divisionId
           : DivisionDetailsBySearch[0]?.divisionId,
       };
+      console.log("DATA SENDING :" , data)
       Dispatch(
         createSubscription(
           data,

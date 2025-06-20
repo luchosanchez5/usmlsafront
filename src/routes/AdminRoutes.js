@@ -20,6 +20,7 @@ const AddDivision = lazy(() => import("../pages/Dashboard/AddDivision.js"));
 const AllDivision = lazy(() => import("../pages/Dashboard/AllDivision.js"));
 const AllDivisionDetails = lazy(() => import("../pages/Dashboard/AllDivisionDetails.js"));
 const AllVenusDetails = lazy(() => import("../pages/Dashboard/AllVenusDetails.js"));
+const RegisterTeam = lazy(() => import('../pages/Payment/RegisterTeam.jsx'));
 const AdminRoutes = (
     <>
         <Route exact path='/dashboard' element={<Dashboard />}></Route>
@@ -41,6 +42,8 @@ const AdminRoutes = (
         <Route exact path='/dashboard/alldivisions/:id' element={<AllDivisionDetails />}></Route>
         <Route exact path='/dashboard/user/setting' element={<Setting />}></Route>
         <Route exact path='/dashboard/user/change-password' element={<ChangePassword />}></Route>
+
+        <Route exact path='/dashboard/registerteam/:id' element={<RegisterTeam />}></Route>
         
     </>
 )

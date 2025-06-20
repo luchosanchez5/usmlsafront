@@ -537,6 +537,107 @@ export const createSubscription = (data, Token, navigate, id, isPendingAmount, S
 };
 
 
+/*export const createCustomSubscription = (data, Token, navigate, id, isPendingAmount, SetCardModel) => (dispatch) => {
+  console.log(SetCardModel, 'SetCardModel')
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+  const endpoint = `${Url}api/payment/secure/create-subscription-custom`;
+  console.log(data);
+  axios.post(endpoint, data, {
+    headers: {
+      Authorization: `Bearer ${Token}`
+    }
+  })
+    .then((response) => {
+      console.log(response.data)
+      Toast.success(response.data.message);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+      SetCardModel(false);
+      if (!isPendingAmount) {
+        navigate(-1)
+      }
+    })
+    .catch((error) => {
+      console.log(error.response)
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "An unexpected error occurred";
+      Toast.error(errorMessage);
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+*/
+
+export const createCustomSubscription = (
+  data,
+  Token,
+  navigate,
+  id,
+  isPendingAmount,
+  SetCardModel
+) => (dispatch) => {
+  console.log("SetCardModel:", SetCardModel);
+  console.log("Submitting custom payment data:", data);
+
+  dispatch({
+    type: actionTypes.SET_LOADING,
+    payload: true,
+  });
+
+  const endpoint = `${Url}api/payment/secure/create-subscription-custom`;
+
+  axios
+    .post(endpoint, data, {
+      headers: {
+        Authorization: `Bearer ${Token}`,
+      },
+    })
+    .then((response) => {
+      console.log("Response:", response.data);
+      Toast.success(response.data.message);
+
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+
+      // Safely handle modal closing
+      if (typeof SetCardModel === "function") {
+        SetCardModel(false);
+      }
+
+      if (!isPendingAmount) {
+        navigate(-1); // Navigate back
+      }
+    })
+    .catch((error) => {
+      console.error("Error submitting custom payment:", error?.response);
+
+      const errorMessage =
+        error.response?.data?.error ||
+        error.response?.data?.message ||
+        "An unexpected error occurred";
+
+      Toast.error(errorMessage);
+
+      dispatch({
+        type: actionTypes.SET_LOADING,
+        payload: false,
+      });
+    });
+};
+
+
 export const completePendingPayment = (teamId,
   tournamentId,
   divisionId,
